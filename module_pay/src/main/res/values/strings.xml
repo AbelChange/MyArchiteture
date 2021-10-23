@@ -1,0 +1,5 @@
+<resources>
+    <string name="module_login_app_name">登录组件</string>
+    <string name="module_login_test_login">测试登录组件</string>
+    <string name="module_login_go_login">登录</string>
+</resources>

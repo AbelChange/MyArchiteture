@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="module_base_please_wait">请稍后...</string>
+    <string name="title">标题</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="loading_empty_str"></string>
+    <string name="loading_error_str">暂时找不到网络君</string>
+</resources>

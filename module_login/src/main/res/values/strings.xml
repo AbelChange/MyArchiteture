@@ -1,0 +1,45 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
+    <string name="module_login_app_name">登录组件</string>
+    <string name="module_login_test_login">测试登录组件</string>
+    <string name="module_login_go_login">登录</string>
+
+    <string name="module_login_enter_verification_code">填写验证码</string>
+    <string name="module_login_verification_code_send_tips">短信已发送至:</string>
+    <string name="module_login_verification_code_send_to">+86 %1$s的手机号</string>
+    <string name="module_login_verification_code_hint">请输入短信验证码</string>
+    <string name="module_login_wait_regain_verification_code">%1$ds 后重新获取验证码</string>
+    <string name="module_login_regain_verification_code">重新获取验证码</string>
+
+    <string name="module_login_area_code">+86</string>
+    <string name="module_login_enter_phone_number_hint">请输入手机号</string>
+    <string name="module_login_enter_password_hint">请输入密码</string>
+    <string name="module_login_help"><u>需要帮助？</u></string>
+    <string name="module_login">登录</string>
+    <string name="module_login_with_password">手机号密码登录</string>
+    <string name="module_login_with_phone_code">短信验证码登录</string>
+    <string name="module_login_with_mobile_one_click">本机号码一键登录</string>
+    <string name="module_login_agreement">注册即同意《用户协议》与《隐私政策》</string>
+    <string name="module_login_third">第三方登录</string>
+    <string name="module_login_wechat">微信</string>
+    <string name="module_login_qq">QQ</string>
+    <string name="module_login_ju">剧</string>
+    <string name="module_login_dian">点</string>
+    <string name="module_login_please_input_code">请输入验证码</string>
+    <string name="module_login_code_error">验证码错误，请重新输入</string>
+    <string name="module_login_service_agreement">用户协议</string>
+    <string name="module_login_privacy_policy">隐私政策</string>
+    <string name="module_login_please_agreement">请同意《用户协议》和《隐私协议》</string>
+    <string name="module_login_mobile_one_click_login">本机号码一键登录</string>
+    <string name="module_login_no_sim_card">无法识别sim卡或没有sim卡</string>
+    <string name="module_login_not_install_app">您没有安装该应用</string>
+    <string name="module_login_cancel">取消</string>
+    <string name="module_login_ok">确定</string>
+    <string name="module_login_bind_mobile">手机绑定</string>
+    <string name="module_login_fill_mobile">请输入手机号</string>
+    <string name="module_login_verify_code_success">验证码发送成功</string>
+    <string name="module_login_fill_verify_code">请输入验证码</string>
+    <string name="module_login_fill_psw">请输入密码</string>
+    <string name="module_login_app_not_install">您没有安装该应用</string>
+    <string name="module_login_get_code">获取验证码</string>
+    <string name="module_login_reget_code">%1$ss后重新获取</string>
+</resources>

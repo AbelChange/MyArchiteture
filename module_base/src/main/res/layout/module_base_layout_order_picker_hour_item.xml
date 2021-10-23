@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="46dp"
+    android:background="@drawable/module_base_selector_btn_order_choose_hour"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:lines="1"
+        android:textColor="@color/module_base_order_day_selector"
+        android:textSize="13sp"
+        tools:text="16:30" />
+
+</LinearLayout>

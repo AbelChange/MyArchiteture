@@ -1,0 +1,90 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+}
+def globalConfig = rootProject.ext
+def version = globalConfig.versions
+def dep = globalConfig.dependencies
+
+android {
+    compileSdkVersion version.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion version.minSdkVersion
+        targetSdkVersion version.targetSdkVersion
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
+    //统一资源前缀，规范资源引用
+    resourcePrefix "module_base"
+
+    flavorDimensions "default"
+    productFlavors globalConfig.flavor
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    kapt {
+        useBuildCache = true
+        arguments {
+            arg("room.schemaLocation", "$projectDir/schemas".toString())
+        }
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api project(path: ':library')
+    kapt "androidx.room:room-compiler:$dep.roomVersion"
+    kapt "io.github.meituan-dianping:compiler:$dep.WMRouterVersion"
+    //Hilt
+    kapt "com.google.dagger:hilt-compiler:$dep.hiltVersion"
+    kapt "androidx.hilt:hilt-compiler:$dep.hiltCompilerVersion"
+    //Glide
+    kapt "com.github.bumptech.glide:compiler:$dep.glideVersion"
+    //banner
+    api "com.fq:convenientbanner:1.0.3-SNAPSHOT"
+    //umeng
+    api 'com.umeng.umsdk:common:9.4.2'// 必选
+    api 'com.umeng.umsdk:asms:1.4.1'// 必选
+
+    api "com.umeng.umsdk:share-core:$dep.shareVersion"
+    api "com.umeng.umsdk:share-qq:$dep.shareVersion"
+    api "com.umeng.umsdk:share-wx:$dep.shareVersion"
+    //    qq and wechat
+    api "com.tencent.tauth:qqopensdk:3.51.2"
+    api "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.7.9"
+
+    //numberPickerView
+    api "com.fq:numberpickerview:$dep.numberPickerVersion"
+
+    //imagePicker
+    api "com.fq:imagepicker:$dep.imagePickerVersion"
+
+    //腾讯bugly
+    api "com.tencent.bugly:crashreport:$dep.buglyAppVersion"
+    api "com.tencent.bugly:nativecrashreport:$dep.buglyNativeVersion"
+
+    //x5WebView
+    api "com.tencent.tbs.tbssdk:sdk:$dep.x5WebVersion"
+
+    //高德
+    api "com.amap.api:location:$dep.locationVersion"
+    debugImplementation "com.github.chuckerteam.chucker:library:$dep.chuckerVersion"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$dep.chuckerVersion"
+
+}

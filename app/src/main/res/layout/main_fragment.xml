@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".logic.main.MainFragment">
+
+
+    <TextView
+        android:id="@+id/tvResponse"
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <Button
+        android:id="@+id/btnConstraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="constraintLayout" />
+
+    <Button
+        android:id="@+id/btnTransformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TRANSFORMATION">
+
+    </Button>
+
+    <Button
+        android:id="@+id/btnCoordinator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="COORDINATOR">
+
+    </Button>
+
+    <Button
+        android:id="@+id/btnSocket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WEBSOCKET"/>
+
+    <Button
+        android:id="@+id/btnRxOperator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RX_OPERATOR"/>
+
+
+    <Button
+        android:id="@+id/btnGoLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LOGINMODULE"/>
+
+    <Button
+        android:id="@+id/btnGoList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ListFragment"/>
+</LinearLayout>

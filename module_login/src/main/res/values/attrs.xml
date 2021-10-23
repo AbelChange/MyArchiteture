@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <declare-styleable name="CodeEditText" tools:ignore="ResourceName">
+        <attr name="maxLength" format="integer" />
+        <attr name="lineWidth" format="dimension" />
+        <attr name="lineHeight" format="dimension" />
+        <attr name="linePadding" format="dimension" />
+        <attr name="lineColor" format="color" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".view.fragment.BindPhoneFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="44dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="38dp" />
+
+    <TextView
+        android:id="@+id/textViewTip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
+        android:text="请输入手机号接收验证码，以便进行绑定"
+        android:textSize="14sp"
+        android:textColor="@color/gray_888"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewAreaCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="+86"
+        android:textSize="16sp"
+        android:textColor="@color/gray_333"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTip" />
+
+    <EditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:background="@null"
+        android:ems="10"
+        android:hint="输入手机号"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:singleLine="true"
+        android:textSize="15sp"
+        android:textColorHint="#ADB1B9"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAreaCode"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toEndOf="@+id/textViewAreaCode"
+        app:layout_constraintTop_toTopOf="@+id/textViewAreaCode" />
+
+    <View
+        android:id="@+id/viewPhoneDiv"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/module_login_light_gray"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber"
+        tools:layout_editor_absoluteX="38dp" />
+
+    <TextView
+        android:id="@+id/textViewVerificationCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="验证码"
+        android:textSize="14sp"
+        android:textColor="@color/gray_333"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/viewPhoneDiv" />
+
+    <EditText
+        android:id="@+id/editTextVerificationCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@null"
+        android:ems="10"
+        android:textSize="15sp"
+        android:textColorHint="#ADB1B9"
+        android:hint="输入短信验证码"
+        android:inputType="number"
+        android:maxLength="6"
+        android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewVerificationCode"
+        app:layout_constraintEnd_toStartOf="@+id/textViewGetCode"
+        app:layout_constraintStart_toEndOf="@+id/textViewVerificationCode"
+        app:layout_constraintTop_toTopOf="@+id/textViewVerificationCode" />
+
+    <TextView
+        android:id="@+id/textViewCountDownTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/module_login_reget_code"
+        android:textSize="13sp"
+        android:visibility="invisible"
+        android:textColor="#FFA800"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextVerificationCode"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintTop_toTopOf="@+id/editTextVerificationCode" />
+
+    <TextView
+        android:id="@+id/textViewGetCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/module_login_get_code"
+        android:textSize="13sp"
+        android:textColor="@color/module_login_orange_a8"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextVerificationCode"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintTop_toTopOf="@+id/editTextVerificationCode" />
+
+
+    <View
+        android:id="@+id/viewVerificationCodeDiv"
+        android:layout_width="0dp"
+        android:layout_height="1px"
+        android:layout_marginTop="20dp"
+        android:background="@color/module_login_light_gray"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/editTextVerificationCode" />
+
+    <Button
+        android:layout_marginHorizontal="15dp"
+        android:id="@+id/buttonConfirm"
+        style="@style/module_base_btn_style_day_mode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:enabled="false"
+        android:text="确认"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toBottomOf="@+id/viewVerificationCodeDiv" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+

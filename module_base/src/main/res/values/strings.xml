@@ -1,0 +1,28 @@
+<resources>
+
+    <string name="module_base_app_name">剧点</string>
+    <string name="module_base_app_slogan">随时随地剧本杀</string>
+    <string name="module_base_please_wait">请稍后...</string>
+    <string name="module_base_ok">确定</string>
+    <string name="module_base_cancel">取消</string>
+    <string name="module_base_paste">粘贴</string>
+
+    <string name="module_base_share_cancle">取消分享</string>
+    <string name="module_base_share_success">分享成功</string>
+    <string name="module_base_share_fail">分享失败</string>
+    <string name="module_base_share_qq">QQ</string>
+    <string name="module_base_share_wechat">微信</string>
+    <string name="module_base_save_pic">保存图片</string>
+    <string name="module_base_share_wechat_">微信好友</string>
+    <string name="module_base_share_qzone">QQ空间</string>
+    <string name="module_base_share_timeline">朋友圈</string>
+    <string name="module_base_location_service_tip">定位服务未开启， 请进入系统设置>隐私>定位服务中打开开关，并允许\"剧点\"使用定位服务，开启定位后可查看当地剧本库和安排DM上门服务。</string>
+    <string name="module_base_location_permission_tip">为了确保后台判定服务地址，请开启地理位置权限。</string>
+    <string name="module_base_coupon_success">优惠券领取成功，可在个人中心查看</string>
+    <string name="module_base_coupon_fail">你不是新用户了哦~</string>
+    <string name="module_base_make_order_choose_start_time">请选择开始时间</string>
+    <string name="module_base_dm_appointment_count">当前可预约DM %1$s人</string>
+    <string name="module_base_first_order">先下单后预约</string>
+    <string name="module_base_full_booked">已约满</string>
+
+</resources>

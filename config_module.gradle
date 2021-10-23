@@ -1,0 +1,61 @@
+if (isBuildModule.toBoolean()) {
+    //独立组件运行
+    apply plugin: 'com.android.application'
+    apply plugin: 'WMRouter'
+} else {
+    //集成运行
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+def globalConfig = rootProject.ext
+def version = globalConfig.versions
+def dep = globalConfig.dependencies
+
+android {
+    compileSdkVersion version.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion version.minSdkVersion
+        targetSdkVersion version.targetSdkVersion
+        versionCode version.versionCode
+        versionName version.versionName
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            if (isBuildModule.toBoolean()) {
+                //独立运行
+                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+            } else {
+                //合并到主工程
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                resources {
+                    exclude 'src/main/debug/*'
+                }
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding =  true
+    }
+
+}

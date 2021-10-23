@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/module_base_share_bg_corner_12"
+            android:padding="22dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSavePic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/module_base_icon_download"
+                android:drawablePadding="5dp"
+                android:text="@string/module_base_save_pic"
+                app:layout_constraintEnd_toStartOf="@id/tvWeChat"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvWeChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/module_base_icon_wechat"
+                android:drawablePadding="5dp"
+                android:text="@string/module_base_share_wechat_"
+                app:layout_constraintEnd_toStartOf="@+id/tvFriendCircle"
+                app:layout_constraintStart_toEndOf="@id/tvSavePic"
+                app:layout_constraintTop_toTopOf="@id/tvSavePic" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFriendCircle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/module_base_icon_friend_circle"
+                android:drawablePadding="5dp"
+                android:text="@string/module_base_share_timeline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvWeChat"
+                app:layout_constraintTop_toTopOf="@id/tvSavePic" />
+
+            <Button
+                android:id="@+id/btCancel"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/module_base_selector_btn_common"
+                android:text="@string/cancel"
+                android:textColor="@drawable/module_base_selector_btn_text_color"
+                app:layout_constraintTop_toBottomOf="@id/tvSavePic" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="41dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:paddingVertical="40dp"
+            app:layout_constraintBottom_toTopOf="@id/layoutBottom">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivBg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivQrcode"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_margin="20dp"
+                    app:layout_constraintBottom_toBottomOf="@id/ivBg"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_error"
+        android:src="@drawable/loading_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="快乐没了"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_marginTop="4dp"
+        android:id="@+id/tvSecondTitle"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_888"
+        android:text="@string/loading_empty_str"
+        android:textSize="13sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
+        android:id="@+id/btnText"
+        style="@style/base_btn_style"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:paddingHorizontal="40dp"
+        android:text="去寻找"
+        android:textColor="@color/white" />
+</LinearLayout>
