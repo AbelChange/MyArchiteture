@@ -14,7 +14,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initImmersionBar()
     }
 
 
@@ -31,13 +30,6 @@ abstract class BaseActivity : AppCompatActivity() {
             titleView.text = title
             supportActionBar?.title = null
         }
-    }
-
-    fun initImmersionBar() {
-        ImmersionBar.with(this)
-            .statusBarDarkFont(true, 0.2f)
-            .transparentStatusBar()
-            .init()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
