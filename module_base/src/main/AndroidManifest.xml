@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.yunfeng.module_base"
+    package="com.ablec.module_base"
     tools:ignore="LockedOrientationActivity">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -8,7 +8,7 @@
 
     <application>
         <activity
-            android:name="com.yunfeng.dm.wxapi.WXEntryActivity"
+            android:name="com.ablec.dm.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="sensorPortrait"

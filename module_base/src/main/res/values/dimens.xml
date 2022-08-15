@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="module_base_margin_padding">15dp</dimen>
-    <dimen name="module_base_title_size">18sp</dimen>
+
 </resources>

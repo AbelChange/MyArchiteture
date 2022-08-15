@@ -1,30 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
-    <color name="colorPrimary" tools:ignore="ResourceName">#f4f4f4</color>
-    <color name="colorPrimaryDark" tools:ignore="ResourceName">#000000</color>
-    <color name="colorAccent" tools:ignore="ResourceName">#FFA800</color>
-    <color name="colorAccent_80" tools:ignore="ResourceName">#80FFE401</color>
-    <color name="menu_text" tools:ignore="ResourceName">#999999</color>
-    <color name="button_text_color_normal" tools:ignore="ResourceName">#888888</color>
-    <color name="text_color_hint" tools:ignore="ResourceName">#ADB1B9</color>
-    <color name="lightGrey" tools:ignore="ResourceName">#d3d3d3</color>
-    <color name="errorColor" tools:ignore="ResourceName">#FF4D4F</color>
-    <color name="button_default_Color" tools:ignore="ResourceName">#F4F4F6</color>
-    <color name="orange_ffa800" tools:ignore="ResourceName">#FFA800</color>
-    <color name="orange_ffa800_80" tools:ignore="ResourceName">#80FFA800</color>
-    <color name="orange_fef8e2" tools:ignore="ResourceName">#FEF8E2</color>
-    <color name="gray_f8f8f8" tools:ignore="ResourceName">#F8F8F8</color>
-    <color name="gray_dadada" tools:ignore="ResourceName">#DADADA</color>
-    <color name="yellow_ffe401" tools:ignore="ResourceName">#FFE401</color>
-    <color name="yellow_ffe401_80" tools:ignore="ResourceName">#80FFE401</color>
-    <color name="yellow_fef7ea" tools:ignore="ResourceName">#FEF7EA</color>
-    <color name="white_F4F4F6" tools:ignore="ResourceName">#F4F4F6</color>
-    <color name="white_F4F4F4" tools:ignore="ResourceName">#F4F4F6</color>
-    <color name="white_f8f8f8" tools:ignore="ResourceName">#F8F8F8</color>
-    <color name="white_fafafa" tools:ignore="ResourceName">#FAFAFA</color>
-    <color name="smoke_e4e4e4" tools:ignore="ResourceName">#E4E4E4</color>
-    <color name="orange_FF703A" tools:ignore="ResourceName">#FF703A</color>
-    <color name="gray_cccccc" tools:ignore="ResourceName">#cccccc</color>
-
+<resources xmlns:tools="http://schemas.android.com/tools" >
+    <color name="colorPrimary" >#FF703A</color>
+    <color name="colorPrimaryDark" >#000000</color>
+    <color name="colorAccent" >#FFA800</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#FF000000</color>
+    <color name="gray_888">#888888</color>
 </resources>
 

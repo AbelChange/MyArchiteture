@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="module_login_white">#FFFFFF</color>
-    <color name="module_login_gray_888">#888888</color>
-    <color name="module_login_gray_666">#666666</color>
-    <color name="module_login_gray_333">#333333</color>
-    <color name="module_login_light_gray">#ECEDEE</color>
-    <color name="module_login_trans">#00000000</color>
-    <color name="module_login_orange_a8">#FFA800</color>
 
 </resources>

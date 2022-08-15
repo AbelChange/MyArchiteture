@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.yunfeng.module_push">
+    package="com.ablec.module_push">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <permission
-        android:name="com.yunfeng.dm.permission.XGPUSH_RECEIVE"
+        android:name="com.ablec.dm.permission.XGPUSH_RECEIVE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="com.yunfeng.dm.permission.XGPUSH_RECEIVE" />
+    <uses-permission android:name="com.ablec.dm.permission.XGPUSH_RECEIVE" />
     <!-- 【必须】 移动推送 TPNS SDK 所需权限 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -53,7 +53,7 @@
         <!-- 关闭与 TPNS 应用的联合保活功能，请配置 -->
         <provider
             android:name="com.tencent.android.tpush.XGPushProvider"
-            android:authorities="com.yunfeng.dm.xxx.XGVIP_PUSH_AUTH"
+            android:authorities="com.ablec.dm.xxx.XGVIP_PUSH_AUTH"
             android:exported="false"
             android:enabled="false"
             tools:replace="android:authorities" />

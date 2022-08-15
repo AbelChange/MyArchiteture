@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.yunfeng.module_pay">
+    package="com.ablec.module_pay">
 
     <application
-        android:name="com.yunfeng.module_base.debug.DebugApplication"
+        android:name="com.ablec.module_base.debug.DebugApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/module_login_app_name"

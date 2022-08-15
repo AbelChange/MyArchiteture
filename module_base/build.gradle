@@ -26,9 +26,6 @@ android {
         viewBinding = true
     }
 
-    //统一资源前缀，规范资源引用
-    resourcePrefix "module_base"
-
     flavorDimensions "default"
     productFlavors globalConfig.flavor
 
@@ -56,35 +53,23 @@ dependencies {
     kapt "androidx.hilt:hilt-compiler:$dep.hiltCompilerVersion"
     //Glide
     kapt "com.github.bumptech.glide:compiler:$dep.glideVersion"
-    //banner
-    api "com.fq:convenientbanner:1.0.3-SNAPSHOT"
     //umeng
     api 'com.umeng.umsdk:common:9.4.2'// 必选
     api 'com.umeng.umsdk:asms:1.4.1'// 必选
 
-    api "com.umeng.umsdk:share-core:$dep.shareVersion"
-    api "com.umeng.umsdk:share-qq:$dep.shareVersion"
-    api "com.umeng.umsdk:share-wx:$dep.shareVersion"
+    api "com.umeng.umsdk:share-core:7.1.6"
+    api "com.umeng.umsdk:share-wx:7.1.6"
+    api "com.umeng.umsdk:share-qq:7.1.6"
+    api 'com.squareup.okhttp3:okhttp:3.14.9' //QQ官方sdk 3.53及之后版本需要集成okhttp3.x，必选
     //    qq and wechat
     api "com.tencent.tauth:qqopensdk:3.51.2"
     api "com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.7.9"
-
-    //numberPickerView
-    api "com.fq:numberpickerview:$dep.numberPickerVersion"
-
-    //imagePicker
-    api "com.fq:imagepicker:$dep.imagePickerVersion"
 
     //腾讯bugly
     api "com.tencent.bugly:crashreport:$dep.buglyAppVersion"
     api "com.tencent.bugly:nativecrashreport:$dep.buglyNativeVersion"
 
     //x5WebView
-    api "com.tencent.tbs.tbssdk:sdk:$dep.x5WebVersion"
-
-    //高德
-    api "com.amap.api:location:$dep.locationVersion"
-    debugImplementation "com.github.chuckerteam.chucker:library:$dep.chuckerVersion"
-    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$dep.chuckerVersion"
+    api "com.tencent.tbs.tbssdk:sdk:43993"
 
 }

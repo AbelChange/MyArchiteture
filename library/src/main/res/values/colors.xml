@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorAccent">#FFE401</color>
-    <color name="white">#ffffff</color>
-    <color name="black">#FF000000</color>
-    <color name="gray_888">#888888</color>
-    <color name="gray_80_EAEAEA">#80EAEAEA</color>
-    <color name="gray_333">#333333</color>
-    <color name="gray_555">#555555</color>
-    <color name="half_transparent">#7f000000</color>
-    <color name="transparent_30">#30000000</color>
-    <color name="transparent">#000000</color>
-    <color name="orange_ffa800">#FFA800</color>
+
 </resources>

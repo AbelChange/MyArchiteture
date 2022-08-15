@@ -3,7 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/purple_200"
+    android:orientation="vertical"
+    app:paddingBottomSystemWindowInsets="true"
+    app:paddingTopSystemWindowInsets="true">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"

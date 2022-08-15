@@ -30,7 +30,7 @@ android {
     }
 
     buildFeatures {
-        viewBinding =  true
+        viewBinding = true
     }
 
     compileOptions {
@@ -45,9 +45,19 @@ android {
 
 dependencies {
     api fileTree(dir: "libs", include: ['*.jar'])
+    // android common
     api "androidx.multidex:multidex:$dep.multidexVersion"
+    api "com.google.android.material:material:$dep.materialVersion"
+    api "com.jakewharton.timber:timber:$dep.timberVersion"
+    api "androidx.constraintlayout:constraintlayout:$dep.constraintLayoutVersion"
+    api "androidx.appcompat:appcompat:$dep.appCompatVersion"
+    api "androidx.cardview:cardview:$dep.cardVersion"
+    api "androidx.recyclerview:recyclerview:$dep.recyclerViewVersion"
+    api "androidx.annotation:annotation:$dep.androidXAnnotations"
+    api "androidx.datastore:datastore:$dep.dataStoreVersion"
+    api "androidx.datastore:datastore-preferences:$dep.dataStoreVersion"
 
-    // Architecture Components
+    //art
     api "androidx.room:room-runtime:$dep.roomVersion"
     api "androidx.navigation:navigation-ui-ktx:$dep.navigationVersion"
     api "androidx.navigation:navigation-fragment-ktx:$dep.navigationVersion"
@@ -56,27 +66,13 @@ dependencies {
     api "androidx.lifecycle:lifecycle-runtime-ktx:$dep.archLifecycleVersion"
     api "androidx.work:work-runtime-ktx:$dep.workVersion"
 
-    // Kotlin
+    // Ktx
     api "androidx.room:room-ktx:$dep.roomVersion"
     kapt "androidx.room:room-compiler:$dep.roomVersion"
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$dep.kotlinVersion"
     api "androidx.activity:activity-ktx:$dep.activityKtxVersion"
     api "androidx.fragment:fragment-ktx:$dep.fragmentKtxVersion"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$dep.coroutinesVersion"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$dep.coroutinesVersion"
-
-
-    // App dependencies
-
-    api "androidx.constraintlayout:constraintlayout:$dep.constraintLayoutVersion"
-    api "androidx.appcompat:appcompat:$dep.appCompatVersion"
-    api "androidx.cardview:cardview:$dep.cardVersion"
-    api "com.google.android.material:material:$dep.materialVersion"
-    api "androidx.recyclerview:recyclerview:$dep.recyclerViewVersion"
-    api "androidx.annotation:annotation:$dep.androidXAnnotations"
-//    api "com.jakewharton.timber:timber:$dep.timberVersion"
-    api "androidx.legacy:legacy-support-v4:$dep.androidXLegacySupport"
-    api "com.google.code.gson:gson:$dep.gsonVersion"
 
     // retrofit2
     api "com.squareup.retrofit2:retrofit:$dep.retrofitVersion"
@@ -84,24 +80,25 @@ dependencies {
     api "com.squareup.retrofit2:adapter-rxjava3:$dep.retrofitVersion"
     api "io.reactivex.rxjava3:rxjava:$dep.rxjavaVersion"
     api "io.reactivex.rxjava3:rxandroid:$dep.rxandroidVersion"
-    // okhttp3 支持4.4需要用3.9.1版本
+    // okhttp3
     api "com.squareup.okhttp3:logging-interceptor:$dep.okhttpVersion"
     api "com.squareup.okhttp3:okhttp:$dep.okhttpVersion"
+    //gson
+    api "com.google.code.gson:gson:$dep.gsonVersion"
+
     //Router
     api "io.github.meituan-dianping:router:$dep.WMRouterVersion"
     kapt "io.github.meituan-dianping:compiler:$dep.WMRouterVersion"
     //util
     api 'com.blankj:utilcodex:1.30.6'
-
     api "io.github.jeremyliao:live-event-bus-x:$dep.LiveEventBusVersion"
 
     //brvah
     api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$dep.BRVAH_Version"
 
+    //glide
     kapt "com.github.bumptech.glide:compiler:$dep.glideVersion"
-
-    api "com.zlc.glide:webpdecoder:2.0.${dep.glideVersion}"
-    api ("com.github.bumptech.glide:glide:$dep.glideVersion"){
+    api("com.github.bumptech.glide:glide:$dep.glideVersion") {
         exclude group: "com.android.support"
     }
     api("com.github.bumptech.glide:okhttp3-integration:$dep.glideVersion") {
@@ -109,24 +106,19 @@ dependencies {
     }
     api "jp.wasabeef:glide-transformations:$dep.glideTransformationsVersion"
 
-//    api "me.jessyan:autosize:$dep.autosizeVersion"
-
+    //适配
+    api "me.jessyan:autosize:$dep.autosizeVersion"
     api "com.tencent:mmkv-static:$dep.mmkvVersion"
 
+    //load
     api 'com.kingja.loadsir:loadsir:1.3.8'
 
     //沉浸式
     api 'com.gyf.immersionbar:immersionbar:3.0.0'
-
     //权限处理
     api 'com.github.tbruyelle:rxpermissions:0.12'
-    /**
-     * 下拉刷新
-     */
-    api  'com.scwang.smart:refresh-layout-kernel:2.0.3'
-
-    api "com.github.jenly1314:zxing-lite:$dep.zixingVersion"
-
-    api 'com.github.Temtion:BigImageViewPager:v4_6.1.4'
+    //下拉刷新
+    api 'io.github.scwang90:refresh-layout-kernel:2.0.5'
+    api 'io.github.scwang90:refresh-header-classics:2.0.5'
 
 }

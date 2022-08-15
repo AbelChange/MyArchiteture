@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yunfeng.module_pay">
+    package="com.ablec.module_pay">
 
     <queries>
         <package android:name="com.eg.android.AlipayGphone" />
@@ -9,7 +9,7 @@
 
     <application>
         <activity
-            android:name="com.yunfeng.dm.wxapi.WXPayEntryActivity"
+            android:name="com.ablec.dm.wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
     </application>

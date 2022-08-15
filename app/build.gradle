@@ -16,19 +16,18 @@ android {
     compileSdkVersion version.compileSdkVersion
 
     defaultConfig {
-        applicationId version.applicationId
         minSdkVersion version.minSdkVersion
         targetSdkVersion version.targetSdkVersion
-        versionCode version.versionCode
-        versionName version.versionName
+        applicationId "com.ablec.myarchitecture"
+        versionCode 136
+        versionName  "1.3.6"
         multiDexEnabled true
         resConfigs 'zh-rCN'
-
         manifestPlaceholders = [
                 //vivo厂商通道
-                VIVO_APPID        :"105489822",
-                VIVO_APPKEY       :"423a6e7778dacef8a5be2dc5cded70e8",
-                qqappid           : "101954482",
+//                VIVO_APPID        :"105489822",
+//                VIVO_APPKEY       :"423a6e7778dacef8a5be2dc5cded70e8",
+                qqappid           : "12220",
                 APP_NAME          : "@string/app_name",
                 UMENG_CHANNEL_NAME: "@string/channel"
         ]
@@ -109,4 +108,8 @@ dependencies {
 
     implementation "com.google.android.exoplayer:exoplayer-core:2.15.0"
 
+
+    //
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 }

@@ -1,86 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="ModuleBaseAppTheme" parent="Theme.AppCompat.DayNight.NoActionBar" tools:ignore="ResourceName">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
 
-    <style name="module_base_toolbar_theme" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="actionMenuTextColor">@color/menu_text</item>
-        <item name="colorControlNormal">@color/colorPrimaryDark</item>
-    </style>
-
-    <style name="module_base_overflow_menu_style" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
-        <item name="overlapAnchor">false</item>
-    </style>
-
-    <style name="module_base_popup_overlay" parent="ThemeOverlay.AppCompat.Light">
-        <!--用于控制menu弹出的位置，位于toolbar的下面，而不是上面-->
-        <item name="actionOverflowMenuStyle">@style/module_base_overflow_menu_style</item>
-    </style>
-
-    <style name="module_base_input_edit_text_day_mode">
-        <item name="android:background">@null</item>
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColorHint">@color/text_color_hint</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-    </style>
-
-    <style name="module_base_btn_style" parent="Widget.AppCompat.Button.Borderless">
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="module_base_btn_style_day_mode" parent="module_base_btn_style">
-        <item name="android:background">@drawable/module_base_selector_btn_common</item>
-        <item name="android:textColor">@drawable/module_base_selector_btn_text_color</item>
+    <style name="MainButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="module_base_btn_style_save" parent="module_base_btn_style">
-        <item name="android:background">@drawable/module_base_selector_btn_yellow</item>
-        <item name="android:textColor">@drawable/module_base_selector_btn_text_color</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-
-    <style name="module_base_btn_style_cancel" parent="module_base_btn_style">
-        <item name="android:background">@drawable/module_base_selector_btn_stroke_ffa800</item>
-        <item name="android:textColor">@color/orange_ffa800</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="module_base_ActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
-        <!-- 背景透明 -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <!-- 浮于Activity之上 -->
-        <item name="android:windowIsFloating">true</item>
-        <!-- 边框 -->
-        <item name="android:windowFrame">@null</item>
-        <!-- Dialog以外的区域模糊效果 -->
-        <item name="android:backgroundDimEnabled">true</item>
-        <!-- 无标题 -->
-        <item name="android:windowNoTitle">true</item>
-        <!-- 半透明 -->
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:backgroundDimAmount">0.2</item>
-    </style>
-
-    <style name="module_base_ActionSheetDialogStyleWithAnimation" parent="module_base_ActionSheetDialogStyle">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsFloating">true</item>
-        <!-- Dialog进入及退出动画 -->
-        <item name="android:windowAnimationStyle">@style/module_base_ActionSheetDialogAnimation
-        </item>
-    </style>
-
-    <!-- ActionSheet进出动画 -->
-    <style name="module_base_ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
-        <item name="android:windowEnterAnimation">@anim/module_base_dialog_in</item>
-        <item name="android:windowExitAnimation">@anim/module_base_dialog_out</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="cornerRadius">24dp</item>
     </style>
 </resources>

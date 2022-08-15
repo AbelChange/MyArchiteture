@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.temption.myarchitecture.logic.main.MainFragment"
+        android:name="com.ablec.myarchitecture.logic.main.MainFragment"
         android:label="constraint_fragment"
         tools:layout="@layout/main_fragment">
         <action
@@ -40,19 +40,19 @@
     <fragment
         tools:layout="@layout/constraint_fragment"
         android:id="@+id/constraintLayoutFragment"
-        android:name="com.temption.myarchitecture.logic.main.ConstraintLayoutFragment"
+        android:name="com.ablec.myarchitecture.logic.main.ConstraintLayoutFragment"
         android:label="ConstraintLayoutFragment" >
     </fragment>
 
     <fragment
         tools:layout="@layout/transformation_fragment"
         android:id="@+id/transformationFragment"
-        android:name="com.temption.myarchitecture.logic.transformation.TransformationFragment"
+        android:name="com.ablec.myarchitecture.logic.transformation.TransformationFragment"
         android:label="TransformationFragment" />
 
     <fragment
         android:id="@+id/webSocketFragment"
-        android:name="com.temption.myarchitecture.logic.websocket.WebSocketFragment"
+        android:name="com.ablec.myarchitecture.logic.websocket.WebSocketFragment"
         android:label="web_socket_fragment"
         tools:layout="@layout/web_socket_fragment" />
     <fragment
@@ -61,12 +61,12 @@
         tools:layout="@layout/coordinator_layout_fragment" />
     <fragment
         android:id="@+id/rxFragment"
-        android:name="com.temption.myarchitecture.logic.rx.RxFragment"
+        android:name="com.ablec.myarchitecture.logic.rx.RxFragment"
         android:label="rx_fragment"
         tools:layout="@layout/rx_fragment" />
     <fragment
         android:id="@+id/dataListFragment"
-        android:name="com.temption.myarchitecture.logic.pageslist.DataListFragment"
+        android:name="com.ablec.myarchitecture.logic.pageslist.DataListFragment"
         android:label="DataListFragment" />
 
 

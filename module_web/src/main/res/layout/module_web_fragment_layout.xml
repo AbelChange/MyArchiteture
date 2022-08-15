@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:visibility="visible">
 
-    <com.yunfeng.module_web.webview.X5WebView
+    <com.ablec.module_web.webview.X5WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

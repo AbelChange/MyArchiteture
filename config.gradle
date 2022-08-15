@@ -41,23 +41,21 @@ ext {
 
     dependencies = [:]
     versions = [
-            compileSdkVersion: 30,
+            compileSdkVersion: 31,
             minSdkVersion    : 21,
-            targetSdkVersion : 30,
-            versionCode      : 136,
-            versionName      : "1.3.6",
-            applicationId    : "com.temption.myarchitecture"
+            targetSdkVersion : 30
     ]
-    dependencies.kotlinVersion = '1.5.30'
+    dependencies.kotlinVersion = '1.6.21'
     dependencies.multidexVersion = '2.0.1'
     dependencies.androidXVersion = '1.0.0'
     dependencies.androidXTestCoreVersion = '1.2.0'
     dependencies.androidXTestExtKotlinRunnerVersion = '1.1.1'
     dependencies.androidXTestRulesVersion = '1.2.0'
     dependencies.androidXAnnotations = '1.2.0'
+    dependencies.dataStoreVersion = '1.0.0'
     dependencies.androidXLegacySupport = '1.0.0'
     dependencies.constraintLayoutVersion = '2.1.0'
-    dependencies.appCompatVersion = '1.3.1'
+    dependencies.appCompatVersion = '1.4.1'
     dependencies.navigationVersion = '2.3.5'
     dependencies.archLifecycleVersion = '2.3.1'
     dependencies.workVersion = '2.5.0'
@@ -93,14 +91,9 @@ ext {
     dependencies.hiltVersion = '2.38.1'
     dependencies.hiltCompilerVersion = '1.0.0'
     dependencies.numberPickerVersion = '1.0.3-SNAPSHOT'
-    dependencies.imagePickerVersion = '2.0.5'
     dependencies.mmkvVersion = '1.2.10'
-    dependencies.shareVersion = '7.1.6'
-    dependencies.chuckerVersion = '3.5.2'
     dependencies.buglyAppVersion = '3.4.4'
     dependencies.buglyNativeVersion = '3.9.2'
-    dependencies.locationVersion = '5.4.0'
     dependencies.x5WebVersion = '43993'
-    dependencies.zixingVersion = '2.1.1'
 
 }

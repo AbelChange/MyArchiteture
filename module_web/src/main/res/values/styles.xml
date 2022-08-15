@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="ModuleWebTheme" parent="ModuleBaseAppTheme">
+    <style name="ModuleWebTheme" parent="BaseAppTheme">
 
     </style>
 

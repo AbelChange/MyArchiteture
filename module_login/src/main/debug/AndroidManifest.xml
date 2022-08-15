@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.yunfeng.module_login">
+    package="com.ablec.module_login">
 
     <application
-        android:name="com.yunfeng.module_base.debug.DebugApplication"
+        android:name="com.ablec.module_base.debug.DebugApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/module_login_app_name"
         android:supportsRtl="true"
         tools:replace="android:label"
-        android:theme="@style/ModuleBaseAppTheme">
-<!--        <activity android:name="com.yunfeng.module_login.view.LoginActivity">-->
+        android:theme="@style/BaseAppTheme">
+<!--        <activity android:name="com.ablec.module_login.view.LoginActivity">-->
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 

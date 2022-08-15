@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <drawable name="module_base_image_picker_bg">@color/colorAccent</drawable>
-
 </resources>

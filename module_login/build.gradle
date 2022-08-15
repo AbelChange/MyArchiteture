@@ -8,7 +8,7 @@ android {
     defaultConfig {
         //如果是独立模块，则使用当前组件的包名
         if (isBuildModule.toBoolean()) {
-            applicationId "com.yunfeng.module_login"
+            applicationId "com.ablec.module_login"
         }
     }
 
@@ -29,7 +29,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //组件依赖基础库
     api project(path: ':module_base')
-    implementation(name:'shanyan_sdk_v2.3.3.2', ext: 'aar')
     kapt "io.github.meituan-dianping:compiler:$dep.WMRouterVersion"
     //Hilt
     kapt "com.google.dagger:hilt-compiler:$dep.hiltVersion"
