@@ -1,8 +1,8 @@
 package com.ablec.myarchitecture.data.server.api
 
+import com.ablec.module_base.http.BaseResp
+import com.ablec.module_base.http.PageData
 import com.ablec.myarchitecture.data.server.dto.ListItem
-import com.ablec.module_base.http.base.BaseResp
-import com.ablec.module_base.http.base.PageData
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 

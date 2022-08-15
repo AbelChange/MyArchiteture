@@ -1,4 +1,4 @@
-package com.ablec.module_base.http
+package com.ablec.module_base.util
 
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser

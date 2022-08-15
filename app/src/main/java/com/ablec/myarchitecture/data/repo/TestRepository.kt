@@ -1,22 +1,44 @@
 package com.ablec.myarchitecture.data.repo
 
-import com.ablec.myarchitecture.data.server.api.TestApi
-import com.ablec.myarchitecture.data.server.dto.GetListReq
-import com.ablec.module_base.http.convert
 import com.ablec.module_base.http.handleHttpResp
+import com.ablec.module_base.util.convert
+import com.ablec.myarchitecture.AppApplication
+import com.ablec.myarchitecture.data.server.api.TestApiService
+import com.ablec.myarchitecture.data.server.dto.GetListReq
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 
 /**
  * @Description:
  * @Author:         haoshuaihui
  * @CreateDate:     2020/12/29 19:07
  */
-class TestRepository {
+object TestRepository {
+
+    private val apiService: TestApiService
+
+    /**
+     * 自定义入口
+     */
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface TaskMonitorViewModelEntryPoint {
+        fun getApiService(): TestApiService
+    }
+
+    init {
+        val hiltEntryPoint =
+            EntryPointAccessors.fromApplication(
+                AppApplication.instance,
+                TaskMonitorViewModelEntryPoint::class.java
+            )
+        apiService = hiltEntryPoint.getApiService()
+    }
 
     suspend fun getListData(req: GetListReq) =
-        handleHttpResp { testApi.getListData(req.convert()) }
+        handleHttpResp { apiService.getListData(req.convert()) }
 
-    companion object {
-        private val testApi: TestApi
-            get() = RetrofitServiceManager.getApiService(TestApi::class.java);
-    }
+
 }

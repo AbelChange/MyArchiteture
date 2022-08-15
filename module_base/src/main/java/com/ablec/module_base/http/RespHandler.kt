@@ -1,10 +1,9 @@
 package com.ablec.module_base.http
 
-import com.ablec.module_base.http.base.BaseFailedResp
-import com.ablec.module_base.http.base.BaseResp
-import com.ablec.module_base.http.exception.ExceptionEngine
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+
+
+import kotlin.coroutines.cancellation.CancellationException
+
 
 /**
  * @Description:
@@ -14,22 +13,23 @@ import kotlinx.coroutines.withContext
 suspend fun <T> handleHttpResp(
     action: suspend () -> BaseResp<T>
 ): BaseResp<T> {
-    return withContext(Dispatchers.IO) {
-        try {
-            val invoke = action.invoke()
-            handleHttpSuccess(invoke)
-        } catch (e: Exception) {
-            handleHttpError<T>(e)
+    return try {
+        val invoke = action.invoke()
+        handleHttpSuccess(invoke)
+    } catch (it: Throwable) {
+        if (it is CancellationException) {
+            throw it
+        } else {
+            handleHttpError(it)
         }
     }
 }
 
 /**
- * 非后台返回错误，捕获到的异常
+ * http
  */
 private fun <T> handleHttpError(e: Throwable): BaseFailedResp<T> {
     val apiException = ExceptionEngine.handleException(e)
-    //401处理
     return BaseFailedResp(apiException.code, apiException.message)
 }
 
@@ -37,10 +37,14 @@ private fun <T> handleHttpError(e: Throwable): BaseFailedResp<T> {
  * 返回200，但是还要判断isSuccess
  */
 private fun <T> handleHttpSuccess(data: BaseResp<T>): BaseResp<T> {
-    return if (data.isSuccess()) {
+    return if (data.isSuccess) {
         data
     } else {
         //逻辑异常
+        if (data.invalidToken){
+            //处理登出
+
+        }
         BaseFailedResp(data.code, data.msg)
     }
 }

@@ -1,6 +1,6 @@
 package com.ablec.myarchitecture.data.server.api
 
-import com.ablec.module_base.http.base.BaseResp
+import com.ablec.module_base.http.BaseResp
 import okhttp3.MultipartBody
 import retrofit2.http.Multipart
 import retrofit2.http.POST
