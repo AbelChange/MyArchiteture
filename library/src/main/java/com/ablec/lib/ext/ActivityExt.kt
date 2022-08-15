@@ -1,9 +1,9 @@
 package com.ablec.lib.ext
 
 import android.app.Activity
-import android.graphics.Color
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
+import android.view.View
+import androidx.core.view.marginTop
+import com.ablec.lib.ext.dp
 import com.blankj.utilcode.util.BarUtils
 
 /**
@@ -12,19 +12,26 @@ import com.blankj.utilcode.util.BarUtils
  * @CreateDate:     2020/12/29 13:28
  */
 
+
 //沉浸 + 透明状态栏
-fun Activity.setImmerse(blackFont: Boolean) {
-    BarUtils.setStatusBarLightMode(this, blackFont)
-    WindowCompat.setDecorFitsSystemWindows(window, false)
-    window.statusBarColor = Color.TRANSPARENT
-    window.navigationBarColor = Color.BLACK
-//    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-//        window.navigationBarDividerColor = Color.TRANSPARENT
-//    }
-    //设置沉浸后专栏栏和导航字体的颜色
-    ViewCompat.getWindowInsetsController(window.decorView)
-        ?.let { controller ->
-            controller.isAppearanceLightStatusBars = blackFont
-            controller.isAppearanceLightNavigationBars = blackFont
-        }
+fun Activity.setUpBars(lightMode: Boolean) {
+    BarUtils.transparentStatusBar(window)
+    BarUtils.setStatusBarLightMode(window, lightMode)
+    BarUtils.setNavBarLightMode(window, lightMode)
 }
+
+fun Activity.hideSystemBar() {
+    BarUtils.setNavBarVisibility(window, false)
+    BarUtils.setStatusBarVisibility(window, false)
+}
+
+val statusBarHeight = BarUtils.getStatusBarHeight()
+
+fun View.paddingStatusBar() {
+    setPadding(paddingLeft, statusBarHeight + 12.dp, paddingRight, paddingBottom)
+}
+
+
+
+
+
