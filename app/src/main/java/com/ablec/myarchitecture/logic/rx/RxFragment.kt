@@ -9,6 +9,9 @@ import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.ablec.lib.base.BaseFragment
+import com.ablec.lib.ext.viewBinding
+import com.ablec.myarchitecture.R
 import com.ablec.myarchitecture.databinding.RxFragmentBinding
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Flowable
@@ -18,22 +21,13 @@ import io.reactivex.rxjava3.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
 
-class RxFragment : Fragment() {
+class RxFragment : BaseFragment(R.layout.rx_fragment) {
 
     private val viewModel by viewModels<RxViewModel>()
 
-    private lateinit var binding: RxFragmentBinding
+    private val binding: RxFragmentBinding by viewBinding()
 
     private val searchContent = PublishSubject.create<String>()
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        binding = RxFragmentBinding.inflate(layoutInflater)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
