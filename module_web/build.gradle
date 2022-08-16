@@ -18,12 +18,6 @@ android {
     flavorDimensions "default"
     productFlavors globalConfig.flavor
 
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-    }
-
 }
 
 dependencies {

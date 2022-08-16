@@ -31,7 +31,6 @@ class ConstraintLayoutFragment :Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showToolBar(true, binding.toolbarLayout.toolbar)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

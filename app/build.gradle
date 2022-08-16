@@ -99,18 +99,15 @@ dependencies {
 
     //Glide
     kapt "com.github.bumptech.glide:compiler:$dep.glideVersion"
-
     //Hilt
+    kapt "com.google.dagger:hilt-android-compiler:$dep.hiltVersion"
     implementation "com.google.dagger:hilt-android:$dep.hiltVersion"
-    kapt "com.google.dagger:hilt-compiler:$dep.hiltVersion"
-    kapt "androidx.hilt:hilt-compiler:$dep.hiltCompilerVersion"
+
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
     //仿weibo可展开折叠texview
     implementation 'com.github.MZCretin:ExpandableTextView:v1.6.1'
 
     implementation "com.google.android.exoplayer:exoplayer-core:2.15.0"
-
-
     //
     debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
     releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"

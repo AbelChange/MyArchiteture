@@ -29,7 +29,10 @@ allprojects {
     repositories {
         flatDir {
             dirs 'libs'
+            dirs project(':module_login').file('libs')
+//            dirs project(':module_pay').file('libs')
         }
+
         google()
         mavenCentral()
         maven { url "https://jitpack.io" }

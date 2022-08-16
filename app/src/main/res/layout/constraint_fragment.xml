@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".logic.main.ConstraintLayoutFragment">
 
-
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -32,10 +30,8 @@
     <Button
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@color/colorAccent"
-        android:padding="0dp"
         android:text="spread"
         app:layout_constraintBottom_toTopOf="@id/textView2"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -46,9 +42,7 @@
     <Button
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:background="@color/colorAccent"
-        android:padding="0dp"
+        android:layout_height="wrap_content"
         android:text="spread"
         app:layout_constraintBottom_toTopOf="@id/textView3"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -58,9 +52,7 @@
     <Button
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:background="@color/colorAccent"
-        android:padding="0dp"
+        android:layout_height="wrap_content"
         android:text="spread"
         app:layout_constraintBottom_toTopOf="@id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -90,7 +82,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <androidx.constraintlayout.utils.widget.ImageFilterView
+    <androidx.constraintlayout.utils.widget.ImageFilterButton
         android:id="@+id/iv"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -103,7 +95,7 @@
         app:roundPercent="1" />
 
 
-    <androidx.constraintlayout.utils.widget.ImageFilterButton
+    <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/btn"
         android:layout_width="80dp"
         android:layout_height="80dp"

@@ -29,12 +29,6 @@ android {
     flavorDimensions "default"
     productFlavors globalConfig.flavor
 
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-    }
-
     kapt {
         useBuildCache = true
         arguments {
@@ -48,9 +42,6 @@ dependencies {
     api project(path: ':library')
     kapt "androidx.room:room-compiler:$dep.roomVersion"
     kapt "io.github.meituan-dianping:compiler:$dep.WMRouterVersion"
-    //Hilt
-    kapt "com.google.dagger:hilt-compiler:$dep.hiltVersion"
-    kapt "androidx.hilt:hilt-compiler:$dep.hiltCompilerVersion"
     //Glide
     kapt "com.github.bumptech.glide:compiler:$dep.glideVersion"
     //umeng

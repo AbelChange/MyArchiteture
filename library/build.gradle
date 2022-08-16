@@ -47,8 +47,6 @@ dependencies {
     api fileTree(dir: "libs", include: ['*.jar'])
     // android common
     api "androidx.multidex:multidex:$dep.multidexVersion"
-    api "com.google.android.material:material:$dep.materialVersion"
-    api "com.jakewharton.timber:timber:$dep.timberVersion"
     api "androidx.constraintlayout:constraintlayout:$dep.constraintLayoutVersion"
     api "androidx.appcompat:appcompat:$dep.appCompatVersion"
     api "androidx.cardview:cardview:$dep.cardVersion"
@@ -74,6 +72,9 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$dep.coroutinesVersion"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$dep.coroutinesVersion"
 
+    api "com.google.android.material:material:$dep.materialVersion"
+    api "com.jakewharton.timber:timber:$dep.timberVersion"
+
     // retrofit2
     api "com.squareup.retrofit2:retrofit:$dep.retrofitVersion"
     api "com.squareup.retrofit2:converter-gson:$dep.retrofitVersion"
@@ -90,7 +91,7 @@ dependencies {
     api "io.github.meituan-dianping:router:$dep.WMRouterVersion"
     kapt "io.github.meituan-dianping:compiler:$dep.WMRouterVersion"
     //util
-    api 'com.blankj:utilcodex:1.30.6'
+    api 'com.blankj:utilcodex:1.31.0'
     api "io.github.jeremyliao:live-event-bus-x:$dep.LiveEventBusVersion"
 
     //brvah
@@ -120,5 +121,9 @@ dependencies {
     //下拉刷新
     api 'io.github.scwang90:refresh-layout-kernel:2.0.5'
     api 'io.github.scwang90:refresh-header-classics:2.0.5'
+
+    //hilt
+    api "com.google.dagger:hilt-android:$dep.hiltVersion"
+
 
 }

@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.sankuai.waimai.router.common.DefaultUriRequest
 import com.sankuai.waimai.router.core.OnCompleteListener
 import com.sankuai.waimai.router.core.UriRequest
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 /**
  * @Description:    外部跳转统一交给router处理

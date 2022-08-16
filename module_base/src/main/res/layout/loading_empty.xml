@@ -27,13 +27,11 @@
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/gray_888"
         android:text="@string/loading_empty_str"
         android:textSize="13sp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnText"
-        style="@style/MainButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"

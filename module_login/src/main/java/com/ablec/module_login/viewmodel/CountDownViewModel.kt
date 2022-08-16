@@ -14,8 +14,10 @@ import kotlinx.coroutines.launch
  * @Author:         haoshuaihui
  * @CreateDate:     2021/6/18 16:45
  */
-class CountDownViewModel(application: Application) :
-    AndroidViewModel(application) {
+class CountDownViewModel constructor(
+    val app: Application
+) :
+    AndroidViewModel(app) {
 
     private var timeCountJob: Job? = null
 

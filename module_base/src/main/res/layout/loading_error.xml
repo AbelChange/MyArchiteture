@@ -27,12 +27,10 @@
         android:id="@+id/tv_errorMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/gray_888"
         android:text="@string/loading_error_str"
         android:textSize="13sp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        style="@style/MainButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="20dp"

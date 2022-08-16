@@ -30,8 +30,7 @@ dependencies {
     //组件依赖基础库
     api project(path: ':module_base')
     kapt "io.github.meituan-dianping:compiler:$dep.WMRouterVersion"
-    //Hilt
-    kapt "com.google.dagger:hilt-compiler:$dep.hiltVersion"
-    kapt "androidx.hilt:hilt-compiler:$dep.hiltCompilerVersion"
+    //dagger
+    kapt "com.google.dagger:hilt-android-compiler:$dep.hiltVersion"
 
 }

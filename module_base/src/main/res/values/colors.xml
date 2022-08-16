@@ -2,7 +2,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools" >
     <color name="colorPrimary">#518EF8</color>
     <color name="colorPrimaryDark">#518EF8</color>
-    <color name="colorAccent">#806DFB</color>
+    <color name="colorAccent">#226DFB</color>
+    <color name="colorOnSurface">#80000000</color>
+    <color name="buttonNormal">#226DFB</color>
     <color name="white">#ffffff</color>
     <color name="black">#FF000000</color>
 </resources>
