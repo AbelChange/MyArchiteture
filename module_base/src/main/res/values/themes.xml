@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
 
-    <style name="Base.AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -10,5 +10,20 @@
         <item name="colorControlHighlight">@color/trans_white</item>
         <item name="materialButtonStyle">@style/Button</item>
         <item name="imageButtonStyle">@style/ImageButton</item>
+    </style>
+
+    <style name="FullScreenAcTheme" parent="AppTheme">
+        <!--这里替换闪屏图片-->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
+        <item name="android:colorEdgeEffect">@android:color/transparent</item>
+    </style>
+
+    <style name="SplashTheme" parent="FullScreenAcTheme">
+        <!--这里替换闪屏图片-->
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowBackground">@mipmap/splash_chinese_bg</item>
     </style>
 </resources>

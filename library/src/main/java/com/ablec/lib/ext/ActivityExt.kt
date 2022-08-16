@@ -2,6 +2,7 @@ package com.ablec.lib.ext
 
 import android.app.Activity
 import android.view.View
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.marginTop
 import com.ablec.lib.ext.dp
 import com.blankj.utilcode.util.BarUtils
@@ -16,8 +17,9 @@ import com.blankj.utilcode.util.BarUtils
 //沉浸 + 透明状态栏
 fun Activity.setUpBars(lightMode: Boolean) {
     BarUtils.transparentStatusBar(window)
-    BarUtils.setStatusBarLightMode(window, lightMode)
-    BarUtils.setNavBarLightMode(window, lightMode)
+    WindowInsetsControllerCompat(this.window, this.window.decorView).apply {
+        isAppearanceLightStatusBars = lightMode
+    }
 }
 
 fun Activity.hideSystemBar() {

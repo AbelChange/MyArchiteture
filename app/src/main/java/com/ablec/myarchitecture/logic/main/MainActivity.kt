@@ -1,27 +1,24 @@
 package com.ablec.myarchitecture.logic.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import com.ablec.lib.base.BaseActivity
+import com.ablec.lib.ext.paddingStatusBar
+import com.ablec.lib.ext.setUpBars
 import com.ablec.lib.ext.showToast
 import com.ablec.module_base.config.Main.BASE
-import com.ablec.module_base.util.convert
 import com.ablec.module_base.util.toJson
 import com.ablec.myarchitecture.R
-import com.ablec.myarchitecture.data.server.api.TestApiService
-import com.ablec.myarchitecture.data.server.dto.GetListReq
 import com.ablec.myarchitecture.databinding.MainActivityBinding
 import com.ablec.myarchitecture.logic.pageslist.DataListModel
 import com.sankuai.waimai.router.annotation.RouterUri
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 @RouterUri(path = [BASE])
@@ -39,6 +36,8 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setUpBars(true)
+        binding.root.paddingStatusBar()
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
@@ -48,7 +47,7 @@ class MainActivity : BaseActivity() {
                 .build()
 
         //test
-        vm.listLive.observe(this){
+        vm.listLive.observe(this) {
             showToast(it.toJson())
         }
     }
@@ -60,6 +59,14 @@ class MainActivity : BaseActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        fun start(context: Context) {
+            val starter = Intent(context, MainActivity::class.java)
+            context.startActivity(starter)
         }
     }
 }
