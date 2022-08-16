@@ -14,6 +14,7 @@
             android:screenOrientation="sensorPortrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             tools:replace="android:theme" />
+
     </application>
 
 </manifest>

@@ -1,5 +1,0 @@
-include ':module_base'
-include ':module_login'
-include ':library'
-include ':app'
-rootProject.name = "MyArchitecture"

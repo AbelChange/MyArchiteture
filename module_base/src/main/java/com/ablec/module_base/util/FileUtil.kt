@@ -239,23 +239,23 @@ object FileUtil {
             && !PermissionUtils.isGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         ) {
             if (context is FragmentActivity) {
-                RxPermissions(context).requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe {
-                        if (it.granted) {
-                            doActualSaveBitmap(name, context, image)
-                        } else {
-                            ToastUtils.showShort("存储权限被拒绝，无法保存")
-                        }
-                    }
+//                RxPermissions(context).requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    .subscribe {
+//                        if (it.granted) {
+//                            doActualSaveBitmap(name, context, image)
+//                        } else {
+//                            ToastUtils.showShort("存储权限被拒绝，无法保存")
+//                        }
+//                    }
             } else if (context is Fragment) {
-                RxPermissions(context).requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    .subscribe {
-                        if (it.granted) {
-                            doActualSaveBitmap(name, context, image)
-                        } else {
-                            ToastUtils.showShort("存储权限被拒绝，无法保存")
-                        }
-                    }
+//                RxPermissions(context).requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    .subscribe {
+//                        if (it.granted) {
+//                            doActualSaveBitmap(name, context, image)
+//                        } else {
+//                            ToastUtils.showShort("存储权限被拒绝，无法保存")
+//                        }
+//                    }
             }
         } else {
             doActualSaveBitmap(name, context, image)

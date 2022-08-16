@@ -13,7 +13,7 @@ import com.ablec.lib.util.MMKVUtil
 import com.ablec.module_base.config.BaseModule
 import com.ablec.module_base.config.ModuleConfig
 import com.ablec.module_base.service.RouterServiceManager
-import com.ablec.module_login.config.LoginModule
+//import com.ablec.module_login.config.LoginModule
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -28,7 +28,7 @@ class AppApplication : BaseApplication() {
      * 需要初始化的模块
      */
     private val moduleClass = listOf(
-        BaseModule::class.java, LoginModule::class.java,
+        BaseModule::class.java,
     )
 
     override fun onCreate() {

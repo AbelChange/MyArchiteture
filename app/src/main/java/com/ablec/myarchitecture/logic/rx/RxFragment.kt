@@ -1,13 +1,10 @@
 package com.ablec.myarchitecture.logic.rx
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ablec.lib.base.BaseFragment
 import com.ablec.lib.ext.viewBinding
@@ -17,7 +14,6 @@ import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject
-
 import java.util.concurrent.TimeUnit
 
 

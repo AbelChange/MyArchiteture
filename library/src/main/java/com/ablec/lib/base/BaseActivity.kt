@@ -3,11 +3,8 @@ package com.ablec.lib.base
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.TextView
-import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
-import com.gyf.immersionbar.ImmersionBar
 import com.ablec.common.R
 
 abstract class BaseActivity : AppCompatActivity() {

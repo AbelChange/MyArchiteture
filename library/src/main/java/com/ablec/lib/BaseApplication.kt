@@ -1,8 +1,6 @@
 package com.ablec.lib;
 
-import androidx.multidex.MultiDexApplication
-import com.blankj.utilcode.util.ProcessUtils
-import com.kingja.loadsir.core.LoadSir
+import android.app.Application
 
 
 /**
@@ -10,7 +8,7 @@ import com.kingja.loadsir.core.LoadSir
  * @Author:         haoshuaihui
  * @CreateDate:     2020/12/29 15:22
  */
-abstract class BaseApplication : MultiDexApplication() {
+abstract class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

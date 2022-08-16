@@ -1,7 +1,5 @@
 package com.ablec.module_base.config
 
-import com.ablec.module_base.BuildConfig
-
 /**
  * 每个模块的初始化,模块间联调
  */
@@ -63,19 +61,19 @@ object ModuleConstant {
         /**
          * 订单详情
          */
-        const val ORDER_DETAIL = "${BuildConfig.BASE_URL}wpersion/orderDetail?order_no="
+        const val ORDER_DETAIL = ""
         const val ORDER_DETAIL_FROM_ORDER_TYPE = "&from=order&orderType=1"
         const val ORDER_DETAIL_FROM_REVENUE_TYPE = "&from=order&orderType=2"
 
         /**
          * 新人福利
          */
-        const val NEW_USER = "${BuildConfig.BASE_URL}activity/coupon"
+        const val NEW_USER = ""
 
         /**
          * 邀请好友
          */
-        const val INVITE_FRIEND = "${BuildConfig.BASE_URL}activity/invite"
+        const val INVITE_FRIEND = ""
     }
 
     /**

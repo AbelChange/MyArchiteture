@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Rect
-import android.location.LocationManager
 import android.text.*
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
@@ -15,15 +14,16 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorRes
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.findViewTreeLifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.ObservableOnSubscribe
-import io.reactivex.rxjava3.disposables.Disposable
-import java.math.BigDecimal
-import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * @Description:
@@ -54,18 +54,20 @@ fun Context.showToast(content: String? = null, duration: Int = Toast.LENGTH_SHOR
 }
 
 /*--------------------View start---------------*/
-fun View.debounceClick(windowDuration: Long = 800,
-                       unit: TimeUnit = TimeUnit.MILLISECONDS,
-                       listener: (view: View) -> Unit): Disposable {
-    return Observable.create(ObservableOnSubscribe<View> { emitter ->
-        setOnClickListener {
-            if (!emitter.isDisposed) {
-                emitter.onNext(it)
-            }
-        }
-    }).throttleFirst(windowDuration, unit)
-        .subscribe { listener(it) }
+fun View.debounceClick(
+    windowDuration: Long = 800,
+    listener: (view: View) -> Unit
+) {
+    findViewTreeLifecycleOwner()?.lifecycleScope?.let {
+        callbackFlow<Unit> {
+            setOnClickListener { this.trySend(Unit) }
+            awaitClose { setOnClickListener(null) }
+        }.throttleFirst(windowDuration).onEach {
+            listener(this)
+        }.launchIn(it)
+    }
 }
+
 
 /**
  * 扩大点击区域，适用于 view 相对“孤立”的case
