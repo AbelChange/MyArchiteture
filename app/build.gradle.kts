@@ -92,12 +92,12 @@ android {
 
 }
 
-
+//尝试抽离
 dependencies {
 
     api(projects.moduleBase)
 //    //集成模式
-    if (Config.buildModule) {
+    if (!Config.buildModule) {
 //        implementation(project(":module_login"))
 //        implementation(projects.module_pay)
 //        implementation(projects.module_web)

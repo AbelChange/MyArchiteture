@@ -13,7 +13,7 @@ pluginManagement {
                 "androidx.navigation.safeargs" -> {
                     useModule("androidx.navigation:navigation-safe-args-gradle-plugin:${requested.version}")
                 }
-                "WMRouter"->{
+                "WMRouter" -> {
                     useModule("io.github.meituan-dianping:plugin:${requested.version}")
                 }
                 else -> {
@@ -40,7 +40,10 @@ dependencyResolutionManagement {
 }
 
 
-include(":library",":module_base",":app")
+include(":library")
+include(":module_base")
+include(":app")
+
 rootProject.name = "MyArchitecture"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

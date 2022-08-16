@@ -19,44 +19,42 @@ if (Config.buildModule) {
 
 
 
-android {
-
-    compileSdk = Versions.COMPILE_SDK
-
-    defaultConfig {
-        minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    buildFeatures {
-        viewBinding = true
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ["libs"]
-            if (Config.buildModule) {
-                //独立运行
-                manifest.srcFile("src/main/debug/AndroidManifest.xml")
-            } else {
-                //合并到主工程
-                manifest.srcFile("src/main/AndroidManifest.xml")
-                resources {
-                    exclude("src/main/debug/*")
-                }
-            }
-        }
-    }
-
-}
+//android {
+//
+//    compileSdk = Versions.COMPILE_SDK
+//
+//    defaultConfig {
+//        minSdk = Versions.MIN_SDK
+//        targetSdk = Versions.TARGET_SDK
+//    }
+//
+//    compileOptions {
+//        sourceCompatibility = JavaVersion.VERSION_1_8
+//        targetCompatibility = JavaVersion.VERSION_1_8
+//    }
+//
+//    buildFeatures {
+//        viewBinding = true
+//    }
+//
+//    kotlinOptions {
+//        jvmTarget = "1.8"
+//    }
+//
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ["libs"]
+//            if (Config.buildModule) {
+//                manifest.srcFile("src/main/debug/AndroidManifest.xml")
+//            } else {
+//                manifest.srcFile("src/main/AndroidManifest.xml")
+//                resources {
+//                    exclude("src/main/debug/*")
+//                }
+//            }
+//        }
+//    }
+//
+//}
 
 
