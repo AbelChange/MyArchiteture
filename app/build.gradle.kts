@@ -1,3 +1,6 @@
+import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     id("com.android.application")
     id("WMRouter")
@@ -19,8 +22,6 @@ android {
         versionCode = 1
         versionName = "1.0"
         manifestPlaceholders["qqappid"] = "12220"
-        manifestPlaceholders["VIVO_APPID"] = "105489822"
-        manifestPlaceholders["VIVO_APPKEY"] = "423a6e7778dacef8a5be2dc5cded70e8"
         manifestPlaceholders["APP_NAME"] = "appname"
         manifestPlaceholders["UMENG_CHANNEL_NAME"] = "common"
 
@@ -29,25 +30,28 @@ android {
             // libraries Gradle should build and package with your app.
             abiFilters += listOf(
                 "arm64-v8a",
-                "armeabi-v7a",
-                "x86"
+                "armeabi-v7a"
             )
         }
     }
 
     signingConfigs {
-        // Creates a signing configuration called "release".
         create("release") {
-            storeFile = file("my-release-key.jks")
-            storePassword = "storePassword"
-            keyAlias = "my-alias"
-            keyPassword = "my-keyPassword"
+            val keystorePropertiesFile = file("keystore/keystore.properties")
+            val keystoreProperties = Properties()
+            keystoreProperties.load(keystorePropertiesFile.inputStream())
+            keyAlias = keystoreProperties.getProperty("keyAlias")
+            keyPassword = keystoreProperties.getProperty("keyPassword")
+            storeFile = file(keystoreProperties.getProperty("storeFile"))
+            storePassword = keystoreProperties.getProperty("storePassword")
         }
     }
 
     buildTypes {
+        all {
+//            signingConfig = signingConfigs.getByName("release")
+        }
         release {
-            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = false
             proguardFiles(
@@ -109,6 +113,15 @@ android {
 
 
         }
+    }
+
+    applicationVariants.all {
+        outputs
+            .map { it as BaseVariantOutputImpl }
+            .forEach { output ->
+                val outputFileName = "${"appName"}_${baseName}_${versionName}.${versionCode}.apk"
+                output.outputFileName = outputFileName
+            }
     }
 
 }
