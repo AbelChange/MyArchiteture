@@ -1,26 +1,4 @@
-if (Config.buildModule) {
-    plugins {
-        id("com.android.library")
-        id("kotlin-android")
-        id("kotlin-parcelize")
-        kotlin("kapt")
-    }
-} else {
-    //集成运行
-    plugins {
-        id("com.android.application")
-        id("WMRouter")
-        id("com.android.library")
-        id("kotlin-android")
-        id("kotlin-parcelize")
-        kotlin("kapt")
-    }
-}
-
-
-
-//android {
-//
+//public fun LibraryExtension.configCommon() {
 //    compileSdk = Versions.COMPILE_SDK
 //
 //    defaultConfig {
@@ -28,6 +6,15 @@ if (Config.buildModule) {
 //        targetSdk = Versions.TARGET_SDK
 //    }
 //
+//    buildTypes {
+//        release {
+//            isMinifyEnabled = false
+//            proguardFiles(
+//                getDefaultProguardFile("proguard-android-optimize.txt"),
+//                "proguard-rules.pro"
+//            )
+//        }
+//    }
 //    compileOptions {
 //        sourceCompatibility = JavaVersion.VERSION_1_8
 //        targetCompatibility = JavaVersion.VERSION_1_8
@@ -37,24 +24,32 @@ if (Config.buildModule) {
 //        viewBinding = true
 //    }
 //
+//    compileOptions {
+//        sourceCompatibility = JavaVersion.VERSION_1_8
+//        targetCompatibility = JavaVersion.VERSION_1_8
+//    }
+//
 //    kotlinOptions {
 //        jvmTarget = "1.8"
 //    }
-//
-//    sourceSets {
-//        main {
-//            jniLibs.srcDirs = ["libs"]
-//            if (Config.buildModule) {
-//                manifest.srcFile("src/main/debug/AndroidManifest.xml")
-//            } else {
-//                manifest.srcFile("src/main/AndroidManifest.xml")
-//                resources {
-//                    exclude("src/main/debug/*")
-//                }
-//            }
-//        }
-//    }
-//
 //}
 
 
+fun Config_module_gradle.configModulePlugin() {
+    if (Config.buildModule) {
+        plugins {
+            id("com.android.library")
+            id("kotlin-android")
+            id("kotlin-parcelize")
+        }
+    } else {
+        //集成运行
+        plugins {
+            id("com.android.application")
+            id("WMRouter")
+            id("kotlin-android")
+            id("kotlin-parcelize")
+            kotlin("kapt")
+        }
+    }
+}

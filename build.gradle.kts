@@ -1,26 +1,23 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+//// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
         mavenCentral()
+        google()
+        mavenCentral()
+        maven { url = uri("https://jitpack.io") }
+        maven {
+            url = uri("https://maven.aliyun.com/repository/public")
+        }
     }
     dependencies {
-        classpath("io.github.meituan-dianping:plugin:1.2.1")
+        classpath("com.android.tools.build:gradle:${Versions.androidGradlePlugin}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.dagger}")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}")
+        classpath("io.github.meituan-dianping:plugin:${Versions.wmRouter}")
     }
 }
 
-plugins {
-    id("com.android.application") version Versions.androidGradlePlugin apply false
-    id("com.android.library") version Versions.androidGradlePlugin apply false
-    kotlin("android") version Versions.kotlin apply false
-    kotlin("kapt") version Versions.kotlin apply false
-    kotlin("plugin.serialization") version Versions.kotlin apply false
-    id("com.google.dagger.hilt.android") version Versions.dagger apply false
-}
-
-//task clean(type: Delete) {
-//    delete rootProject.buildDir
-//}
 
 
 

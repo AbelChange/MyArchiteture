@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
+    id("kotlin-kapt")
 }
 
 android {
@@ -77,10 +77,9 @@ dependencies {
     api(Libs.glide)
     kapt(Libs.glideCompiler)
 
-
     //Router
     api("io.github.meituan-dianping:router:${Versions.wmRouter}")
-//    //util
+    //util
     api("com.blankj:utilcodex:1.31.0")
     api("io.github.jeremyliao:live-event-bus-x:${Versions.eventBus}")
     //brvah
@@ -99,6 +98,5 @@ dependencies {
     //下拉刷新
     api("io.github.scwang90:refresh-layout-kernel:2.0.5")
     api("io.github.scwang90:refresh-header-classics:2.0.5")
-
 
 }

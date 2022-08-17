@@ -11,10 +11,8 @@ pluginManagement {
         eachPlugin {
             when (requested.id.namespace) {
                 "androidx.navigation.safeargs" -> {
-                    useModule("androidx.navigation:navigation-safe-args-gradle-plugin:${requested.version}")
                 }
                 "WMRouter" -> {
-                    useModule("io.github.meituan-dianping:plugin:${requested.version}")
                 }
                 else -> {
 

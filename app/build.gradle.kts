@@ -1,14 +1,12 @@
 plugins {
     id("com.android.application")
     id("WMRouter")
-    kotlin("android")
-    kotlin("kapt")
-    kotlin("plugin.parcelize")
+    id("kotlin-android")
+    id("kotlin-parcelize")
+    id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-    id("androidx.navigation.safeargs.kotlin") version Versions.navigationVersion
+    id("androidx.navigation.safeargs.kotlin")
 }
-// 应用WMRouter插件
-apply(plugin = "WMRouter")
 
 android {
 
@@ -95,7 +93,7 @@ android {
 //尝试抽离
 dependencies {
 
-    api(projects.moduleBase)
+    implementation(projects.moduleBase)
 //    //集成模式
     if (!Config.buildModule) {
 //        implementation(project(":module_login"))
