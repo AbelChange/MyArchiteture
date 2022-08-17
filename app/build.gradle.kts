@@ -35,6 +35,30 @@ android {
         }
     }
 
+    signingConfigs {
+        // Creates a signing configuration called "release".
+        create("release") {
+            storeFile = file("my-release-key.jks")
+            storePassword = "storePassword"
+            keyAlias = "my-alias"
+            keyPassword = "my-keyPassword"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = true
+            isShrinkResources = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
+            isMinifyEnabled = false
+        }
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -45,18 +69,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        dataBinding = true
         buildConfig = true
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = true
-            isShrinkResources = false
-        }
-        debug {
-            isMinifyEnabled = false
-        }
     }
 
     flavorDimensions += listOf("server", "market")
@@ -85,14 +98,22 @@ android {
                 }
             }
         }
+    }
 
+    androidComponents {
+        beforeVariants { builder ->
+            val flavorName = builder.flavorName
+
+        }
+        afterEvaluate {
+
+
+        }
     }
 
 }
 
-//尝试抽离
 dependencies {
-
     implementation(projects.moduleBase)
 //    //集成模式
     if (!Config.buildModule) {
