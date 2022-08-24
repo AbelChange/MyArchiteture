@@ -30,4 +30,10 @@
     </style>
 
 
+    <style name="BottomDialogTheme" parent="BaseDialogTheme">
+        <item name="titleEnabled">false</item>
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
+    </style>
+
 </resources>

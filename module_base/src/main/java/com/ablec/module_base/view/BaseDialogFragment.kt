@@ -1,4 +1,4 @@
-package com.ablec.lib.base
+package com.ablec.module_base.view
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,7 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import com.ablec.common.R
+import com.ablec.module_base.R
 
 
 /**
@@ -16,7 +16,7 @@ import com.ablec.common.R
  * @description: dialog 支持viewmodel + bottom动画 + 宽度自定义（高度随机）
  * @date :2022/3/9 17:44
  */
-abstract class BaseDialogFragment(@LayoutRes val contentLayoutId: Int) :
+abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
     AppCompatDialogFragment(contentLayoutId) {
 
     protected val fragmentTag = javaClass.simpleName
@@ -33,7 +33,7 @@ abstract class BaseDialogFragment(@LayoutRes val contentLayoutId: Int) :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.Theme_AppCompat_Dialog)
+        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.BaseDialogTheme)
     }
 
     override fun onCreateView(
@@ -64,14 +64,14 @@ abstract class BaseDialogFragment(@LayoutRes val contentLayoutId: Int) :
         }
     }
 
-    protected fun getWindowAttrWidth(): Int {
-        return WindowManager.LayoutParams.WRAP_CONTENT
+    protected open fun getWindowAttrWidth(): Int {
+        return WindowManager.LayoutParams.MATCH_PARENT
     }
 
     /*
     * 支持bottom和center
     * */
-    protected fun getGravity(): Int {
+    protected open fun getGravity(): Int {
         return Gravity.CENTER
     }
 
