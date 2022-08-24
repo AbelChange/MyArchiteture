@@ -14,16 +14,9 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorRes
-import androidx.lifecycle.findViewTreeLifecycleOwner
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlin.properties.Delegates
 
 /**
  * @Description:
@@ -56,15 +49,15 @@ fun Context.showToast(content: String? = null, duration: Int = Toast.LENGTH_SHOR
 /*--------------------View start---------------*/
 fun View.debounceClick(
     windowDuration: Long = 800,
-    listener: (view: View) -> Unit
+    listener: View.OnClickListener
 ) {
-    findViewTreeLifecycleOwner()?.lifecycleScope?.let {
-        callbackFlow<Unit> {
-            setOnClickListener { this.trySend(Unit) }
-            awaitClose { setOnClickListener(null) }
-        }.throttleFirst(windowDuration).onEach {
-            listener(this)
-        }.launchIn(it)
+    var clickTime by Delegates.observable(0L) { pre, old, new ->
+        if (new - old >= windowDuration) {
+            listener.onClick(this)
+        }
+    }
+    setOnClickListener {
+        clickTime = System.currentTimeMillis()
     }
 }
 
