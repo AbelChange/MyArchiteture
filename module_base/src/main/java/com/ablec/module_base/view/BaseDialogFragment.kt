@@ -33,7 +33,11 @@ abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NO_TITLE, R.style.BaseDialogTheme)
+        if (getGravity() == Gravity.BOTTOM) {
+            setStyle(DialogFragment.STYLE_NO_TITLE, R.style.BottomDialogTheme)
+        }else{
+            setStyle(DialogFragment.STYLE_NO_TITLE, R.style.BaseDialogTheme)
+        }
     }
 
     override fun onCreateView(
@@ -50,16 +54,13 @@ abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
         dialog?.apply {
             setCanceledOnTouchOutside(isCancelableOutside())
             setCancelable(canBeCancel())
-            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
-        val gravity = getGravity()
         dialog?.window?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            val gravity = getGravity()
             setDimAmount(0.3f)
             setGravity(gravity)
             //底部抬升
-            if (gravity == Gravity.BOTTOM) {
-                setWindowAnimations(R.style.BottomDialogTheme)
-            }
             setLayout(getWindowAttrWidth(), WindowManager.LayoutParams.WRAP_CONTENT)
         }
     }

@@ -30,10 +30,13 @@
     </style>
 
 
-    <style name="BottomDialogTheme" parent="BaseDialogTheme">
-        <item name="titleEnabled">false</item>
+    <style name="BottomDialogAnimation" parent="@android:style/Animation.Dialog">
         <item name="android:windowEnterAnimation">@anim/dialog_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
     </style>
 
+    <style name="recyclerview">
+        <item name="android:scrollbars">none</item>
+        <item name="android:overScrollMode">never</item>
+    </style>
 </resources>
