@@ -2,6 +2,8 @@ package com.ablec.lib.ext
 
 import android.app.Activity
 import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.marginTop
 import com.ablec.lib.ext.dp
@@ -30,7 +32,17 @@ fun Activity.hideSystemBar() {
 val statusBarHeight = BarUtils.getStatusBarHeight()
 
 fun View.paddingStatusBar() {
-    setPadding(paddingLeft, statusBarHeight + 12.dp, paddingRight, paddingBottom)
+    ViewCompat.setOnApplyWindowInsetsListener(
+        this
+    ) { view: View, windowInsetsCompat: WindowInsetsCompat ->
+        view.setPadding(
+            0,
+            windowInsetsCompat.getInsets(WindowInsetsCompat.Type.statusBars()).top,
+            0,
+            0
+        )
+        windowInsetsCompat
+    }
 }
 
 
