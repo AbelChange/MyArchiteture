@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/purple_200"
     android:orientation="vertical"
-    app:paddingBottomSystemWindowInsets="true"
     app:paddingTopSystemWindowInsets="true">
 
     <androidx.fragment.app.FragmentContainerView

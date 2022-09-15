@@ -9,6 +9,7 @@
         <item name="android:windowBackground">@color/white</item>
         <item name="materialButtonStyle">@style/Button</item>
         <item name="imageButtonStyle">@style/ImageButton</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
     </style>
 
     <style name="FullScreenAcTheme" parent="AppTheme">
