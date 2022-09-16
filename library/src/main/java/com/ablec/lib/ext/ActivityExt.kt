@@ -29,8 +29,6 @@ fun Activity.hideSystemBar() {
     BarUtils.setStatusBarVisibility(window, false)
 }
 
-val statusBarHeight = BarUtils.getStatusBarHeight()
-
 fun View.paddingStatusBar() {
     ViewCompat.setOnApplyWindowInsetsListener(
         this
