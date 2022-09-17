@@ -31,9 +31,6 @@
         <action
             android:id="@+id/action_mainFragment_to_rxFragment"
             app:destination="@id/rxFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_dataListFragment"
-            app:destination="@id/dataListFragment" />
 
     </fragment>
 
@@ -56,6 +53,7 @@
         android:label="web_socket_fragment"
         tools:layout="@layout/web_socket_fragment" />
     <fragment
+        android:name="com.ablec.myarchitecture.logic.main.CoordinatorLayoutFragment"
         android:id="@+id/coordinatorLayoutFragment"
         android:label="coordinator_layout_fragment"
         tools:layout="@layout/coordinator_layout_fragment" />
@@ -64,10 +62,7 @@
         android:name="com.ablec.myarchitecture.logic.rx.RxFragment"
         android:label="rx_fragment"
         tools:layout="@layout/rx_fragment" />
-    <fragment
-        android:id="@+id/dataListFragment"
-        android:name="com.ablec.myarchitecture.logic.pageslist.DataListFragment"
-        android:label="DataListFragment" />
+
 
 
 </navigation>

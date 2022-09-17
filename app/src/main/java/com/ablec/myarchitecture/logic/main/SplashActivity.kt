@@ -20,6 +20,7 @@ class SplashActivity : BaseActivity() {
         setContentView(binding.root)
         lifecycleScope.launchWhenStarted {
             MainActivity.start(this@SplashActivity)
+            finish()
         }
     }
 }

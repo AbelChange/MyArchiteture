@@ -36,7 +36,7 @@
         android:text="spread"
         app:layout_constraintBottom_toTopOf="@id/textView2"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="spread_inside"
         app:layout_constraintVertical_weight="1" />
 
@@ -68,7 +68,7 @@
         app:layout_constraintBottom_toTopOf="@id/button4"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.3"
         app:layout_constraintVertical_chainStyle="packed" />
 
@@ -92,7 +92,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline2"
-        app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+        app:layout_constraintTop_toTopOf="parent"
         app:roundPercent="1" />
 
 
@@ -250,11 +250,4 @@
         android:text="B"
         android:textColor="#ffffff"
         android:textSize="16sp" />
-
-    <include
-        android:id="@+id/toolbarLayout"
-        layout="@layout/tool_bar"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

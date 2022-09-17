@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ablec.lib.ext.navigate
-import com.ablec.module_base.service.RouterServiceManager
 import com.ablec.myarchitecture.databinding.MainFragmentBinding
 
 class MainFragment : Fragment() {
@@ -30,6 +29,11 @@ class MainFragment : Fragment() {
             navigate(action)
         }
 
+        binding.btnCoordinator.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToCoordinatorLayoutFragment()
+            navigate(action)
+        }
+
         binding.btnTransformation.setOnClickListener {
             val action = MainFragmentDirections.actionMainFragmentToTransformationFragment()
             navigate(action)
@@ -44,12 +48,9 @@ class MainFragment : Fragment() {
         }
 
         binding.btnGoLogin.setOnClickListener {
-            RouterServiceManager.getAccountService()?.startLogin(requireContext())
+//            RouterServiceManager.getAccountService()?.startLogin(requireContext())
         }
 
-        binding.btnGoList.setOnClickListener {
-            navigate(MainFragmentDirections.actionMainFragmentToDataListFragment())
-        }
 
     }
 

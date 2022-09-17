@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.ablec.lib.base.BaseActivity
 import com.ablec.lib.ext.paddingStatusBar
 import com.ablec.lib.ext.setUpBars
@@ -23,8 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 @RouterUri(path = [BASE])
 class MainActivity : BaseActivity() {
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
 
     private lateinit var navController: NavController
 
@@ -42,23 +41,14 @@ class MainActivity : BaseActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         navController.setGraph(R.navigation.nav_graph)
-        appBarConfiguration =
+        //联动toolbar rootFragment不显示返回按钮
+        val appBarConfiguration =
             AppBarConfiguration.Builder(navController.graph)
                 .build()
-
+        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
         //test
         vm.listLive.observe(this) {
             showToast(it.toJson())
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.home -> {
-                onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 
