@@ -6,13 +6,7 @@ plugins {
 }
 
 android {
-
-    compileSdk = Versions.COMPILE_SDK
-
     defaultConfig {
-        minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
-
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += mapOf(
@@ -22,18 +16,11 @@ android {
                 )
             }
         }
-
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     buildFeatures {
         viewBinding = true
     }
-
 }
 
 dependencies {

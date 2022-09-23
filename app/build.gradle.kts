@@ -12,12 +12,7 @@ plugins {
 }
 
 android {
-
-    compileSdk = Versions.COMPILE_SDK
-
     defaultConfig {
-        minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
         applicationId = "com.ablec.myarchitecture"
         versionCode = 1
         versionName = "1.0"
@@ -64,13 +59,10 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         viewBinding = true
         buildConfig = true
@@ -111,13 +103,11 @@ android {
         }
         afterEvaluate {
 
-
         }
     }
 
     applicationVariants.all {
-        outputs
-            .map { it as BaseVariantOutputImpl }
+        outputs.map { it as BaseVariantOutputImpl }
             .forEach { output ->
                 val outputFileName = "${"appName"}_${baseName}_${versionName}.${versionCode}.apk"
                 output.outputFileName = outputFileName
