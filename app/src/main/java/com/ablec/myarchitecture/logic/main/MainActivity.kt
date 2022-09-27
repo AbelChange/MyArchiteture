@@ -40,12 +40,18 @@ class MainActivity : BaseActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        navController.setGraph(R.navigation.nav_graph)
+        val graph = navController.graph.apply {
+            //动态设置start
+            // graph.startDestination = R.id.xxx
+        }
+        //初始参数
+        navController.setGraph(graph, Bundle())
         //联动toolbar rootFragment不显示返回按钮
         val appBarConfiguration =
             AppBarConfiguration.Builder(navController.graph)
                 .build()
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+
         //test
         vm.listLive.observe(this) {
             showToast(it.toJson())
