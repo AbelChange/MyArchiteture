@@ -45,7 +45,7 @@ class MainActivity : BaseActivity() {
             // graph.startDestination = R.id.xxx
         }
         //初始参数
-        navController.setGraph(graph, Bundle())
+        navController.setGraph(graph, Bundle().apply {  })
         //联动toolbar rootFragment不显示返回按钮
         val appBarConfiguration =
             AppBarConfiguration.Builder(navController.graph)
