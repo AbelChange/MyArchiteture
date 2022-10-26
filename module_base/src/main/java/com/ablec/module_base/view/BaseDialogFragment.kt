@@ -80,16 +80,6 @@ abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
         show(fragmentManager, fragmentTag)
     }
 
-    override fun dismiss() {
-        dialog?.setOnDismissListener(null)
-        dialog?.setOnKeyListener(null)
-        super.dismiss()
-    }
 
-    override fun dismissAllowingStateLoss() {
-        dialog?.setOnDismissListener(null)
-        dialog?.setOnKeyListener(null)
-        super.dismissAllowingStateLoss()
-    }
 
 }
