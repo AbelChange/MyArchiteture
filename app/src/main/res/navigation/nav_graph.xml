@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_mainFragment_to_rxFragment"
             app:destination="@id/rxFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_testFragment"
+            app:destination="@id/testFragment" />
 
     </fragment>
 
@@ -65,6 +68,10 @@
         android:name="com.ablec.myarchitecture.logic.rx.RxFragment"
         android:label="rx_fragment"
         tools:layout="@layout/rx_fragment" />
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.ablec.myarchitecture.test.TestFragment"
+        android:label="TestFragment" />
 
 
 </navigation>

@@ -51,6 +51,10 @@ class MainFragment : Fragment() {
 //            RouterServiceManager.getAccountService()?.startLogin(requireContext())
         }
 
+        binding.btnTest.setOnClickListener {
+            navigate(MainFragmentDirections.actionMainFragmentToTestFragment())
+        }
+
 
     }
 

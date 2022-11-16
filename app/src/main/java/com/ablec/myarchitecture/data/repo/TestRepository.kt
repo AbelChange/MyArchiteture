@@ -29,12 +29,10 @@ object TestRepository {
     }
 
     init {
-        val hiltEntryPoint =
-            EntryPointAccessors.fromApplication(
-                AppApplication.instance,
-                TaskMonitorViewModelEntryPoint::class.java
-            )
-        apiService = hiltEntryPoint.getApiService()
+        apiService = EntryPointAccessors.fromApplication(
+            AppApplication.instance,
+            TaskMonitorViewModelEntryPoint::class.java
+        ).getApiService()
     }
 
     suspend fun getListData(req: GetListReq) =
