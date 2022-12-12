@@ -1,4 +1,4 @@
-package com.ablec.lib.util
+package com.droi.hotshopping.utils
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -15,7 +15,7 @@ import java.io.FileOutputStream
 
 /**
  * @author HaoShuaiHui
- * @description: 图片压缩处理
+ * @description:
  * @date :2022/12/8 17:34
  */
 object ImageUtil {
@@ -39,7 +39,7 @@ object ImageUtil {
                 options
             )
 
-            //压缩到上传要求大小
+            //压缩到上传要求
             val baos = ByteArrayOutputStream()
             decodeBitmap?.compress(
                 Bitmap.CompressFormat.JPEG,
