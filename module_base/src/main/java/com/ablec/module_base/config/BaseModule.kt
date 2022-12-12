@@ -25,6 +25,7 @@ import com.ablec.module_base.service.RouterServiceManager
 import com.ablec.module_base.view.loading.EmptyCallback
 import com.ablec.module_base.view.loading.ErrorCallback
 import com.ablec.module_base.view.loading.LoadingCallback
+import com.ablec.module_base.web.X5WebViewInitializer
 
 /**
  * 组件通信模块初始化
@@ -114,7 +115,10 @@ class BaseModule : IBaseModule {
 
     override fun lazyInit(application: BaseApplication?) {
         if (ProcessUtils.isMainProcess()) {
-            initUmeng(application)
+            application?.let {
+                initUmeng(application)
+                X5WebViewInitializer.init(application)
+            }
         }
     }
 }

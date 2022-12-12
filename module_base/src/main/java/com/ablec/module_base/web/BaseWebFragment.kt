@@ -91,8 +91,11 @@ abstract class BaseWebFragment(@LayoutRes contentLayoutId: Int) : BaseFragment(c
             defaultTextEncodingName = "utf-8"
             loadsImagesAutomatically = true
             mediaPlaybackRequiresUserGesture = false
+            setAppCacheEnabled(true)
+            cacheMode =WebSettings.LOAD_DEFAULT
             allowContentAccess = true
             allowFileAccess = true
+            textZoom = 100
             setAllowFileAccessFromFileURLs(true)
             setAllowUniversalAccessFromFileURLs(true)
         }
