@@ -18,7 +18,7 @@ import java.lang.reflect.ParameterizedType
  * @Desc:
  */
 
-abstract class BaseBindingAdapter<VB : ViewBinding, T>(
+abstract class VBBaseAdapter<VB : ViewBinding, T>(
     @LayoutRes private val layoutResId: Int,
     data: MutableList<T>? = null
 ) :
@@ -40,7 +40,7 @@ abstract class BaseBindingAdapter<VB : ViewBinding, T>(
     }
 }
 
-abstract class VBBaseMultiItemQuickAdapter<T : MultiItemEntity> :
+abstract class VBMultiItemAdapter<T : MultiItemEntity> :
     BaseMultiItemQuickAdapter<T, VBViewHolder<ViewBinding>>() {
 
     private val bindings: SparseArray<(LayoutInflater, ViewGroup, Boolean) -> ViewBinding> by lazy(

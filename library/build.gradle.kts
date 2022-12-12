@@ -30,7 +30,7 @@ dependencies {
     api(libs.androidx.annotation)
     api(libs.androidx.constraintlayout)
     api(libs.material)
-
+    api(libs.androidx.activity)
     api(libs.androidx.fragment)
     api(libs.androidx.lifecycle.viewmodel)
     api(libs.androidx.lifecycle.runtime)

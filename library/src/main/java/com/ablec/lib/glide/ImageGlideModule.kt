@@ -8,6 +8,7 @@ import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.Registry
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.engine.bitmap_recycle.LruArrayPool
 import com.bumptech.glide.load.engine.bitmap_recycle.LruBitmapPool
 import com.bumptech.glide.load.engine.cache.InternalCacheDiskCacheFactory
 import com.bumptech.glide.load.engine.cache.LruResourceCache
@@ -16,7 +17,7 @@ import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
 
 /**
- * 绑定OKhttp3  设置缓存信息等
+ * 设置缓存信息,缓存策略等
  */
 @GlideModule
 class ImageGlideModule : AppGlideModule() {
@@ -32,11 +33,17 @@ class ImageGlideModule : AppGlideModule() {
                 diskCacheSizeBytes.toLong()
             )
         )
-        val calculator = MemorySizeCalculator.Builder(context)
-            .setMemoryCacheScreens(2f)
-            .build()
-        builder.setMemoryCache(LruResourceCache(calculator.memoryCacheSize.toLong()))
-        builder.setBitmapPool(LruBitmapPool(calculator.bitmapPoolSize.toLong()))
+        val calculator = MemorySizeCalculator.Builder(context).build()
+        val defaultMemoryCacheSize = calculator.memoryCacheSize
+        val defaultBitmapPoolSize = calculator.bitmapPoolSize
+        val defaultArrayPoolSize = calculator.arrayPoolSizeInBytes
+        builder.setDefaultRequestOptions(
+            RequestOptions()
+                .format(DecodeFormat.PREFER_RGB_565)
+        )
+        builder.setMemoryCache(LruResourceCache((defaultMemoryCacheSize / 2).toLong()))
+        builder.setBitmapPool(LruBitmapPool((defaultBitmapPoolSize / 2).toLong()))
+        builder.setArrayPool(LruArrayPool(defaultArrayPoolSize / 2))
 
         //设置全局选项
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {

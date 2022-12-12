@@ -47,6 +47,6 @@ dependencies {
     api("com.tencent.bugly:nativecrashreport:3.9.2")
 
     //x5WebView
-    api("com.tencent.tbs.tbssdk:sdk:43993")
+    api (Libs.x5WebView)
 
 }

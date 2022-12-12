@@ -1,16 +1,19 @@
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.android.build.gradle.LibraryExtension
 
-//// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        mavenCentral()
+        maven {
+            name = "jcenter托管"
+            url = uri("https://maven.aliyun.com/repository/public")
+        }
+        maven {
+            name = "google备选"
+            url = uri("https://maven.aliyun.com/repository/google")
+        }
         google()
         mavenCentral()
         maven { url = uri("https://jitpack.io") }
-        maven {
-            url = uri("https://maven.aliyun.com/repository/public")
-        }
     }
     dependencies {
         classpath("com.android.tools.build:gradle:${Versions.androidGradlePlugin}")
@@ -20,6 +23,15 @@ buildscript {
         classpath("io.github.meituan-dianping:plugin:${Versions.wmRouter}")
     }
 }
+
+//plugins {
+//    id("com.android.application") version Versions.androidGradlePlugin apply false
+//    id("com.android.library") version Versions.androidGradlePlugin apply false
+//    kotlin("android") version Versions.kotlin apply false
+//    kotlin("kapt") version Versions.kotlin apply false
+//    kotlin("plugin.serialization") version Versions.kotlin apply false
+//    id("com.google.dagger.hilt.android") version Versions.dagger apply false
+//}
 
 project.allprojects {
     plugins.withId("com.android.library") {

@@ -1,7 +1,12 @@
 pluginManagement {
     repositories {
         maven {
+            name = "jcenter托管"
             url = uri("https://maven.aliyun.com/repository/public")
+        }
+        maven {
+            name = "google备选"
+            url = uri("https://maven.aliyun.com/repository/google")
         }
         gradlePluginPortal()
         google()
@@ -26,7 +31,12 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         maven {
+            name = "jcenter托管"
             url = uri("https://maven.aliyun.com/repository/public")
+        }
+        maven {
+            name = "google备选"
+            url = uri("https://maven.aliyun.com/repository/google")
         }
         google()
         mavenCentral()
