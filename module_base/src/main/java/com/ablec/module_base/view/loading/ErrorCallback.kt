@@ -4,8 +4,8 @@ package com.ablec.module_base.view.loading
 import android.content.Context
 import android.view.View
 import android.widget.TextView
-import com.kingja.loadsir.callback.Callback
 import com.ablec.module_base.R
+import com.kingja.loadsir.callback.Callback
 
 
 /**

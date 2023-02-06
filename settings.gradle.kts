@@ -54,6 +54,10 @@ include(":module_base")
 include(":module_login")
 include(":module_pay")
 
+//include(":module_pay")
+
+
+
 rootProject.name = "MyArchitecture"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

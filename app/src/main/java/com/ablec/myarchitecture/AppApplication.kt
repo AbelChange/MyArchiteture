@@ -4,6 +4,7 @@ import android.app.Application
 import android.graphics.Color
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatDelegate
+import com.ablec.myarchitecture.BuildConfig
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.ProcessUtils
 import com.blankj.utilcode.util.ToastUtils

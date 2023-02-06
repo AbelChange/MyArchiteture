@@ -5,7 +5,6 @@ import android.text.TextUtils
 import com.alipay.sdk.app.PayTask
 import com.sankuai.waimai.router.annotation.RouterService
 import com.tencent.mm.opensdk.modelpay.PayReq
-import com.ablec.module_base.PayOrderDto
 import com.ablec.module_base.config.Pay.PAY_SERVICE
 import com.ablec.module_base.config.ThirdApi
 import com.ablec.module_base.service.IPayService

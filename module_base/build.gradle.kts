@@ -6,7 +6,12 @@ plugins {
 }
 
 android {
+
+    namespace = "com.ablec.module_base"
+    compileSdk = Versions.COMPILE_SDK
     defaultConfig {
+        minSdk = Versions.MIN_SDK
+        targetSdk = Versions.TARGET_SDK
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += mapOf(
@@ -26,6 +31,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+
 }
 
 dependencies {
@@ -44,7 +51,6 @@ dependencies {
     api("com.squareup.okhttp3:okhttp:3.14.9")
     //QQ官方sdk 3.53及之后版本需要集成okhttp3.x，必选)
     //    qq and wechat
-    api("com.tencent.tauth:qqopensdk:3.51.2")
     api("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.7.9")
 
     //腾讯bugly
@@ -54,4 +60,6 @@ dependencies {
     //x5WebView
     api (Libs.x5WebView)
 
+    //qq
+    api("com.tencent.tauth:qqopensdk:3.51.2")
 }

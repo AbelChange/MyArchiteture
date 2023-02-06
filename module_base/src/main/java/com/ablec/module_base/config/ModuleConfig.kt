@@ -2,7 +2,6 @@ package com.ablec.module_base.config
 
 import com.ablec.lib.BaseApplication
 import com.ablec.lib.IBaseModule
-import com.ablec.module_base.BuildConfig
 
 object ModuleConfig {
     fun init(application: BaseApplication, classes: List<Class<out IBaseModule>>?) {
@@ -37,7 +36,4 @@ object ModuleConfig {
         }
     }
 
-    fun isTestMode(): Boolean {
-        return BuildConfig.DEBUG
-    }
 }

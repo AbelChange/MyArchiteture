@@ -5,6 +5,14 @@ plugins {
 }
 
 android {
+    namespace = "com.ablec.library"
+    compileSdk = Versions.COMPILE_SDK
+
+    defaultConfig {
+        minSdk = Versions.MIN_SDK
+        targetSdk = Versions.TARGET_SDK
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -64,6 +72,7 @@ dependencies {
     api("io.github.meituan-dianping:router:${Versions.wmRouter}")
     //util
     api("com.blankj:utilcodex:1.31.0")
+
     api("io.github.jeremyliao:live-event-bus-x:${Versions.eventBus}")
     //brvah
     api("com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.BRVAH_Version}")

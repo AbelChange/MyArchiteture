@@ -1,5 +1,6 @@
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     id("com.android.application")
     id("WMRouter")
@@ -11,8 +12,12 @@ plugins {
 }
 
 android {
+    namespace = "com.ablec.myarchitecture"
+    compileSdk = Versions.COMPILE_SDK
+
     defaultConfig {
-        applicationId = "com.ablec.myarchitecture"
+        minSdk = Versions.MIN_SDK
+        targetSdk = Versions.TARGET_SDK
         versionCode = 1
         versionName = "1.0"
         manifestPlaceholders["qqappid"] = "12220"
@@ -122,14 +127,11 @@ android {
 
 dependencies {
     implementation(projects.moduleBase)
-//    //集成模式
+//集成模式
     if (!Config.buildModule) {
-//        implementation(project(":module_login"))
+        implementation(projects.moduleLogin)
         implementation(project(":module_pay"))
-        implementation(project(":module_login"))
-//        implementation(projects.module_push)
     }
-//
     kapt(libs.hilt.compiler)
     kapt(Libs.glideCompiler)
     kapt(Libs.routerCompiler)
@@ -140,7 +142,7 @@ dependencies {
     implementation("com.github.MZCretin:ExpandableTextView:v1.6.1")
 
     implementation("com.google.android.exoplayer:exoplayer-core:2.15.0")
-    //
+
 
 
     debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")

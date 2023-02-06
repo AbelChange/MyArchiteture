@@ -2,8 +2,8 @@ package com.ablec.myarchitecture.logic.main
 
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
-import com.ablec.lib.base.BaseActivity
 import com.ablec.myarchitecture.databinding.SimpleTextviewBinding
+import com.ablec.lib.base.BaseActivity
 
 /**
  * @author HaoShuaiHui

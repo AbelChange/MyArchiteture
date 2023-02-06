@@ -11,7 +11,7 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.lifecycleScope
 import com.ablec.lib.BaseApplication
 import com.ablec.lib.base.BaseFragment
-import com.ablec.lib.util.ImageUtil
+//import com.ablec.lib.util.ImageUtil
 import com.blankj.utilcode.util.LogUtils
 import com.tencent.smtt.export.external.interfaces.SslError
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler
@@ -40,12 +40,12 @@ abstract class BaseWebFragment(@LayoutRes contentLayoutId: Int) : BaseFragment(c
                 multipleMediaCallBack?.onReceiveValue(null)
             } else {
                 lifecycleScope.launch {
-                    val resizeBitmap = ImageUtil.getResizeBitmap(requireContext(), uri)
-                    if (resizeBitmap != null) {
-                        multipleMediaCallBack?.onReceiveValue(arrayOf(resizeBitmap))
-                    } else {
-                        multipleMediaCallBack?.onReceiveValue(arrayOf(uri))
-                    }
+//                    val resizeBitmap = ImageUtil.getResizeBitmap(requireContext(), uri)
+//                    if (resizeBitmap != null) {
+//                        multipleMediaCallBack?.onReceiveValue(arrayOf(resizeBitmap))
+//                    } else {
+//                        multipleMediaCallBack?.onReceiveValue(arrayOf(uri))
+//                    }
                 }
 
             }

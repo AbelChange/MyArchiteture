@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ablec.myarchitecture.databinding.ConstraintFragmentBinding
 
+
 /**
  * @Description:
  * @Author:         haoshuaihui
@@ -15,6 +16,7 @@ import com.ablec.myarchitecture.databinding.ConstraintFragmentBinding
 class ConstraintLayoutFragment : Fragment() {
 
     private lateinit var binding: ConstraintFragmentBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

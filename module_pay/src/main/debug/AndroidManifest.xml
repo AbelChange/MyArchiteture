@@ -10,6 +10,13 @@
         android:label="@string/module_login_app_name"
         android:supportsRtl="true"
         tools:replace="android:label"
-        android:theme="@style/ModulePayTheme"></application>
+        android:theme="@style/ModulePayTheme">
+        <activity
+            android:name="com.ablec.dm.wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+        
+        
+    </application>
 
 </manifest>

@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.ablec.lib.ext.navigate
 import com.ablec.myarchitecture.databinding.FragmentTestBinding
-import com.ablec.myarchitecture.databinding.MainFragmentBinding
+
 import com.ablec.myarchitecture.logic.transformation.TransformationFragment
 import com.blankj.utilcode.util.ToastUtils
 
