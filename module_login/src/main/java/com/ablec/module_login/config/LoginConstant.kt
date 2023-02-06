@@ -1,6 +1,5 @@
 package com.ablec.module_login.config
 
-import com.ablec.module_login.BuildConfig
 
 /**
  *
@@ -72,10 +71,6 @@ class LoginConstant {
         }
     }
 
-    object H5 {
-        const val SERVER_PROTOCOL = "${BuildConfig.BASE_URL}agreement/service"
-        const val PRIVACY_PROTOCOL = "${BuildConfig.BASE_URL}agreement/privacy"
-    }
 
     object Bool {
         val YES = "1"

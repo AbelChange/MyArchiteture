@@ -25,30 +25,30 @@ class PayServiceImpl : IPayService {
 
     private val scope = CoroutineScope(Job() + Dispatchers.Main)
 
-    override fun startPay(context: Activity?, order: PayOrderDto?) {
+     fun startPay(context: Activity?, order: String?) {
         order?.let {
-            if (!TextUtils.isEmpty(order.alipayStr)) {
-                dealAlipay(context, order.alipayStr)
-            } else {
-                dealWeiXinPay(context, order)
-            }
+//            if (!TextUtils.isEmpty(order.alipayStr)) {
+//                dealAlipay(context, order.alipayStr)
+//            } else {
+//                dealWeiXinPay(context, order)
+//            }
         }
     }
 
-    private fun dealWeiXinPay(context: Activity?, order: PayOrderDto) {
+    private fun dealWeiXinPay(context: Activity?, order: String) {
         val wxApi = ThirdApi.wxApi
         if (!wxApi.isWXAppInstalled) {
             notifyPayFailure("未安装微信客户端")
             return
         }
         val request = PayReq()
-        request.appId = order.appId
-        request.partnerId = order.partnerid
-        request.prepayId = order.prepayid
-        request.packageValue = order.packageInfo
-        request.nonceStr = order.noncestr
-        request.timeStamp = order.timestamp
-        request.sign = order.sign
+//        request.appId = order.appId
+//        request.partnerId = order.partnerid
+//        request.prepayId = order.prepayid
+//        request.packageValue = order.packageInfo
+//        request.nonceStr = order.noncestr
+//        request.timeStamp = order.timestamp
+//        request.sign = order.sign
         wxApi.sendReq(request)
     }
 

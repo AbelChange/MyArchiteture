@@ -1,6 +1,5 @@
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import org.jetbrains.kotlin.konan.properties.Properties
-
 plugins {
     id("com.android.application")
     id("WMRouter")
@@ -63,6 +62,11 @@ android {
         jvmTarget = "1.8"
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
     buildFeatures {
         viewBinding = true
         buildConfig = true
@@ -121,8 +125,8 @@ dependencies {
 //    //集成模式
     if (!Config.buildModule) {
 //        implementation(project(":module_login"))
-//        implementation(projects.module_pay)
-//        implementation(projects.module_web)
+        implementation(project(":module_pay"))
+        implementation(project(":module_login"))
 //        implementation(projects.module_push)
     }
 //

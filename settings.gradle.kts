@@ -47,10 +47,12 @@ dependencyResolutionManagement {
     }
 }
 
-
+include(":app")
 include(":library")
 include(":module_base")
-include(":app")
+
+include(":module_login")
+include(":module_pay")
 
 rootProject.name = "MyArchitecture"
 
