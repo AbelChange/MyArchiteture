@@ -40,7 +40,7 @@ abstract class VBBaseAdapter<VB : ViewBinding, T>(
     }
 }
 
-abstract class VBMultiItemAdapter<T : MultiItemEntity> :
+abstract class VBBaseMultiItemAdapter<T : MultiItemEntity> :
     BaseMultiItemQuickAdapter<T, VBViewHolder<ViewBinding>>() {
 
     private val bindings: SparseArray<(LayoutInflater, ViewGroup, Boolean) -> ViewBinding> by lazy(

@@ -95,4 +95,8 @@ public class ControlInterceptLinearLayout extends LinearLayoutCompat {
     }
 
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
 }
