@@ -13,8 +13,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.ablec.module_base.db.converter.DateConverter
 import com.ablec.module_base.db.dao.ProductDao
 import com.ablec.module_base.db.entity.ProductEntity
+import com.ablec.module_base.db.entity.SearchHistoryEntity
 
-@Database(entities = [ProductEntity::class], version = 1)
+@Database(entities = [ProductEntity::class, SearchHistoryEntity::class], version = 1)
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
@@ -71,6 +72,7 @@ abstract class AppDatabase : RoomDatabase() {
                     }
                 })
                 // .addMigrations(MIGRATION_1_2)
+                .fallbackToDestructiveMigration()
                 .build()
         }
 
