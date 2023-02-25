@@ -45,7 +45,7 @@ object Versions {
     const val MIN_SDK = 23
 
     //plugin
-    const val androidGradlePlugin = "7.3.1"
+    const val androidGradlePlugin = "7.4.1"
     const val kotlin = "1.6.10"
     const val dagger = "2.41"
     const val wmRouter = "1.2.1"
