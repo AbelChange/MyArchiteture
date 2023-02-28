@@ -13,7 +13,7 @@ class LoginConstant {
     interface ShanYanCode {
         companion object {
             //登录成功
-            const val SUCCESS = 1000
+            const val SUCCESS = 100
             const val INIT_SUCCESS = 1022
 
             /**

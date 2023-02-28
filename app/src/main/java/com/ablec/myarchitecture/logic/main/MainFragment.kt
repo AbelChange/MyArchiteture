@@ -57,10 +57,8 @@ class MainFragment : Fragment() {
 
         binding.btnTest.setOnClickListener {
             val intent = Intent()
-            intent.component = ComponentName("com.freeme.searchbox", "com.android.droi.searchbox.kd.LauncherKdActivity")
-            startActivity(intent)
-//            navigate(MainFragmentDirections.actionMainFragmentToTestFragment())
-//            RouterServiceManager.getAccountService()?.startLogin(requireContext())
+            navigate(MainFragmentDirections.actionMainFragmentToTestFragment())
+            RouterServiceManager.getAccountService()?.startLogin(requireContext())
         }
 
 

@@ -39,7 +39,7 @@ class CountDownViewModel constructor(
         var countDownTime = total
         timeCountJob = viewModelScope.launch {
             repeat(_countDownSecond.value!!) {
-                delay(1000)
+                delay(100)
                 countDownTime = countDownTime.dec()
                 _countDownSecond.value = countDownTime
                 if (countDownTime == 0) {

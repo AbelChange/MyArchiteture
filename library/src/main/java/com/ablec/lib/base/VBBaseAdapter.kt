@@ -65,4 +65,8 @@ abstract class VBBaseMultiItemAdapter<T : MultiItemEntity> :
 }
 
 
-class VBViewHolder<VB : ViewBinding>(vb: VB) : BaseViewHolder(vb.root)
+class VBViewHolder<VB : ViewBinding>( val binding: VB) : BaseViewHolder(binding.root){
+
+
+
+}

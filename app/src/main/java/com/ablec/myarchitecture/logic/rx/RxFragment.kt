@@ -56,7 +56,7 @@ class RxFragment : BaseFragment(R.layout.rx_fragment) {
      */
     private fun subscribe() {
         val subscribe = searchContent
-            .throttleFirst(1000, TimeUnit.MILLISECONDS)
+            .throttleFirst(100, TimeUnit.MILLISECONDS)
             .subscribe {
                 binding.textViewRealSearch.text = it
             }

@@ -28,7 +28,7 @@ object ClickUtil {
         val viewId = v.id
         val time = System.currentTimeMillis()
         val timeInterval = Math.abs(time - mLastClickTime)
-        return if (timeInterval < 1000 && viewId == mLastClickViewId) {
+        return if (timeInterval < 100 && viewId == mLastClickViewId) {
             true
         } else {
             mLastClickTime = time
@@ -59,7 +59,7 @@ object ClickUtil {
         get() {
             val time = System.currentTimeMillis()
             val timeInterval = Math.abs(time - mLastClickTime)
-            return if (timeInterval < 1000) {
+            return if (timeInterval < 100) {
                 true
             } else {
                 mLastClickTime = time
@@ -80,7 +80,7 @@ object ClickUtil {
             return false
         }
         val timeInterval = Math.abs(time - mLastClickTime)
-        return if (timeInterval < 1000) {
+        return if (timeInterval < 100) {
             true
         } else {
             mLastClickTime = time

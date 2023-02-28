@@ -38,6 +38,12 @@
         <action
             android:id="@+id/action_mainFragment_to_testFragment"
             app:destination="@id/testFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_animFragment"
+            app:destination="@id/animFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
 
     </fragment>
 
@@ -72,6 +78,16 @@
         android:id="@+id/testFragment"
         android:name="com.ablec.myarchitecture.test.TestFragment"
         android:label="TestFragment" />
+    <fragment
+        android:id="@+id/animFragment"
+        tools:layout="@layout/fragment_anim"
+        android:name="com.ablec.myarchitecture.anim.AnimFragment"
+        android:label="AnimFragment" />
+    <fragment
+        tools:layout="@layout/fragment_event"
+        android:id="@+id/eventFragment"
+        android:name="com.ablec.myarchitecture.android.EventFragment"
+        android:label="EventFragment" />
 
 
 </navigation>
