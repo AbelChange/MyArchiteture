@@ -81,7 +81,7 @@
     <fragment
         android:id="@+id/animFragment"
         tools:layout="@layout/fragment_anim"
-        android:name="com.ablec.myarchitecture.anim.AnimFragment"
+        android:name="com.ablec.myarchitecture.android.AnimFragment"
         android:label="AnimFragment" />
     <fragment
         tools:layout="@layout/fragment_event"

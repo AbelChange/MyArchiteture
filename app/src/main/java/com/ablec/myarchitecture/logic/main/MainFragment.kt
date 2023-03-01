@@ -57,8 +57,7 @@ class MainFragment : Fragment() {
 
         binding.btnTest.setOnClickListener {
             val intent = Intent()
-            navigate(MainFragmentDirections.actionMainFragmentToTestFragment())
-            RouterServiceManager.getAccountService()?.startLogin(requireContext())
+            navigate(MainFragmentDirections.actionMainFragmentToAnimFragment())
         }
 
 

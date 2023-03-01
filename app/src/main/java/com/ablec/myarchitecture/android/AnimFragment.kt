@@ -65,11 +65,9 @@ class AnimFragment : Fragment() {
         })
     }
 
-    private var isHiding = false
     private var hideAnim: ObjectAnimator? = null
     private var showAnim: ObjectAnimator? = null
     private fun hide() {
-        showAnim?.cancel()
         if (hideAnim?.isRunning == true) {
             return
         }
@@ -80,15 +78,8 @@ class AnimFragment : Fragment() {
             200f
         ).apply {
             duration = 200
-            doOnCancel {
-                isHiding = false
-            }
-            doOnEnd {
-                isHiding = false
-            }
         }
         hideAnim?.start()
-
     }
 
     private fun scheduleDelayShow() {
