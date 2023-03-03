@@ -1,20 +1,21 @@
 package com.ablec.myarchitecture
 
+//import com.ablec.module_login.config.LoginModule
+import android.app.Activity
 import android.app.Application
+import android.content.res.TypedArray
 import android.graphics.Color
+import android.os.Bundle
 import android.view.Gravity
-import androidx.appcompat.app.AppCompatDelegate
-import com.ablec.myarchitecture.BuildConfig
-import com.blankj.utilcode.util.AppUtils
-import com.blankj.utilcode.util.ProcessUtils
-import com.blankj.utilcode.util.ToastUtils
-import com.tencent.bugly.crashreport.CrashReport
+import androidx.core.view.ViewCompat
 import com.ablec.lib.BaseApplication
 import com.ablec.lib.util.MMKVUtil
 import com.ablec.module_base.config.BaseModule
 import com.ablec.module_base.config.ModuleConfig
-import com.ablec.module_base.service.RouterServiceManager
-//import com.ablec.module_login.config.LoginModule
+import com.blankj.utilcode.util.AppUtils
+import com.blankj.utilcode.util.ProcessUtils
+import com.blankj.utilcode.util.ToastUtils
+import com.tencent.bugly.crashreport.CrashReport
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -35,14 +36,14 @@ class AppApplication : BaseApplication() {
     override fun onCreate() {
         instance = this
         super.onCreate()
+        //设置系统栏亮色模式与主题一致（系统栏亮色模式则图标深色；系统深色模式则图标亮色）
+        registerActivityLifecycleCallbacks(SystemBarActivityLifecycleCallbacks)
         //主进程中初始化
         if (ProcessUtils.isMainProcess()) {
-            //不使用夜间模式
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            // initToast()
             syncServerConfig()
         }
     }
+
 
     private fun syncServerConfig() {
     }
@@ -91,5 +92,38 @@ class AppApplication : BaseApplication() {
             initBugly(this)
         }
         ModuleConfig.lazyInit(this, moduleClass)
+    }
+}
+
+object SystemBarActivityLifecycleCallbacks : Application.ActivityLifecycleCallbacks {
+    private val lightThemeAttributes = intArrayOf(R.attr.isLightTheme)
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+        val lightThemeTypedArray: TypedArray = activity.obtainStyledAttributes(lightThemeAttributes)
+        //判断当前是否是亮色主题
+        val isLightTheme = lightThemeTypedArray.getBoolean(0, true)
+        lightThemeTypedArray.recycle()
+
+        ViewCompat.getWindowInsetsController(activity.findViewById(android.R.id.content))?.apply {
+            isAppearanceLightStatusBars = isLightTheme
+//            isAppearanceLightNavigationBars = isLightTheme
+        }
+    }
+
+    override fun onActivityStarted(activity: Activity) {
+    }
+
+    override fun onActivityResumed(activity: Activity) {
+    }
+
+    override fun onActivityPaused(activity: Activity) {
+    }
+
+    override fun onActivityStopped(activity: Activity) {
+    }
+
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+    }
+
+    override fun onActivityDestroyed(activity: Activity) {
     }
 }

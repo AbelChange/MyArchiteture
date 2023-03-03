@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.ablec.myarchitecture.databinding.SimpleTextviewBinding
 import com.ablec.lib.base.BaseActivity
+import kotlinx.coroutines.delay
 
 /**
  * @author HaoShuaiHui
@@ -19,6 +20,7 @@ class SplashActivity : BaseActivity() {
         binding = SimpleTextviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         lifecycleScope.launchWhenStarted {
+            delay(1000)
             MainActivity.start(this@SplashActivity)
             finish()
         }

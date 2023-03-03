@@ -14,11 +14,13 @@
 
     <style name="FullScreenAcTheme" parent="AppTheme">
         <!--这里替换闪屏图片-->
+        <item name="android:colorEdgeEffect">@android:color/transparent</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:navigationBarColor">@color/transparent</item>
-        <item name="android:colorEdgeEffect">@android:color/transparent</item>
+        <!--    android10以上版本禁用系统栏视觉保护，使导航栏纯透明（可选） -->
+<!--        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>-->
     </style>
 
     <style name="SplashTheme" parent="FullScreenAcTheme">

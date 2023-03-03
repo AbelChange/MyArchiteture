@@ -51,7 +51,7 @@
         android:id="@+id/constraintLayoutFragment"
         android:name="com.ablec.myarchitecture.logic.main.ConstraintLayoutFragment"
         android:label="ConstraintLayoutFragment"
-        tools:layout="@layout/constraint_fragment"></fragment>
+        tools:layout="@layout/constraint_fragment"/>
 
     <fragment
         android:id="@+id/transformationFragment"

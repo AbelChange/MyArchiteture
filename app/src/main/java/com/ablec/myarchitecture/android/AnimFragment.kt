@@ -2,11 +2,10 @@ package com.ablec.myarchitecture.android
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.view.Choreographer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.animation.doOnCancel
-import androidx.core.animation.doOnEnd
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.ablec.lib.base.VBBaseAdapter
@@ -23,6 +22,7 @@ class AnimFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAnimBinding.inflate(layoutInflater)
+        Choreographer.getInstance().postFrameCallback {  }
         return binding.root
     }
 
