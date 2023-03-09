@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
+    <!--除了domain-config 的标签下的域名都不允许明文传输-->
     <base-config cleartextTrafficPermitted="true" />
+    <!--cleartextTrafficPermitted配置false时候,只支持配置的域名明文传输-->
+<!--    <domain-config cleartextTrafficPermitted="true">-->
+<!--        &lt;!&ndash;允许明文传输的域名&ndash;&gt;-->
+<!--        <domain includeSubdomains="true">测试环境域名</domain>-->
+<!--        <domain includeSubdomains="true">正式环境域名</domain>-->
+<!--    </domain-config>-->
+
+
+    <!--证书相关-->
+    <!-- 兼容 Android 7.0 以上debug 时，信任 用户 证书，抓包 -->
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
 </network-security-config>
