@@ -17,9 +17,16 @@ import javax.net.ssl.X509TrustManager
  * @description:对okhttp框架层次设置证书信任
  * @date :2023/3/9 16:55
  */
+/**
+ * @receiver OkHttpClient.Builder
+ * @param builder Builder
+ * @param path String assets下证书路径
+ * @param context Context
+ * @return OkHttpClient.Builder
+ */
 fun OkHttpClient.Builder.certConfig(
     builder: OkHttpClient.Builder,
-    path: String,
+    path: String = "my_ca.crt",
     context: Context
 ): OkHttpClient.Builder {
     val trustManager = CustomX509TrustManager(context, path)
@@ -67,13 +74,11 @@ class CustomX509TrustManager(private val context: Context, private val certPath:
         keyStore.load(null, null)
         var inputStream: InputStream? = null
         try {
-            val assetManager = context.assets
             val cf =
                 CertificateFactory.getInstance("X.509")
-            //一般是 server 证书
-            inputStream = assetManager.open(certPath)
-            val myCa = cf.generateCertificate(inputStream)
-            keyStore.setCertificateEntry("myCa", myCa)
+            // server 证书
+            inputStream = context.assets.open(certPath)
+            keyStore.setCertificateEntry("serverCert", cf.generateCertificate(inputStream))
 
             //系统 + 用户证 书
             val ks = KeyStore.getInstance("AndroidCAStore")

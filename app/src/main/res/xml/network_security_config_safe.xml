@@ -5,11 +5,23 @@
     <!--okHttp可以框架层单独设置证书校验-->
 
     <!--除了domain-config 的标签下的域名都不允许明文传输-->
-    <base-config cleartextTrafficPermitted="true">
+    <base-config cleartextTrafficPermitted="false">
         <trust-anchors>
             <certificates src="system" />
         </trust-anchors>
     </base-config>
+
+
+    <!--cleartextTrafficPermitted配置false时候,只支持配置的域名明文传输-->
+    <domain-config cleartextTrafficPermitted="true">
+        <!--允许明文传输的域名-->
+        <domain includeSubdomains="true">测试环境域名</domain>
+        <domain includeSubdomains="true">正式环境域名</domain>
+        <trust-anchors>
+            <!--信任server证书-->
+            <!--<certificates src="@raw/my_ca"/>-->
+        </trust-anchors>
+    </domain-config>
 
     <!--证书相关-->
     <!-- 兼容 Android 7.0 以上debug 时，信任 用户 证书，抓包 -->
