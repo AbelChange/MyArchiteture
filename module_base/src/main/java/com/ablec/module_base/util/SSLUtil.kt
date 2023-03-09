@@ -1,142 +1,105 @@
 package com.ablec.module_base.util
 
 import android.content.Context
+import com.ablec.module_base.BuildConfig
 import okhttp3.OkHttpClient
-import java.io.ByteArrayInputStream
-import java.io.IOException
 import java.io.InputStream
 import java.security.KeyStore
 import java.security.cert.CertificateFactory
-import java.util.*
+import java.security.cert.X509Certificate
 import javax.net.ssl.SSLContext
-import javax.net.ssl.SSLSocketFactory
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
-import kotlin.collections.ArrayList
+
 
 /**
  * @author HaoShuaiHui
- * @description:
+ * @description:对okhttp框架层次设置证书信任
  * @date :2023/3/9 16:55
  */
-/**
- * 设置证书
- * @receiver OkHttpClient.Builder
- * @param builder Builder
- * @param path String
- * @param context Context
- * @return OkHttpClient.Builder
- */
-fun OkHttpClient.Builder.sslSocketFactory(builder: OkHttpClient.Builder, path: String,context: Context): OkHttpClient.Builder {
-    val sslUtil = SSLUtil()
-    sslUtil.addCertificate(path, context)
-    builder.sslSocketFactory(sslUtil.getSSLSocketFactory(), sslUtil.mX509TrustManager)
+fun OkHttpClient.Builder.certConfig(
+    builder: OkHttpClient.Builder,
+    path: String,
+    context: Context
+): OkHttpClient.Builder {
+    val trustManager = CustomX509TrustManager(context, path)
+    builder.sslSocketFactory(trustManager.getSSLContext().socketFactory, trustManager)
     return builder
 }
 
-class SSLUtil {
+class CustomX509TrustManager(private val context: Context, private val certPath: String) :
+    X509TrustManager {
 
-    val mX509TrustManager = getTrustManager()
+    private val trustManagers = ArrayList<X509TrustManager>()
 
-    // 证书数据
-    private var CERTIFICATES_DATA = ArrayList<ByteArray?>()
+    init {
+        val keyStore = getKeyStore()
+        val tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm()
+        val tmf = TrustManagerFactory.getInstance(tmfAlgorithm)
+        tmf.init(keyStore)
+        trustManagers.add(tmf.trustManagers[0] as X509TrustManager)
+    }
 
-
-    /**
-     * 添加https证书
-     *
-     * @param inputStream
-     */
-    @Synchronized
-    fun addCertificate(path: String, context: Context) {
-
-        val inputStream = context.assets.open(path)
-
-        try {
-            var len = 0// 数据总长度
-            val data = ArrayList<ByteArray>()
-            var ava = inputStream.available() // 数据当次可读长度
-            while (ava > 0) {
-                val buffer = ByteArray(ava)
-                inputStream.read(buffer)
-                data.add(buffer)
-                len += ava
-                ava = inputStream.available()
-            }
-
-            val buff = ByteArray(len)
-            var dstPos = 0
-            for (bytes in data) {
-                val length = bytes.size
-                System.arraycopy(bytes, 0, buff, dstPos, length)
-                dstPos += length
-            }
-
-            CERTIFICATES_DATA.add(buff)
-        } catch (e: IOException) {
-            e.printStackTrace()
+    override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+        trustManagers.forEach {
+            it.checkClientTrusted(chain, authType)
         }
     }
 
-
-    /**
-     * 获取sslSocketFactory() 中需要的参数  X509TrustManager
-     */
-    private fun getTrustManager(): X509TrustManager {
-
-        val trustManagerFactory = TrustManagerFactory.getInstance(
-            TrustManagerFactory.getDefaultAlgorithm());
-        trustManagerFactory.init(getKeyStore())
-        val trustManagers = trustManagerFactory.trustManagers;
-        if (trustManagers.size != 1 || trustManagers[0] !is X509TrustManager) {
-            throw  IllegalStateException("Unexpected default trust managers:"
-                    + Arrays.toString(trustManagers))
+    override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
+        trustManagers.forEach {
+            it.checkServerTrusted(chain, authType)
         }
-        return trustManagers[0] as X509TrustManager
-
     }
 
-
-    /**
-     * 获取sslSocketFactory() 中需要的参数  SSLSocketFactory
-     */
-    fun getSSLSocketFactory(): SSLSocketFactory {
-        val sslContext = SSLContext.getInstance("TLS")
-        sslContext.init(null, arrayOf(mX509TrustManager), null)
-        return sslContext.socketFactory
+    override fun getAcceptedIssuers(): Array<X509Certificate> {
+        val certificates = arrayListOf<X509Certificate>()
+        trustManagers.forEach { manager ->
+            manager.acceptedIssuers.forEach {
+                certificates.add(it)
+            }
+        }
+        return certificates.toTypedArray()
     }
-
 
     private fun getKeyStore(): KeyStore {
-
-        // 添加证书
-        val certificates = ArrayList<InputStream>()
-
-        // 将字节数组转为输入流数组
-        if (CERTIFICATES_DATA.isNotEmpty()) {
-            for (bytes in CERTIFICATES_DATA) {
-                certificates.add(ByteArrayInputStream(bytes))
-            }
-        }
-
-        val certificateFactory = CertificateFactory.getInstance("X.509")
         val keyStore = KeyStore.getInstance(KeyStore.getDefaultType())
-        keyStore.load(null)
+        keyStore.load(null, null)
+        var inputStream: InputStream? = null
         try {
-            var i = 0
-            val size = certificates.size
-            while (i < size) {
-                val certificate = certificates[i]
-                val certificateAlias = Integer.toString(i++)
-                keyStore.setCertificateEntry(certificateAlias, certificateFactory
-                    .generateCertificate(certificate))
-                certificate?.close()
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
+            val assetManager = context.assets
+            val cf =
+                CertificateFactory.getInstance("X.509")
+            //一般是 server 证书
+            inputStream = assetManager.open(certPath)
+            val myCa = cf.generateCertificate(inputStream)
+            keyStore.setCertificateEntry("myCa", myCa)
 
+            //系统 + 用户证 书
+            val ks = KeyStore.getInstance("AndroidCAStore")
+            ks.load(null)
+            val aliases = ks.aliases()
+            while (aliases.hasMoreElements()) {
+                val alias = aliases.nextElement()
+                if (alias.contains("user") && !BuildConfig.DEBUG) {
+                    //只在调试模式下信任用户证书
+                    continue
+                }
+                keyStore.setCertificateEntry(alias, ks.getCertificate(alias))
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        } finally {
+            inputStream?.close()
+        }
         return keyStore
     }
 
+    fun getSSLContext(): SSLContext {
+        val sslContext = SSLContext.getInstance("TLS")
+        val array = arrayOfNulls<X509TrustManager>(trustManagers.size)
+        trustManagers.toArray(array)
+        sslContext.init(null, array, null)
+        return sslContext
+    }
 }
