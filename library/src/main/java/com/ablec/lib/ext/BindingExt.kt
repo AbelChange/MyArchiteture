@@ -95,6 +95,7 @@ class FragmentViewBindingDelegate<VB : ViewBinding>(
             "Should not attempt to get bindings when it might not be available"
         )
     }
+
 }
 
 

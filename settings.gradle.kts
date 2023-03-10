@@ -61,3 +61,4 @@ include(":module_pay")
 rootProject.name = "MyArchitecture"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+include(":learn_note")
