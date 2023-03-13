@@ -1,7 +1,7 @@
 package com.ablechange.learn.leetcode
 
 /**
- * @Description:
+ * @Description:相邻元素比较,大的放右边  第一轮 [0 , size-1] 第二轮 [0 ,size - 2]]
  * @Author: haoshuaihui
  * @CreateDate: 2021/4/27 15:26
  */

@@ -28,9 +28,9 @@ inline fun <I, reified O> I.convert(): O {
     return gson.fromJson(json, object : TypeToken<O>() {}.type)
 }
 
-inline fun <reified O> String.convert(): O {
-    return gson.fromJson(this, object : TypeToken<O>() {}.type)
-}
+//inline fun <reified O> String.convert(): O {
+//    return gson.fromJson(this, object : TypeToken<O>() {}.type)
+//}
 
 inline fun <reified I> I.toJson(): String {
     return gson.toJson(this)

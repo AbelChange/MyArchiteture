@@ -1,5 +1,7 @@
 package com.ablechange.learn.design.factory
 
+import kotlin.reflect.KClass
+
 /**
  * @author HaoShuaiHui
  * @description:
@@ -7,42 +9,22 @@ package com.ablechange.learn.design.factory
  */
 
 fun main(args: Array<String>) {
-    Factory.produce("飞机").applyResult()
-}
-
-interface IFactory {
-    fun produce(arg: String): IProduct
+    AbsFactory.produce(Plane::class).applyResult()
 }
 
 interface IProduct {
     fun applyResult()
 }
 
-object Factory : IFactory {
-
-    override fun produce(arg: String): IProduct {
-        if (arg == "飞机") {
-            return Plane()
-        } else if (arg == "汽车") {
-            return Car()
-        }
-        return object : IProduct {
-            override fun applyResult() {
-                println("生产不出来")
+abstract class AbsFactory : IFactory {
+    companion object {
+        inline fun <reified T : IProduct> produce(kClass: KClass<T>): IProduct {
+            return when (kClass) {
+                Plane::class -> KongKeFactory().produce()
+                Car::class -> BaoMaFactory().produce()
+                else -> throw java.lang.IllegalArgumentException()
             }
         }
-    }
-}
-
-class Plane : IProduct {
-    override fun applyResult() {
-        println("飞机飞起来")
-    }
-}
-
-class Car : IProduct {
-    override fun applyResult() {
-        println("汽车跑起来")
     }
 }
 
