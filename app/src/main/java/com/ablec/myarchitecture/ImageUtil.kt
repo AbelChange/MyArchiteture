@@ -1,4 +1,4 @@
-package com.droi.hotshopping.utils
+package com.ablec.myarchitecture
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -63,7 +63,7 @@ object ImageUtil {
                 fileOutputStream =
                     FileOutputStream(targetFile)
                 fileOutputStream.write(baos.toByteArray())
-                file2Uri(context, targetFile)
+                AppFileProvider.getFileUri("temp${System.currentTimeMillis()}.jpg")
             } catch (e: Exception) {
                 e.printStackTrace()
                 null
@@ -73,10 +73,6 @@ object ImageUtil {
         }
     }
 
-
-    private fun file2Uri(context: Context, file: File): Uri? {
-        return FileProvider.getUriForFile(context, "com.droi.hotshopping.fileprovider", file)
-    }
 
 
 }

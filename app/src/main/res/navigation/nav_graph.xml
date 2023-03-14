@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.ablec.myarchitecture.logic.main.MainFragment"
-        android:label="constraint_fragment"
+        android:label="main_fragment"
         tools:layout="@layout/main_fragment">
         <argument
             android:name="argString"
@@ -35,15 +35,16 @@
         <action
             android:id="@+id/action_mainFragment_to_rxFragment"
             app:destination="@id/rxFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_testFragment"
-            app:destination="@id/testFragment" />
+
         <action
             android:id="@+id/action_mainFragment_to_animFragment"
             app:destination="@id/animFragment" />
         <action
             android:id="@+id/action_mainFragment_to_eventFragment"
             app:destination="@id/eventFragment" />
+        <action
+                android:id="@+id/action_mainFragment_to_pickerFragment"
+                app:destination="@id/pickerFragment"/>
 
     </fragment>
 
@@ -75,8 +76,8 @@
         android:label="rx_fragment"
         tools:layout="@layout/rx_fragment" />
     <fragment
-        android:id="@+id/testFragment"
-        android:name="com.ablec.myarchitecture.test.TestFragment"
+        android:id="@+id/pickerFragment"
+        android:name="com.ablec.myarchitecture.logic.main.PickerFragment"
         android:label="TestFragment" />
     <fragment
         android:id="@+id/animFragment"

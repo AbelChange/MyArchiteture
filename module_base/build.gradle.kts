@@ -47,8 +47,6 @@ dependencies {
 
     api("com.umeng.umsdk:share-core:7.1.6")
     api("com.umeng.umsdk:share-wx:7.1.6")
-    api("com.umeng.umsdk:share-qq:7.1.6")
-    api("com.squareup.okhttp3:okhttp:3.14.9")
     //QQ官方sdk 3.53及之后版本需要集成okhttp3.x，必选)
     //    qq and wechat
     api("com.tencent.mm.opensdk:wechat-sdk-android-without-mta:6.7.9")
@@ -59,7 +57,4 @@ dependencies {
 
     //x5WebView
     api (Libs.x5WebView)
-
-    //qq
-    api("com.tencent.tauth:qqopensdk:3.51.2")
 }

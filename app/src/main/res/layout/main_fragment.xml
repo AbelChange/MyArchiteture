@@ -62,8 +62,14 @@
         android:text="ListFragment"/>
 
     <Button
-        android:id="@+id/btnTest"
+            android:id="@+id/btnAnim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anim"/>
+
+    <Button
+        android:id="@+id/btnPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test"/>
+        android:text="PickerImage"/>
 </LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:background="@color/cardview_light_background"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/camera"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingTop="27dp"
+                android:paddingBottom="17dp"
+                android:text="相机"
+                android:textColor="#061930"
+                android:textSize="16sp"/>
+
+        <TextView
+                android:id="@+id/album"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingTop="17dp"
+                android:paddingBottom="17dp"
+                android:text="图库"
+                android:textColor="#061930"
+                android:textSize="16sp"/>
+
+        <TextView
+                android:id="@+id/cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:paddingTop="17dp"
+                android:paddingBottom="17dp"
+                android:text="退出"
+                android:textColor="#A8AFB8"
+                android:textSize="16sp"/>
+
+    </LinearLayout>
+</LinearLayout>

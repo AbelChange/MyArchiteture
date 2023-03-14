@@ -20,7 +20,6 @@ android {
         targetSdk = Versions.TARGET_SDK
         versionCode = 1
         versionName = "1.0"
-        manifestPlaceholders["qqappid"] = "12220"
         manifestPlaceholders["APP_NAME"] = "appname"
         manifestPlaceholders["UMENG_CHANNEL_NAME"] = "common"
 

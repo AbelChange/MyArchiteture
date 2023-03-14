@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <root-path
+        name="root"
+        path="" />
+    <files-path
+        name="files"
+        path="." />
+    <cache-path
+        name="cache"
+        path="." />
+    <external-path
+        name="external"
+        path="." />
+    <external-files-path
+        name="external-files"
+        path="." />
+    <external-cache-path
+        name="external-cache"
+        path="." />
+    <external-files-path
+        name="umeng_cache"
+        path="umeng_cache/" />
+    <root-path
+        name="opensdk_root"
+        path="" />
+    <external-files-path
+        name="opensdk_external"
+        path="Images/tmp" />
+</resources>

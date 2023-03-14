@@ -1,7 +1,5 @@
 package com.ablec.myarchitecture.logic.main
 
-import android.content.ComponentName
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.ablec.lib.ext.navigate
 import com.ablec.module_base.service.RouterServiceManager
 import com.ablec.myarchitecture.databinding.MainFragmentBinding
-import com.blankj.utilcode.util.ActivityUtils
 
 class MainFragment : Fragment() {
 
@@ -55,11 +52,13 @@ class MainFragment : Fragment() {
             RouterServiceManager.getAccountService()?.startLogin(requireContext())
         }
 
-        binding.btnTest.setOnClickListener {
-            val intent = Intent()
+        binding.btnAnim.setOnClickListener {
             navigate(MainFragmentDirections.actionMainFragmentToAnimFragment())
         }
 
+        binding.btnPicker.setOnClickListener {
+            navigate(MainFragmentDirections.actionMainFragmentToPickerFragment())
+        }
 
     }
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+    <Button
+            android:id="@+id/start"
+            android:text="开始"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    </Button>
+
+    <ImageView
+            android:layout_marginTop="50dp"
+            android:id="@+id/imageView1"
+            android:scaleType="centerCrop"
+            android:layout_width="200dp"
+            android:layout_height="200dp">
+    </ImageView>
+
+
+    <ImageView
+            android:id="@+id/imageView2"
+            android:scaleType="centerCrop"
+            android:layout_width="200dp"
+            android:layout_height="200dp">
+    </ImageView>
+</androidx.appcompat.widget.LinearLayoutCompat>

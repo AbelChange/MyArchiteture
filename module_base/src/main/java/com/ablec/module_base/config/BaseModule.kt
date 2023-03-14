@@ -19,7 +19,6 @@ import com.ablec.lib.IBaseModule
 import com.ablec.lib.util.MMKVUtil
 
 import com.kingja.loadsir.core.LoadSir
-import com.ablec.module_base.config.ModuleConstant.QQ_APP_SECRET
 import com.ablec.module_base.db.AppDatabase.Companion.getInstance
 import com.ablec.module_base.service.RouterServiceManager
 import com.ablec.module_base.view.loading.EmptyCallback
@@ -100,8 +99,6 @@ class BaseModule : IBaseModule {
         UMConfigure.setLogEnabled(BuildConfig.DEBUG)
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO)
         PlatformConfig.setWeixin(ModuleConstant.WX_APP_ID, "")
-        PlatformConfig.setQQZone(ModuleConstant.QQ_APP_ID, QQ_APP_SECRET)
-        PlatformConfig.setQQFileProvider("com.ablec.dm.fileprovider")
         PlatformConfig.setWXFileProvider("com.ablec.dm.fileprovider")
     }
 

@@ -1,85 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+          xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- for mta statistics, not necessary -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 读写文件 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 多媒体 -->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- 手机状态 -->
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.VIBRATE" /> <!-- <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" /> -->
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" /> <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- 8.0 系统上需要 -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- SDK权限申明, 第三方APP接入时 -->
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.Manifest.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET"/> <!-- for mta statistics, not necessary -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/> <!-- 读写文件 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/> <!-- 手机状态 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission
+            android:name="android.permission.VIBRATE"/> <!-- <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" /> -->
+    <uses-permission
+            android:name="android.permission.MODIFY_AUDIO_SETTINGS"/> <!-- <uses-permission android:name="android.permission.WRITE_SETTINGS" /> -->
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/> <!-- 8.0 系统上需要 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/> <!-- SDK权限申明, 第三方APP接入时 -->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.Manifest.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
 
     <application
-        android:name=".AppApplication"
-        android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:networkSecurityConfig="@xml/network_security_config"
-        android:resizeableActivity="false"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="LockedOrientationActivity">
+            android:name=".AppApplication"
+            android:allowBackup="false"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:networkSecurityConfig="@xml/network_security_config"
+            android:resizeableActivity="false"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            tools:ignore="LockedOrientationActivity">
+
+
+        <provider
+                android:name=".AppFileProvider"
+                android:authorities="${applicationId}.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/filepath"/>
+        </provider>
 
         <activity
-            android:name="com.ablec.myarchitecture.logic.main.MainActivity"
-            android:screenOrientation="portrait" />
+                android:name="com.ablec.myarchitecture.logic.main.MainActivity"
+                android:screenOrientation="portrait"/>
         <activity
-            android:name=".SchemeFilterActivity"
-            android:exported="true">
+                android:name=".SchemeFilterActivity"
+                android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
                 <!--       配置成项目即可 ，不区分host 和 path        -->
-                <data android:scheme="myarc" />
+                <data android:scheme="myarc"/>
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".logic.main.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true"
-            android:screenOrientation="portrait">
+                android:name=".logic.main.SplashActivity"
+                android:theme="@style/SplashTheme"
+                android:exported="true"
+                android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.tencent.tauth.AuthActivity"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="tencent${qqappid}" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
