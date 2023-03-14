@@ -36,7 +36,7 @@ class PhotoPickerObserver(host: ActivityResultCaller) : DefaultLifecycleObserver
         }
     }
 
-    fun cropPhoto(config: CropPictureContract.CropConfig, callBack: ResultCallBack) {
+    fun crop(config: CropPictureContract.CropConfig, callBack: ResultCallBack) {
         mCallBack = callBack
         mResultUri = config.outputUri
         cropPhotoLauncher.launch(config)

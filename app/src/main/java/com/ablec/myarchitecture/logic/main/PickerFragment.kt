@@ -72,7 +72,7 @@ class PickerFragment : Fragment() {
                                 showImage(uri,binding.imageView1)
                             }
                             val fileUri = getFileUri("裁剪")
-                            photoProxy.cropPhoto(CropPictureContract.CropConfig(uri, fileUri), object : ResultCallBack {
+                            photoProxy.crop(CropPictureContract.CropConfig(uri, fileUri), object : ResultCallBack {
                                 override fun onResult(uri: Uri?) {
                                     uri?.let {
                                         showImage(uri,binding.imageView2)
