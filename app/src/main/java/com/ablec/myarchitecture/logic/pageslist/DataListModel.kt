@@ -9,9 +9,12 @@ import com.ablec.module_base.util.toJson
 import com.ablec.myarchitecture.data.server.api.TestApiService
 import com.ablec.myarchitecture.data.server.dto.GetListReq
 import com.ablec.myarchitecture.data.server.dto.ListItem
+import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 class DataListModel @Inject constructor(
@@ -28,11 +31,18 @@ class DataListModel @Inject constructor(
     }
 
     fun getListTest() {
-        viewModelScope.launch {
+        viewModelScope.launch(HttpExceptionHandler()) {
             val resp = apiService.getListData(GetListReq(1, 10).convert())
             if (resp.isSuccess) {
                 _list.value = resp.data
             }
+        }
+    }
+
+    class HttpExceptionHandler() : CoroutineExceptionHandler {
+        override val key = CoroutineExceptionHandler
+        override fun handleException(context: CoroutineContext, exception: Throwable) {
+            LogUtils.e("HttpExceptionHandler", exception)
         }
     }
 

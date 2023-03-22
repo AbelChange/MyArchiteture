@@ -6,52 +6,40 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:elevation="0dp">
+            app:elevation="0dp"
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll">
+
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"
-                android:background="@mipmap/play_music_full_screen_bg_7"
-                app:layout_collapseMode="parallax" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:background="@mipmap/play_music_full_screen_bg_7"
+                    app:layout_collapseMode="parallax"/>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <!-- TabLayout that stays fixed to the top of the screen -->
+        <com.google.android.material.tabs.TabLayout
+                android:background="@color/colorPrimary"
+                app:layout_scrollFlags="enterAlways"
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabGravity="fill"
+                app:tabMode="fixed"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+    <!-- ViewPager2 with multiple fragments -->
+    <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="600dp"
-                android:gravity="center"
-                android:text="123123" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="600dp"
-                android:gravity="center"
-                android:text="123123" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="600dp"
-                android:gravity="center"
-                android:text="123123" />
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

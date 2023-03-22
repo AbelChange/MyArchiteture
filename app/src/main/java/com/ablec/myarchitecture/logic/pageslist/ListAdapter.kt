@@ -1,6 +1,8 @@
 package com.ablec.myarchitecture.logic.pageslist
 
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.ablec.lib.glide.GlideUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.animation.AlphaInAnimation
 import com.chad.library.adapter.base.animation.BaseAnimation
@@ -21,6 +23,8 @@ class ListAdapter :BaseQuickAdapter<ListItem,BaseViewHolder>(R.layout.simple_tex
 
     override fun convert(holder: BaseViewHolder, item: ListItem) {
         holder.setText(R.id.tvResp, item.title)
+        val iv = holder.getView<ImageView>(R.id.imageView)
+        GlideUtils.loadImage(context,item.firstImg,iv)
     }
 
     override fun onViewAttachedToWindow(holder: BaseViewHolder) {
