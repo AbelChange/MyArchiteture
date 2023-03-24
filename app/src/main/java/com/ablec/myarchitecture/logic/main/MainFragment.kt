@@ -59,6 +59,9 @@ class MainFragment : Fragment() {
         binding.btnPicker.setOnClickListener {
             navigate(MainFragmentDirections.actionMainFragmentToPickerFragment())
         }
+        binding.btnBinder.setOnClickListener {
+            navigate(MainFragmentDirections.actionMainFragmentToBinderFragment())
+        }
 
     }
 

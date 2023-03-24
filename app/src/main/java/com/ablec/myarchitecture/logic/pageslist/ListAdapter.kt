@@ -16,7 +16,7 @@ import com.ablec.myarchitecture.data.server.dto.ListItem
  * @Author:         haoshuaihui
  * @CreateDate:     2021/4/28 16:13
  */
-class ListAdapter :BaseQuickAdapter<ListItem,BaseViewHolder>(R.layout.simple_textview),
+class ListAdapter :BaseQuickAdapter<ListItem,BaseViewHolder>(R.layout.item_simple_list),
     LoadMoreModule {
 
     private var position: Int = -1

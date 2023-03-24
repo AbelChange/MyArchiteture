@@ -1,4 +1,4 @@
-package com.ablec.myarchitecture.logic.main
+package com.ablec.myarchitecture.android
 
 import android.graphics.BitmapFactory
 import android.net.Uri

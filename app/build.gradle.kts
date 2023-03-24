@@ -125,6 +125,7 @@ android {
 }
 
 dependencies {
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
     implementation(projects.moduleBase)
 //集成模式
     if (!Config.buildModule) {

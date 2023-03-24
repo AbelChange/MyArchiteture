@@ -63,7 +63,9 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <!--       配置成项目即可 ，不区分host 和 path        -->
-                <data android:scheme="myarc"/>
+                <data
+                        android:scheme="myarc"
+                        android:host="app"/>
             </intent-filter>
         </activity>
 
@@ -77,6 +79,16 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <service
+                android:name=".service.RemoteService"
+                android:process=":remote"
+                android:enabled="true"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="ACTION_PLUS"/>
+            </intent-filter>
+        </service>
 
     </application>
 

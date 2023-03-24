@@ -45,6 +45,9 @@
         <action
                 android:id="@+id/action_mainFragment_to_pickerFragment"
                 app:destination="@id/pickerFragment"/>
+        <action
+                android:id="@+id/action_mainFragment_to_binderFragment"
+                app:destination="@id/binderFragment"/>
 
     </fragment>
 
@@ -77,7 +80,7 @@
         tools:layout="@layout/rx_fragment" />
     <fragment
         android:id="@+id/pickerFragment"
-        android:name="com.ablec.myarchitecture.logic.main.PickerFragment"
+        android:name="com.ablec.myarchitecture.android.PickerFragment"
         android:label="TestFragment" />
     <fragment
         android:id="@+id/animFragment"
@@ -89,6 +92,10 @@
         android:id="@+id/eventFragment"
         android:name="com.ablec.myarchitecture.android.EventFragment"
         android:label="EventFragment" />
+    <fragment
+            android:id="@+id/binderFragment"
+            android:name="com.ablec.myarchitecture.android.BinderFragment"
+            android:label="BinderFragment"/>
 
 
 </navigation>

@@ -68,8 +68,15 @@
             android:text="Anim"/>
 
     <Button
-        android:id="@+id/btnPicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PickerImage"/>
+            android:id="@+id/btnPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PickerImage"/>
+
+
+    <Button
+            android:id="@+id/btnBinder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BinderLearn"/>
 </LinearLayout>
