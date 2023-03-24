@@ -48,6 +48,9 @@
         <action
                 android:id="@+id/action_mainFragment_to_binderFragment"
                 app:destination="@id/binderFragment"/>
+        <action
+                android:id="@+id/action_mainFragment_to_myListFragment"
+                app:destination="@id/myListFragment"/>
 
     </fragment>
 
@@ -96,6 +99,10 @@
             android:id="@+id/binderFragment"
             android:name="com.ablec.myarchitecture.android.BinderFragment"
             android:label="BinderFragment"/>
+    <fragment
+            android:id="@+id/myListFragment"
+            android:name="com.ablec.myarchitecture.logic.main.MyListFragment"
+            android:label="MyListFragment"/>
 
 
 </navigation>

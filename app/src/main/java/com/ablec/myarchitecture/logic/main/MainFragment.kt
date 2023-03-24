@@ -56,6 +56,10 @@ class MainFragment : Fragment() {
             navigate(MainFragmentDirections.actionMainFragmentToAnimFragment())
         }
 
+        binding.btnGoList.setOnClickListener {
+            navigate(MainFragmentDirections.actionMainFragmentToMyListFragment())
+        }
+
         binding.btnPicker.setOnClickListener {
             navigate(MainFragmentDirections.actionMainFragmentToPickerFragment())
         }
