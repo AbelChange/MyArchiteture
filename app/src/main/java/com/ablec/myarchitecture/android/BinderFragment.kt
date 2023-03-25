@@ -4,8 +4,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.os.Bundle
-import android.os.IBinder
+import android.os.*
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.ablec.lib.ext.viewBinding
@@ -13,13 +12,18 @@ import com.ablec.myarchitecture.R
 import com.ablec.myarchitecture.aidl.IRemote
 import com.ablec.myarchitecture.aidl.IRemoteCallBack
 import com.ablec.myarchitecture.databinding.FragmentSimpleTextBinding
-import com.blankj.utilcode.util.LogUtils
+import java.io.File
+import java.io.IOException
 
+
+/**
+ * aidl客户端，同步调用与异步调用
+ */
 class BinderFragment : Fragment(R.layout.fragment_simple_text) {
 
     private val bindings: FragmentSimpleTextBinding by viewBinding()
 
-    private var binder:IRemote?= null
+    private var binder: IRemote? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,7 +32,8 @@ class BinderFragment : Fragment(R.layout.fragment_simple_text) {
         }
 
         bindings.startCall.setOnClickListener {
-            startCall()
+//            sendFile("")
+            shareMem("")
         }
     }
 
@@ -52,7 +57,7 @@ class BinderFragment : Fragment(R.layout.fragment_simple_text) {
 
     }
 
-    private var callBack = object :IRemoteCallBack.Stub(){
+    private var callBack = object : IRemoteCallBack.Stub() {
         override fun onSuccess(result: String?) {
             bindings.textView.text = "异步回调$result"
         }
@@ -61,19 +66,60 @@ class BinderFragment : Fragment(R.layout.fragment_simple_text) {
             bindings.textView.text = error
         }
     }
-    private fun startCall() {
-//       binder?.let {
-//            val result = it.plus(1, 2)
-//            bindings.textView.text = "获取同步计算结果$result"
-//        }
+
+    private fun simpleCall() {
         binder?.let {
-            it.registerCallBack(callBack)
-            for (i in 1 until 1000) {
-                it.async(i)
+            val result = it.plus(1, 2)
+            bindings.textView.text = "获取同步计算结果$result"
+        }
+    }
+
+    private fun asyncCall() {
+        binder?.let {
+            try {
+                it.registerCallBack(callBack)
+                for (i in 1 until 1000) {
+                    it.async(i)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
 
+    //文件共享
+    private fun sendFile(path: String) {
+        try {
+            val pfd = ParcelFileDescriptor.open(
+                File(path),
+                ParcelFileDescriptor.MODE_READ_ONLY
+            )
+            binder?.transferFile(pfd)
+            pfd.close()
+        } catch (e: RemoteException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    //内存共享
+    private fun shareMem(path: String) {
+        try {
+            // 创建 MemoryFile，并写入数据
+            val bytes = "Hello, World!".toByteArray()
+            val memoryFile = MemoryFile("MemoryFileDemo", bytes.size)
+            memoryFile.writeBytes(bytes, 0, 0, bytes.size)
+            val pfd = memoryFile.fileDescriptor()
+            binder?.transferFile(pfd)
+            memoryFile.close()
+            pfd?.close()
+        } catch (e: RemoteException) {
+            e.printStackTrace()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
 
     override fun onDestroy() {
         super.onDestroy()

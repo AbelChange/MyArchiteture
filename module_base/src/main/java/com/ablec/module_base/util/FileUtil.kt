@@ -1,4 +1,4 @@
-package com.ablec.lib.util
+package com.ablec.module_base.util
 
 import android.Manifest
 import android.content.ContentResolver
@@ -15,7 +15,6 @@ import androidx.fragment.app.FragmentActivity
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.PermissionUtils
 import com.blankj.utilcode.util.ToastUtils
-import com.tbruyelle.rxpermissions3.RxPermissions
 import java.io.*
 import java.text.DecimalFormat
 import java.util.*
@@ -57,8 +56,8 @@ object FileUtil {
      * @return 是否创建成功
      */
     fun mkDir(dir: File): Boolean {
-        while (!dir.parentFile.exists()) {
-            mkDir(dir.parentFile)
+        while (dir.parentFile?.exists() == true) {
+            dir.parentFile?.let { mkDir(it) }
         }
         return dir.mkdir()
     }

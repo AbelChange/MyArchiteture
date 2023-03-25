@@ -3,12 +3,17 @@ package com.ablec.myarchitecture.service
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import android.os.ParcelFileDescriptor
 import android.os.RemoteCallbackList
 import android.os.RemoteException
 import com.ablec.myarchitecture.aidl.IRemote
 import com.ablec.myarchitecture.aidl.IRemoteCallBack
 import com.blankj.utilcode.util.LogUtils
 import kotlinx.coroutines.*
+import java.io.BufferedReader
+import java.io.FileInputStream
+import java.io.IOException
+import java.io.InputStreamReader
 
 
 class RemoteService : Service() {
@@ -29,6 +34,20 @@ class RemoteService : Service() {
         return binder
     }
 
+    private fun broadcast(s: String) {
+        var i: Int = remoteCallBackList.beginBroadcast()
+        while (i > 0) {
+            i--
+            try {
+                remoteCallBackList.getBroadcastItem(i).onSuccess(s)
+            } catch (e: RemoteException) {
+                // The RemoteCallbackList will take care of removing
+                // the dead object for us.
+            }
+        }
+        remoteCallBackList.finishBroadcast()
+    }
+
 
     private val binder = object : IRemote.Stub() {
         override fun plus(a: Int, b: Int): String {
@@ -44,18 +63,22 @@ class RemoteService : Service() {
             broadcast("binder线程:${name},回调结果${a}")
         }
 
-        private fun broadcast(s: String) {
-            var i: Int = remoteCallBackList.beginBroadcast()
-            while (i > 0) {
-                i--
-                try {
-                    remoteCallBackList.getBroadcastItem(i).onSuccess(s)
-                } catch (e: RemoteException) {
-                    // The RemoteCallbackList will take care of removing
-                    // the dead object for us.
+        override fun transferFile(pfd: ParcelFileDescriptor) {
+            val inputStream = FileInputStream(pfd.fileDescriptor)
+            val bufferedReader = BufferedReader(InputStreamReader(inputStream))
+            val lines = mutableListOf<String>()
+            try {
+                while (true) {
+                    val line = bufferedReader.readLine() ?: break
+                    lines.add(line)
                 }
+                bufferedReader.close()
+                inputStream.close()
+                pfd.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-            remoteCallBackList.finishBroadcast()
+            LogUtils.d(TAG,lines.toString())
         }
 
         override fun registerCallBack(callback: IRemoteCallBack?) {
@@ -65,6 +88,7 @@ class RemoteService : Service() {
         override fun unregisterCallBack(callback: IRemoteCallBack?) {
             remoteCallBackList.unregister(callback)
         }
+
     }
 
     companion object {
