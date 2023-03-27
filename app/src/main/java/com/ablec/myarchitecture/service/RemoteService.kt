@@ -51,10 +51,10 @@ class RemoteService : Service() {
 
     private val binder = object : IRemote.Stub() {
         override fun plus(a: Int, b: Int): String {
-            //子线程
-            val result = a + b
+            //子线程|
+            val pid = android.os.Process.myPid()
             val name = Thread.currentThread().name
-            return "binder线程:${name},result:$result"
+            return "pid:$pid,binder线程:${name},result:$a + b"
         }
 
         override fun async(a: Int) {

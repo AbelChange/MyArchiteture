@@ -39,7 +39,7 @@ class BinderFragment : Fragment(R.layout.fragment_simple_text) {
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(cpname: ComponentName?, service: IBinder?) {
-            //主线程
+            //主线程 拿到binder代理
             binder = IRemote.Stub.asInterface(service)
         }
 
