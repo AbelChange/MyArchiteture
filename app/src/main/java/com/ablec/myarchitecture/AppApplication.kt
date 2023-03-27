@@ -1,8 +1,10 @@
 package com.ablec.myarchitecture
 
 //import com.ablec.module_login.config.LoginModule
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.os.Bundle
@@ -10,8 +12,7 @@ import android.view.Gravity
 import androidx.core.view.ViewCompat
 import com.ablec.lib.BaseApplication
 import com.ablec.lib.util.MMKVUtil
-import com.ablec.module_base.config.BaseModule
-import com.ablec.module_base.config.ModuleConfig
+import com.ablec.module_base.provider.BaseInitializer.Companion.GlobalContext
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.ProcessUtils
 import com.blankj.utilcode.util.ToastUtils
@@ -26,15 +27,8 @@ import dagger.hilt.android.HiltAndroidApp
 @HiltAndroidApp
 class AppApplication : BaseApplication() {
 
-    /**
-     * 需要初始化的模块
-     */
-    private val moduleClass = listOf(
-        BaseModule::class.java,
-    )
-
     override fun onCreate() {
-        instance = this
+        instance = GlobalContext
         super.onCreate()
         //设置系统栏亮色模式与主题一致（系统栏亮色模式则图标深色；系统深色模式则图标亮色）
         registerActivityLifecycleCallbacks(SystemBarActivityLifecycleCallbacks)
@@ -71,13 +65,9 @@ class AppApplication : BaseApplication() {
         ToastUtils.getDefaultMaker().setTextColor(Color.WHITE)
     }
 
-    override fun dependModulesInit() {
-        ModuleConfig.init(this, moduleClass)
-        lazyInit()
-    }
-
     companion object {
-        lateinit var instance: AppApplication
+        @SuppressLint("StaticFieldLeak")
+        lateinit var instance: Context
             private set
     }
 
@@ -91,7 +81,6 @@ class AppApplication : BaseApplication() {
         if (!BuildConfig.DEBUG) {
             initBugly(this)
         }
-        ModuleConfig.lazyInit(this, moduleClass)
     }
 }
 

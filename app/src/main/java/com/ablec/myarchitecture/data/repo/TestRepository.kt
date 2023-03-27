@@ -1,8 +1,8 @@
 package com.ablec.myarchitecture.data.repo
 
 import com.ablec.module_base.http.handleHttpResp
+import com.ablec.module_base.provider.BaseInitializer.Companion.GlobalContext
 import com.ablec.module_base.util.convert
-import com.ablec.myarchitecture.AppApplication
 import com.ablec.myarchitecture.data.server.api.TestApiService
 import com.ablec.myarchitecture.data.server.dto.GetListReq
 import dagger.hilt.EntryPoint
@@ -30,7 +30,7 @@ object TestRepository {
 
     init {
         apiService = EntryPointAccessors.fromApplication(
-            AppApplication.instance,
+            GlobalContext,
             TaskMonitorViewModelEntryPoint::class.java
         ).getApiService()
     }

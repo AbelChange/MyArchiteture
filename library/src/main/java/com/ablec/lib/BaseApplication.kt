@@ -13,7 +13,6 @@ abstract class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        dependModulesInit()
     }
 
     companion object {
@@ -23,8 +22,4 @@ abstract class BaseApplication : Application() {
 
 
 
-    /**
-     * 依赖组件初始化
-     */
-    abstract fun dependModulesInit()
 }
