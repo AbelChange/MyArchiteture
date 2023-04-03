@@ -65,9 +65,8 @@ dependencies {
     api(libs.androidx.datastore.preferences)
 
     //glide
-    api(Libs.glide)
-    kapt(Libs.glideCompiler)
-
+    api(libs.glide)
+    kapt(libs.glide.compiler)
     //Router
     api("io.github.meituan-dianping:router:${Versions.wmRouter}")
     //util

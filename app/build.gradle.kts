@@ -133,7 +133,7 @@ dependencies {
         implementation(project(":module_pay"))
     }
     kapt(libs.hilt.compiler)
-    kapt(Libs.glideCompiler)
+    kapt(libs.glide.compiler)
     kapt(Libs.routerCompiler)
     implementation(libs.hilt.android)
 

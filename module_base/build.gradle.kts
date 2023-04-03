@@ -39,7 +39,7 @@ dependencies {
     api(projects.library)
     kapt(libs.androidx.room.compiler)
     kapt(libs.hilt.compiler)
-    kapt(Libs.glideCompiler)
+    kapt(libs.glide.compiler)
     kapt(Libs.routerCompiler)
     //umeng
     api("com.umeng.umsdk:common:9.4.2")
