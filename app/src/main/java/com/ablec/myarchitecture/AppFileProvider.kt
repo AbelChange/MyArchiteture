@@ -11,7 +11,7 @@ class AppFileProvider : FileProvider() {
     }
 
     companion object {
-        private const val FILE_PROVIDER_AUTHORITY = "${BuildConfig.APPLICATION_ID}.fileprovider"
+        private const val FILE_PROVIDER_AUTHORITY = "${BuildConfig.APPLICATION_ID}.fileProvider"
 
         fun getFileUri( name: String): Uri {
             val fileDir = AppApplication.instance.filesDir
