@@ -1,31 +1,3 @@
-pluginManagement {
-    repositories {
-        maven {
-            name = "jcenter托管"
-            url = uri("https://maven.aliyun.com/repository/public")
-        }
-        maven {
-            name = "google备选"
-            url = uri("https://maven.aliyun.com/repository/google")
-        }
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-    resolutionStrategy {
-        eachPlugin {
-            when (requested.id.namespace) {
-                "androidx.navigation.safeargs" -> {
-                }
-                "WMRouter" -> {
-                }
-                else -> {
-
-                }
-            }
-        }
-    }
-}
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
