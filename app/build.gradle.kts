@@ -137,11 +137,11 @@ dependencies {
     kapt(Libs.routerCompiler)
     implementation(libs.hilt.android)
 
-    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.7")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:2.10")
     //仿weibo可展开折叠texview
-    implementation("com.github.MZCretin:ExpandableTextView:v1.6.1")
+    implementation("com.github.MZCretin:ExpandableTextView:1.6.1")
 
-    implementation("com.google.android.exoplayer:exoplayer-core:2.15.0")
+    implementation("com.google.android.exoplayer:exoplayer-core:2.18.5")
 
 
 
