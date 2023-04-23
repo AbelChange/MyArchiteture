@@ -42,7 +42,7 @@ object Versions {
     //sdk
     const val COMPILE_SDK = 33
     const val TARGET_SDK = 31
-    const val MIN_SDK = 23
+    const val MIN_SDK = 24
 
     //plugin
     const val androidGradlePlugin = "7.4.1"

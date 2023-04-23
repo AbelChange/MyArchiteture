@@ -68,9 +68,10 @@ class PickerFragment : Fragment() {
                 override fun onAlbumClick() {
                     photoProxy.pickAlbum(object : ResultCallBack {
                         override fun onResult(uri: Uri?) {
-                            uri?.let {
-                                showImage(uri,binding.imageView1)
+                            if (uri == null){
+                                return
                             }
+                            showImage(uri,binding.imageView1)
                             val fileUri = getFileUri("裁剪")
                             photoProxy.crop(CropPictureContract.CropConfig(uri, fileUri), object : ResultCallBack {
                                 override fun onResult(uri: Uri?) {

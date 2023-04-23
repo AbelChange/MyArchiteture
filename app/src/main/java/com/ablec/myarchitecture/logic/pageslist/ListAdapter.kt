@@ -1,11 +1,8 @@
 package com.ablec.myarchitecture.logic.pageslist
 
 import android.widget.ImageView
-import androidx.recyclerview.widget.RecyclerView
 import com.ablec.lib.glide.GlideUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.animation.AlphaInAnimation
-import com.chad.library.adapter.base.animation.BaseAnimation
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.ablec.myarchitecture.R
@@ -19,50 +16,9 @@ import com.ablec.myarchitecture.data.server.dto.ListItem
 class ListAdapter :BaseQuickAdapter<ListItem,BaseViewHolder>(R.layout.item_simple_list),
     LoadMoreModule {
 
-    private var position: Int = -1
-
     override fun convert(holder: BaseViewHolder, item: ListItem) {
         holder.setText(R.id.tvResp, item.title)
         val iv = holder.getView<ImageView>(R.id.imageView)
         GlideUtils.loadImage(context,item.firstImg,iv)
-    }
-
-    override fun onViewAttachedToWindow(holder: BaseViewHolder) {
-        val type = holder.itemViewType
-        if (isFixedViewType(type)) {
-            setFullSpan(holder)
-        } else {
-            addAnimation(holder)
-        }
-    }
-
-    override fun setNewInstance(list: MutableList<ListItem>?) {
-        super.setNewInstance(list)
-        position = -1
-    }
-
-    override fun setList(list: Collection<ListItem>?) {
-        super.setList(list)
-        position = -1
-    }
-
-    private fun addAnimation(holder: RecyclerView.ViewHolder) {
-        if (animationEnable) {
-            if (!isAnimationFirstOnly || holder.layoutPosition > position) {
-                if (holder.adapterPosition >= 2) {
-                    val animation: BaseAnimation = adapterAnimation ?: AlphaInAnimation()
-                    animation.animators(holder.itemView).forEach {
-                        startAnim(it, holder.layoutPosition)
-                    }
-                    position = holder.layoutPosition
-                } else {
-                    val animation: BaseAnimation = AlphaInAnimation()
-                    animation.animators(holder.itemView).forEach {
-                        startAnim(it, holder.layoutPosition)
-                    }
-                    position = holder.layoutPosition
-                }
-            }
-        }
     }
 }
