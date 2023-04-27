@@ -76,7 +76,10 @@ android {
         buildConfig = true
     }
 
-    flavorDimensions += listOf("server", "market")
+    flavorDimensions .apply{
+        add("server")
+        add("market")
+    }
 
     productFlavors {
         //server维度

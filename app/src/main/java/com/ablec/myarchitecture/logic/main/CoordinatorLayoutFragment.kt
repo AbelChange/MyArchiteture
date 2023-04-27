@@ -8,6 +8,8 @@ import com.ablec.lib.base.BaseFragment
 import com.ablec.lib.ext.viewBinding
 import com.ablec.myarchitecture.R
 import com.ablec.myarchitecture.databinding.CoordinatorLayoutFragmentBinding
+import com.blankj.utilcode.util.LogUtils
+import com.google.android.material.appbar.AppBarLayout
 
 /**
  * @author HaoShuaiHui
@@ -30,6 +32,13 @@ class CoordinatorLayoutFragment : BaseFragment(R.layout.coordinator_layout_fragm
                 return MyListFragment()
             }
         }
+
+
+        mBinding.appBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { _, verticalOffset ->
+
+                LogUtils.d(verticalOffset) // 0 ~ -400
+
+        })
     }
 
 
