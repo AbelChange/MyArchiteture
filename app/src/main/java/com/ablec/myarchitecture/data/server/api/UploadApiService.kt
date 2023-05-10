@@ -1,6 +1,6 @@
 package com.ablec.myarchitecture.data.server.api
 
-import com.ablec.module_base.http.BaseResp
+import com.ablec.myarchitecture.data.server.dto.BaseResp
 import okhttp3.MultipartBody
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -20,5 +20,5 @@ interface UploadApiService {
     @Multipart
     @POST("uploadImage")
     suspend fun uploadPic(@Part part: MultipartBody.Part,
-                          @QueryMap map: Map<String, String>): BaseResp<Void>
+                          @QueryMap map: Map<String, String>): BaseResp<Unit>
 }

@@ -1,51 +1,30 @@
 package com.ablec.module_base.http
 
-
-
-import kotlin.coroutines.cancellation.CancellationException
-
-
 /**
  * @Description:
  * @Author:         haoshuaihui
  * @CreateDate:     2020/12/30 14:03
  */
-suspend fun <T> handleHttpResp(
-    action: suspend () -> BaseResp<T>
-): BaseResp<T> {
+interface ApiResp<T> {
+    val message: String?
+    val data: T?
+    val code: Int
+    val success: Boolean
+}
+
+data class ApiException(override val message: String?, override val cause: Throwable?) :
+    Exception(message, cause)
+
+suspend fun <T> handleApiCall(call: suspend () -> ApiResp<T>): Result<T?> {
     return try {
-        val invoke = action.invoke()
-        handleHttpSuccess(invoke)
-    } catch (it: Throwable) {
-        if (it is CancellationException) {
-            throw it
+        val response = call.invoke()
+        if (response.success) {
+            Result.success(response.data)
         } else {
-            handleHttpError(it)
+            Result.failure(ApiException(response.message, null))
         }
-    }
-}
-
-/**
- * http
- */
-private fun <T> handleHttpError(e: Throwable): BaseFailedResp<T> {
-    val apiException = ExceptionEngine.handleException(e)
-    return BaseFailedResp(apiException.code, apiException.message)
-}
-
-/**
- * 返回200，但是还要判断isSuccess
- */
-private fun <T> handleHttpSuccess(data: BaseResp<T>): BaseResp<T> {
-    return if (data.isSuccess) {
-        data
-    } else {
-        //逻辑异常
-        if (data.invalidToken){
-            //处理登出
-
-        }
-        BaseFailedResp(data.code, data.msg)
+    } catch (e: Exception) {
+        Result.failure(ApiException("网络错误:${e.message}", e))
     }
 }
 

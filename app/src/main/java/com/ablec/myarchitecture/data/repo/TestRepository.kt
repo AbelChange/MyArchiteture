@@ -1,6 +1,6 @@
 package com.ablec.myarchitecture.data.repo
 
-import com.ablec.module_base.http.handleHttpResp
+import com.ablec.module_base.http.handleApiCall
 import com.ablec.module_base.provider.BaseInitializer.Companion.GlobalContext
 import com.ablec.module_base.util.convert
 import com.ablec.myarchitecture.data.server.api.TestApiService
@@ -36,7 +36,7 @@ object TestRepository {
     }
 
     suspend fun getListData(req: GetListReq) =
-        handleHttpResp { apiService.getListData(req.convert()) }
+        handleApiCall { apiService.getListData(req.convert()) }
 
 
 }

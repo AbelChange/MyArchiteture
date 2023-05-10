@@ -1,14 +1,16 @@
 package com.ablec.myarchitecture.logic.pageslist
 
 import android.app.Application
-import androidx.lifecycle.*
-import com.ablec.lib.ext.showToast
-import com.ablec.module_base.http.PageData
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.viewModelScope
+import com.ablec.module_base.http.handleApiCall
 import com.ablec.module_base.util.convert
-import com.ablec.module_base.util.toJson
 import com.ablec.myarchitecture.data.server.api.TestApiService
 import com.ablec.myarchitecture.data.server.dto.GetListReq
 import com.ablec.myarchitecture.data.server.dto.ListItem
+import com.ablec.myarchitecture.data.server.dto.PageData
 import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -31,18 +33,12 @@ class DataListModel @Inject constructor(
     }
 
     fun getListTest() {
-        viewModelScope.launch(HttpExceptionHandler()) {
-            val resp = apiService.getListData(GetListReq(1, 10).convert())
-            if (resp.isSuccess) {
-                _list.value = resp.data
+        viewModelScope.launch() {
+            handleApiCall { apiService.getListData(GetListReq(1, 10).convert()) }.onSuccess {
+                _list.value = it
+            }.onFailure {
+                LogUtils.e(it)
             }
-        }
-    }
-
-    class HttpExceptionHandler() : CoroutineExceptionHandler {
-        override val key = CoroutineExceptionHandler
-        override fun handleException(context: CoroutineContext, exception: Throwable) {
-            LogUtils.e("HttpExceptionHandler", exception)
         }
     }
 

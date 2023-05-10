@@ -30,5 +30,4 @@ dependencies {
     implementation(projects.moduleBase)
     kapt(Libs.routerCompiler)
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
-    implementation(files("libs/alipaysdk-15.8.05.211018174351.aar"))
 }
