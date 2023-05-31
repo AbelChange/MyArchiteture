@@ -14,7 +14,6 @@ plugins {
 android {
     namespace = "com.ablec.myarchitecture"
     compileSdk = Versions.COMPILE_SDK
-
     defaultConfig {
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
@@ -60,15 +59,6 @@ android {
         debug {
             isMinifyEnabled = false
         }
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     buildFeatures {
@@ -145,8 +135,6 @@ dependencies {
     implementation("com.github.MZCretin:ExpandableTextView:1.6.1")
 
     implementation("com.google.android.exoplayer:exoplayer-core:2.18.5")
-
-
 
     debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")

@@ -24,24 +24,35 @@ fun main(args: Array<String>) {
     val list1 = ArrayList<String>()
     println(list1.javaClass.genericSuperclass)//java.util.AbstractList<E>
     //1.使用匿名内部类
-    val list2 = object : ArrayList<String>(){} //匿名内部类 --》gson传递泛型参数
+    val list2 = object : ArrayList<String>() {} //匿名内部类 --》gson传递泛型参数
     println(list2.javaClass.genericSuperclass)//java.util.ArrayList<java.lang.String>
     //2.使用内联函数,reified不能被java调用
-     getType<List<String>>()
+    getType<List<String>>()
 
 
     //三、kotlin List支持协变 List<out E> 可读不可写
-    val appletS:List<Fruit> = listOf<Apple>()
+    val appletS: List<Fruit> = listOf<Apple>()
 
-    val numbers:List<Number> = listOf<Int>()
+    val numbers: List<Number> = listOf<Int>()
+
+
+    val listOf = listOf<Apple>();
+    add(listOf)
+
+
+}
+
+
+fun add(fr: List<Fruit>) {
+
 
 }
 
 //inline属于编译器优化，减少高阶函数带来 堆栈层级的问题
-inline fun < reified T> getType(): Class<T> {
+inline fun <reified T> getType(): Class<T> {
     return T::class.java
 }
 
-class FruitPlate<T: Fruit>(val t : T)//上界约束（where 多个上界）
+class FruitPlate<T : Fruit>(val t: T)//上界约束（where 多个上界）
 
 

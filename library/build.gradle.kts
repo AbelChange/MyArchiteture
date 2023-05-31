@@ -10,25 +10,9 @@ android {
 
     defaultConfig {
         minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
     }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
     buildFeatures {
         viewBinding = true
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 }
 

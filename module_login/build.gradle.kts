@@ -9,22 +9,10 @@ android {
     resourcePrefix("module_login")
 
     namespace = "com.ablec.module_login"
-    compileSdk = Versions.COMPILE_SDK
-
-    defaultConfig {
-        minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
-    }
 
     buildFeatures {
         viewBinding = true
     }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
 }
 
 

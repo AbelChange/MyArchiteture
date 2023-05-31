@@ -22,7 +22,8 @@ public class GenericJava {
         System.out.println("测试"+ fruits[0]);
         //编译报错 因为 数组是协变的，而list是不变的
        // List<Fruit> fruitsList= new ArrayList<Apple>();
-
     }
+
+
 
 }
