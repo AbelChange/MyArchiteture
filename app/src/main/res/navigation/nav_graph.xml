@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.ablec.myarchitecture.logic.main.MainFragment"
+        android:name="com.ablec.myarchitecture.logic.main.RouterFragment"
         android:label="main_fragment"
-        tools:layout="@layout/main_fragment">
+        tools:layout="@layout/router_fragment">
         <argument
             android:name="argString"
             app:argType="string" />
@@ -56,7 +56,7 @@
 
     <fragment
         android:id="@+id/constraintLayoutFragment"
-        android:name="com.ablec.myarchitecture.logic.main.ConstraintLayoutFragment"
+        android:name="com.ablec.myarchitecture.logic.other.ConstraintLayoutFragment"
         android:label="ConstraintLayoutFragment"
         tools:layout="@layout/constraint_fragment"/>
 
@@ -73,7 +73,7 @@
         tools:layout="@layout/web_socket_fragment" />
     <fragment
         android:id="@+id/coordinatorLayoutFragment"
-        android:name="com.ablec.myarchitecture.logic.main.CoordinatorLayoutFragment"
+        android:name="com.ablec.myarchitecture.logic.other.CoordinatorLayoutFragment"
         android:label="coordinator_layout_fragment"
         tools:layout="@layout/coordinator_layout_fragment" />
     <fragment
@@ -101,7 +101,7 @@
             android:label="BinderFragment"/>
     <fragment
             android:id="@+id/myListFragment"
-            android:name="com.ablec.myarchitecture.logic.main.MyListFragment"
+            android:name="com.ablec.myarchitecture.logic.other.MyListFragment"
             android:label="MyListFragment"/>
 
 

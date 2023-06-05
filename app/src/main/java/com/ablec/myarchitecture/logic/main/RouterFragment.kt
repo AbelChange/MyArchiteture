@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ablec.lib.ext.navigate
 import com.ablec.module_base.service.RouterServiceManager
-import com.ablec.myarchitecture.databinding.MainFragmentBinding
+import com.ablec.myarchitecture.databinding.RouterFragmentBinding
 
-class MainFragment : Fragment() {
+class RouterFragment : Fragment() {
 
-    private lateinit var binding: MainFragmentBinding
+    private lateinit var binding: RouterFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = MainFragmentBinding.inflate(layoutInflater)
+        binding = RouterFragmentBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -26,26 +26,26 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnConstraintLayout.setOnClickListener {
             val action =
-                MainFragmentDirections.actionMainFragmentToConstraintLayoutFragment()
+                RouterFragmentDirections.actionMainFragmentToConstraintLayoutFragment()
             navigate(action)
         }
 
         binding.btnCoordinator.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToCoordinatorLayoutFragment()
+            val action = RouterFragmentDirections.actionMainFragmentToCoordinatorLayoutFragment()
             navigate(action)
         }
 
         binding.btnTransformation.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToTransformationFragment()
+            val action = RouterFragmentDirections.actionMainFragmentToTransformationFragment()
             navigate(action)
         }
 
         binding.btnSocket.setOnClickListener {
-            navigate(MainFragmentDirections.actionMainFragmentToWebSocketFragment())
+            navigate(RouterFragmentDirections.actionMainFragmentToWebSocketFragment())
         }
 
         binding.btnRxOperator.setOnClickListener {
-            navigate(MainFragmentDirections.actionMainFragmentToRxFragment())
+            navigate(RouterFragmentDirections.actionMainFragmentToRxFragment())
         }
 
         binding.btnGoLogin.setOnClickListener {
@@ -53,18 +53,18 @@ class MainFragment : Fragment() {
         }
 
         binding.btnAnim.setOnClickListener {
-            navigate(MainFragmentDirections.actionMainFragmentToAnimFragment())
+            navigate(RouterFragmentDirections.actionMainFragmentToAnimFragment())
         }
 
         binding.btnGoList.setOnClickListener {
-            navigate(MainFragmentDirections.actionMainFragmentToMyListFragment())
+            navigate(RouterFragmentDirections.actionMainFragmentToMyListFragment())
         }
 
         binding.btnPicker.setOnClickListener {
-            navigate(MainFragmentDirections.actionMainFragmentToPickerFragment())
+            navigate(RouterFragmentDirections.actionMainFragmentToPickerFragment())
         }
         binding.btnBinder.setOnClickListener {
-            navigate(MainFragmentDirections.actionMainFragmentToBinderFragment())
+            navigate(RouterFragmentDirections.actionMainFragmentToBinderFragment())
         }
 
     }

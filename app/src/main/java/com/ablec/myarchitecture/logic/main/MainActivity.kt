@@ -4,11 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.ablec.lib.base.BaseActivity
 import com.ablec.lib.ext.paddingStatusBar
 import com.ablec.lib.ext.setUpBars
@@ -25,8 +30,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @RouterUri(path = [BASE])
 class MainActivity : BaseActivity() {
 
-    private lateinit var navController: NavController
-
     private lateinit var binding: MainActivityBinding
 
     private val vm by viewModels<DataListModel>()
@@ -36,25 +39,22 @@ class MainActivity : BaseActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpBars(true)
-        binding.root.paddingStatusBar()
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
-        val graph = navController.graph.apply {
-            //动态设置start
-            // graph.startDestination = R.id.xxx
-        }
-        //初始参数
-        navController.setGraph(graph, Bundle().apply {  })
-        //联动toolbar rootFragment不显示返回按钮
-        val appBarConfiguration =
-            AppBarConfiguration.Builder(navController.graph)
-                .build()
-        binding.toolbar.setupWithNavController(navController, appBarConfiguration)
+        initView()
+    }
 
-        //test
-        vm.listLive.observe(this) {
-            showToast(it.toJson())
+    private fun initView() {
+        binding.viewPager.apply {
+            isUserInputEnabled = false
+            adapter = NavigationPagerAdapter(this@MainActivity)
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    binding.navigation.menu.getItem(position).isChecked = true
+                }
+            })
+        }
+        binding.navigation.setOnItemSelectedListener {
+            binding.viewPager.setCurrentItem(it.order, false)
+            return@setOnItemSelectedListener true
         }
     }
 
@@ -63,6 +63,20 @@ class MainActivity : BaseActivity() {
         fun start(context: Context) {
             val starter = Intent(context, MainActivity::class.java)
             context.startActivity(starter)
+        }
+    }
+
+    class NavigationPagerAdapter(ac: FragmentActivity) : FragmentStateAdapter(ac) {
+        override fun getItemCount(): Int {
+            return 3
+        }
+
+        override fun createFragment(position: Int): Fragment {
+            return when (position) {
+                0 -> HomeFragment()
+                1 -> MotionLayoutFragment()
+                else -> Fragment()
+            }
         }
     }
 }

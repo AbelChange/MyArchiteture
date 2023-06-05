@@ -1,4 +1,4 @@
-package com.ablec.myarchitecture.logic.main
+package com.ablec.myarchitecture.logic.other
 
 import android.os.Bundle
 import android.view.View

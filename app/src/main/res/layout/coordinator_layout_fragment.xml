@@ -11,33 +11,18 @@
         android:minHeight="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+        <include layout="@layout/coordinator_header" />
+        <com.google.android.material.tabs.TabLayout
+            android:background="@color/colorPrimary"
+            app:layout_scrollFlags="enterAlways"
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="70dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
-
-            <ImageView
-                android:id="@+id/iv_content"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/play_music_full_screen_bg_7"
-                app:layout_collapseMode="pin"
-                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        <!-- TabLayout that stays fixed to the top of the screen -->
-        <com.google.android.material.tabs.TabLayout
-                android:background="@color/colorPrimary"
-                app:layout_scrollFlags="enterAlways"
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabGravity="fill"
-                app:tabMode="fixed"/>
+            app:tabGravity="fill"
+            app:tabMode="fixed"/>
     </com.google.android.material.appbar.AppBarLayout>
+
+
 
 
     <!-- ViewPager2 with multiple fragments -->
