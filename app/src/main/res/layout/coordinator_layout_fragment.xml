@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
         <include layout="@layout/coordinator_header" />
         <com.google.android.material.tabs.TabLayout
-            android:background="@color/colorPrimary"
+            android:background="@color/black"
             app:layout_scrollFlags="enterAlways"
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
@@ -21,9 +21,6 @@
             app:tabGravity="fill"
             app:tabMode="fixed"/>
     </com.google.android.material.appbar.AppBarLayout>
-
-
-
 
     <!-- ViewPager2 with multiple fragments -->
     <androidx.viewpager2.widget.ViewPager2

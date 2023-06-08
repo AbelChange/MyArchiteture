@@ -8,7 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_scrollFlags="scroll|exitUntilCollapsed"
-    android:minHeight="50dp"
+    android:minHeight="90dp"
     android:background="#1e376b">
 
     <ImageView
@@ -20,23 +20,39 @@
         android:scaleType="centerCrop" />
 
     <TextView
-        android:id="@+id/label"
+        android:id="@+id/topWeather"
+        app:layout_constraintBottom_toTopOf="@id/label"
+        app:layout_constraintTop_toTopOf="@id/background"
+        app:layout_constraintStart_toStartOf="@id/background"
+        android:text="天气区域"
+        android:drawableStart="@drawable/baseline_cloud_24"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:transformPivotX="0dp"
-        android:transformPivotY="0dp"
-        android:text="Monterey"
-        android:textColor="#FFF"
-        android:textSize="32dp" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/sublabel"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="California"
-        android:textColor="#FFF"
+        android:background="@color/white"
+        android:gravity="center"
+        android:text="底部新闻图标区域"
+        android:textColor="@color/black"
         android:textSize="24sp"
-        app:fontFamily="cursive" />
+        app:layout_constraintBottom_toBottomOf="@id/background" />
+
+    <TextView
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="@id/background"
+        app:layout_constraintBottom_toBottomOf="@id/background"
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="搜索框"
+        android:textColor="@color/black"
+        android:textSize="32dp"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp"/>
 
 
 </com.ablec.myarchitecture.view.CollapsibleToolbar>

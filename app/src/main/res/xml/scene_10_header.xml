@@ -36,21 +36,27 @@
             android:scaleY="1.1"
             motion:layout_constraintBottom_toBottomOf="parent" />
         <Constraint
-            android:id="@+id/label"
-            android:layout_width="wrap_content"
+            motion:layout_constraintBottom_toTopOf="@id/label"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:alpha="0.6"
-            android:rotation="-90.0"
-            android:translationY="8dp"
-            motion:layout_constraintBottom_toBottomOf="@+id/background"
-            motion:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/topWeather"
+            android:alpha="1.0" />
+
         <Constraint
-            android:id="@+id/sublabel"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="8dp"
-            motion:layout_constraintBaseline_toBaselineOf="@+id/label"
-            motion:layout_constraintStart_toEndOf="parent" />
+            android:id="@+id/label"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="50dp" />
+        <Constraint
+            motion:layout_constraintBottom_toBottomOf="@id/background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="1.0"
+            android:id="@+id/sublabel" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -63,20 +69,25 @@
             android:translationY="100dp"
             motion:layout_constraintBottom_toBottomOf="parent" />
         <Constraint
-            android:id="@id/label"
-            android:layout_width="wrap_content"
+            motion:layout_constraintBottom_toTopOf="@id/label"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            android:rotation="0.0"
-            motion:layout_constraintBottom_toBottomOf="@+id/background"
+            android:id="@+id/topWeather"
+            android:alpha="0.0" />
+        <Constraint
+            android:id="@id/label"
+            android:layout_width="match_parent"
+            android:gravity="center|bottom"
+            android:layout_height="90dp"
+            motion:layout_constraintTop_toTopOf="@null"
+            motion:layout_constraintBottom_toBottomOf="@id/background"
+            motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
         <Constraint
-            android:id="@id/sublabel"
-            android:layout_width="wrap_content"
+            motion:layout_constraintBottom_toBottomOf="@id/background"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            motion:layout_constraintBaseline_toBaselineOf="@+id/label"
-            motion:layout_constraintEnd_toEndOf="parent" />
+            android:id="@id/sublabel"
+            android:alpha="0.0" />
     </ConstraintSet>
 </MotionScene>
