@@ -1,5 +1,10 @@
 package com.ablechange.learn.design.delegate
 
+import java.lang.IllegalStateException
+import kotlin.properties.Delegates.notNull
+import kotlin.properties.Delegates.observable
+import kotlin.properties.Delegates.vetoable
+import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 /**
@@ -21,20 +26,19 @@ object Test {
     }
 }
 
-
 /**
  * 属性委托
  * @property p Int
  * @constructor
  */
-class DelegateProperty(val p: Int) {
+class DelegateProperty(val p: Int):ReadWriteProperty<Any?,Int> {
 
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): Int {
+    override operator fun getValue(thisRef: Any?, property: KProperty<*>): Int {
         println("属性委托$thisRef")
         return p * p
     }
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
+    override operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {
         println("$value has been assigned to '${property.name}' in $thisRef.")
     }
 
@@ -42,6 +46,25 @@ class DelegateProperty(val p: Int) {
         @JvmStatic
         fun main(args: Array<String>) {
             val l by DelegateProperty(10)
+            val b by lazy {
+                5
+            }
+            val mobile by vetoable<String>("dsa") { property: KProperty<*>, oldValue: String, newValue: String ->
+                if (newValue.equals("Dsa")) {
+                    throw IllegalStateException("校验失败")
+                } else {
+                    true
+                }
+            }
+
+            var nnt by notNull<String>()
+
+            var ttn by observable<String>("dsa") { property: KProperty<*>, oldValue: String, newValue: String ->
+            }
+
+
+
+
             println(l)
         }
     }
