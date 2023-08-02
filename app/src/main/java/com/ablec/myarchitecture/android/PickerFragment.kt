@@ -26,6 +26,7 @@ class PickerFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycle.addObserver(photoProxy)
+
     }
 
     override fun onCreateView(
@@ -53,7 +54,7 @@ class PickerFragment : Fragment() {
                         override fun onResult(uri: Uri?) {
                             uri?.let {
                                 val bitmap = BitmapFactory.decodeStream(
-                                    context?.contentResolver?.openInputStream(
+                                    this@PickerFragment.requireContext().contentResolver?.openInputStream(
                                         uri
                                     )
                                 )

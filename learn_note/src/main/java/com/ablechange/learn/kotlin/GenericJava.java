@@ -1,5 +1,8 @@
 package com.ablechange.learn.kotlin;
 
+import com.ablechange.learn.kotlin.bean.Apple;
+import com.ablechange.learn.kotlin.bean.Fruit;
+
 import java.util.ArrayList;
 import java.util.List;
 

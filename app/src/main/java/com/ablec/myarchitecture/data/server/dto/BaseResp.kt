@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 class BaseResp<T>(
     @SerializedName("error_code") override var code: Int,
     @SerializedName("reason", alternate = ["message"]) override var message: String? = null,
-    @SerializedName("result") override var data: T?,
+    @SerializedName("result") override var data: T,
 ) :ApiResp<T>{
     override val success: Boolean
         get() = code == 0

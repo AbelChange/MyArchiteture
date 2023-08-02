@@ -37,14 +37,10 @@ class ImageGlideModule : AppGlideModule() {
         val defaultMemoryCacheSize = calculator.memoryCacheSize
         val defaultBitmapPoolSize = calculator.bitmapPoolSize
         val defaultArrayPoolSize = calculator.arrayPoolSizeInBytes
-        builder.setDefaultRequestOptions(
-            RequestOptions()
-                .format(DecodeFormat.PREFER_RGB_565)
-        )
-        builder.setMemoryCache(LruResourceCache((defaultMemoryCacheSize / 2).toLong()))
-        builder.setBitmapPool(LruBitmapPool((defaultBitmapPoolSize / 2).toLong()))
-        builder.setArrayPool(LruArrayPool(defaultArrayPoolSize / 2))
-
+        builder
+            .setMemoryCache(LruResourceCache((defaultMemoryCacheSize / 2).toLong()))
+            .setBitmapPool(LruBitmapPool((defaultBitmapPoolSize / 2).toLong()))
+            .setArrayPool(LruArrayPool(defaultArrayPoolSize / 2))
         //设置全局选项
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
             val requestOptions = RequestOptions()

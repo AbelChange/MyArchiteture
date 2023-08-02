@@ -1,16 +1,21 @@
-package com.ablechange.learn.kotlin
+package com.ablechange.learn.kotlin.bean
 
 /**
  * @author HaoShuaiHui
  * @description:
  * @date :2023/3/13 14:28
  */
+class Person {
+    var name: String = ""
+    var age: Int = 0
+}
+
 interface Fruit{
     fun eat()
     fun size():Int
 }
 
-class Apple :Fruit{
+class Apple : Fruit {
     override fun eat() {
         println("苹果")
     }
@@ -20,7 +25,7 @@ class Apple :Fruit{
     }
 }
 
-class Bannana:Fruit{
+class Bannana: Fruit {
     override fun eat() {
         println("香蕉")
     }

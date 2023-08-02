@@ -7,15 +7,15 @@ package com.ablec.module_base.http
  */
 interface ApiResp<T> {
     val message: String?
-    val data: T?
-    val code: Int
+    val data: T
+    val code: Int?
     val success: Boolean
 }
 
 data class ApiException(override val message: String?, override val cause: Throwable?) :
     Exception(message, cause)
 
-suspend fun <T> handleApiCall(call: suspend () -> ApiResp<T>): Result<T?> {
+suspend inline fun <T> handleApiCall(crossinline call: suspend () -> ApiResp<T>): Result<T> {
     return try {
         val response = call.invoke()
         if (response.success) {

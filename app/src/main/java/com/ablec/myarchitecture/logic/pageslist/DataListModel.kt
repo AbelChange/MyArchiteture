@@ -8,12 +8,15 @@ import androidx.lifecycle.viewModelScope
 import com.ablec.module_base.http.handleApiCall
 import com.ablec.module_base.util.convert
 import com.ablec.myarchitecture.data.server.api.TestApiService
+import com.ablec.myarchitecture.data.server.dto.BaseResp
 import com.ablec.myarchitecture.data.server.dto.GetListReq
 import com.ablec.myarchitecture.data.server.dto.ListItem
 import com.ablec.myarchitecture.data.server.dto.PageData
 import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -33,6 +36,7 @@ class DataListModel @Inject constructor(
     }
 
     fun getListTest() {
+
         viewModelScope.launch() {
             handleApiCall { apiService.getListData(GetListReq(1, 10).convert()) }.onSuccess {
                 _list.value = it
@@ -40,6 +44,12 @@ class DataListModel @Inject constructor(
                 LogUtils.e(it)
             }
         }
+    }
+
+    // standard repo
+    suspend fun getListFlow(): Flow<BaseResp<PageData<ListItem>>> {
+        val resp = apiService.getListData(GetListReq(1, 10).convert());
+        return flow { emit(resp) }
     }
 
 }
