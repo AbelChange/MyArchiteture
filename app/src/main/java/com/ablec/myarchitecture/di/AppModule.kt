@@ -9,6 +9,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.ablec.module_base.db.AppDatabase
 import com.ablec.myarchitecture.data.server.api.TestApiService
 import com.ablec.myarchitecture.data.server.api.UploadApiService
+import com.blankj.utilcode.util.LogUtils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -66,8 +67,12 @@ object AppModule {
     @Singleton
     @Provides
     fun provideNormalClient(@ApplicationContext context: Context): OkHttpClient {
-        return OkHttpClient().newBuilder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        return OkHttpClient()
+            .newBuilder()
+            .addInterceptor(
+                HttpLoggingInterceptor { LogUtils.d(it) }
+                    .setLevel(HttpLoggingInterceptor.Level.BODY)
+            )
 //            .addInterceptor(ChuckerInterceptor(BaseApplication.instance))
             .connectTimeout(
                 5L,

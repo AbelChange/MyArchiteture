@@ -131,6 +131,7 @@ dependencies {
     implementation(libs.hilt.android)
 
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.10")
+    debugImplementation ("com.squareup.leakcanary:leakcanary-android-process:2.10")
     //仿weibo可展开折叠texview
     implementation("com.github.MZCretin:ExpandableTextView:1.6.1")
 
