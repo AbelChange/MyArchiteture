@@ -17,9 +17,9 @@ pluginManagement {
         eachPlugin {
             println(requested.id.name)
             when (requested.id.name) {
-//                "androidx.navigation" -> {
-//                    useModule("androidx.navigation:navigation-safe-args-gradle-plugin:${requested.version}")
-//                }
+                "androidx.navigation" -> {
+                    useModule("androidx.navigation:navigation-safe-args-gradle-plugin:${requested.version}")
+                }
                 "WMRouter"->{
                     useModule("io.github.meituan-dianping:plugin:1.2.1")
                 }
@@ -53,6 +53,7 @@ include(":app")
 include(":library")
 include(":module_base")
 
+include(":module_compose")
 include(":module_login")
 include(":module_pay")
 

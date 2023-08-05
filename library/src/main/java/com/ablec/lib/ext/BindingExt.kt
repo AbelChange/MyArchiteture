@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.ComponentActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
@@ -82,14 +83,14 @@ class FragmentViewBindingDelegate<VB : ViewBinding>(
             binding =
                 bind?.invoke(thisRef.requireView()) ?: clazz.getMethod("bind", View::class.java)
                     .invoke(null, thisRef.requireView()) as VB
-            thisRef.viewLifecycleOwnerLiveData.observeForever(object :Observer<LifecycleOwner> {
-                override fun onChanged(owner: LifecycleOwner?) {
-                    if (owner == null) {
-                        binding = null
-                        thisRef.viewLifecycleOwnerLiveData.removeObserver(this)
-                    }
-                }
-            })
+//            thisRef.viewLifecycleOwnerLiveData.observeForever(object : Observer<LifecycleOwner> {
+//                override fun onChanged(value: LifecycleOwner) {
+//                    if (value.lifecycle.currentState === Lifecycle.State.DESTROYED) {
+//                        binding = null
+//                        thisRef.viewLifecycleOwnerLiveData.removeObserver(this)
+//                    }
+//                }
+//            })
         }
         return binding ?: throw IllegalStateException(
             "Should not attempt to get bindings when it might not be available"

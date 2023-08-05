@@ -52,6 +52,7 @@ class RouterFragment : Fragment() {
             RouterServiceManager.getAccountService()?.startLogin(requireContext())
         }
 
+
         binding.btnAnim.setOnClickListener {
             navigate(RouterFragmentDirections.actionMainFragmentToAnimFragment())
         }

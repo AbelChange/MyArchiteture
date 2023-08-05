@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.startup.Initializer
 import com.ablec.lib.util.MMKVUtil
+import com.ablec.module_base.BuildConfig
 import com.ablec.module_base.config.ModuleConstant
 import com.ablec.module_base.db.AppDatabase
-import com.ablec.module_base.service.RouterServiceManager
 import com.ablec.module_base.view.loading.EmptyCallback
 import com.ablec.module_base.view.loading.ErrorCallback
 import com.ablec.module_base.view.loading.LoadingCallback
@@ -14,7 +14,6 @@ import com.blankj.utilcode.util.ProcessUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.kingja.loadsir.core.LoadSir
-import com.sankuai.waimai.router.BuildConfig
 import com.sankuai.waimai.router.Router
 import com.sankuai.waimai.router.common.DefaultRootUriHandler
 import com.sankuai.waimai.router.components.DefaultLogger
@@ -26,6 +25,7 @@ import com.umeng.commonsdk.UMConfigure
 class BaseInitializer : Initializer<Context> {
     override fun create(context: Context): Context {
         GlobalContext = context
+        init()
         return context
     }
 
@@ -43,7 +43,7 @@ class BaseInitializer : Initializer<Context> {
             UMConfigure.preInit(
                 GlobalContext,
                 ModuleConstant.UMENG_APPKEY,
-                RouterServiceManager.getAppInfoService()?.channel()
+                "channel"
             )
         }
         LazyInitHolder.init()
@@ -74,13 +74,15 @@ class BaseInitializer : Initializer<Context> {
                 ToastUtils.showShort("Router 失败，request:$request")
             }
         }
-        // 初始化
-        Router.init(rootHandler)
         // Log开关，建议测试环境下开启，方便排查问题。
         Debugger.setEnableLog(BuildConfig.DEBUG)
         // 调试开关，建议测试环境下开启。调试模式下，严重问题直接抛异常，及时暴漏出来。
         Debugger.setEnableDebug(BuildConfig.DEBUG)
         Debugger.setLogger(DefaultLogger.INSTANCE)
+
+        // 初始化
+        Router.init(rootHandler)
+
     }
 
 

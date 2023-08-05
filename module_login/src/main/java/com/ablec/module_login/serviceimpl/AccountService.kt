@@ -1,14 +1,10 @@
 package com.ablec.module_login.serviceimpl
 
 import android.content.Context
-import com.sankuai.waimai.router.Router
 import com.sankuai.waimai.router.annotation.RouterService
 import com.ablec.module_base.config.Login.ACCOUNT_SERVICE
-import com.ablec.module_base.config.Login.LOGIN_ACTIVITY
-import com.ablec.module_base.config.Login.SHANYAN_LOGIN_ACTIVITY
 import com.ablec.module_base.service.IAccountService
-import com.ablec.module_login.config.LoginModule
-import com.blankj.utilcode.util.ToastUtils
+import com.blankj.utilcode.util.LogUtils
 
 /**
  * @Description:
@@ -24,7 +20,7 @@ class AccountService : IAccountService {
 
     // 使用注解声明该方法是一个Provider
     override fun startLogin(context: Context?) {
-        ToastUtils.showShort("吊起登录")
+        LogUtils.d("吊起登陆")
     }
 
     override fun registerObserver(observer: IAccountService.Observer?) {

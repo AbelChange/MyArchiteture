@@ -17,7 +17,7 @@ android {
 }
 
 dependencies {
-    api(libs.androidx.core)
+    api(libs.androidx.core.ktx)
     api(libs.androidx.appcompat)
     api(libs.androidx.annotation)
     api(libs.androidx.constraintlayout)
@@ -44,8 +44,7 @@ dependencies {
     api(libs.androidx.swiperefreshlayout)
 
     api(libs.androidx.navigation.fragment)
-    api(libs.androidx.navigation.ui)
-    api(libs.androidx.navigation.ui)
+    api(libs.androidx.navigation.ui.ktx)
     api(libs.androidx.datastore.preferences)
 
     //glide

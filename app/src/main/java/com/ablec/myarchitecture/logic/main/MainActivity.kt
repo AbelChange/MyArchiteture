@@ -68,14 +68,14 @@ class MainActivity : BaseActivity() {
 
     class NavigationPagerAdapter(ac: FragmentActivity) : FragmentStateAdapter(ac) {
         override fun getItemCount(): Int {
-            return 3
+            return 4
         }
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
                 0 -> HomeFragment()
                 1 -> MotionLayoutFragment()
-                else -> Fragment()
+                else -> LearningFragment()
             }
         }
     }

@@ -124,16 +124,17 @@ dependencies {
     if (!Config.buildModule) {
         implementation(projects.moduleLogin)
         implementation(project(":module_pay"))
+        implementation(project(":module_compose"))
     }
-    kapt(libs.hilt.compiler)
     kapt(libs.glide.compiler)
     kapt(Libs.routerCompiler)
+    kapt(libs.hilt.compiler)
+
     implementation(libs.hilt.android)
 
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.10")
     debugImplementation ("com.squareup.leakcanary:leakcanary-android-process:2.10")
     //仿weibo可展开折叠texview
-    implementation("com.github.MZCretin:ExpandableTextView:1.6.1")
 
     implementation("com.google.android.exoplayer:exoplayer-core:2.18.5")
 

@@ -4,13 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.text.TextUtils
-import com.sankuai.waimai.router.common.DefaultUriRequest
-import com.ablec.module_base.config.ModuleConstant
-import com.ablec.module_base.config.ModuleConstant.H5.NEW_USER
-import com.ablec.module_base.config.ModuleConstant.H5.ORDER_DETAIL
-import com.ablec.module_base.config.ModuleConstant.H5.ORDER_DETAIL_FROM_ORDER_TYPE
-import com.ablec.module_base.config.Order
-import com.ablec.module_base.service.RouterServiceManager
 import java.io.UnsupportedEncodingException
 import java.net.URLDecoder
 
@@ -106,70 +99,7 @@ object JumpUtils {
             return
         }
         when {
-            url.startsWith(OPEN_LOGIN) -> {
-                if (RouterServiceManager.getAccountService()?.isLogin() == false) {
-                    RouterServiceManager.getAccountService()?.startLogin(context)
-                }
-            }
 
-            url.startsWith(OPEN_WEB) -> {
-                RouterServiceManager.getWebService()
-                    ?.startWeb(context, getUrlParams(url, "url"))
-            }
-
-            url.startsWith(OPEN_NEW_USER) -> {
-                RouterServiceManager.getWebService()
-                    ?.startWeb(context, NEW_USER)
-            }
-
-            //去支付
-            url.startsWith(OPEN_PAY_ORDER) -> {
-                DefaultUriRequest(context, Order.PAY_ORDER)
-                    .putExtra("order_no", getUrlParams(url, "order_id"))
-                    .start()
-            }
-            // 订单详情H5
-            url.startsWith(OPEN_ORDER_DETAIL) -> {
-                val orderId = getUrlParams(url, "order_id")
-                if (!TextUtils.isEmpty(orderId)) {
-                    RouterServiceManager.getWebService()
-                        ?.startWeb(context, ORDER_DETAIL + orderId + ORDER_DETAIL_FROM_ORDER_TYPE)
-                }
-            }
-
-            url.startsWith(OPEN_SCRIPT_DETAIL) -> {
-                RouterServiceManager.getAppInfoService()
-                    ?.startDramaDetail(context, getUrlParams(url, "id"))
-            }
-
-            url.startsWith(OPEN_DM_INFO) -> {
-                RouterServiceManager.getAppInfoService()
-                    ?.startDmPage(context, getUrlParams(url, "dmId"))
-            }
-
-            url.startsWith(OPEN_GROUP_DETAIL) -> {
-                RouterServiceManager.getWebService()
-                    ?.startGroupOrderDetail(context, getUrlParams(url, "orderNo"))
-            }
-
-            url.startsWith(OPEN_BROWSER) -> {
-                jumpToBrowser(context, getUrlParams(url, "url"))
-            }
-            url.startsWith(OPEN_MESSAGE) -> {
-                RouterServiceManager.getAppInfoService()?.startServerMessageActivity(context)
-            }
-            url.startsWith(OPEN_COUPON) -> {
-                RouterServiceManager.getAppInfoService()?.startCouponListActivity(context)
-            }
-            url.startsWith(INVITE_FRIEND) -> {
-                if (RouterServiceManager.getAccountService()?.isLogin() == false) {
-                    RouterServiceManager.getAccountService()?.startLogin(context)
-                } else {
-                    RouterServiceManager.getWebService()?.startWeb(
-                        context, ModuleConstant.H5.INVITE_FRIEND
-                    )
-                }
-            }
         }
     }
 

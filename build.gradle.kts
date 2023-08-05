@@ -1,16 +1,19 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+    val compose_version by extra("1.2.0")
+}
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id("com.android.application") version Versions.androidGradlePlugin apply false
-    id("com.android.library") version Versions.androidGradlePlugin apply false
-    id("org.jetbrains.kotlin.android") version Versions.kotlin apply false
-    id("org.jetbrains.kotlin.jvm") version Versions.kotlin apply false
-    id("org.jetbrains.kotlin.kapt") version Versions.kotlin apply false
-    id("org.jetbrains.kotlin.plugin.parcelize") version Versions.kotlin apply false
-    id("androidx.navigation.safeargs") version Versions.navigationVersion apply false
-    id("com.google.dagger.hilt.android") version Versions.dagger apply false
+    id("com.android.application") version "7.4.1" apply false
+    id("com.android.library") version "7.4.1" apply false
+    id("org.jetbrains.kotlin.android") version "1.8.0" apply false
+    id("org.jetbrains.kotlin.jvm") version "1.8.0" apply false
+    id("org.jetbrains.kotlin.kapt") version "1.8.0" apply false
+    id("org.jetbrains.kotlin.plugin.parcelize") version "1.8.0" apply false
+    id("androidx.navigation.safeargs.kotlin") version "2.5.3" apply false
+    id("com.google.dagger.hilt.android") version "2.43.2" apply false
     id("WMRouter") version Versions.wmRouter apply false
 }
 
@@ -32,9 +35,6 @@ subprojects {
                 checkReleaseBuilds = false
             }
         }
-        project.dependencies {
-            add("implementation", "androidx.core:core-ktx:1.9.0")
-        }
     }
 
     plugins.withType<com.android.build.gradle.LibraryPlugin>().configureEach {
@@ -47,9 +47,6 @@ subprojects {
                 sourceCompatibility = JavaVersion.VERSION_1_8
                 targetCompatibility = JavaVersion.VERSION_1_8
             }
-        }
-        project.dependencies {
-            add("implementation", "androidx.core:core-ktx:1.9.0")
         }
     }
 
@@ -79,5 +76,6 @@ subprojects {
         }
     }
 }
+
 
 

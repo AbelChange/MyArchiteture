@@ -15,12 +15,12 @@
     <item
         android:id="@+id/navigation_item3"
         android:icon="@drawable/bottom_navigation_msg"
-        android:orderInCategory="1"
+        android:orderInCategory="2"
         android:title="" />
 
     <item
         android:id="@+id/navigation_item4"
         android:icon="@drawable/bottom_navigation_mine"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:title="" />
 </menu>
