@@ -7,7 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 
-class PhotoPickerObserver(host: ActivityResultCaller) : DefaultLifecycleObserver {
+class ActivityResultProxy(host: ActivityResultCaller) : DefaultLifecycleObserver {
 
     private var mResultUri: Uri? = null
     private var mCallBack: ResultCallBack? = null

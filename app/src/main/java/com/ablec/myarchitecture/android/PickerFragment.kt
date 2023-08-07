@@ -10,8 +10,8 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.ablec.module_base.photopicker.BottomPickPhotoDialog
 import com.ablec.module_base.photopicker.CropPictureContract
-import com.ablec.module_base.photopicker.PhotoPickerObserver
-import com.ablec.module_base.photopicker.PhotoPickerObserver.*
+import com.ablec.module_base.photopicker.ActivityResultProxy
+import com.ablec.module_base.photopicker.ActivityResultProxy.*
 import com.ablec.myarchitecture.AppFileProvider.Companion.getFileUri
 import com.ablec.myarchitecture.databinding.FragmentPickerBinding
 import com.blankj.utilcode.util.LogUtils
@@ -21,12 +21,17 @@ class PickerFragment : Fragment() {
 
     private lateinit var binding: FragmentPickerBinding
 
-    private val photoProxy = PhotoPickerObserver(this)
+    private val photoProxy = ActivityResultProxy(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //photoProxy继承LifecycleOwner 感知LifeCycle生命周期
         lifecycle.addObserver(photoProxy)
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+//        lifecycle.removeObserver(photoProxy) ?
     }
 
     override fun onCreateView(

@@ -5,7 +5,7 @@
     <!--okHttp可以框架层单独设置证书校验-->
 
     <!--除了domain-config 的标签下的域名都不允许明文传输-->
-    <base-config cleartextTrafficPermitted="faidlalse">
+    <base-config cleartextTrafficPermitted="false">
         <trust-anchors>
             <certificates src="system" />
         </trust-anchors>
