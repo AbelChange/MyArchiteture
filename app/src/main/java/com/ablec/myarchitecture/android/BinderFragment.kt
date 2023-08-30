@@ -11,7 +11,9 @@ import com.ablec.lib.ext.viewBinding
 import com.ablec.myarchitecture.R
 import com.ablec.myarchitecture.aidl.IRemote
 import com.ablec.myarchitecture.aidl.IRemoteCallBack
+import com.ablec.myarchitecture.data.AidlData
 import com.ablec.myarchitecture.databinding.FragmentSimpleTextBinding
+import com.blankj.utilcode.util.LogUtils
 import java.io.File
 import java.io.IOException
 
@@ -33,18 +35,30 @@ class BinderFragment : Fragment(R.layout.fragment_simple_text) {
 
         bindings.startCall.setOnClickListener {
 //            sendFile("")
-            shareMem("")
+//            shareMem("")
+            val aidlData = AidlData()
+            binder?.receive(aidlData);
+            LogUtils.d(aidlData.toString())
         }
     }
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(cpname: ComponentName?, service: IBinder?) {
-            //主线程 拿到binder代理
+            //参数 binder驱动提供的binder对象
+            //如果本地找到，说明在同一个进程，该binder不需要代理
+            //没找到，明是远程对象，需要代理 这里IBinder对象是BinderProxy
             binder = IRemote.Stub.asInterface(service)
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
             binder = null
+        }
+    }
+
+    private fun simpleCall() {
+        binder?.let {
+            val result = it.plus(1, 2)
+            bindings.textView.text = "获取同步计算结果$result"
         }
     }
 
@@ -67,12 +81,7 @@ class BinderFragment : Fragment(R.layout.fragment_simple_text) {
         }
     }
 
-    private fun simpleCall() {
-        binder?.let {
-            val result = it.plus(1, 2)
-            bindings.textView.text = "获取同步计算结果$result"
-        }
-    }
+
 
     private fun asyncCall() {
         binder?.let {

@@ -6,13 +6,13 @@ import android.os.IBinder
 import android.os.ParcelFileDescriptor
 import android.os.RemoteCallbackList
 import android.os.RemoteException
+import com.ablec.myarchitecture.data.AidlData
 import com.ablec.myarchitecture.aidl.IRemote
 import com.ablec.myarchitecture.aidl.IRemoteCallBack
 import com.blankj.utilcode.util.LogUtils
 import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.FileInputStream
-import java.io.IOException
 import java.io.InputStreamReader
 
 
@@ -48,7 +48,7 @@ class RemoteService : Service() {
         remoteCallBackList.finishBroadcast()
     }
 
-
+    //stub类 继承binder，实现业务接口，onBind返回
     private val binder = object : IRemote.Stub() {
         override fun plus(a: Int, b: Int): String {
             //binder线程池子线程 需要考虑线程安全问题
@@ -57,10 +57,21 @@ class RemoteService : Service() {
             return "pid:$pid,binder线程:${name},result:$a + b"
         }
 
+
+
         override fun async(a: Int) {
             //binder线程池子线程 需要考虑线程安全问题
             val name = Thread.currentThread().name
             broadcast("binder线程:${name},回调结果${a}")
+        }
+
+        override fun send(data: AidlData?) {
+            LogUtils.d("服务端收到数据"+data.toString())
+        }
+
+
+        override fun receive(data: AidlData?) {
+            data?.name = "name change by server"
         }
 
         override fun transferFile(pfd: ParcelFileDescriptor) {
