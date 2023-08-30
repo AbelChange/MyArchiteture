@@ -28,7 +28,6 @@ import dagger.hilt.android.HiltAndroidApp
 class AppApplication : BaseApplication() {
 
     override fun onCreate() {
-        instance = GlobalContext
         super.onCreate()
         //设置系统栏亮色模式与主题一致（系统栏亮色模式则图标深色；系统深色模式则图标亮色）
         registerActivityLifecycleCallbacks(SystemBarActivityLifecycleCallbacks)
@@ -63,12 +62,6 @@ class AppApplication : BaseApplication() {
         ToastUtils.getDefaultMaker().setGravity(Gravity.CENTER, 0, 0)
         // ToastUtils.getDefaultMaker().setBgResource(R.drawable.round_corner_toast)
         ToastUtils.getDefaultMaker().setTextColor(Color.WHITE)
-    }
-
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        lateinit var instance: Context
-            private set
     }
 
     /**

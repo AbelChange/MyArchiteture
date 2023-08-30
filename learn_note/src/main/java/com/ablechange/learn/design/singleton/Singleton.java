@@ -70,7 +70,7 @@ public class Singleton {
     public static Singleton getInstance(){
         return SingletonHolder.INSTANCE;
     }
-    //只有第一次调用getInstance方法才会加载SingletonHolder类并初始化sInstance（ClassLoader loadClass的sychronized关键字）
+    //只有第一次调用getInstance方法才会触发类SingletonHolder类加载，并初始化sInstance（ClassLoader loadClass的sychronized关键字）
     private static class SingletonHolder{
         private static final Singleton INSTANCE = new Singleton();
     }

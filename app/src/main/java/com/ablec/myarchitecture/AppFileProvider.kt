@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.core.content.FileProvider
+import com.ablec.module_base.provider.BaseInitializer.Companion.GlobalContext
 import java.io.File
 
 class AppFileProvider : FileProvider() {
@@ -17,12 +18,12 @@ class AppFileProvider : FileProvider() {
         private const val FILE_PROVIDER_AUTHORITY = "${BuildConfig.APPLICATION_ID}.fileProvider"
 
         fun getFileUri( name: String): Uri {
-            val fileDir = AppApplication.instance.filesDir
+            val fileDir = GlobalContext.filesDir
             return file2Uri(File(fileDir, name))
         }
 
         private fun file2Uri(file: File): Uri {
-            return getUriForFile(AppApplication.instance, FILE_PROVIDER_AUTHORITY, file)
+            return getUriForFile(GlobalContext, FILE_PROVIDER_AUTHORITY, file)
         }
 
         fun getBitmapFromUri(context: Context, uri: Uri): Bitmap? {
