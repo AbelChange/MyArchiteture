@@ -3,7 +3,7 @@ package com.ablec.module_base.provider
 import android.annotation.SuppressLint
 import android.content.Context
 import androidx.startup.Initializer
-import com.ablec.lib.util.MMKVUtil
+import com.ablec.module_base.util.MMKVUtil
 import com.ablec.module_base.BuildConfig
 import com.ablec.module_base.config.ModuleConstant
 import com.ablec.module_base.db.AppDatabase

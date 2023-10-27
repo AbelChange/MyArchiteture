@@ -1,4 +1,4 @@
-package com.ablec.lib.util
+package com.ablec.module_base.util
 
 import android.content.Context
 import android.os.Parcelable
@@ -50,19 +50,15 @@ object MMKVUtil {
         }
     }
 
-    fun getString(key: String): String? {
-        return kv?.decodeString(key)
+    fun getString(key: String, defaultValue: String? = null): String? {
+        return kv?.decodeString(key, defaultValue) ?: defaultValue
     }
 
     fun putInt(key: String, value: Int) {
         kv?.encode(key, value)
     }
 
-    fun getInt(key: String): Int? {
-        return kv?.decodeInt(key)
-    }
-
-    fun getInt(key: String, defaultValue: Int): Int {
+    fun getInt(key: String, defaultValue: Int = 0): Int {
         return kv?.decodeInt(key, defaultValue) ?: defaultValue
     }
 
@@ -70,11 +66,7 @@ object MMKVUtil {
         kv?.encode(key, value)
     }
 
-    fun getLong(key: String): Long? {
-        return kv?.decodeLong(key)
-    }
-
-    fun getLong(key: String, defaultValue: Long): Long {
+    fun getLong(key: String, defaultValue: Long = 0L): Long {
         return kv?.decodeLong(key, defaultValue) ?: defaultValue
     }
 
@@ -82,24 +74,24 @@ object MMKVUtil {
         kv?.encode(key, value)
     }
 
-    fun getFloat(key: String): Float? {
-        return kv?.decodeFloat(key)
+    fun getFloat(key: String, defaultValue: Float = 0f): Float {
+        return kv?.decodeFloat(key, defaultValue) ?: defaultValue
     }
 
     fun putDouble(key: String, value: Double) {
         kv?.encode(key, value)
     }
 
-    fun getDouble(key: String): Double? {
-        return kv?.decodeDouble(key)
+    fun getDouble(key: String, defaultValue: Double = 0.0): Double {
+        return kv?.decodeDouble(key, defaultValue) ?: defaultValue
     }
 
     fun putBoolean(key: String, value: Boolean) {
         kv?.encode(key, value)
     }
 
-    fun getBoolean(key: String): Boolean {
-        return kv?.decodeBool(key) ?: false
+    fun getBoolean(key: String, defaultValue: Boolean = false): Boolean {
+        return kv?.decodeBool(key, defaultValue) ?: defaultValue
     }
 
     fun putParcelable(key: String, value: Parcelable?) {

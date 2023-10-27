@@ -1,7 +1,7 @@
 package com.ablec.module_base.provider
 
 import android.content.Context
-import com.ablec.lib.util.MMKVUtil
+import com.ablec.module_base.util.MMKVUtil
 import com.ablec.module_base.config.ModuleConstant
 import com.ablec.module_base.provider.BaseInitializer.Companion.GlobalContext
 import com.ablec.module_base.service.RouterServiceManager

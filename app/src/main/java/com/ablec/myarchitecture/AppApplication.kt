@@ -1,18 +1,15 @@
 package com.ablec.myarchitecture
 
 //import com.ablec.module_login.config.LoginModule
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
-import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
 import androidx.core.view.ViewCompat
 import com.ablec.lib.BaseApplication
-import com.ablec.lib.util.MMKVUtil
-import com.ablec.module_base.provider.BaseInitializer.Companion.GlobalContext
+import com.ablec.module_base.util.MMKVUtil
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.ProcessUtils
 import com.blankj.utilcode.util.ToastUtils
