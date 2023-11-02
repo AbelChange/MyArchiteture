@@ -1,21 +1,17 @@
 package com.ablec.myarchitecture.logic.transformation
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.distinctUntilChanged
-import androidx.lifecycle.map
-import androidx.lifecycle.switchMap
+import androidx.lifecycle.*
 import com.ablec.myarchitecture.data.Person
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
 
 /**
  * @Description:
  * @Author:         haoshuaihui
  * @CreateDate:     2021/2/2 15:52
  */
- class TransformationViewModel(app: Application,savedStateHandle: SavedStateHandle) : AndroidViewModel(app) {
+class TransformationViewModel(app: Application, savedStateHandle: SavedStateHandle) : AndroidViewModel(app) {
 
 
     private val rawLiveData = MutableLiveData<Person>()
@@ -27,9 +23,11 @@ import com.ablec.myarchitecture.data.Person
         rawLiveData.value = Person("男", 28, false)
     }
 
-    val allPerson:LiveData<Person> get() {
-         return rawLiveData
-    }
+    val allPerson: LiveData<Person>
+        get() {
+            return rawLiveData
+        }
+
     /**
      * 关注联系使用map
      */
@@ -47,11 +45,32 @@ import com.ablec.myarchitecture.data.Person
             MutableLiveData(it.age)
         }
     }
+
     /**
      *
      */
     fun distinctPerson(): LiveData<Person> {
         return rawLiveData.distinctUntilChanged()
     }
+
+    /**
+     * 下游停止收集时取消流,2000是为了防止配置修改引起的意外取消
+     * 如果downStream  downStream2 都不再收集 才 取消该流
+     * 可避免重复创建上游带来的资源浪费
+     */
+    private val _whileSubscribed: Flow<Int> = flow<Int> {
+        emit(1)
+        emit(2)
+        delay(3000)
+        emit(3)
+    }.shareIn(viewModelScope, SharingStarted.WhileSubscribed(2000))
+        .distinctUntilChanged { old, new ->
+            old - new == 0
+        }
+
+    val downStream: Flow<String> = _whileSubscribed.map { it.toString() }
+
+    val downStream2: Flow<String> = _whileSubscribed.map { it.toString() }
+
 
 }

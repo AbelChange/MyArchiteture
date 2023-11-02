@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 import com.ablec.myarchitecture.databinding.TransformationFragmentBinding
+import com.blankj.utilcode.util.LogUtils
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 /**
  * @Description:
@@ -15,6 +18,7 @@ import com.ablec.myarchitecture.databinding.TransformationFragmentBinding
  * @CreateDate:     2021/2/2 15:54
  */
 class TransformationFragment : Fragment() {
+    private val TAG = "TransformationFragment"
 
     private lateinit var binding: TransformationFragmentBinding
 
@@ -37,11 +41,24 @@ class TransformationFragment : Fragment() {
             viewModel.start()
         }
         viewModel.distinctPerson().observe(viewLifecycleOwner, Observer {
-            println("distinct" + it.toString())
+            LogUtils.d(TAG, it)
         })
         viewModel.mapAgeOnly().observe(viewLifecycleOwner) {
             println(it)
+            LogUtils.d(TAG, it)
         }
+
+
+
+        lifecycleScope.launch {
+            viewModel.downStream
+                //绑定生命周期
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect {
+
+                }
+        }
+
     }
 
 }
