@@ -3,24 +3,14 @@ package com.ablec.myarchitecture.logic.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.ablec.lib.base.BaseActivity
-import com.ablec.lib.ext.paddingStatusBar
 import com.ablec.lib.ext.setUpBars
-import com.ablec.lib.ext.showToast
 import com.ablec.module_base.config.Main.BASE
-import com.ablec.module_base.util.toJson
-import com.ablec.myarchitecture.R
 import com.ablec.myarchitecture.databinding.MainActivityBinding
 import com.ablec.myarchitecture.logic.pageslist.DataListModel
 import com.sankuai.waimai.router.annotation.RouterUri
@@ -75,7 +65,8 @@ class MainActivity : BaseActivity() {
             return when (position) {
                 0 -> HomeFragment()
                 1 -> MotionLayoutFragment()
-                else -> LearningFragment()
+                2->LearningFragment()
+                else -> MineFragment()
             }
         }
     }

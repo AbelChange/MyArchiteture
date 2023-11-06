@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.ComponentActivity
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.viewbinding.ViewBinding
+import com.ablec.library.R
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
@@ -56,18 +55,6 @@ inline fun <reified VB : ViewBinding> ComponentActivity.viewBinding(noinline bin
     }
 
 
-/**
- * 使用bind方法
- *
- * 反射用例：
- *     private val binding: FragmentTimelineBinding by viewBinding()
- *
- * 或者
- *    private val binding by viewBinding<FragmentTimelineBinding>()
- *
- * 不反射用例：
- *     private val binding by viewBinding(FragmentTimelineBinding::bind)
- */
 inline fun <reified VB : ViewBinding> Fragment.viewBinding(noinline bind: ((View) -> VB)? = null) =
     FragmentViewBindingDelegate(VB::class.java, bind)
 
@@ -75,26 +62,17 @@ class FragmentViewBindingDelegate<VB : ViewBinding>(
     private val clazz: Class<VB>,
     private val bind: ((View) -> VB)? = null
 ) : ReadOnlyProperty<Fragment, VB> {
-    private var binding: VB? = null
-
     @Suppress("UNCHECKED_CAST")
     override fun getValue(thisRef: Fragment, property: KProperty<*>): VB {
-        if (thisRef.view != null && binding == null) {
-            binding =
-                bind?.invoke(thisRef.requireView()) ?: clazz.getMethod("bind", View::class.java)
-                    .invoke(null, thisRef.requireView()) as VB
-//            thisRef.viewLifecycleOwnerLiveData.observeForever(object : Observer<LifecycleOwner> {
-//                override fun onChanged(value: LifecycleOwner) {
-//                    if (value.lifecycle.currentState === Lifecycle.State.DESTROYED) {
-//                        binding = null
-//                        thisRef.viewLifecycleOwnerLiveData.removeObserver(this)
-//                    }
-//                }
-//            })
-        }
-        return binding ?: throw IllegalStateException(
-            "Should not attempt to get bindings when it might not be available"
-        )
+        return requireNotNull(thisRef.view) { "The constructor missing layout id or the property of ${property.name} has been destroyed." }
+            .run {
+                getTag(R.id.tag_view_binding) as? VB ?: (clazz.getMethod("bind", View::class.java)
+                    .invoke(null, this) as VB)
+                    .also { setTag(R.id.tag_view_binding, it) }
+            }
+            .also { binding ->
+                if (binding is ViewDataBinding) binding.lifecycleOwner = thisRef.viewLifecycleOwner
+            }
     }
 
 }

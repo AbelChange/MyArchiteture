@@ -1,74 +1,79 @@
 package com.ablec.myarchitecture.logic.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import com.ablec.lib.base.VBBaseAdapter
+import com.ablec.lib.base.VBViewHolder
 import com.ablec.lib.ext.navigate
-import com.ablec.module_base.service.RouterServiceManager
+import com.ablec.lib.ext.viewBinding
+import com.ablec.myarchitecture.R
+import com.ablec.myarchitecture.databinding.ItemNaviDataBinding
 import com.ablec.myarchitecture.databinding.RouterFragmentBinding
 
-class RouterFragment : Fragment() {
+class RouterFragment : Fragment(R.layout.router_fragment) {
 
-    private lateinit var binding: RouterFragmentBinding
+    private val binding: RouterFragmentBinding by viewBinding()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = RouterFragmentBinding.inflate(layoutInflater)
-        return binding.root
-    }
+    data class Item(val nav: NavDirections, val title: String? = null, val des: String? = null)
+
+    private val adapter =
+        object : VBBaseAdapter<ItemNaviDataBinding, Item>(R.layout.item_navi_data) {
+            override fun convert(holder: VBViewHolder<ItemNaviDataBinding>, item: Item) {
+                holder.binding.textViewTitle.text = item.title
+            }
+        }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnConstraintLayout.setOnClickListener {
-            val action =
-                RouterFragmentDirections.actionMainFragmentToConstraintLayoutFragment()
-            navigate(action)
-        }
 
-        binding.btnCoordinator.setOnClickListener {
-            val action = RouterFragmentDirections.actionMainFragmentToCoordinatorLayoutFragment()
-            navigate(action)
-        }
+        val list = listOf<Item>(
+            Item(
+                RouterFragmentDirections.actionMainFragmentToConstraintLayoutFragment(),
+                "ConstraintLayout"
+            ),
+            Item(
+                RouterFragmentDirections.actionMainFragmentToCoordinatorLayoutFragment(),
+                "CoordinatorLayout"
+            ),
+            Item(
+                RouterFragmentDirections.actionMainFragmentToTransformationFragment(),
+                "Transformation"
+            ),
+            Item(
+                RouterFragmentDirections.actionMainFragmentToWebSocketFragment(),
+                "Coordinator"
+            ),
+            Item(
+                RouterFragmentDirections.actionMainFragmentToRxFragment(),
+                "Rx"
+            ),
+            Item(
+                RouterFragmentDirections.actionMainFragmentToAnimFragment(),
+                "Anim"
+            ),
+            Item(
+                RouterFragmentDirections.actionMainFragmentToMyListFragment(),
+                "MyList"
+            ),
+            Item(
+                RouterFragmentDirections.actionMainFragmentToPickerFragment(),
+                "PickerPhoto"
+            ),
+            Item(
+                RouterFragmentDirections.actionMainFragmentToBinderFragment(),
+                "Android Binder"
+            ),
+        )
 
-        binding.btnTransformation.setOnClickListener {
-            val action = RouterFragmentDirections.actionMainFragmentToTransformationFragment()
-            navigate(action)
+        binding!!.recyclerview.adapter = adapter.apply {
+            setOnItemClickListener { adapter, view, position ->
+                navigate(getItem(position).nav)
+            }
+            setList(list)
         }
-
-        binding.btnSocket.setOnClickListener {
-            navigate(RouterFragmentDirections.actionMainFragmentToWebSocketFragment())
-        }
-
-        binding.btnRxOperator.setOnClickListener {
-            navigate(RouterFragmentDirections.actionMainFragmentToRxFragment())
-        }
-
-        binding.btnGoLogin.setOnClickListener {
-            RouterServiceManager.getAccountService()?.startLogin(requireContext())
-        }
-
-
-        binding.btnAnim.setOnClickListener {
-            navigate(RouterFragmentDirections.actionMainFragmentToAnimFragment())
-        }
-
-        binding.btnGoList.setOnClickListener {
-            navigate(RouterFragmentDirections.actionMainFragmentToMyListFragment())
-        }
-
-        binding.btnPicker.setOnClickListener {
-            navigate(RouterFragmentDirections.actionMainFragmentToPickerFragment())
-        }
-        binding.btnBinder.setOnClickListener {
-            navigate(RouterFragmentDirections.actionMainFragmentToBinderFragment())
-        }
-
     }
-
 
 }
