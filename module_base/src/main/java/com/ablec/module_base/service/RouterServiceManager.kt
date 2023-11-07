@@ -4,6 +4,7 @@ import com.ablec.module_base.config.Compose.COMPOSE_SERVICE
 import com.sankuai.waimai.router.Router
 import com.ablec.module_base.config.Login.ACCOUNT_SERVICE
 import com.ablec.module_base.config.Main.APP_INFO_SERVICE
+import com.ablec.module_base.config.Native
 import com.ablec.module_base.config.Pay.PAY_SERVICE
 
 /**
@@ -29,6 +30,10 @@ class RouterServiceManager {
 
         fun getComposeService():IComposeService?{
             return Router.getService(IComposeService::class.java, COMPOSE_SERVICE)
+        }
+
+        fun getNativeService():INativeService?{
+            return Router.getService(INativeService::class.java, Native.SERVICE)
         }
 
     }

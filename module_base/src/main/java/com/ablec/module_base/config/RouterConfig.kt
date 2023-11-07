@@ -26,3 +26,8 @@ object Main {
     const val APP_INFO_SERVICE = "${BASE}/service"
 }
 
+object Native{
+    const val BASE = "/native"
+    const val SERVICE = "$BASE/service"
+}
+

@@ -56,6 +56,7 @@ include(":module_base")
 include(":module_compose")
 include(":module_login")
 include(":module_pay")
+include(":module_native")
 
 //include(":module_pay")
 

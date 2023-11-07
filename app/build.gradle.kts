@@ -125,6 +125,7 @@ dependencies {
         implementation(projects.moduleLogin)
         implementation(project(":module_pay"))
         implementation(project(":module_compose"))
+        implementation(project(":module_native"))
     }
     kapt(libs.glide.compiler)
     kapt(Libs.routerCompiler)
