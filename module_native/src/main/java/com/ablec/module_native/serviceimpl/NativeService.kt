@@ -2,9 +2,7 @@ package com.ablec.module_native.serviceimpl
 
 
 import android.content.Context
-import com.ablec.module_base.config.Compose.COMPOSE_SERVICE
 import com.ablec.module_base.config.Native
-import com.ablec.module_base.service.IComposeService
 import com.ablec.module_base.service.INativeService
 import com.ablec.module_native.MainActivity
 import com.sankuai.waimai.router.annotation.RouterService
