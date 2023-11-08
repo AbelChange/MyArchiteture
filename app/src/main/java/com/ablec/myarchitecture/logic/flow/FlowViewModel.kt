@@ -38,7 +38,7 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
     fun test() {
         //模拟上游发送数据
         viewModelScope.launch {
-            flowOf(20, 20, 32, 33, 33, 33, 25, 26)
+            flowOf(20, 20, 32, 33, 33, 25, 26,31)
                 .onEach {
                     delay(1000)
                 }.collect {

@@ -35,8 +35,8 @@ class FlowFragment : Fragment(R.layout.fragment_flow) {
                 .getSpeed()
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect {
-//                    binding.textViewSpeed.text = "当前速度$it"
-//                    binding.textViewSpeedX.text = "超速了$it"
+                    binding.textViewSpeed.text = "当前速度$it"
+                    binding.textViewSpeedX.text = "超速了$it"
                 }
         }
 
