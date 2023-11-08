@@ -7,6 +7,7 @@ import android.widget.EditText
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flow
 
 
 /**
@@ -46,4 +47,24 @@ fun EditText.textChangeFlow(): Flow<CharSequence> = callbackFlow {
 fun View.clickFlow() = callbackFlow {
     setOnClickListener { trySend(Unit) }
     awaitClose { setOnClickListener(null) }
+}
+
+
+//连续n帧数据一致 才认为有效 合并成一帧
+fun <T> Flow<T>.countUntil(n: Int): Flow<T> = flow {
+    var count = 0
+    var lastValue: T? = null
+    collect {
+        if (lastValue == it) {
+            ++count
+        } else {
+            lastValue = it
+            count = 1
+        }
+        if (count >= n) {
+            emit(it)
+            count = 0
+            lastValue = null
+        }
+    }
 }

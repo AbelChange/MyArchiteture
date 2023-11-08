@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/mainFragment">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph.xml"
+            app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.ablec.myarchitecture.logic.main.RouterFragment"
-        android:label="main_fragment"
-        tools:layout="@layout/router_fragment">
+            android:id="@+id/mainFragment"
+            android:name="com.ablec.myarchitecture.logic.main.RouterFragment"
+            android:label="main_fragment"
+            tools:layout="@layout/router_fragment">
         <argument
-            android:name="argString"
-            app:argType="string" />
+                android:name="argString"
+                app:argType="string"/>
         <action
-            android:id="@+id/action_mainFragment_to_constraintLayoutFragment"
-            app:destination="@id/constraintLayoutFragment" />
+                android:id="@+id/action_mainFragment_to_constraintLayoutFragment"
+                app:destination="@id/constraintLayoutFragment"/>
 
         <!--回退后绕过目的fragment-->
         <action
-            android:id="@+id/action_mainFragment_to_constraintLayoutFragment2"
-            app:destination="@id/constraintLayoutFragment"
-            app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true" />
+                android:id="@+id/action_mainFragment_to_constraintLayoutFragment2"
+                app:destination="@id/constraintLayoutFragment"
+                app:popUpTo="@id/mainFragment"
+                app:popUpToInclusive="true"/>
         <action
-            android:id="@+id/action_mainFragment_to_transformationFragment"
-            app:destination="@id/transformationFragment" />
+                android:id="@+id/action_mainFragment_to_transformationFragment"
+                app:destination="@id/transformationFragment"/>
         <action
-            android:id="@+id/action_mainFragment_to_webSocketFragment"
-            app:destination="@id/webSocketFragment" />
+                android:id="@+id/action_mainFragment_to_webSocketFragment"
+                app:destination="@id/webSocketFragment"/>
         <action
-            android:id="@+id/action_mainFragment_to_coordinatorLayoutFragment"
-            app:destination="@id/coordinatorLayoutFragment" />
+                android:id="@+id/action_mainFragment_to_coordinatorLayoutFragment"
+                app:destination="@id/coordinatorLayoutFragment"/>
         <action
-            android:id="@+id/action_mainFragment_to_rxFragment"
-            app:destination="@id/rxFragment" />
+                android:id="@+id/action_mainFragment_to_rxFragment"
+                app:destination="@id/rxFragment"/>
 
         <action
-            android:id="@+id/action_mainFragment_to_animFragment"
-            app:destination="@id/animFragment" />
+                android:id="@+id/action_mainFragment_to_animFragment"
+                app:destination="@id/animFragment"/>
         <action
-            android:id="@+id/action_mainFragment_to_eventFragment"
-            app:destination="@id/eventFragment" />
+                android:id="@+id/action_mainFragment_to_eventFragment"
+                app:destination="@id/eventFragment"/>
         <action
                 android:id="@+id/action_mainFragment_to_pickerFragment"
                 app:destination="@id/pickerFragment"/>
@@ -51,50 +51,52 @@
         <action
                 android:id="@+id/action_mainFragment_to_myListFragment"
                 app:destination="@id/myListFragment"/>
+        <action android:id="@+id/action_mainFragment_to_flowFragment"
+                app:destination="@id/flowFragment"/>
 
     </fragment>
 
     <fragment
-        android:id="@+id/constraintLayoutFragment"
-        android:name="com.ablec.myarchitecture.logic.other.ConstraintLayoutFragment"
-        android:label="ConstraintLayoutFragment"
-        tools:layout="@layout/constraint_fragment"/>
+            android:id="@+id/constraintLayoutFragment"
+            android:name="com.ablec.myarchitecture.logic.other.ConstraintLayoutFragment"
+            android:label="ConstraintLayoutFragment"
+            tools:layout="@layout/constraint_fragment"/>
 
     <fragment
-        android:id="@+id/transformationFragment"
-        android:name="com.ablec.myarchitecture.logic.transformation.TransformationFragment"
-        android:label="TransformationFragment"
-        tools:layout="@layout/transformation_fragment" />
+            android:id="@+id/transformationFragment"
+            android:name="com.ablec.myarchitecture.logic.transformation.TransformationFragment"
+            android:label="TransformationFragment"
+            tools:layout="@layout/transformation_fragment"/>
 
     <fragment
-        android:id="@+id/webSocketFragment"
-        android:name="com.ablec.myarchitecture.logic.websocket.WebSocketFragment"
-        android:label="web_socket_fragment"
-        tools:layout="@layout/web_socket_fragment" />
+            android:id="@+id/webSocketFragment"
+            android:name="com.ablec.myarchitecture.logic.websocket.WebSocketFragment"
+            android:label="web_socket_fragment"
+            tools:layout="@layout/web_socket_fragment"/>
     <fragment
-        android:id="@+id/coordinatorLayoutFragment"
-        android:name="com.ablec.myarchitecture.logic.other.CoordinatorLayoutFragment"
-        android:label="coordinator_layout_fragment"
-        tools:layout="@layout/coordinator_layout_fragment" />
+            android:id="@+id/coordinatorLayoutFragment"
+            android:name="com.ablec.myarchitecture.logic.other.CoordinatorLayoutFragment"
+            android:label="coordinator_layout_fragment"
+            tools:layout="@layout/coordinator_layout_fragment"/>
     <fragment
-        android:id="@+id/rxFragment"
-        android:name="com.ablec.myarchitecture.logic.rx.RxFragment"
-        android:label="rx_fragment"
-        tools:layout="@layout/rx_fragment" />
+            android:id="@+id/rxFragment"
+            android:name="com.ablec.myarchitecture.logic.rx.RxFragment"
+            android:label="rx_fragment"
+            tools:layout="@layout/rx_fragment"/>
     <fragment
-        android:id="@+id/pickerFragment"
-        android:name="com.ablec.myarchitecture.android.PickerFragment"
-        android:label="TestFragment" />
+            android:id="@+id/pickerFragment"
+            android:name="com.ablec.myarchitecture.android.PickerFragment"
+            android:label="TestFragment"/>
     <fragment
-        android:id="@+id/animFragment"
-        tools:layout="@layout/fragment_anim"
-        android:name="com.ablec.myarchitecture.android.AnimFragment"
-        android:label="AnimFragment" />
+            android:id="@+id/animFragment"
+            tools:layout="@layout/fragment_anim"
+            android:name="com.ablec.myarchitecture.android.AnimFragment"
+            android:label="AnimFragment"/>
     <fragment
-        tools:layout="@layout/fragment_event"
-        android:id="@+id/eventFragment"
-        android:name="com.ablec.myarchitecture.android.EventFragment"
-        android:label="EventFragment" />
+            tools:layout="@layout/fragment_event"
+            android:id="@+id/eventFragment"
+            android:name="com.ablec.myarchitecture.android.EventFragment"
+            android:label="EventFragment"/>
     <fragment
             android:id="@+id/binderFragment"
             android:name="com.ablec.myarchitecture.android.BinderFragment"
@@ -103,6 +105,10 @@
             android:id="@+id/myListFragment"
             android:name="com.ablec.myarchitecture.logic.other.MyListFragment"
             android:label="MyListFragment"/>
+    <fragment android:id="@+id/flowFragment"
+              tools:layout="@layout/fragment_flow"
+              android:name="com.ablec.myarchitecture.logic.flow.FlowFragment"
+              android:label="FlowFragment"/>
 
 
 </navigation>

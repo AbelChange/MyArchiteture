@@ -66,6 +66,10 @@ class RouterFragment : Fragment(R.layout.router_fragment) {
                 RouterFragmentDirections.actionMainFragmentToBinderFragment(),
                 "Android Binder"
             ),
+            Item(
+                RouterFragmentDirections.actionMainFragmentToFlowFragment(),
+                "Kt - Flow"
+            ),
         )
 
         binding!!.recyclerview.adapter = adapter.apply {

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+            android:layout_marginTop="100dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="16sp"
+            android:id="@+id/textViewSpeed"
+            android:layout_width="wrap_content"
+            android:text="实际速度%1$s"
+            android:layout_height="wrap_content"/>
+
+
+    <TextView
+            android:layout_marginStart="20dp"
+            android:textSize="16sp"
+            android:id="@+id/textViewSpeedX"
+            android:layout_width="wrap_content"
+            android:text="超速了"
+            android:textColor="@color/red"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewSpeed"
+            app:layout_constraintTop_toTopOf="@+id/textViewSpeed"
+            app:layout_constraintStart_toEndOf="@+id/textViewSpeed"/>
+
+
+    <Button
+            android:id="@+id/btnStart"
+            android:layout_marginTop="50dp"
+            android:text="开始flow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="@+id/textViewSpeed"
+            app:layout_constraintStart_toStartOf="@+id/textViewSpeed"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSpeed">
+
+    </Button>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
