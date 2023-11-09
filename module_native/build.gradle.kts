@@ -9,9 +9,15 @@ android {
 
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
+        ndk {
+            abiFilters += listOf(
+                "arm64-v8a",
+                "armeabi-v7a"
+            )
+        }
         externalNativeBuild {
             cmake {
-                cppFlags("")
+                cppFlags("-std=c++14")
             }
         }
     }
@@ -34,9 +40,6 @@ android {
 dependencies {
     implementation(projects.moduleBase)
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.5.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     kapt(Libs.routerCompiler)
 }
 

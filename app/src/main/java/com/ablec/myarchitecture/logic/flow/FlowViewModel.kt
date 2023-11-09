@@ -1,16 +1,23 @@
 package com.ablec.myarchitecture.logic.flow
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 class FlowViewModel(app: Application) : AndroidViewModel(app) {
 
     companion object {
-        const val TAG = "FlowViewModel"
+        const val TAG = "FlowLearn"
 
         //帧间隔
         const val FRAME_INTERVAL = 1000L
@@ -19,34 +26,39 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
         const val SPEED = 30
     }
 
-    // MutableStateFlow默认具备 liveData的distinctUntilChange特征，
     // value 变化时候才发到下游
-    private val _speedFlow = MutableStateFlow<Int>(0);
+    private val _speedFlow = MutableSharedFlow<Int>(0);
 
     private val _vehicleState = MutableStateFlow<VehicleState>(VehicleState.PILOT);
 
+    //distinctUntilChanged只有变化的值才会发到ui
     fun getSpeed(): Flow<Int> {
-        return _speedFlow
+        return _speedFlow.distinctUntilChanged()
     }
 
+    //超速提醒(连续 n 帧 数据一致才认为 超速/未超速)
     fun getIfSpeedX(): Flow<Boolean> {
-        return _speedFlow.map {
-            it > SPEED
-        }
+        return _speedFlow
+            .onEach {
+                Log.d(TAG, "rawValue:$it")
+            }
+            .map {
+                it > SPEED
+            }.onEach {
+                Log.d(TAG, "是否超速:$it")
+            }
     }
 
     fun test() {
         //模拟上游发送数据
         viewModelScope.launch {
-            flowOf(20, 20, 32, 33, 33, 25, 26,31)
+            flowOf(20, 20, 32, 33, 33, 25, 26, 31, 32)
                 .onEach {
-                    delay(1000)
+                    delay(FRAME_INTERVAL)
                 }.collect {
                     _speedFlow.emit(it)
                 }
         }
-
-
     }
 
     enum class VehicleState {

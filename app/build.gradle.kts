@@ -66,7 +66,7 @@ android {
         buildConfig = true
     }
 
-    flavorDimensions .apply{
+    flavorDimensions.apply {
         add("server")
         add("market")
     }
@@ -134,7 +134,7 @@ dependencies {
     implementation(libs.hilt.android)
 
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.10")
-    debugImplementation ("com.squareup.leakcanary:leakcanary-android-process:2.10")
+    debugImplementation("com.squareup.leakcanary:leakcanary-android-process:2.10")
     //仿weibo可展开折叠texview
 
     implementation("com.google.android.exoplayer:exoplayer-core:2.18.5")

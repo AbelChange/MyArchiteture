@@ -50,7 +50,7 @@ fun View.clickFlow() = callbackFlow {
 }
 
 
-//连续n帧数据一致 才认为有效 合并成一帧
+//连续n帧 数据一致 才认为有效 合并成一帧
 fun <T> Flow<T>.countUntil(n: Int): Flow<T> = flow {
     var count = 0
     var lastValue: T? = null

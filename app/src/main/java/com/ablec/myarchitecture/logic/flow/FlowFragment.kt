@@ -12,7 +12,6 @@ import com.ablec.lib.ext.debounceClick
 import com.ablec.lib.ext.viewBinding
 import com.ablec.myarchitecture.R
 import com.ablec.myarchitecture.databinding.FragmentFlowBinding
-import com.blankj.utilcode.util.LogUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -46,7 +45,6 @@ class FlowFragment : Fragment(R.layout.fragment_flow) {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect {
                     binding.textViewSpeedX.isVisible = it
-                    LogUtils.d("超速 $it")
                 }
         }
 
