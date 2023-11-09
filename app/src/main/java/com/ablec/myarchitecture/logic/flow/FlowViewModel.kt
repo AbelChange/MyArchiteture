@@ -26,12 +26,13 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
         const val SPEED = 30
     }
 
-    // value 变化时候才发到下游
-    private val _speedFlow = MutableSharedFlow<Int>(0);
+    //sharedFlow 可以有多个下游
+    private val _speedFlow = MutableSharedFlow<Int>(0)
 
+    // StateFlow value 变化时候才发到下游
     private val _vehicleState = MutableStateFlow<VehicleState>(VehicleState.PILOT);
 
-    //distinctUntilChanged只有变化的值才会发到ui
+    //sharedFlow + distinctUntilChanged只有变化的值才会发到ui
     fun getSpeed(): Flow<Int> {
         return _speedFlow.distinctUntilChanged()
     }
