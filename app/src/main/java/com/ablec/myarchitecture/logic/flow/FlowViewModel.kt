@@ -8,6 +8,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
@@ -23,41 +24,61 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
         const val FRAME_INTERVAL = 1000L
 
         //超速速度
-        const val SPEED = 30
+        const val MAX_SPEED = 30
     }
 
-    //sharedFlow 可以有多个下游
+    //sharedFlow
+    // 1.可以有多个下游(订阅者)
+    // 2.replay- 可以缓存一些数据序列，在订阅时候重新发送
+    // 3.BufferOverflow - 被压策略 - 1.挂起 2.丢弃新3.丢弃老  比如：pop消息
     private val _speedFlow = MutableSharedFlow<Int>(0)
-
-    // StateFlow value 变化时候才发到下游
-    private val _vehicleState = MutableStateFlow<VehicleState>(VehicleState.PILOT);
 
     //sharedFlow + distinctUntilChanged只有变化的值才会发到ui
     fun getSpeed(): Flow<Int> {
         return _speedFlow.distinctUntilChanged()
     }
 
-    //超速提醒(连续 n 帧 数据一致才认为 超速/未超速)
+    // StateFlow 天然具备distinctUntilChanged()
+    private val _vehicleState = MutableStateFlow(VehicleState.PILOT);
+
+    //超速提醒
+    //map操作符：int流转化成boolean流
     fun getIfSpeedX(): Flow<Boolean> {
         return _speedFlow
             .onEach {
                 Log.d(TAG, "rawValue:$it")
             }
             .map {
-                it > SPEED
+                it > MAX_SPEED
+            }.onEach {
+                Log.d(TAG, "是否超速:$it")
+            }
+    }
+
+    //合并操作符 两条流合并成一条新流
+    fun getIfSpeedX2(): Flow<Boolean> {
+        return _speedFlow
+            .combine(_vehicleState) { speed, state ->
+                return@combine speed > MAX_SPEED && state == VehicleState.PARK
             }.onEach {
                 Log.d(TAG, "是否超速:$it")
             }
     }
 
     fun test() {
-        //模拟上游发送数据
+        //模拟上游发送数据，实际来自sdk的子线程
         viewModelScope.launch {
             flowOf(20, 20, 32, 33, 33, 25, 26, 31, 32)
                 .onEach {
                     delay(FRAME_INTERVAL)
                 }.collect {
                     _speedFlow.emit(it)
+                    //模拟 “31” 帧 超速了
+                    if (it == 31){
+                        _vehicleState.emit(VehicleState.PARK)
+                    }else{
+                        _vehicleState.emit(VehicleState.PILOT)
+                    }
                 }
         }
     }

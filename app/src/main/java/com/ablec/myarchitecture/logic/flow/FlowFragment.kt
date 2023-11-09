@@ -47,9 +47,6 @@ class FlowFragment : Fragment(R.layout.fragment_flow) {
                     binding.textViewSpeedX.isVisible = it
                 }
         }
-
-
     }
-
 
 }
