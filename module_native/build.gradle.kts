@@ -9,15 +9,13 @@ android {
 
     defaultConfig {
         consumerProguardFiles("consumer-rules.pro")
-        ndk {
-            abiFilters += listOf(
-                "arm64-v8a",
-                "armeabi-v7a"
-            )
-        }
         externalNativeBuild {
             cmake {
                 cppFlags("-std=c++14")
+                abiFilters += listOf(
+                    "arm64-v8a",
+                    "armeabi-v7a"
+                )
             }
         }
     }

@@ -3,6 +3,8 @@ package com.ablec.myarchitecture.logic.flow
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -10,6 +12,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -44,15 +47,16 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
     //超速提醒
     //map操作符：int流转化成boolean流
     fun getIfSpeedX(): Flow<Boolean> {
-        return _speedFlow
-            .onEach {
-                Log.d(TAG, "rawValue:$it")
-            }
-            .map {
-                it > MAX_SPEED
-            }.onEach {
-                Log.d(TAG, "是否超速:$it")
-            }
+        return _speedFlow.filter {
+            it > 300
+        }.map {
+            it > MAX_SPEED
+        }
+
+
+//            .onEach {
+//                Log.d(TAG, "是否超速:$it")
+//            }
     }
 
     //合并操作符 两条流合并成一条新流
@@ -60,9 +64,10 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
         return _speedFlow
             .combine(_vehicleState) { speed, state ->
                 return@combine speed > MAX_SPEED && state == VehicleState.PARK
-            }.onEach {
-                Log.d(TAG, "是否超速:$it")
             }
+//            .onEach {
+//                Log.d(TAG, "是否超速:$it")
+//            }
     }
 
     fun test() {
@@ -74,9 +79,9 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
                 }.collect {
                     _speedFlow.emit(it)
                     //模拟 “31” 帧 超速了
-                    if (it == 31){
+                    if (it == 31) {
                         _vehicleState.emit(VehicleState.PARK)
-                    }else{
+                    } else {
                         _vehicleState.emit(VehicleState.PILOT)
                     }
                 }

@@ -25,6 +25,12 @@ subprojects {
             defaultConfig {
                 minSdk =  Versions.MIN_SDK
                 vectorDrawables.useSupportLibrary = true
+                ndk {
+                    abiFilters += listOf(
+                        "arm64-v8a",
+                        "armeabi-v7a"
+                    )
+                }
             }
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -42,6 +48,12 @@ subprojects {
             compileSdk = Versions.COMPILE_SDK
             defaultConfig {
                 minSdk =  Versions.MIN_SDK
+                ndk {
+                    abiFilters += listOf(
+                        "arm64-v8a",
+                        "armeabi-v7a"
+                    )
+                }
             }
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_1_8
