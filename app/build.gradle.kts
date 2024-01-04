@@ -134,9 +134,8 @@ dependencies {
     implementation(libs.hilt.android)
 
     debugImplementation("com.squareup.leakcanary:leakcanary-android:2.10")
-    debugImplementation("com.squareup.leakcanary:leakcanary-android-process:2.10")
+    releaseImplementation("com.squareup.leakcanary:leakcanary-android-process:2.10")
     //仿weibo可展开折叠texview
-
     implementation("com.google.android.exoplayer:exoplayer-core:2.18.5")
 
     debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")

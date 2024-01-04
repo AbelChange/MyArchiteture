@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-        android:orientation="vertical"
-        android:gravity="center"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
     <Button
-            android:id="@+id/btnCompose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="composelearn"/>
+        android:id="@+id/btnCompose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="composelearn" />
 
+    <Button
+        android:id="@+id/btnNative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jniLearn" />
 
+    <Button
+        android:id="@+id/btnTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test" />
 </androidx.appcompat.widget.LinearLayoutCompat>

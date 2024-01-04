@@ -1,6 +1,7 @@
 package com.ablec.myarchitecture.logic.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.ablec.lib.ext.viewBinding
@@ -14,10 +15,26 @@ class LearningFragment:Fragment(R.layout.fragment_learning) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnCompose.setOnClickListener{
-//            RouterServiceManager.getComposeService()?.start(requireContext())
-            RouterServiceManager.getNativeService()?.startNativeUi(requireContext())
+        binding.btnTest.setOnClickListener{
+            object : Thread() {
+                override fun run() {
+                    super.run()
+                    var i = 1
+                    while (true) {
+                        i++
+                        val result = ByteArray(5 * 1024 * 1024)
+                        Log.d("内存申请", i.toString() + "")
+                    }
+                }
+            }.start()
+        }
 
+        binding.btnNative.setOnClickListener{
+            RouterServiceManager.getNativeService()?.startNativeUi(requireContext())
+        }
+
+        binding.btnCompose.setOnClickListener{
+            RouterServiceManager.getComposeService()?.start(requireContext())
         }
     }
 
