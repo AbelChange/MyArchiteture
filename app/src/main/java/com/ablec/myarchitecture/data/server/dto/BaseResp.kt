@@ -16,7 +16,7 @@ class BaseResp<T>(
 
 class PageData<T> {
     @SerializedName("list", alternate = ["rows"])
-    val list: List<T> = listOf()
+    var list: List<T> = listOf()
 
     @SerializedName("hasNext")
     val hasNext: Boolean = false

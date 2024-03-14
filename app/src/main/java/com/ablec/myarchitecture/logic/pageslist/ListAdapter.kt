@@ -17,7 +17,7 @@ class ListAdapter :BaseQuickAdapter<ListItem,BaseViewHolder>(R.layout.item_simpl
     LoadMoreModule {
 
     override fun convert(holder: BaseViewHolder, item: ListItem) {
-        holder.setText(R.id.tvResp, item.title)
+        holder.setText(R.id.tvResp, holder.bindingAdapterPosition.toString())
         val iv = holder.getView<ImageView>(R.id.imageView)
         GlideUtils.loadImage(context,item.firstImg,iv)
     }

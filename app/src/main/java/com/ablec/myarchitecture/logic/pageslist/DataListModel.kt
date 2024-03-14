@@ -36,14 +36,38 @@ class DataListModel @Inject constructor(
     }
 
     fun getListTest() {
-
-        viewModelScope.launch() {
-            handleApiCall { apiService.getListData(GetListReq(1, 10).convert()) }.onSuccess {
-                _list.value = it
-            }.onFailure {
-                LogUtils.e(it)
-            }
+        _list.value = PageData<ListItem>().apply {
+            list = listOf(
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+                ListItem("", "", "", "", "", ""),
+            )
         }
+//        viewModelScope.launch() {
+//            handleApiCall { apiService.getListData(GetListReq(1, 10).convert()) }.onSuccess {
+//                _list.value = it
+//            }.onFailure {
+//                LogUtils.e(it)
+//            }
+//        }
     }
 
     // standard repo
