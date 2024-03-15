@@ -15,12 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
 
-import com.blankj.utilcode.util.LogUtils;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import timber.log.Timber;
 
 /**
  * This implementation of {@link RecyclerView.ItemAnimator} provides basic
@@ -98,6 +94,7 @@ public class DefaultItemAnimator2 extends SimpleItemAnimator {
         boolean movesPending = !mPendingMoves.isEmpty();
         boolean changesPending = !mPendingChanges.isEmpty();
         boolean additionsPending = !mPendingAdditions.isEmpty();
+        Log.d("holder------>runPendingAnimations","mPendingRemovals:"+mPendingRemovals.size()+"mPendingMoves:"+mPendingMoves.size()+"mPendingChanges:"+mPendingChanges.size()+"mPendingAdditions:"+mPendingAdditions.size());
         if (!removalsPending && !movesPending && !additionsPending && !changesPending) {
             // nothing to animate
             return;
@@ -191,6 +188,7 @@ public class DefaultItemAnimator2 extends SimpleItemAnimator {
     }
 
     private void animateRemoveImpl(final RecyclerView.ViewHolder holder) {
+        Log.d("holder------>animateRemoveImpl",holder.getBindingAdapterPosition()+"");
         final View view = holder.itemView;
         final ViewPropertyAnimator animation = view.animate();
         mRemoveAnimations.add(holder);
@@ -221,6 +219,7 @@ public class DefaultItemAnimator2 extends SimpleItemAnimator {
     }
 
     void animateAddImpl(final RecyclerView.ViewHolder holder) {
+        Log.d("holder------>animateAddImpl",holder.getBindingAdapterPosition()+"");
         final View view = holder.itemView;
         final ViewPropertyAnimator animation = view.animate();
         mAddAnimations.add(holder);
@@ -270,6 +269,7 @@ public class DefaultItemAnimator2 extends SimpleItemAnimator {
     }
 
     void animateMoveImpl(final RecyclerView.ViewHolder holder, int fromX, int fromY, int toX, int toY) {
+        Log.d("holder------>animateMoveImpl",holder.getBindingAdapterPosition()+"");
         final View view = holder.itemView;
         final int deltaX = toX - fromX;
         final int deltaY = toY - fromY;
@@ -342,6 +342,8 @@ public class DefaultItemAnimator2 extends SimpleItemAnimator {
         final View view = holder == null ? null : holder.itemView;
         final RecyclerView.ViewHolder newHolder = changeInfo.newHolder;
         final View newView = newHolder != null ? newHolder.itemView : null;
+        Log.d("holder------>animateChangeImpl",holder.getBindingAdapterPosition()+"");
+
         if (view != null) {
             final ViewPropertyAnimator oldViewAnim = view.animate().setDuration(
                     getChangeDuration());

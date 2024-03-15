@@ -1,14 +1,13 @@
 package com.ablec.myarchitecture.logic.other
 
 import android.animation.Animator
-import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Interpolator
 import android.view.animation.LinearInterpolator
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.AdapterDataObserver
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import jp.wasabeef.recyclerview.internal.ViewHelper.clear
+import jp.wasabeef.recyclerview.internal.ViewHelper
 
 /**
  * Copyright (C) 2021 Daichi Furiya / Wasabeef
@@ -25,23 +24,24 @@ import jp.wasabeef.recyclerview.internal.ViewHelper.clear
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-abstract class AnimationAdapter2(wrapped: RecyclerView.Adapter<out RecyclerView.ViewHolder>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class AnimationAdapter2(wrapped: RecyclerView.Adapter<out ViewHolder>) :
+    RecyclerView.Adapter<ViewHolder>() {
 
     private var duration = 300
     private var interpolator: Interpolator = LinearInterpolator()
     private var lastPosition = -1
     private var isFirstOnly = true
 
-    protected var adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+    protected var adapter: RecyclerView.Adapter<ViewHolder>
 
     init {
         @Suppress("UNCHECKED_CAST")
-        this.adapter = wrapped as RecyclerView.Adapter<RecyclerView.ViewHolder>
+        this.adapter = wrapped as RecyclerView.Adapter<ViewHolder>
         super.setHasStableIds(this.adapter.hasStableIds())
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         return adapter.onCreateViewHolder(parent, viewType)
     }
 
@@ -65,17 +65,17 @@ abstract class AnimationAdapter2(wrapped: RecyclerView.Adapter<out RecyclerView.
         adapter.onDetachedFromRecyclerView(recyclerView)
     }
 
-    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+    override fun onViewAttachedToWindow(holder: ViewHolder) {
         super.onViewAttachedToWindow(holder)
         adapter.onViewAttachedToWindow(holder)
     }
 
-    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
+    override fun onViewDetachedFromWindow(holder: ViewHolder) {
         super.onViewDetachedFromWindow(holder)
         adapter.onViewDetachedFromWindow(holder)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         adapter.onBindViewHolder(holder, position)
         val adapterPosition = holder.bindingAdapterPosition
         if (!isFirstOnly || adapterPosition > lastPosition) {
@@ -85,11 +85,11 @@ abstract class AnimationAdapter2(wrapped: RecyclerView.Adapter<out RecyclerView.
             }
             lastPosition = adapterPosition
         } else {
-            clear(holder.itemView)
+            ViewHelper.clear(holder.itemView)
         }
     }
 
-    override fun onViewRecycled(holder: RecyclerView.ViewHolder) {
+    override fun onViewRecycled(holder: ViewHolder) {
         adapter.onViewRecycled(holder)
         super.onViewRecycled(holder)
     }
@@ -119,7 +119,7 @@ abstract class AnimationAdapter2(wrapped: RecyclerView.Adapter<out RecyclerView.
         return adapter.getItemViewType(position)
     }
 
-    val wrappedAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+    val wrappedAdapter: RecyclerView.Adapter<ViewHolder>
         get() = adapter
 
     override fun setHasStableIds(hasStableIds: Boolean) {
