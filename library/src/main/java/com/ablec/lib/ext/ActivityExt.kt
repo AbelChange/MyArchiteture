@@ -2,14 +2,12 @@ package com.ablec.lib.ext
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
 import android.view.View
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.core.view.marginTop
-import androidx.fragment.app.Fragment
-import com.ablec.lib.ext.dp
-import com.blankj.utilcode.util.BarUtils
 
 /**
  * @Description:
@@ -22,16 +20,23 @@ val Activity.context:Context
     }
 
 //沉浸 + 透明状态栏
-fun Activity.setUpBars(lightMode: Boolean) {
-    BarUtils.transparentStatusBar(window)
+fun Activity.immerse(darkFont: Boolean) {
+    WindowCompat.setDecorFitsSystemWindows(window, false)
+    window.statusBarColor = Color.TRANSPARENT
+    window.navigationBarColor = Color.TRANSPARENT
     WindowInsetsControllerCompat(this.window, this.window.decorView).apply {
-        isAppearanceLightStatusBars = lightMode
+        isAppearanceLightStatusBars = darkFont
+        isAppearanceLightNavigationBars = darkFont
     }
 }
 
 fun Activity.hideSystemBar() {
-    BarUtils.setNavBarVisibility(window, false)
-    BarUtils.setStatusBarVisibility(window, false)
+    WindowCompat.setDecorFitsSystemWindows(window, false)
+    WindowCompat.getInsetsController(window,window.decorView).let { controller ->
+        controller.hide(WindowInsetsCompat.Type.systemBars())
+        controller.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
 }
 
 fun View.paddingStatusBar() {
