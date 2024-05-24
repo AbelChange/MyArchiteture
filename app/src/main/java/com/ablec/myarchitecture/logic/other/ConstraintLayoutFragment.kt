@@ -1,11 +1,14 @@
 package com.ablec.myarchitecture.logic.other
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.ablec.myarchitecture.databinding.ConstraintFragmentBinding
+import com.ablec.myarchitecture.databinding.SimpleButtonBinding
 
 
 /**
@@ -16,7 +19,6 @@ import com.ablec.myarchitecture.databinding.ConstraintFragmentBinding
 class ConstraintLayoutFragment : Fragment() {
 
     private lateinit var binding: ConstraintFragmentBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +37,15 @@ class ConstraintLayoutFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val remoteView = binding.viewStub.inflate()
+        val stubBinding = SimpleButtonBinding.bind(remoteView)
+        binding.btn.setOnClickListener {
+            remoteView.isVisible = !remoteView.isVisible
+            Log.d("remoteView", remoteView.isVisible.toString())
+            Log.d("stubBinding", stubBinding.root.isVisible.toString())
+            //always false
+            Log.d("viewStub", binding.viewStub.isVisible.toString())
+        }
     }
 
 

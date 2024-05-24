@@ -113,7 +113,7 @@
         android:id="@+id/flow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="tvA,tvB,tvC,tvD,tvE,tvF,tvG,tvH,tvI,tvJ,tvK,tvL"
+        app:constraint_referenced_ids="tvA,tvB,tvC,tvD"
         app:flow_horizontalAlign="center"
         app:flow_horizontalBias="0"
         app:flow_horizontalGap="15dp"
@@ -122,8 +122,8 @@
         app:flow_verticalAlign="top"
         app:flow_verticalGap="15dp"
         app:flow_verticalStyle="spread_inside"
-        app:flow_wrapMode="chain"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:flow_wrapMode="chain2"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline3"
@@ -141,7 +141,7 @@
 
     <TextView
         android:id="@+id/tvB"
-        android:layout_width="90dp"
+        android:layout_width="310dp"
         android:layout_height="50dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
@@ -170,84 +170,17 @@
         android:textColor="#ffffff"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tvE"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="B"
-        android:textColor="#ffffff"
-        android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tvF"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="B"
-        android:textColor="#ffffff"
-        android:textSize="16sp" />
+    <ViewStub
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flow"
+        tools:visibility="visible"
+        android:layout="@layout/simple_button"
+        android:id="@+id/viewStub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/tvG"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="B"
-        android:textColor="#ffffff"
-        android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tvH"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="B"
-        android:textColor="#ffffff"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteY="556dp" />
-
-    <TextView
-        android:id="@+id/tvI"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="B"
-        android:textColor="#ffffff"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/tvJ"
-        android:layout_width="40dp"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="B"
-        android:textColor="#ffffff"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/tvK"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="B"
-        android:textColor="#ffffff"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/tvL"
-        android:layout_width="80dp"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:text="B"
-        android:textColor="#ffffff"
-        android:textSize="16sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

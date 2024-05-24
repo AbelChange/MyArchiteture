@@ -26,7 +26,7 @@ class CoordinatorLayoutFragment : BaseFragment(R.layout.coordinator_layout_fragm
         super.onViewCreated(view, savedInstanceState)
         mBinding.viewPager.adapter = object : FragmentStateAdapter(this){
             override fun getItemCount(): Int {
-                return 5
+                return 4
             }
 
             override fun createFragment(position: Int): Fragment {

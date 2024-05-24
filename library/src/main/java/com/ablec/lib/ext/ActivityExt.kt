@@ -3,6 +3,7 @@ package com.ablec.lib.ext
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.view.View
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -24,10 +25,13 @@ fun Activity.immerse(darkFont: Boolean) {
     WindowCompat.setDecorFitsSystemWindows(window, false)
     window.statusBarColor = Color.TRANSPARENT
     window.navigationBarColor = Color.TRANSPARENT
-    WindowInsetsControllerCompat(this.window, this.window.decorView).apply {
-        isAppearanceLightStatusBars = darkFont
-        isAppearanceLightNavigationBars = darkFont
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        window.isNavigationBarContrastEnforced = false
+        window.isStatusBarContrastEnforced = false
     }
+    val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)
+    windowInsetsController.isAppearanceLightStatusBars = darkFont
+    windowInsetsController.isAppearanceLightNavigationBars = darkFont
 }
 
 fun Activity.hideSystemBar() {

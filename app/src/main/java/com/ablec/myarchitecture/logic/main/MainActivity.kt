@@ -28,7 +28,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        immerse(true)
+        immerse(false)
         initView()
     }
 
