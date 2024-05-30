@@ -43,7 +43,7 @@
             android:alpha="1.0" />
 
         <Constraint
-            android:id="@+id/label"
+            android:id="@id/label"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="1.0"
-            android:id="@+id/sublabel" />
+            android:id="@id/sublabel" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">

@@ -141,4 +141,6 @@ dependencies {
     debugImplementation("com.github.chuckerteam.chucker:library:3.5.2")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
     implementation ("jp.wasabeef:recyclerview-animators:4.0.2")
+    implementation ("com.bytedance.tools.codelocator:codelocator-core:2.0.3")
+
 }
