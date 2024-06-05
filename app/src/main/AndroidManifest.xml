@@ -90,6 +90,9 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".gridtopager.GridActivity"/>
+
+        <activity android:name=".gridtopager.ImageActivity"></activity>
     </application>
 
 </manifest>
