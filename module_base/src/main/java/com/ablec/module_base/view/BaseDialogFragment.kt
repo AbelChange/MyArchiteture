@@ -17,7 +17,7 @@ import com.ablec.module_base.R
  * @date :2022/3/9 17:44
  */
 abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
-    AppCompatDialogFragment(contentLayoutId) {
+    DialogFragment(contentLayoutId) {
 
     protected val fragmentTag = javaClass.simpleName
 

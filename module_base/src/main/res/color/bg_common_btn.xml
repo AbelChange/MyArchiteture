@@ -14,6 +14,6 @@
   ~ limitations under the License.
 -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/buttonDisabled" android:state_enabled="false" />
-    <item android:color="@color/buttonNormal" />
+    <item android:alpha="0.12" android:color="@color/buttonDisabled" android:state_enabled="false" />
+    <item android:color="@color/red" />
 </selector>
