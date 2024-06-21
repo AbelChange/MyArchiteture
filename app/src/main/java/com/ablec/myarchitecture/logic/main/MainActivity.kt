@@ -10,6 +10,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.ablec.lib.base.BaseActivity
 import com.ablec.lib.ext.immerse
+import com.ablec.lib.ext.paddingStatusBar
 import com.ablec.module_base.config.Main.BASE
 import com.ablec.myarchitecture.databinding.MainActivityBinding
 import com.ablec.myarchitecture.logic.pageslist.DataListModel
@@ -28,7 +29,8 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        immerse(false)
+        immerse(true)
+        binding.root.paddingStatusBar()
         initView()
     }
 
@@ -69,5 +71,9 @@ class MainActivity : BaseActivity() {
                 else -> MineFragment()
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 }

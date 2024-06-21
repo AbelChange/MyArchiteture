@@ -11,13 +11,21 @@ import com.ablec.lib.ext.viewBinding
 import com.ablec.myarchitecture.R
 import com.ablec.myarchitecture.databinding.FragmentHomeBinding
 
+/**
+ * 使用navigation跳转
+ */
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding: FragmentHomeBinding by viewBinding()
     private lateinit var navController: NavController
 
-    private val backPressedCallback = object : OnBackPressedCallback(false) {
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            navController.navigateUp()
+            //判断谁来处理回退事件
+            if (navController.currentDestination?.id != R.id.mainFragment){
+                navController.navigateUp()
+            }else{
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
         }
     }
 
@@ -28,7 +36,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         navController = navHostFragment.navController
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            backPressedCallback.isEnabled = navController.currentDestination?.id != R.id.mainFragment
+
         }
 
         val graph = navController.graph.apply {
@@ -43,16 +51,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 .build()
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,backPressedCallback)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        backPressedCallback.isEnabled = navController.currentDestination?.id != R.id.mainFragment
-    }
-
-    override fun onPause() {
-        super.onPause()
-        backPressedCallback.isEnabled = false
     }
 
 

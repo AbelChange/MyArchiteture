@@ -93,6 +93,7 @@
         <activity android:name=".gridtopager.GridActivity"/>
 
         <activity android:name=".gridtopager.ImageActivity"></activity>
+        <activity android:name="com.ablec.myarchitecture.customviewlearn.MatrixActivity" />
     </application>
 
 </manifest>
