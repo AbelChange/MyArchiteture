@@ -44,7 +44,7 @@ class RouterFragment : Fragment(R.layout.router_fragment) {
             ),
             Item(
                 RouterFragmentDirections.actionMainFragmentToWebSocketFragment(),
-                "Coordinator"
+                "WebSocket"
             ),
             Item(
                 RouterFragmentDirections.actionMainFragmentToRxFragment(),
@@ -70,9 +70,13 @@ class RouterFragment : Fragment(R.layout.router_fragment) {
                 RouterFragmentDirections.actionMainFragmentToFlowFragment(),
                 "Kt - Flow"
             ),
+            Item(
+                RouterFragmentDirections.actionMainFragmentToMatrixFragment(),
+                "Matrix - Learn"
+            ),
         )
 
-        binding!!.recyclerview.adapter = adapter.apply {
+        binding.recyclerview.adapter = adapter.apply {
             setOnItemClickListener { adapter, view, position ->
                 navigate(getItem(position).nav)
             }

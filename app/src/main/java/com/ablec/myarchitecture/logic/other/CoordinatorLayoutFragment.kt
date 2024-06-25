@@ -37,8 +37,8 @@ class CoordinatorLayoutFragment : BaseFragment(R.layout.coordinator_layout_fragm
             when (position) {
                 0 -> tab.text = "视频"
                 1 -> tab.text = "推荐"
-                3 -> tab.text = "小说"
-                4 -> tab.text = "游戏"
+                2 -> tab.text = "小sssssss说"
+                3 -> tab.text = "游戏"
             }
         }.attach()
 

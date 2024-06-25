@@ -1,5 +1,6 @@
 package com.ablec.myarchitecture.android
 
+import android.Manifest
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -15,6 +16,8 @@ import com.ablec.module_base.photopicker.ActivityResultProxy.*
 import com.ablec.myarchitecture.AppFileProvider.Companion.getFileUri
 import com.ablec.myarchitecture.databinding.FragmentPickerBinding
 import com.blankj.utilcode.util.LogUtils
+import com.blankj.utilcode.util.ToastUtils
+import com.permissionx.guolindev.PermissionX
 import java.io.InputStream
 
 class PickerFragment : Fragment() {
@@ -54,39 +57,58 @@ class PickerFragment : Fragment() {
         BottomPickPhotoDialog.newInstance().apply {
             setOnItemCallBack(object : BottomPickPhotoDialog.OnItemClickCallBack {
                 override fun onCameraClick() {
-                    val photo = getFileUri("拍照的图片")
-                    photoProxy.takePhoto(photo, object : ResultCallBack {
-                        override fun onResult(uri: Uri?) {
-                            uri?.let {
-                                val bitmap = BitmapFactory.decodeStream(
-                                    this@PickerFragment.requireContext().contentResolver?.openInputStream(
-                                        uri
-                                    )
-                                )
-                                binding.imageView1.setImageBitmap(
-                                    bitmap
-                                )
+                    PermissionX.init(requireActivity())
+                        .permissions(
+                            Manifest.permission_group.CAMERA,
+                        )
+                        .explainReasonBeforeRequest()
+                        .onExplainRequestReason { scope, deniedList ->
+                           ToastUtils.showShort("onExplainRequestReason$deniedList")
+                        }
+                        .request { allGranted, grantedList, deniedList ->
+                            if (allGranted) {
+                                LogUtils.d(TAG, grantedList.toString())
+                                photoProxy.takePhoto(
+                                    getFileUri("拍照的图片"),
+                                    object : ResultCallBack {
+                                        override fun onResult(uri: Uri?) {
+                                            uri?.let {
+                                                val bitmap = BitmapFactory.decodeStream(
+                                                    this@PickerFragment.requireContext().contentResolver?.openInputStream(
+                                                        uri
+                                                    )
+                                                )
+                                                binding.imageView1.setImageBitmap(
+                                                    bitmap
+                                                )
+                                            }
+                                        }
+                                    })
+                            }else{
+
                             }
                         }
-                    })
                 }
 
                 override fun onAlbumClick() {
+
                     photoProxy.pickAlbum(object : ResultCallBack {
                         override fun onResult(uri: Uri?) {
-                            if (uri == null){
+                            if (uri == null) {
                                 return
                             }
-                            showImage(uri,binding.imageView1)
+                            showImage(uri, binding.imageView1)
                             val fileUri = getFileUri("裁剪")
-                            photoProxy.crop(CropPictureContract.CropConfig(uri, fileUri), object : ResultCallBack {
-                                override fun onResult(uri: Uri?) {
-                                    uri?.let {
-                                        showImage(uri,binding.imageView2)
+                            photoProxy.crop(
+                                CropPictureContract.CropConfig(uri, fileUri),
+                                object : ResultCallBack {
+                                    override fun onResult(uri: Uri?) {
+                                        uri?.let {
+                                            showImage(uri, binding.imageView2)
+                                        }
+                                        LogUtils.d(uri)
                                     }
-                                    LogUtils.d(uri)
-                                }
-                            })
+                                })
                         }
                     })
                 }
@@ -97,7 +119,7 @@ class PickerFragment : Fragment() {
         }.show(childFragmentManager)
     }
 
-    private fun showImage(uri: Uri,imageView: ImageView) {
+    private fun showImage(uri: Uri, imageView: ImageView) {
         var inputStream: InputStream? = null
         try {
             inputStream = context?.contentResolver?.openInputStream(uri)
@@ -108,6 +130,9 @@ class PickerFragment : Fragment() {
         }
     }
 
+    companion object {
+        const val TAG = "PickerFragment"
+    }
 
 }
 

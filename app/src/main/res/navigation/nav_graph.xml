@@ -53,6 +53,9 @@
                 app:destination="@id/myListFragment"/>
         <action android:id="@+id/action_mainFragment_to_flowFragment"
                 app:destination="@id/flowFragment"/>
+        <action
+            android:id="@+id/action_mainFragment_to_matrixFragment"
+            app:destination="@id/matrixFragment" />
 
     </fragment>
 
@@ -109,6 +112,10 @@
               tools:layout="@layout/fragment_flow"
               android:name="com.ablec.myarchitecture.logic.flow.FlowFragment"
               android:label="FlowFragment"/>
+    <fragment
+        android:id="@+id/matrixFragment"
+        android:name="com.ablec.myarchitecture.customviewlearn.MatrixFragment"
+        android:label="MatrixFragment" />
 
 
 </navigation>

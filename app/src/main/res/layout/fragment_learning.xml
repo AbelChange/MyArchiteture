@@ -28,11 +28,4 @@
         android:layout_height="60dp"
         android:text="transition" />
 
-    <Button
-        android:layout_marginTop="10dp"
-        android:id="@+id/btnMatrix"
-        android:layout_width="wrap_content"
-        android:layout_height="44dp"
-        android:text="matrix" />
-
 </LinearLayout>
