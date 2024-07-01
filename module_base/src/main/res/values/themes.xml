@@ -31,7 +31,7 @@
     </style>
 
 
-    <style name="BaseDialogTheme" parent="Theme.Material3.DayNight.Dialog">
+    <style name="BaseDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
         <item name="materialButtonStyle">@style/Widget.App.Button</item>
         <item name="imageButtonStyle">@style/Widget.App.ImageButton</item>
         <item name="checkboxStyle">@style/Widget.Material3.CompoundButton.CheckBox</item>

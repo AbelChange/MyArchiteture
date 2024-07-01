@@ -73,6 +73,6 @@ dependencies {
     api("io.github.scwang90:refresh-layout-kernel:2.0.5")
     api("io.github.scwang90:refresh-header-classics:2.0.5")
 
-    api("com.guolindev.permissionx:permissionx:1.5.0")
+    api("com.guolindev.permissionx:permissionx:1.6.3")
 
 }

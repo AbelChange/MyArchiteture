@@ -57,17 +57,20 @@ class PickerFragment : Fragment() {
         BottomPickPhotoDialog.newInstance().apply {
             setOnItemCallBack(object : BottomPickPhotoDialog.OnItemClickCallBack {
                 override fun onCameraClick() {
-                    PermissionX.init(requireActivity())
-                        .permissions(
-                            Manifest.permission_group.CAMERA,
-                        )
-                        .explainReasonBeforeRequest()
+                    PermissionX.init(this@PickerFragment)
+                        .permissions(Manifest.permission.CAMERA)
                         .onExplainRequestReason { scope, deniedList ->
-                           ToastUtils.showShort("onExplainRequestReason$deniedList")
+                            val message = "拍照功能需要您同意相册权限"
+                            val ok = "确定"
+                            scope.showRequestReasonDialog(deniedList, message, ok)
+                        }
+                        .onForwardToSettings { scope, deniedList ->
+                            val message = "您需要去设置当中同意相册权限"
+                            val ok = "确定"
+                            scope.showForwardToSettingsDialog(deniedList, message, ok)
                         }
                         .request { allGranted, grantedList, deniedList ->
-                            if (allGranted) {
-                                LogUtils.d(TAG, grantedList.toString())
+                            if (allGranted){
                                 photoProxy.takePhoto(
                                     getFileUri("拍照的图片"),
                                     object : ResultCallBack {
@@ -85,20 +88,19 @@ class PickerFragment : Fragment() {
                                         }
                                     })
                             }else{
-
+                                ToastUtils.showShort("权限被拒绝")
                             }
                         }
                 }
 
                 override fun onAlbumClick() {
-
                     photoProxy.pickAlbum(object : ResultCallBack {
                         override fun onResult(uri: Uri?) {
                             if (uri == null) {
                                 return
                             }
                             showImage(uri, binding.imageView1)
-                            val fileUri = getFileUri("裁剪")
+                            val fileUri = getFileUri("temp_crop")
                             photoProxy.crop(
                                 CropPictureContract.CropConfig(uri, fileUri),
                                 object : ResultCallBack {
