@@ -9,7 +9,10 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
+    //自定义插件
+    id("test_plugin")
 }
+
 
 android {
     namespace = "com.ablec.myarchitecture"

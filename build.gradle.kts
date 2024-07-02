@@ -14,8 +14,10 @@ plugins {
     id("org.jetbrains.kotlin.plugin.parcelize") version "1.8.0" apply false
     id("androidx.navigation.safeargs.kotlin") version "2.5.3" apply false
     id("com.google.dagger.hilt.android") version "2.43.2" apply false
-    id("WMRouter") version Versions.wmRouter apply false
+    id("WMRouter") apply false
+//    id("test_plugin") apply false
 }
+
 
 
 subprojects {
@@ -24,7 +26,6 @@ subprojects {
             compileSdk = Versions.COMPILE_SDK
             defaultConfig {
                 minSdk =  Versions.MIN_SDK
-                vectorDrawables.useSupportLibrary = true
                 ndk {
                     abiFilters += listOf(
                         "arm64-v8a",
@@ -68,25 +69,25 @@ subprojects {
         }
     }
 
-    plugins.withId("maven-publish") {
-        (project as ExtensionAware).extensions.configure<PublishingExtension>("publishing") {
-            repositories {
-                maven {
-                    url = uri("https://maven.freemeos.com:13458/repository/cloud/")
-                    val property = gradleLocalProperties(rootDir)
-                    credentials {
-                        username = property.getProperty("username")
-                        password = property.getProperty("password")
-                    }
-                }
-            }
-            publications {
-                maybeCreate<MavenPublication>("release").apply {
-                    groupId = "com.xxxx.xxxx"
-                }
-            }
-        }
-    }
+//    plugins.withId("maven-publish") {
+//        (project as ExtensionAware).extensions.configure<PublishingExtension>("publishing") {
+//            repositories {
+//                maven {
+//                    url = uri("https://maven.freemeos.com:13458/repository/cloud/")
+//                    val property = gradleLocalProperties(rootDir)
+//                    credentials {
+//                        username = property.getProperty("username")
+//                        password = property.getProperty("password")
+//                    }
+//                }
+//            }
+//            publications {
+//                maybeCreate<MavenPublication>("release").apply {
+//                    groupId = "com.xxxx.xxxx"
+//                }
+//            }
+//        }
+//    }
 }
 
 
