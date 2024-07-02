@@ -3,13 +3,13 @@ import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
     id("com.android.application")
-    id("WMRouter")
     id("kotlin-android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
     //自定义插件
+    id("WMRouter")
     id("test_plugin")
 }
 

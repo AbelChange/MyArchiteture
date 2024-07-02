@@ -20,10 +20,10 @@ pluginManagement {
                 "androidx.navigation" -> {
                     useModule("androidx.navigation:navigation-safe-args-gradle-plugin:")
                 }
+                //自定义插件实现 对应根目录下 插件声明
                 "WMRouter"->{
                     useModule("io.github.meituan-dianping:plugin:1.2.1")
                 }
-                //自定义插件实现 对应根目录下 插件声明
                 "test_plugin"->{
                     useModule("com.example.plugin:test_plugin:1.0.0-snapshot")
                 }
