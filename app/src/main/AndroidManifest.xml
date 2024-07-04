@@ -3,7 +3,6 @@
           xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.INTERNET"/> <!-- for mta statistics, not necessary -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -92,6 +91,11 @@
 
         <activity android:name=".gridtopager.GridActivity"/>
         <activity android:name=".gridtopager.ImageActivity"/>
+
+        <activity android:name=".android.BottomSheetBehaviorActivity"
+            android:theme="@style/ActivityTranslucent">
+
+        </activity>
 
     </application>
 

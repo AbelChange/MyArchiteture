@@ -10,6 +10,7 @@
         <item name="android:paddingBottom">0dp</item>
         <item name="android:paddingTop">0dp</item>
         <item name="cornerRadius">5dp</item>
+        <item name="android:textAllCaps">false</item>
         <item name="backgroundTint">@color/bg_common_btn</item>
         <item name="android:stateListAnimator">@null</item>
         <!--        <item name="shapeAppearanceOverlay">@style/one_rounded</item>-->
@@ -21,6 +22,7 @@
         <item name="android:textSize">20sp</item>
         <item name="strokeColor">@color/colorPrimary</item>
         <item name="rippleColor">@color/colorPrimary</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
 

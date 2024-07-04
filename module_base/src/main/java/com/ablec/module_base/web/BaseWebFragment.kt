@@ -11,6 +11,7 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.lifecycleScope
 import com.ablec.lib.BaseApplication
 import com.ablec.lib.base.BaseFragment
+import com.ablec.module_base.BuildConfig
 //import com.ablec.lib.util.ImageUtil
 import com.blankj.utilcode.util.LogUtils
 import com.tencent.smtt.export.external.interfaces.SslError
@@ -72,7 +73,7 @@ abstract class BaseWebFragment(@LayoutRes contentLayoutId: Int) : BaseFragment(c
     abstract fun pageState(start: PageState)
 
     private fun commonConfig(webView: WebView) {
-//        WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
+        WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
         webView.apply {
             isVerticalScrollBarEnabled = false
             isHorizontalScrollBarEnabled = false

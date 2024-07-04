@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.blankj.utilcode.util.BarUtils
 
 /**
  * @Description:
@@ -29,9 +30,9 @@ fun Activity.immerse(darkFont: Boolean) {
         window.isNavigationBarContrastEnforced = false
         window.isStatusBarContrastEnforced = false
     }
-    val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)
-    windowInsetsController.isAppearanceLightStatusBars = darkFont
-    windowInsetsController.isAppearanceLightNavigationBars = darkFont
+//    val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)
+//    windowInsetsController.isAppearanceLightStatusBars = darkFont
+//    windowInsetsController.isAppearanceLightNavigationBars = darkFont
 }
 
 fun Activity.hideSystemBar() {
@@ -57,6 +58,29 @@ fun View.paddingStatusBar() {
     }
 }
 
+fun View.replaceStatusBar() {
+    ViewCompat.setOnApplyWindowInsetsListener(
+        this
+    ) { view: View, windowInsetsCompat: WindowInsetsCompat ->
+        view.layoutParams.height =
+            windowInsetsCompat.getInsets(WindowInsetsCompat.Type.statusBars()).top
+        windowInsetsCompat
+    }
+}
+
+
+fun View.paddingNavigationBar() {
+    ViewCompat.setOnApplyWindowInsetsListener(
+        this
+    ) { view: View, windowInsetsCompat: WindowInsetsCompat ->
+        view.setPadding(
+            0,
+            0,
+            0,
+            windowInsetsCompat.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom)
+        windowInsetsCompat
+    }
+}
 
 
 

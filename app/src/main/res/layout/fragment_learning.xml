@@ -28,4 +28,10 @@
         android:layout_height="60dp"
         android:text="transition" />
 
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btnBottomSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="bottomSheetBehavior" />
 </LinearLayout>

@@ -5,6 +5,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.ablec.lib.base.BaseActivity
+import com.ablec.lib.ext.hideSystemBar
+import com.ablec.lib.ext.immerse
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -17,7 +19,6 @@ class SplashActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        hideSystemBar()
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 delay(1000)
