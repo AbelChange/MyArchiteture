@@ -18,7 +18,6 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_HIDDEN
-import com.tencent.smtt.sdk.WebViewClient
 
 /**
  * @author shuaihui_hao
@@ -50,8 +49,8 @@ class BottomSheetBehaviorActivity : BaseActivity() {
 
     private fun initWeb() {
         binding.webview.apply {
-            getSettings().setJavaScriptEnabled(true);
-            webViewClient = WebViewClient()
+            settings.javaScriptEnabled = true;
+            webViewClient = android.webkit.WebViewClient()
             loadUrl("https://www.baidu.com/")
         }
     }
