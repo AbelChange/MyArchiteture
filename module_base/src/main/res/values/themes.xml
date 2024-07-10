@@ -10,6 +10,8 @@
         <item name="android:windowBackground">@color/window_background</item>
         <item name="materialButtonStyle">@style/Widget.App.Button</item>
         <item name="imageButtonStyle">@style/Widget.App.ImageButton</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
+        <item name="android:enforceStatusBarContrast" tools:targetApi="q">false</item>
     </style>
 
     <style name="App.TransparentTheme" parent="AppTheme">

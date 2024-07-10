@@ -2,6 +2,7 @@ package com.ablec.lib.ext
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Build
 import android.view.View
@@ -9,7 +10,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.blankj.utilcode.util.BarUtils
 
 /**
  * @Description:
@@ -22,7 +22,7 @@ val Activity.context:Context
     }
 
 //沉浸 + 透明状态栏
-fun Activity.immerse(darkFont: Boolean) {
+fun Activity.immerse(nightMode: Boolean = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES) {
     WindowCompat.setDecorFitsSystemWindows(window, false)
     window.statusBarColor = Color.TRANSPARENT
     window.navigationBarColor = Color.TRANSPARENT
@@ -30,9 +30,9 @@ fun Activity.immerse(darkFont: Boolean) {
         window.isNavigationBarContrastEnforced = false
         window.isStatusBarContrastEnforced = false
     }
-//    val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)
-//    windowInsetsController.isAppearanceLightStatusBars = darkFont
-//    windowInsetsController.isAppearanceLightNavigationBars = darkFont
+    val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)
+    windowInsetsController.isAppearanceLightStatusBars = !nightMode
+    windowInsetsController.isAppearanceLightNavigationBars = !nightMode
 }
 
 fun Activity.hideSystemBar() {

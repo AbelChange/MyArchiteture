@@ -3,6 +3,7 @@ package com.ablec.myarchitecture.logic.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -14,6 +15,7 @@ import com.ablec.lib.ext.paddingStatusBar
 import com.ablec.module_base.config.Main.BASE
 import com.ablec.myarchitecture.databinding.MainActivityBinding
 import com.ablec.myarchitecture.logic.pageslist.DataListModel
+import com.blankj.utilcode.util.AppUtils
 import com.sankuai.waimai.router.annotation.RouterUri
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +31,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        immerse(true)
+        immerse(false)
         binding.root.paddingStatusBar()
         initView()
     }
@@ -48,6 +50,14 @@ class MainActivity : BaseActivity() {
             binding.viewPager.setCurrentItem(it.order, false)
             return@setOnItemSelectedListener true
         }
+
+        onBackPressedDispatcher.addCallback(this,object : OnBackPressedCallback(true) {
+
+            override fun handleOnBackPressed() {
+//                AppUtils.exitApp()
+                moveTaskToBack(false)
+            }
+        })
     }
 
     companion object {
@@ -71,9 +81,5 @@ class MainActivity : BaseActivity() {
                 else -> MineFragment()
             }
         }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
     }
 }

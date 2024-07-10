@@ -18,14 +18,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val binding: FragmentHomeBinding by viewBinding()
     private lateinit var navController: NavController
 
-    private val backPressedCallback = object : OnBackPressedCallback(true) {
+    private val backPressedCallback = object : OnBackPressedCallback(false) {
         override fun handleOnBackPressed() {
-            //判断谁来处理回退事件
-            if (navController.currentDestination?.id != R.id.mainFragment){
-                navController.navigateUp()
-            }else{
-                requireActivity().onBackPressedDispatcher.onBackPressed()
-            }
+            navController.navigateUp()
         }
     }
 
@@ -36,7 +31,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         navController = navHostFragment.navController
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-
+            backPressedCallback.isEnabled = navController.currentDestination?.id != R.id.mainFragment
         }
 
         val graph = navController.graph.apply {
@@ -49,8 +44,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val appBarConfiguration =
             AppBarConfiguration.Builder(navController.graph)
                 .build()
-
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,backPressedCallback)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        backPressedCallback.isEnabled = false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        backPressedCallback.isEnabled = navController.currentDestination?.id != R.id.mainFragment
     }
 
 
