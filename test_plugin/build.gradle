@@ -9,16 +9,16 @@ gradlePlugin {
         create("myplugin") {
             group = "com.example.plugin"
             id = 'test_plugin'
-            version = "1.0.0-snapshot"
+            version = "1.0.1-snapshot"
             implementationClass = 'com.example.plugin.MyPlugin'
         }
     }
 }
 
-afterEvaluate {
-    publishing {
-        repositories {
-            mavenLocal()
-        }
-    }
-}
+//afterEvaluate {
+//    publishing {
+//        repositories {
+//            mavenLocal()
+//        }
+//    }
+//}

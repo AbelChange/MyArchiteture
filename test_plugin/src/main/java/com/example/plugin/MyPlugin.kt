@@ -1,7 +1,7 @@
-package com.example.plugin;
+package com.example.plugin
 
-import org.gradle.api.Plugin;
-import org.gradle.api.Project;
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
 class MyPlugin : Plugin<Project> {
 

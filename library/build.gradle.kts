@@ -60,7 +60,6 @@ dependencies {
     api("com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.BRVAH_Version}")
 
     //适配
-    api("me.jessyan:autosize:${Versions.autosizeVersion}")
     api("com.tencent:mmkv-static:${Versions.mmkvVersion}")
     //load
     api("com.kingja.loadsir:loadsir:1.3.8")

@@ -11,7 +11,6 @@ object Versions {
     //lib
     const val eventBus = "1.8.0"
     const val BRVAH_Version = "3.0.6"
-    const val autosizeVersion = "1.2.1"
     const val mmkvVersion = "1.2.10"
 
 

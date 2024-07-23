@@ -14,18 +14,18 @@ pluginManagement {
         mavenCentral()
     }
     resolutionStrategy {
+        //非官方插件
         eachPlugin {
-            println("eachPluginId"+requested.id)
-            when (requested.id.name) {
-                "androidx.navigation" -> {
-                    useModule("androidx.navigation:navigation-safe-args-gradle-plugin:")
+            println("eachPluginId"+requested.id.id)
+            when (requested.id.id) {
+                "androidx.navigation.safeargs.kotlin" -> {
+                    useModule("androidx.navigation:navigation-safe-args-gradle-plugin:${requested.version}")
                 }
-                //自定义插件实现 对应根目录下 插件声明
-                "WMRouter"->{
-                    useModule("io.github.meituan-dianping:plugin:1.2.1")
+                "io.github.meituan-dianping"->{
+                    useModule("io.github.meituan-dianping:plugin:${requested.version}")
                 }
-                "test_plugin"->{
-                    useModule("com.example.plugin:test_plugin:1.0.0-snapshot")
+                "com.example.plugin"->{
+                    useModule("com.example.plugin:test_plugin:${requested.version}")
                 }
                 else -> {}
             }
