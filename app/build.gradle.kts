@@ -8,11 +8,16 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
-    //自定义插件
     id("WMRouter")
+    //自定义插件
     id("test_plugin")
 }
 
+TimeCostConfig {
+    logTag.set("耗时")
+    packageNames.set(listOf("com.ablec.myarchitecture"))
+    methodNames.set(listOf("onCreate"))
+}
 
 android {
     namespace = "com.ablec.myarchitecture"
