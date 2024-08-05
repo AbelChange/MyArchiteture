@@ -20,14 +20,19 @@ class ChildView : AppCompatButton {
         defStyleAttr
     )
 
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        Log.d("事件", "Child-dispatchTouchEvent,action：${ev?.action}")
-        return super.dispatchTouchEvent(ev)
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        Log.d("事件", "Child-dispatchTouchEvent:开始,action：${event?.action}")
+        val dispatchTouchEvent = super.dispatchTouchEvent(event)
+        Log.d("事件", "Child-dispatchTouchEvent:结果${dispatchTouchEvent},action：${event?.action}")
+        return dispatchTouchEvent
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        Log.d("事件", "Child-onTouchEvent,action：${event?.action}")
-        return super.onTouchEvent(event);
+        Log.d("事件", "Child-onTouchEvent:开始,action：${event?.action}")
+        val onTouchEvent = super.onTouchEvent(event)
+//        val onTouchEvent = false
+        Log.d("事件", "Child-onTouchEvent:结果${onTouchEvent},action：${event?.action}")
+        return onTouchEvent
     }
 
 }

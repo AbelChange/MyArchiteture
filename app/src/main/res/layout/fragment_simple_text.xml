@@ -28,6 +28,17 @@
             app:layout_constraintTop_toBottomOf="@+id/startBind">
     </Button>
 
+    <Button
+            android:text="startBindCustom"
+            android:layout_marginTop="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/startBindCustom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/startCall">
+    </Button>
+
 
     <TextView
             android:textSize="13sp"

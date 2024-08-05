@@ -28,19 +28,31 @@ class SuperLayout : FrameLayout {
         defStyleRes: Int
     ) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        Log.d("事件", "Super-dispatchTouchEvent,action：${ev?.action}")
-        return super.dispatchTouchEvent(ev)
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        Log.d("事件", "Super-dispatchTouchEvent开始,action：${event?.action}")
+        val dispatchTouchEvent = super.dispatchTouchEvent(event)
+        Log.d("事件", "Super-dispatchTouchEvent结果:${dispatchTouchEvent},action：${event?.action}")
+        return dispatchTouchEvent
     }
 
-    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-        Log.d("事件", "Super-onInterceptTouchEvent,action：${ev?.action}")
-        return super.onInterceptTouchEvent(ev)
+    override fun onInterceptTouchEvent(event: MotionEvent?): Boolean {
+        Log.d(
+            "事件",
+            "Super-onInterceptTouchEvent开始,action：${event?.action}"
+        )
+        val onInterceptTouchEvent = super.onInterceptTouchEvent(event)
+        Log.d(
+            "事件",
+            "Super-onInterceptTouchEvent结果:${onInterceptTouchEvent},action：${event?.action}"
+        )
+        return onInterceptTouchEvent
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        Log.d("事件", "Super-onTouchEvent,action：${event?.action}",Exception())
-        return super.onTouchEvent(event)
+        Log.d("事件", "Super-onTouchEvent:开始,action：${event?.action}")
+        val onTouchEvent = super.onTouchEvent(event)
+        Log.d("事件", "Super-onTouchEvent结果:${onTouchEvent},action：${event?.action}")
+        return onTouchEvent
     }
 
 }

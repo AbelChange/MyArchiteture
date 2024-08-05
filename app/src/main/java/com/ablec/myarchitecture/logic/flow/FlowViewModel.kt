@@ -1,21 +1,19 @@
 package com.ablec.myarchitecture.logic.flow
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class FlowViewModel(app: Application) : AndroidViewModel(app) {
@@ -30,15 +28,38 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
         const val MAX_SPEED = 30
     }
 
+    /**
+     * mvi中 所有的intent集中在viewmodel处理
+     * Intent事件通过Channel发送给ViewModel，然后在ViewModel中集中处理消费
+     */
+    private val _uiIntentFlow = Channel<String>()
+    val uiIntentFlow: Flow<String> = _uiIntentFlow.receiveAsFlow()
+
+    init {
+        viewModelScope.launch {
+            uiIntentFlow.collect {
+               //处理意图
+            }
+        }
+    }
+
+    fun sendUiIntent(){
+        viewModelScope.launch {
+            _uiIntentFlow.send("")
+        }
+    }
+
+
     //sharedFlow
     // 1.可以有多个下游(订阅者)
     // 2.replay- 可以缓存一些数据序列，在订阅时候重新发送
     // 3.BufferOverflow - 被压策略 - 1.挂起 2.丢弃新3.丢弃老  比如：pop消息
-    private val _speedFlow = MutableSharedFlow<Int>(0)
+    private val _speedFlow = MutableStateFlow<Int>(0)
+    val speed: StateFlow<Int> = _speedFlow
 
     //sharedFlow + distinctUntilChanged只有变化的值才会发到ui
     fun getSpeed(): Flow<Int> {
-        return _speedFlow.distinctUntilChanged()
+        return _speedFlow
     }
 
     // StateFlow 天然具备distinctUntilChanged()

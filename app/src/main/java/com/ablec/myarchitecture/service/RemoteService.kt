@@ -2,10 +2,7 @@ package com.ablec.myarchitecture.service
 
 import android.app.Service
 import android.content.Intent
-import android.os.IBinder
-import android.os.ParcelFileDescriptor
-import android.os.RemoteCallbackList
-import android.os.RemoteException
+import android.os.*
 import com.ablec.myarchitecture.data.AidlData
 import com.ablec.myarchitecture.aidl.IRemote
 import com.ablec.myarchitecture.aidl.IRemoteCallBack
@@ -93,6 +90,11 @@ class RemoteService : Service() {
         }
 
         override fun registerCallBack(callback: IRemoteCallBack?) {
+            callback?.asBinder()?.apply {
+                linkToDeath({
+                    remoteCallBackList.unregister(callback)
+                }, 0)
+            }
             remoteCallBackList.register(callback)
         }
 

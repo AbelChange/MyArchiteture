@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.ablec.lib.ext.debounceClick
 import com.ablec.myarchitecture.databinding.FragmentEventBinding
+import java.util.concurrent.locks.ReentrantLock
 
 class EventFragment : Fragment() {
 
@@ -19,12 +21,26 @@ class EventFragment : Fragment() {
         return binding.root
     }
 
+    private val lock = ReentrantLock()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.child.debounceClick{
+            try {
+                lock.lockInterruptibly()
+                //todo sth
+            } finally {
+                if (lock.isHeldByCurrentThread) {
+                    lock.unlock()
+                }
+            }
 
+
+        }
 
     }
+
 
 
 }

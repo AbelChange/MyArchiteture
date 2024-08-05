@@ -2,7 +2,7 @@ package com.ablec.module_native
 
 object NativeLib {
     init {
-        System.loadLibrary("native-lib")
+        System.loadLibrary("nativelib")
     }
 
     /**

@@ -10,14 +10,14 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("WMRouter")
     //自定义插件
-    id("test_plugin")
+//    id("test_plugin")
 }
 
-TimeCostConfig {
-    logTag.set("耗时")
-    packageNames.set(listOf("com.ablec.myarchitecture"))
-    methodNames.set(listOf("onCreate"))
-}
+//TimeCostConfig {
+//    logTag.set("耗时")
+//    packageNames.set(listOf("com.ablec.myarchitecture"))
+//    methodNames.set(listOf("onCreate"))
+//}
 
 android {
     namespace = "com.ablec.myarchitecture"

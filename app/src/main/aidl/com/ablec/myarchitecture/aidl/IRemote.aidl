@@ -9,9 +9,9 @@ interface IRemote {
 
     void receive(out AidlData data);
 
-    oneway void async(int a);//oneway(单向调用) 不阻塞调用方 避免引入out
+    oneway void async(int a);//oneway(单向调用) 不阻塞调用方 避免引入out //在同一个IBinder对象调用中，会按照调用顺序依次执行
 
-    void transferFile(in ParcelFileDescriptor pfd);//server接收文件
+    void transferFile(in ParcelFileDescriptor pfd);//server接收大文件
 
     void registerCallBack(IRemoteCallBack callback);
 

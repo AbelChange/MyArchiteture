@@ -74,6 +74,10 @@ class RouterFragment : Fragment(R.layout.router_fragment) {
                 RouterFragmentDirections.actionMainFragmentToMatrixFragment(),
                 "Matrix - Learn"
             ),
+            Item(
+                RouterFragmentDirections.actionMainFragmentToEventFragment(),
+                "EventDispatch"
+            ),
         )
 
         binding.recyclerview.adapter = adapter.apply {

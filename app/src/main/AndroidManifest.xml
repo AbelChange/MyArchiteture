@@ -89,6 +89,9 @@
             </intent-filter>
         </service>
 
+        <service android:name=".service.CalculatorService" android:process=":calulator"/>
+
+
         <activity android:name=".gridtopager.GridActivity"/>
         <activity android:name=".gridtopager.ImageActivity"/>
 
