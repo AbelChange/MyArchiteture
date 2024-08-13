@@ -31,7 +31,7 @@ class TimeCostClassVisitor(nextVisitor: ClassVisitor, val config: Property<TimeC
         //从配置中读取tag
         val tag = config.get().logTag.get()
         val newMethodVisitor =
-            object : AdviceAdapter(Opcodes.ASM5, methodVisitor, access, name, descriptor) {
+            object : AdviceAdapter(Opcodes.ASM9, methodVisitor, access, name, descriptor) {
                 private var startTimeLocal = -1 // 保存 startTime 的局部变量索引
 
                 override fun visitInsn(opcode: Int) {

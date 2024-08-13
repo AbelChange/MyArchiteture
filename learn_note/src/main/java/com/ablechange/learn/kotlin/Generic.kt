@@ -26,11 +26,11 @@ fun main(args: Array<String>) {
     //二、泛型擦除导致无法直接获取类型信息，该如何获取呢?
     val list1 = ArrayList<String>()
     println(list1.javaClass.genericSuperclass)//java.util.AbstractList<E>
-    //1.使用匿名内部类
+    //1.使用匿名内部类，运行时 list2 是ArrayList<String> 的子类
     val list2 = object : ArrayList<String>() {} //匿名内部类 --》gson传递泛型参数
     println(list2.javaClass.genericSuperclass)//java.util.ArrayList<java.lang.String>
-    //2.使用内联函数,reified不能被java调用
-    getType<List<String>>()
+    //2.inline + reified(保留泛型信息)
+    //reified不能被java调用，所以kt专用
 
 
     //三、kotlin List支持协变 List<out E> 可读不可写
@@ -48,6 +48,7 @@ fun main(args: Array<String>) {
 
 fun add(fr: List<Fruit>) {
 
+    getType<List<String>>()
 
 }
 
