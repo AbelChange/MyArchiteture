@@ -9,12 +9,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
+
 
 class FlowViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -38,12 +39,12 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
     init {
         viewModelScope.launch {
             uiIntentFlow.collect {
-               //处理意图
+                //处理意图
             }
         }
     }
 
-    fun sendUiIntent(){
+    fun sendUiIntent() {
         viewModelScope.launch {
             _uiIntentFlow.send("")
         }
@@ -68,16 +69,11 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
     //超速提醒
     //map操作符：int流转化成boolean流
     fun getIfSpeedX(): Flow<Boolean> {
-        return _speedFlow.filter {
-            it > 300
-        }.map {
+        return _speedFlow.map {
             it > MAX_SPEED
+        }.onEach {
+            Timber.tag(TAG).d("是否超速:%s", it)
         }
-
-
-//            .onEach {
-//                Log.d(TAG, "是否超速:$it")
-//            }
     }
 
     //合并操作符 两条流合并成一条新流
@@ -112,5 +108,7 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
     enum class VehicleState {
         PARK, PILOT
     }
+
+
 
 }

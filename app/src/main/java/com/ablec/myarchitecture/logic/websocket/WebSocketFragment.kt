@@ -29,7 +29,7 @@ class WebSocketFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnStartConnect.setOnClickListener {
-            val socket = WebSocketManager.connect("10.191.84.172", 39541);
+            val socket = WebSocketManager.connect("");
         }
     }
 

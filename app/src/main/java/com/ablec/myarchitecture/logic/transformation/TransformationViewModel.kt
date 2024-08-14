@@ -17,11 +17,15 @@ class TransformationViewModel(app: Application, savedStateHandle: SavedStateHand
 
     private val rawLiveData = MutableLiveData<Person>()
 
+    private val persons =
+        listOf<Person>(Person("男", 27, false), Person("男", 27, false), Person("女", 27, false))
+
     fun start() {
         //person是data,data 1 equal data 2,如果使用distinctUntilChanged，只会拿到两次变化
         rawLiveData.value = Person("男", 27, false)
         rawLiveData.value = Person("男", 27, false)
-        rawLiveData.value = Person("男", 28, false)
+        rawLiveData.value = Person("男", 27, false)
+        rawLiveData.value = Person("女", 27, false)
     }
 
     val allPerson: LiveData<Person>
@@ -30,7 +34,7 @@ class TransformationViewModel(app: Application, savedStateHandle: SavedStateHand
         }
 
     /**
-     * 关注联系使用map
+     * 简单的映射转换
      */
     fun mapAgeOnly(): LiveData<Int> {
         return rawLiveData.map {
@@ -39,11 +43,15 @@ class TransformationViewModel(app: Application, savedStateHandle: SavedStateHand
     }
 
     /**
-     * 关注switch使用switchMap,比map更加灵活
+     * switchMap 用于处理动态改变上游
      */
-    fun switchMapAgeOnly(): LiveData<Int> {
-        return rawLiveData.switchMap {
-            MutableLiveData(it.age)
+    fun switchMapAgeOnly(): LiveData<List<Person>> {
+        return rawLiveData.switchMap {person->
+            val searchResultsLiveData = MutableLiveData<List<Person>>()
+            //模拟查询年龄一致的
+            val mockSearchResults = persons.filter { it.age == person.age }
+            searchResultsLiveData.value = mockSearchResults
+            return@switchMap searchResultsLiveData
         }
     }
 

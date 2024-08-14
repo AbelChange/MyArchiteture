@@ -152,5 +152,5 @@ dependencies {
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:3.5.2")
     implementation ("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation ("com.bytedance.tools.codelocator:codelocator-core:2.0.3")
-
+    implementation("com.squareup.okhttp3:mockwebserver:4.10.0")
 }
