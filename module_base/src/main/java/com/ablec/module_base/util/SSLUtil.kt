@@ -25,13 +25,12 @@ import javax.net.ssl.X509TrustManager
  * @return OkHttpClient.Builder
  */
 fun OkHttpClient.Builder.certConfig(
-    builder: OkHttpClient.Builder,
     path: String = "my_ca.crt",
     context: Context
 ): OkHttpClient.Builder {
     val trustManager = CustomX509TrustManager(context, path)
-    builder.sslSocketFactory(trustManager.getSSLContext().socketFactory, trustManager)
-    return builder
+    sslSocketFactory(trustManager.getSSLContext().socketFactory, trustManager)
+    return this
 }
 
 class CustomX509TrustManager(private val context: Context, private val certPath: String) :

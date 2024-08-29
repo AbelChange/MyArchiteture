@@ -24,6 +24,7 @@ pluginManagement {
                 "io.github.meituan-dianping"->{
                     useModule("io.github.meituan-dianping:plugin:${requested.version}")
                 }
+                //class path "com.example.plugin:test_plugin:1.0.1-snapshot"
                 "com.example.plugin"->{
                     useModule("com.example.plugin:test_plugin:${requested.version}")
                 }

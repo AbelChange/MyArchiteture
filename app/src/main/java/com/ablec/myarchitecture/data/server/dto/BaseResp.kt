@@ -14,11 +14,16 @@ class BaseResp<T>(
 }
 
 
-class PageData<T> {
-    @SerializedName("list", alternate = ["rows"])
-    var list: List<T> = listOf()
+data class PageData<T>(
+    @SerializedName("list")
+    var list: List<T> = listOf(),
 
-    @SerializedName("hasNext")
-    val hasNext: Boolean = false
+    @SerializedName("pageNum")
+    var pageNum: Int,
 
-}
+    @SerializedName("pageSize")
+    var pageSize: Int,
+
+    @SerializedName("total")
+    val total: Int = 0
+)
