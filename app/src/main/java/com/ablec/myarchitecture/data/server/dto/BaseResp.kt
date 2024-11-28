@@ -19,11 +19,11 @@ data class PageData<T>(
     var list: List<T> = listOf(),
 
     @SerializedName("pageNum")
-    var pageNum: Int,
+    var pageNum: Int = 0,
 
     @SerializedName("pageSize")
-    var pageSize: Int,
+    var pageSize: Int = 0,
 
     @SerializedName("total")
-    val total: Int = 0
+    val total: Int? = 0
 )
