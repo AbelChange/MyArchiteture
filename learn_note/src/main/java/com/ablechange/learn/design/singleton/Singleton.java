@@ -8,7 +8,7 @@ package com.ablechange.learn.design.singleton;
 public class Singleton {
 
     /**
-     * 饿汉 线程安全
+     * 饿汉 线程安全 kotlin的object就是饿汉式
      */
 //    private static Singleton instance=new Singleton();
 //    private Singleton(){
@@ -45,7 +45,7 @@ public class Singleton {
 //    }
 
     /** DCL double check lock
-     * voliatale+synchronized
+     * voliatale+synchronized  by lazy实现方式
      * 缺点：第一次慢，高并发压力大
      */
 //    private static volatile Singleton instance;

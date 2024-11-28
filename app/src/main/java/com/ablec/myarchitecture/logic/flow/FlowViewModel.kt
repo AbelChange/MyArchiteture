@@ -6,15 +6,19 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import kotlin.time.Duration.Companion.milliseconds
 
 
 class FlowViewModel(app: Application) : AndroidViewModel(app) {
@@ -56,6 +60,7 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
     // 2.replay- 可以缓存一些数据序列，在订阅时候重新发送
     // 3.BufferOverflow - 被压策略 - 1.挂起 2.丢弃新3.丢弃老  比如：pop消息
     private val _speedFlow = MutableStateFlow<Int>(0)
+    private val _speedFlowShare = MutableSharedFlow<Int>(0)
     val speed: StateFlow<Int> = _speedFlow
 
     //sharedFlow + distinctUntilChanged只有变化的值才会发到ui
@@ -93,7 +98,18 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
             flowOf(20, 20, 32, 33, 33, 25, 26, 31, 32)
                 .onEach {
                     delay(FRAME_INTERVAL)
-                }.collect {
+                    //节流 时间段内丢弃多余的   最新的值一定发射
+                }.debounce{
+                    if (it == 0 || it == 1) {
+                        200.milliseconds
+                    } else {
+                        0.milliseconds
+                    }
+                }
+                .distinctUntilChanged { old, new ->
+                    new - old > 2
+                }
+                .collect {
                     _speedFlow.emit(it)
                     //模拟 “31” 帧 超速了
                     if (it == 31) {
