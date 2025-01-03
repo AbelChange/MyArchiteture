@@ -9,15 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.ablec.lib.BaseApplication
 import com.ablec.module_base.photopicker.BottomPickPhotoDialog
 import com.ablec.module_base.photopicker.CropPictureContract
 import com.ablec.module_base.photopicker.ActivityResultProxy
 import com.ablec.module_base.photopicker.ActivityResultProxy.*
 import com.ablec.myarchitecture.AppFileProvider.Companion.getFileUri
+import com.ablec.myarchitecture.ImageUtil
 import com.ablec.myarchitecture.databinding.FragmentPickerBinding
 import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.permissionx.guolindev.PermissionX
+import kotlinx.coroutines.launch
 import java.io.InputStream
 
 class PickerFragment : Fragment() {
@@ -76,14 +80,21 @@ class PickerFragment : Fragment() {
                                     object : ResultCallBack {
                                         override fun onResult(uri: Uri?) {
                                             uri?.let {
-                                                val bitmap = BitmapFactory.decodeStream(
-                                                    this@PickerFragment.requireContext().contentResolver?.openInputStream(
-                                                        uri
+                                                lifecycleScope.launch {
+                                                    val compressImage = ImageUtil.compressImage(
+                                                        BaseApplication.instance,
+                                                        uri,
+                                                        2048
                                                     )
-                                                )
-                                                binding.imageView1.setImageBitmap(
-                                                    bitmap
-                                                )
+                                                    val bitmap = BitmapFactory.decodeStream(
+                                                        this@PickerFragment.requireContext().contentResolver?.openInputStream(
+                                                            compressImage
+                                                        )
+                                                    )
+                                                    binding.imageView1.setImageBitmap(
+                                                        bitmap
+                                                    )
+                                                }
                                             }
                                         }
                                     })

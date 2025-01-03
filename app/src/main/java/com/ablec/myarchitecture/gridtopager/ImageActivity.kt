@@ -20,14 +20,16 @@ class ImageActivity :BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.simple_fragment)
-        if (savedInstanceState != null) {
-            return
+        //防止添加新的 Fragment
+        if (savedInstanceState == null) {
+            val fragmentManager = supportFragmentManager
+            fragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_container, ImagePagerFragment(), ImagePagerFragment::class.java.simpleName)
+                //添加到回退栈会影响返回行为
+//                .addToBackStack(null)
+                .commit()
         }
-        val fragmentManager = supportFragmentManager
-        fragmentManager
-            .beginTransaction()
-            .replace(R.id.fragment_container, ImagePagerFragment(), ImagePagerFragment::class.java.simpleName)
-            .commit()
     }
 
     companion object{

@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.core.content.FileProvider
+import com.ablec.myarchitecture.AppFileProvider.Companion.FILE_PROVIDER_AUTHORITY
 import com.blankj.utilcode.util.ImageUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -20,59 +21,32 @@ import java.io.FileOutputStream
  */
 object ImageUtil {
 
-    suspend fun getResizeBitmap(context: Context, uri: Uri, targetSize: Int = 2 * 1024): Uri? {
+    /**
+     * 压缩图片
+     * @param context 上下文
+     * @param uri 图片的 Uri
+     * @param size 压缩后的大小，单位 KB
+     */
+    suspend fun compressImage(context: Context, uri: Uri, size: Int): Uri {
         return withContext(Dispatchers.IO) {
-            val options = BitmapFactory.Options()
-            options.inJustDecodeBounds = true
-            //decodeBounds
-            BitmapFactory.decodeStream(
-                context.contentResolver.openInputStream(uri),
-                null,
-                options
-            )
-            options.inSampleSize = ImageUtils.calculateInSampleSize(options, 1024, 1024)
-            options.inJustDecodeBounds = false
-            //decode realBitmap  with option inSampleSize 防止oom
-            val decodeBitmap = BitmapFactory.decodeStream(
-                context.contentResolver.openInputStream(uri),
-                null,
-                options
-            )
-
-            //压缩到上传要求
-            val baos = ByteArrayOutputStream()
-            decodeBitmap?.compress(
-                Bitmap.CompressFormat.JPEG,
-                100,
-                baos
-            )
-            var quality = 90
-            while (baos.toByteArray().size / 1024 > targetSize) { // 循环判断如果压缩后图片是否大于targetSize(Kb),大于继续压缩
-                baos.reset()
-                decodeBitmap?.compress(
-                    Bitmap.CompressFormat.JPEG,
-                    quality,
-                    baos
-                )
-                quality -= 10 // 每次都减少10
+            val bitmap = BitmapFactory.decodeStream(context.contentResolver.openInputStream(uri))
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+            var quality = 100
+            while (byteArrayOutputStream.toByteArray().size / 1024 > size) {
+                byteArrayOutputStream.reset()
+                quality -= 10
+                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream)
             }
-            //baos 2 file 2 uri
-            var fileOutputStream: FileOutputStream? = null
-            val targetFile = File(context.cacheDir, "temp${System.currentTimeMillis()}.jpg")
-            try {
-                fileOutputStream =
-                    FileOutputStream(targetFile)
-                fileOutputStream.write(baos.toByteArray())
-                AppFileProvider.getFileUri("temp${System.currentTimeMillis()}.jpg")
-            } catch (e: Exception) {
-                e.printStackTrace()
-                null
-            } finally {
-                fileOutputStream?.close()
-            }
+            val file = File(context.cacheDir, "temp.jpg")
+            val fileOutputStream = FileOutputStream(file)
+            fileOutputStream.write(byteArrayOutputStream.toByteArray())
+            fileOutputStream.flush()
+            fileOutputStream.close()
+            val newUri = AppFileProvider.getFileUri(file)
+            bitmap.recycle()
+            newUri
         }
     }
-
-
 
 }

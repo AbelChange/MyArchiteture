@@ -15,14 +15,16 @@ class AppFileProvider : FileProvider() {
     }
 
     companion object {
-        private const val FILE_PROVIDER_AUTHORITY = "${BuildConfig.APPLICATION_ID}.fileProvider"
 
-        fun getFileUri( name: String): Uri {
+         const val FILE_PROVIDER_AUTHORITY = "${BuildConfig.APPLICATION_ID}.fileProvider"
+
+        // 获取文件的 Uri
+        fun getFileUri(name: String): Uri {
             val fileDir = GlobalContext.filesDir
-            return file2Uri(File(fileDir, name))
+            return getUriForFile(GlobalContext, FILE_PROVIDER_AUTHORITY, File(fileDir, name))
         }
 
-        private fun file2Uri(file: File): Uri {
+        fun getFileUri(file: File): Uri {
             return getUriForFile(GlobalContext, FILE_PROVIDER_AUTHORITY, file)
         }
 
