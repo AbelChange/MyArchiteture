@@ -4,9 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import androidx.core.content.FileProvider
-import com.ablec.myarchitecture.AppFileProvider.Companion.FILE_PROVIDER_AUTHORITY
-import com.blankj.utilcode.util.ImageUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
@@ -43,7 +40,7 @@ object ImageUtil {
             fileOutputStream.write(byteArrayOutputStream.toByteArray())
             fileOutputStream.flush()
             fileOutputStream.close()
-            val newUri = AppFileProvider.getFileUri(file)
+            val newUri = AppFileProvider.generateContentUri(file)
             bitmap.recycle()
             newUri
         }

@@ -4,24 +4,25 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
-import android.util.Log
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.annotation.CallSuper
+
 
 class CropPictureContract : ActivityResultContract<CropPictureContract.CropConfig, Boolean>() {
     companion object{
         const val TAG = "CropPictureContract"
     }
     data class CropConfig(
-        var inputUri: Uri? = null,
+        var inputUri: Uri? =null,
         val outputUri: Uri? = null,
         val aspectX: Int = 1,
         val aspectY: Int = 1,
-        val outputX: Int = 250,
-        val outputY: Int = 250,
+        val outputX: Int = 200,
+        val outputY: Int = 200,
         val scale: Boolean = true,
         val scaleUpIfNeeded: Boolean = true,
     )
@@ -29,6 +30,20 @@ class CropPictureContract : ActivityResultContract<CropPictureContract.CropConfi
     @CallSuper
     override fun createIntent(context: Context, input: CropConfig): Intent {
         val cropIntent = Intent("com.android.camera.action.CROP")
+        val resolveActivity =
+            context.packageManager.resolveActivity(cropIntent, PackageManager.MATCH_DEFAULT_ONLY)
+        kotlin.runCatching {
+            val packageName = resolveActivity?.activityInfo?.packageName
+            context.grantUriPermission(
+                packageName, input.inputUri,
+                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+            )
+            context.grantUriPermission(
+                packageName, input.outputUri,
+                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+            )
+        }
+
         cropIntent.setDataAndType(input.inputUri, "image/*")
         // 开启裁剪：打开的Intent所显示的View可裁剪
         cropIntent.putExtra("crop", "true")
@@ -46,27 +61,9 @@ class CropPictureContract : ActivityResultContract<CropPictureContract.CropConfi
         cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, input.outputUri)
         // 图片输出格式
         cropIntent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString())
-
-        val resInfoList = context.packageManager.queryIntentActivities(cropIntent, PackageManager.MATCH_DEFAULT_ONLY)
-        for (resolveInfo in resInfoList) {
-            val packageName = resolveInfo.activityInfo.packageName
-            try {
-                context.grantUriPermission(
-                    packageName, input.inputUri,
-                    Intent.FLAG_GRANT_READ_URI_PERMISSION
-                )
-            } catch (exception: Exception) {
-                Log.e(TAG, "grantUriPermission error : ", exception)
-            }
-            try {
-                context.grantUriPermission(
-                    packageName, input.outputUri,
-                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-                )
-            } catch (exception: Exception) {
-                Log.e(TAG, "grantUriPermission error : ", exception)
-            }
-        }
+        // 是否取消人脸识别
+        cropIntent.putExtra("noFaceDetection", true)
+        cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         return cropIntent
     }
 

@@ -3,26 +3,28 @@ package com.ablec.myarchitecture.android
 import android.Manifest
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.webkit.MimeTypeMap
+import androidx.core.content.contentValuesOf
+import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import com.ablec.lib.BaseApplication
+import com.ablec.lib.glide.GlideUtils
 import com.ablec.module_base.photopicker.BottomPickPhotoDialog
 import com.ablec.module_base.photopicker.CropPictureContract
 import com.ablec.module_base.photopicker.ActivityResultProxy
 import com.ablec.module_base.photopicker.ActivityResultProxy.*
-import com.ablec.myarchitecture.AppFileProvider.Companion.getFileUri
-import com.ablec.myarchitecture.ImageUtil
+import com.ablec.myarchitecture.AppFileProvider
+import com.ablec.myarchitecture.AppFileProvider.Companion.generateContentUri
 import com.ablec.myarchitecture.databinding.FragmentPickerBinding
-import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.permissionx.guolindev.PermissionX
-import kotlinx.coroutines.launch
-import java.io.InputStream
+import java.io.File
 
 class PickerFragment : Fragment() {
 
@@ -76,26 +78,10 @@ class PickerFragment : Fragment() {
                         .request { allGranted, grantedList, deniedList ->
                             if (allGranted){
                                 photoProxy.takePhoto(
-                                    getFileUri("拍照的图片"),
+                                    generateContentUri("pending_photo"),
                                     object : ResultCallBack {
                                         override fun onResult(uri: Uri?) {
-                                            uri?.let {
-                                                lifecycleScope.launch {
-                                                    val compressImage = ImageUtil.compressImage(
-                                                        BaseApplication.instance,
-                                                        uri,
-                                                        2048
-                                                    )
-                                                    val bitmap = BitmapFactory.decodeStream(
-                                                        this@PickerFragment.requireContext().contentResolver?.openInputStream(
-                                                            compressImage
-                                                        )
-                                                    )
-                                                    binding.imageView1.setImageBitmap(
-                                                        bitmap
-                                                    )
-                                                }
-                                            }
+                                            GlideUtils.loadImage(binding.imageView1.context, uri, binding.imageView1)
                                         }
                                     })
                             }else{
@@ -110,18 +96,25 @@ class PickerFragment : Fragment() {
                             if (uri == null) {
                                 return
                             }
-                            showImage(uri, binding.imageView1)
-                            val fileUri = getFileUri("temp_crop")
-                            photoProxy.crop(
-                                CropPictureContract.CropConfig(uri, fileUri),
-                                object : ResultCallBack {
-                                    override fun onResult(uri: Uri?) {
-                                        uri?.let {
-                                            showImage(uri, binding.imageView2)
-                                        }
-                                        LogUtils.d(uri)
+                            val saveAndExpose = AppFileProvider.saveAndExpose(
+                                binding.imageView1.context, uri, "crop_source"
+                            )
+//                            GlideUtils.loadImage(binding.imageView1.context, saveAndExpose, binding.imageView1)
+
+                            photoProxy.crop(CropPictureContract.CropConfig(
+                                saveAndExpose, generateContentUri("crop_result")
+                            ), object : ResultCallBack {
+                                override fun onResult(uri: Uri?) {
+                                    uri?.let {
+                                        GlideUtils.loadImage(
+                                            binding.imageView1.context,
+                                            uri,
+                                            binding.imageView1
+                                        )
                                     }
-                                })
+                                }
+                            })
+
                         }
                     })
                 }
@@ -132,16 +125,6 @@ class PickerFragment : Fragment() {
         }.show(childFragmentManager)
     }
 
-    private fun showImage(uri: Uri, imageView: ImageView) {
-        var inputStream: InputStream? = null
-        try {
-            inputStream = context?.contentResolver?.openInputStream(uri)
-            val bimap = BitmapFactory.decodeStream(inputStream)
-            imageView.setImageBitmap(bimap)
-        } finally {
-            inputStream?.close()
-        }
-    }
 
     companion object {
         const val TAG = "PickerFragment"

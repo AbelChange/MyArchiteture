@@ -4,10 +4,16 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 
 /**
@@ -65,6 +71,18 @@ fun <T> Flow<T>.countUntil(n: Int): Flow<T> = flow {
             emit(it)
             count = 0
             lastValue = null
+        }
+    }
+}
+
+
+inline fun Fragment.launchAndRepeatWithViewLifecycle(
+    minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
+    crossinline block: suspend CoroutineScope.() -> Unit
+) {
+    viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycle.repeatOnLifecycle(minActiveState) {
+            block()
         }
     }
 }

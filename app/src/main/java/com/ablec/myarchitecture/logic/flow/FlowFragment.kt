@@ -2,7 +2,6 @@ package com.ablec.myarchitecture.logic.flow
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -13,7 +12,8 @@ import com.ablec.lib.ext.viewBinding
 import com.ablec.myarchitecture.R
 import com.ablec.myarchitecture.databinding.FragmentFlowBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class FlowFragment : Fragment(R.layout.fragment_flow) {
@@ -29,24 +29,24 @@ class FlowFragment : Fragment(R.layout.fragment_flow) {
             viewModel.test()
         }
 
-        lifecycleScope.launch {
-            viewModel
-                .getSpeed()
-                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                .collect {
-                    binding.textViewSpeed.text = "当前速度$it"
-                    binding.textViewSpeedX.text = "超速了$it"
-                }
-        }
+        viewModel
+            .getSpeed()
+            .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+            .onEach {
+                binding.textViewSpeed.text = "当前速度$it"
+                binding.textViewSpeedX.text = "超速了$it"
+            }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
 
-        lifecycleScope.launch {
-            viewModel
-                .getIfSpeedX()
-                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                .collect {
-                    binding.textViewSpeedX.isVisible = it
-                }
-        }
+
+        viewModel
+            .getIfSpeedX()
+            .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+            .onEach {
+                binding.textViewSpeed.text = "当前速度$it"
+                binding.textViewSpeedX.text = "超速了$it"
+            }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
 }

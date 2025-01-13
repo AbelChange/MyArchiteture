@@ -40,7 +40,7 @@ abstract class BaseWebFragment(@LayoutRes contentLayoutId: Int) : BaseFragment(c
             if (uri == null) {
                 multipleMediaCallBack?.onReceiveValue(null)
             } else {
-                lifecycleScope.launch {
+                viewLifecycleOwner.lifecycleScope.launch {
 //                    val resizeBitmap = ImageUtil.getResizeBitmap(requireContext(), uri)
 //                    if (resizeBitmap != null) {
 //                        multipleMediaCallBack?.onReceiveValue(arrayOf(resizeBitmap))

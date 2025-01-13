@@ -8,6 +8,9 @@ import android.net.Uri
 import androidx.core.content.FileProvider
 import com.ablec.module_base.provider.BaseInitializer.Companion.GlobalContext
 import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 
 class AppFileProvider : FileProvider() {
     override fun onCreate(): Boolean {
@@ -18,13 +21,13 @@ class AppFileProvider : FileProvider() {
 
          const val FILE_PROVIDER_AUTHORITY = "${BuildConfig.APPLICATION_ID}.fileProvider"
 
-        // 获取文件的 Uri
-        fun getFileUri(name: String): Uri {
+        // 获取文件的 ContentUri
+        fun generateContentUri(name: String): Uri {
             val fileDir = GlobalContext.filesDir
-            return getUriForFile(GlobalContext, FILE_PROVIDER_AUTHORITY, File(fileDir, name))
+            return generateContentUri(File(fileDir, name))
         }
 
-        fun getFileUri(file: File): Uri {
+        fun generateContentUri(file: File): Uri {
             return getUriForFile(GlobalContext, FILE_PROVIDER_AUTHORITY, file)
         }
 
@@ -40,6 +43,34 @@ class AppFileProvider : FileProvider() {
                 null
             }
             return bitmap
+        }
+
+        // 将 contentUri 保存到指定的文件，并标记为 suspend 函数
+        fun saveAndExpose(context: Context, contentUri: Uri, fileName: String): Uri? {
+            val contentResolver: ContentResolver = context.contentResolver
+            var inputStream: InputStream? = null
+            var outputStream: OutputStream? = null
+
+            try {
+                inputStream = contentResolver.openInputStream(contentUri)
+                if (inputStream == null) {
+                    return null
+                }
+                val destinationFile = File(GlobalContext.filesDir, fileName)
+                outputStream = FileOutputStream(destinationFile)
+                inputStream.copyTo(outputStream)
+                return generateContentUri(destinationFile)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                return null
+            } finally {
+                try {
+                    inputStream?.close()
+                    outputStream?.close()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
         }
 
     }

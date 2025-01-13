@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import kotlin.time.Duration.Companion.milliseconds
 
 
@@ -76,8 +75,6 @@ class FlowViewModel(app: Application) : AndroidViewModel(app) {
     fun getIfSpeedX(): Flow<Boolean> {
         return _speedFlow.map {
             it > MAX_SPEED
-        }.onEach {
-            Timber.tag(TAG).d("是否超速:%s", it)
         }
     }
 
