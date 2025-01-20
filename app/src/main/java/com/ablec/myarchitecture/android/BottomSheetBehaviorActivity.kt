@@ -31,7 +31,7 @@ class BottomSheetBehaviorActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setEnterTransition(window)
         super.onCreate(savedInstanceState)
-        immerse(false)
+        immerse()
         setContentView(binding.root)
         binding.root.paddingNavigationBar()
         binding.statusBar.replaceStatusBar()

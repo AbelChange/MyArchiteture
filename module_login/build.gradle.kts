@@ -20,4 +20,5 @@ dependencies {
     implementation(projects.moduleBase)
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
     kapt(Libs.routerCompiler)
+    kapt(libs.hilt.compiler)
 }

@@ -7,10 +7,11 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
-import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.ablec.lib.BaseApplication
 import com.ablec.module_base.util.MMKVUtil
 import com.blankj.utilcode.util.AppUtils
+import com.blankj.utilcode.util.LogUtils
 import com.blankj.utilcode.util.ProcessUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.tencent.bugly.crashreport.CrashReport
@@ -81,10 +82,14 @@ object SystemBarActivityLifecycleCallbacks : Application.ActivityLifecycleCallba
         //判断当前是否是亮色主题
         val isLightTheme = lightThemeTypedArray.getBoolean(0, true)
         lightThemeTypedArray.recycle()
-
-        ViewCompat.getWindowInsetsController(activity.findViewById(android.R.id.content))?.apply {
-            isAppearanceLightStatusBars = isLightTheme
-//            isAppearanceLightNavigationBars = isLightTheme
+        val windowInsetsController = WindowInsetsControllerCompat(activity.window, activity.window.decorView)
+        windowInsetsController.isAppearanceLightStatusBars = isLightTheme
+        windowInsetsController.isAppearanceLightNavigationBars = isLightTheme
+        val startTime = System.currentTimeMillis()
+        activity.window.decorView.post {
+            val endTime = System.currentTimeMillis()
+            val duration = endTime - startTime
+            LogUtils.d("SystemBarActivityLifecycleCallbacks", "${activity.javaClass.name} create cost time: $duration ms")
         }
     }
 

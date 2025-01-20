@@ -1,10 +1,10 @@
 package com.ablec.myarchitecture.logic.pageslist
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import com.ablec.module_base.util.convert
 import com.ablec.myarchitecture.data.server.api.TestApiService
 import com.ablec.myarchitecture.data.server.dto.BaseResp
@@ -20,8 +20,8 @@ import javax.inject.Inject
 class DataListModel @Inject constructor(
     private val apiService: TestApiService,
     val app: Application,
-    val savedStateHandle: SavedStateHandle//进程销毁后，viewmodel也不复存在，但是savedStateHandle可以保存一些数据
-) : AndroidViewModel(app) {
+    private val savedStateHandle: SavedStateHandle//进程销毁后，viewmodel也不复存在，但是savedStateHandle可以保存一些数据
+) : ViewModel() {
 
     private val _list = MediatorLiveData<PageData<ListItem>?>()
 

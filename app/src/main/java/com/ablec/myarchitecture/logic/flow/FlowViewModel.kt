@@ -1,8 +1,9 @@
 package com.ablec.myarchitecture.logic.flow
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -17,10 +18,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
-
-class FlowViewModel(app: Application) : AndroidViewModel(app) {
+@HiltViewModel
+class FlowViewModel @Inject constructor(app: Application) : ViewModel() {
 
     companion object {
         const val TAG = "FlowLearn"

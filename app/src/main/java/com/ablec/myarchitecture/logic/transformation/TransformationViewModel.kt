@@ -3,8 +3,10 @@ package com.ablec.myarchitecture.logic.transformation
 import android.app.Application
 import androidx.lifecycle.*
 import com.ablec.myarchitecture.data.Person
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 import kotlin.random.Random
 
 /**
@@ -12,7 +14,12 @@ import kotlin.random.Random
  * @Author:         haoshuaihui
  * @CreateDate:     2021/2/2 15:52
  */
-class TransformationViewModel(app: Application, savedStateHandle: SavedStateHandle) : AndroidViewModel(app) {
+@HiltViewModel
+class TransformationViewModel @Inject constructor(
+    val app: Application,
+    val savedStateHandle: SavedStateHandle
+) :
+    ViewModel() {
 
 
     private val rawLiveData = MutableLiveData<Person>()

@@ -31,7 +31,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        immerse(false)
+        immerse()
         binding.root.paddingStatusBar()
         initView()
     }

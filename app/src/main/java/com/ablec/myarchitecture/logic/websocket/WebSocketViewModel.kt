@@ -1,9 +1,12 @@
 package com.ablec.myarchitecture.logic.websocket
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-open class WebSocketViewModel (app: Application) : AndroidViewModel(app) {
+@HiltViewModel
+open class WebSocketViewModel @Inject constructor (app: Application) : ViewModel() {
 
 
 

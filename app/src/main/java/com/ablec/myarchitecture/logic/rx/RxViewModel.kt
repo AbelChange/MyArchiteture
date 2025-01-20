@@ -3,14 +3,16 @@ package com.ablec.myarchitecture.logic.rx
 import android.annotation.SuppressLint
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 import kotlin.math.abs
 
-
-open class RxViewModel(app: Application) : AndroidViewModel(app) {
+@HiltViewModel
+open class RxViewModel @Inject constructor(app: Application) : ViewModel() {
 
     companion object {
         const val TAG = "RxViewModel"
