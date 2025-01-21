@@ -69,7 +69,6 @@ class MyListFragment : BaseFragment(R.layout.simple_recyclerview) {
                 setFirstOnly(false)
             }
         }
-        vm.getListTest();
         vm.listLive.observe(viewLifecycleOwner) {
             listAdapter.setList(it?.list)
         }

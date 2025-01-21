@@ -1,6 +1,7 @@
 package com.ablec.myarchitecture.di
 
 
+import android.app.Application
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
@@ -35,14 +36,17 @@ object AppModule {
         return AppDatabase.getInstance(context)
     }
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
+    private val Application.globalDateStore: DataStore<Preferences> by preferencesDataStore(
         name = "data-store"
     )
 
     @Singleton
     @Provides
-    fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
-        return context.dataStore
+    fun provideGlobalStore(@ApplicationContext context: Context): DataStore<Preferences> {
+        if (context !is Application){
+            throw IllegalArgumentException("context must be application")
+        }
+        return context.globalDateStore
     }
 
     @Singleton

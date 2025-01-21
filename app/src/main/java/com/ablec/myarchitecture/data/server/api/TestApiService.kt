@@ -13,6 +13,6 @@ import retrofit2.http.QueryMap
 interface TestApiService {
 
     @GET("http://v.juhe.cn/weixin/query?key=27c0dc2798c1cfe2d583385a4e92a1f8")
-    suspend fun getListData(@QueryMap serializeToMap: Map<String, String>): BaseResp<PageData<ListItem>>
+    suspend fun getListData(@QueryMap serializeToMap: Map<String, Any?>): BaseResp<PageData<ListItem>>
 
 }
