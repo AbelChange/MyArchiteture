@@ -21,6 +21,9 @@ object CoroutinesBridge {
      * callback -> suspend
      */
     private suspend fun callBackToSuspend(arg: String) = suspendCancellableCoroutine {
+        it.invokeOnCancellation {
+            //对取消的收尾响应
+        }
         Api.javaCallback(object : Api.CallBack {
             override fun onSuccess(result: String) {
                 it.resume(":1")

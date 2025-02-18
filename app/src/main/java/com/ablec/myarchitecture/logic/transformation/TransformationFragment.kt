@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.*
-import com.ablec.lib.ext.launchAndRepeatWithViewLifecycle
+import com.ablec.lib.ext.collectInViewLifecycle
 import com.ablec.myarchitecture.databinding.TransformationFragmentBinding
 import com.blankj.utilcode.util.LogUtils
-import kotlinx.coroutines.launch
 
 /**
  * @Description:
@@ -47,17 +46,10 @@ class TransformationFragment : Fragment() {
             println(it)
             LogUtils.d(TAG, it)
         }
+        viewModel.downStream.collectInViewLifecycle(this){
 
-        launchAndRepeatWithViewLifecycle {
-            launch {
-                viewModel.downStream
-                    //绑定生命周期
-                    .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                    .collect {
-
-                    }
-            }
         }
+
     }
 
 }

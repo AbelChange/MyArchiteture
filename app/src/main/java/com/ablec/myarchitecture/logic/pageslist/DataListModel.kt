@@ -29,6 +29,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.io.InputStream
 import java.io.OutputStream
 import javax.inject.Inject
@@ -89,6 +90,7 @@ class DataListModel @Inject constructor(
             app.localDataStore.data
                 .map { it[stringPreferencesKey("key")] }
                 .collect {
+                    Timber.tag("DataListModel").d("localDataStore: " + it)
                     LogUtils.d("DataListModel.localDataStore: $it")
                 }
         }

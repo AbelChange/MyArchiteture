@@ -1,7 +1,13 @@
 package com.ablechange.learn.kotlin.bean
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlin.coroutines.cancellation.CancellationException
+
 /**
  * @author HaoShuaiHui
+ *
  * @description:
  * @date :2023/3/13 14:28
  */
@@ -34,4 +40,19 @@ class Bannana: Fruit {
         return 6
     }
 
+}
+
+
+fun main() {
+    runBlocking {
+        launch {
+            launch {
+                println("子协程运行中...")
+                delay(2000)
+                println("子协程完成") // ✅ 仍然会执行
+            }
+            delay(1000)
+            throw CancellationException("父协程手动取消")
+        }
+    }
 }

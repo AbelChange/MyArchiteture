@@ -4,8 +4,9 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,8 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
@@ -33,28 +35,6 @@ class FlowViewModel @Inject constructor(app: Application) : ViewModel() {
         //超速速度
         const val MAX_SPEED = 30
     }
-
-    /**
-     * mvi中 所有的intent集中在viewmodel处理
-     * Intent事件通过Channel发送给ViewModel，然后在ViewModel中集中处理消费
-     */
-    private val _uiIntentFlow = Channel<String>()
-    val uiIntentFlow: Flow<String> = _uiIntentFlow.receiveAsFlow()
-
-    init {
-        viewModelScope.launch {
-            uiIntentFlow.collect {
-                //处理意图
-            }
-        }
-    }
-
-    fun sendUiIntent() {
-        viewModelScope.launch {
-            _uiIntentFlow.send("")
-        }
-    }
-
 
     //sharedFlow
     // 1.可以有多个下游(订阅者)
@@ -124,6 +104,30 @@ class FlowViewModel @Inject constructor(app: Application) : ViewModel() {
         PARK, PILOT
     }
 
+
+    fun testCancelJob(){
+        viewModelScope.launch {
+            while (true){
+                //内部监测取消的两种方式
+                //1.需要响应取消的
+                if (!isActive){
+                    //收尾工作clearJob()
+                    //抛异常来中断，这里与线程直接return有区别 谨记！！！
+                    throw CancellationException()
+                }
+                //2.不需要响应取消
+                ensureActive()
+                //doJob()
+                //3. 会自取消，切记不要捕捉异常
+                try {
+                    delay(500)
+                    //doJob()
+                } finally {
+                    //收尾工作clearJob()
+                }
+            }
+        }
+    }
 
 
 }

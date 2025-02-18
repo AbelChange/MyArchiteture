@@ -24,26 +24,23 @@ object ImageUtil {
      * @param uri 图片的 Uri
      * @param size 压缩后的大小，单位 KB
      */
-    suspend fun compressImage(context: Context, uri: Uri, size: Int): Uri {
-        return withContext(Dispatchers.IO) {
-            val bitmap = BitmapFactory.decodeStream(context.contentResolver.openInputStream(uri))
-            val byteArrayOutputStream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-            var quality = 100
-            while (byteArrayOutputStream.toByteArray().size / 1024 > size) {
-                byteArrayOutputStream.reset()
-                quality -= 10
-                bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream)
-            }
-            val file = File(context.cacheDir, "temp.jpg")
-            val fileOutputStream = FileOutputStream(file)
-            fileOutputStream.write(byteArrayOutputStream.toByteArray())
-            fileOutputStream.flush()
-            fileOutputStream.close()
-            val newUri = AppFileProvider.generateContentUri(file)
-            bitmap.recycle()
-            newUri
+    suspend fun compressImage(context: Context, uri: Uri, size: Int) = withContext(Dispatchers.IO) {
+        val bitmap = BitmapFactory.decodeStream(context.contentResolver.openInputStream(uri))
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        var quality = 100
+        while (byteArrayOutputStream.toByteArray().size / 1024 > size) {
+            byteArrayOutputStream.reset()
+            quality -= 10
+            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream)
         }
+        val file = File(context.cacheDir, "temp.jpg")
+        val fileOutputStream = FileOutputStream(file)
+        fileOutputStream.write(byteArrayOutputStream.toByteArray())
+        fileOutputStream.flush()
+        fileOutputStream.close()
+        val newUri = AppFileProvider.generateContentUri(file)
+        bitmap.recycle()
+        newUri
     }
-
 }
