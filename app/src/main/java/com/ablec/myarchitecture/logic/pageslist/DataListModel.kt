@@ -41,30 +41,6 @@ class DataListModel @Inject constructor(
     val dataStore: DataStore<Preferences>,//App kv
     private val savedStateHandle: SavedStateHandle//进程销毁后，viewmodel也不复存在，但是savedStateHandle可以保存一些数据
 ) : ViewModel() {
-    /**
-     * k-v存储
-     */
-    private val Context.localDataStore: DataStore<Preferences> by preferencesDataStore(
-        name = "DataListModel-Map-KV"
-    )
-
-    /**
-     * bigData存储
-     */
-    val Context.myDataStore by dataStore("bigData", object : Serializer<Person?> {
-        override val defaultValue: Person
-            get() = Person("2",10,false)
-
-        override suspend fun readFrom(input: InputStream): Person? {
-            return runCatching {
-                input.bufferedReader().use { it.readText() }.fromJson<Person>()
-            }.getOrNull()
-        }
-
-        override suspend fun writeTo(t: Person?, output: OutputStream) {
-            output.write(t.toJson().toByteArray())
-        }
-    })
 
     private val _list = MediatorLiveData<PageData<ListItem>?>()
 
@@ -73,32 +49,21 @@ class DataListModel @Inject constructor(
     init {
         getListTest()
         viewModelScope.launch {
-            app.localDataStore.edit { preferences ->
+            dataStore.edit { preferences ->
                 Person("1", 20, true).apply {
                     preferences[stringPreferencesKey("key")] = toJson()
                 }
-            }
-
-            app.myDataStore.updateData { preferences ->
-                preferences?.copy(age = 20, tall = true)
             }
         }
     }
 
     fun getListTest() {
         viewModelScope.launch {
-            app.localDataStore.data
+            dataStore.data
                 .map { it[stringPreferencesKey("key")] }
                 .collect {
                     Timber.tag("DataListModel").d("localDataStore: " + it)
                     LogUtils.d("DataListModel.localDataStore: $it")
-                }
-        }
-
-        viewModelScope.launch {
-            app.myDataStore.data
-                .collect {
-                    LogUtils.d("DataListModel.myDataStore: $it")
                 }
         }
 

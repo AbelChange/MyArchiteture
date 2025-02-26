@@ -4,8 +4,10 @@
     <color name="colorPrimaryDark">#518EF8</color>
     <color name="colorAccent">#226DFB</color>
 
-    <color name="buttonNormal">#226DFB</color>
-    <color name="buttonDisabled">#666666</color>
+    <color name="buttonPressed">#244059</color>
+    <color name="buttonDisabled">#6A98BF</color>
+    <color name="buttonNormal">#335C80</color>
+
     <color name="white">#FFFFFF</color>
     <color name="yellow">#FFFF00</color>
     <color name="black">#000000</color>

@@ -3,8 +3,13 @@ package com.ablec.myarchitecture.logic.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
+import androidx.core.view.doOnLayout
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -27,6 +32,11 @@ class MainActivity : BaseActivity() {
 
     private val vm by viewModels<DataListModel>()
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
@@ -34,7 +44,29 @@ class MainActivity : BaseActivity() {
         immerse()
         binding.root.paddingStatusBar()
         initView()
+        getMeasuredWidthHeight()
     }
+
+    private fun getMeasuredWidthHeight() {
+
+        //拿不到
+        Handler(Looper.getMainLooper()).post{
+            Log.d("MainActivity-handler.post","width:${binding.root.width},height:${binding.root.height} ")
+        }
+        //可以
+        binding.root.doOnLayout {
+            Log.d("MainActivity-doOnLayout","width:${binding.root.width},height:${binding.root.height} ")
+        }
+        //可以
+        binding.root.doOnPreDraw {
+            Log.d("MainActivity-doOnPreDraw","width:${binding.root.width},height:${binding.root.height} ")
+        }
+        //可以
+        binding.root.post {
+            Log.d("MainActivity-view.post","width:${binding.root.width},height:${binding.root.height} ")
+        }
+    }
+
 
     private fun initView() {
         binding.viewPager.apply {
