@@ -71,21 +71,27 @@ subprojects {
     plugins.withId("maven-publish") {
         (project as ExtensionAware).extensions.configure<PublishingExtension>("publishing") {
             repositories {
-                mavenLocal()
-//                maven {
-//                    url = uri("https://xxx)
-//                    val property = gradleLocalProperties(rootDir)
-//                    credentials {
-//                        username = property.getProperty("username")
-//                        password = property.getProperty("password")
-//                    }
-//                }
+                maven {
+                    name = "localRepo"
+                    url = uri("../repo")
+                }
+                maven {
+                    name = "remouteRepo"
+                    url = uri("xxx")
+                    isAllowInsecureProtocol = true
+                    credentials {
+                        username = providers.gradleProperty("MAVEN_USER").get()
+                        password = providers.gradleProperty("MAVEN_PASSWORD").get()
+                    }
+                }
             }
-//            publications {
-//                maybeCreate<MavenPublication>("release").apply {
-//                    groupId = "com.xxxx.xxxx"
-//                }
-//            }
+            publications {
+                maybeCreate<MavenPublication>("release").apply {
+                    groupId = "com.xxxx"
+                    artifactId = "artifactId"
+                    version = providers.gradleProperty("VERSIONNAME").get()
+                }
+            }
         }
     }
 }
