@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.core.view.doOnLayout
 import androidx.core.view.doOnPreDraw
@@ -41,7 +42,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        immerse()
+        enableEdgeToEdge()
         binding.root.paddingStatusBar()
         initView()
         getMeasuredWidthHeight()

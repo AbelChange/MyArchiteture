@@ -46,4 +46,5 @@ dependencies {
 
     //x5WebView
     api (Libs.x5WebView)
+    api (libs.zxing.core)  // Zxing 核心库
 }

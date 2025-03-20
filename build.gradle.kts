@@ -69,30 +69,30 @@ subprojects {
     }
 
     plugins.withId("maven-publish") {
-        (project as ExtensionAware).extensions.configure<PublishingExtension>("publishing") {
-            repositories {
-                maven {
-                    name = "localRepo"
-                    url = uri("../repo")
-                }
-                maven {
-                    name = "remouteRepo"
-                    url = uri("xxx")
-                    isAllowInsecureProtocol = true
-                    credentials {
-                        username = providers.gradleProperty("MAVEN_USER").get()
-                        password = providers.gradleProperty("MAVEN_PASSWORD").get()
-                    }
-                }
-            }
-            publications {
-                maybeCreate<MavenPublication>("release").apply {
-                    groupId = "com.xxxx"
-                    artifactId = "artifactId"
-                    version = providers.gradleProperty("VERSIONNAME").get()
-                }
-            }
-        }
+//        (project as ExtensionAware).extensions.configure<PublishingExtension>("publishing") {
+//            repositories {
+//                maven {
+//                    name = "localRepo"
+//                    url = uri("../repo")
+//                }
+//                maven {
+//                    name = "remouteRepo"
+//                    url = uri("xxx")
+//                    isAllowInsecureProtocol = true
+//                    credentials {
+//                        username = providers.gradleProperty("MAVEN_USER").get()
+//                        password = providers.gradleProperty("MAVEN_PASSWORD").get()
+//                    }
+//                }
+//            }
+//            publications {
+//                maybeCreate<MavenPublication>("release").apply {
+//                    groupId = "com.xxxx"
+//                    artifactId = "artifactId"
+//                    version = providers.gradleProperty("VERSIONNAME").get()
+//                }
+//            }
+//        }
     }
 }
 

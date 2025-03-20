@@ -7,6 +7,7 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
+import androidx.appcompat.widget.ThemeUtils
 import androidx.core.view.WindowInsetsControllerCompat
 import com.ablec.lib.BaseApplication
 import com.ablec.module_base.util.MMKVUtil

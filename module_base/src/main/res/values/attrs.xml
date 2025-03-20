@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--二维码-->
+    <declare-styleable name="QrcodeView">
+        <!--整体样式-->
+        <attr name="qrcodeViewStyle" format="reference" />
+        <!--二维码内容-->
+        <attr name="qrcodeContent" format="reference|string" />
+        <!--二维码 像素涂色-->
+        <attr name="pixelColor" format="color|reference" />
+        <!--二维码 底色-->
+        <attr name="gapColor" format="color|reference" />
+        <!--圆角-->
+        <attr name="cornerRadius" format="dimension|reference" />
+        <!-- 中心logo -->
+        <attr name="logo" format="reference" />
+        <!-- logo占用整个区域比例，(0,30) 区间-->
+        <attr name="logoSizePercentage" format="integer|reference" />
+        <!--二维码pixel绘制区域离边缘距离 px-->
+        <attr name="margin" format="integer" />
+        <attr name="errorCorrectionLevel" format="enum">
+            <enum name="L" value="0" />
+            <enum name="M" value="1" />
+            <enum name="Q" value="2" />
+            <enum name="H" value="3" />
+        </attr>
+    </declare-styleable>
+
+</resources>

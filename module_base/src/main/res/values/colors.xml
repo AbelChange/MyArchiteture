@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" >
-    <color name="colorPrimary">#518EF8</color>
-    <color name="colorPrimaryDark">#518EF8</color>
-    <color name="colorAccent">#226DFB</color>
+    <!-- 主色调：蓝紫渐变灵感 -->
+    <color name="colorPrimary">#518EF8</color>        <!-- 柔和蓝 -->
+    <color name="colorPrimaryDark">#3A6ED6</color>    <!-- 深邃蓝 -->
+    <color name="colorAccent">#7B61FF</color>         <!-- 酷感紫蓝，用于高亮按钮/图标 -->
+
+    <!-- 背景色 -->
+    <color name="colorBackground">#F9FAFC</color>     <!-- 极浅蓝灰，显干净 -->
+    <color name="colorCard">#FFFFFF</color>           <!-- 卡片纯白 -->
+    <color name="colorSurface">#F1F3F5</color>        <!-- 轻灰层次背景 -->
+
+    <!-- 文本色 -->
+    <color name="colorTextPrimary">#1E1E1E</color>    <!-- 主文字：深灰 -->
+    <color name="colorTextSecondary">#5A5A5A</color>  <!-- 次文字：中灰 -->
+    <color name="colorTextDisabled">#A0A0A0</color>   <!-- 禁用文字 -->
+
+    <!-- 分隔线 & 辅助色 -->
+    <color name="colorDivider">#E0E0E0</color>        <!-- 浅灰线 -->
+    <color name="colorShadow">#1E1E1E1A</color>       <!-- 阴影微透明 -->
+
+    <!-- 状态色 -->
+    <color name="colorSuccess">#34C759</color>        <!-- 成功：苹果绿 -->
+    <color name="colorWarning">#FF9500</color>        <!-- 警告：亮橙 -->
+    <color name="colorError">#FF3B30</color>          <!-- 错误：醒目红 -->
+
+    <!-- iOS 风格开关 -->
+    <color name="ios_switch_on">#4CD964</color>       <!-- iOS 绿 -->
+    <color name="ios_switch_off">#D1D1D6</color>      <!-- iOS 灰 -->
+    <color name="ios_switch_thumb">#FFFFFF</color>    <!-- iOS 拇指 -->
+
+    <!-- 额外可选 -->
+    <color name="colorHighlight">#00C2FF</color>      <!-- 点缀亮蓝 -->
+    <color name="colorMuted">#CED4DA</color>          <!-- 淡灰，低调控件 -->
 
     <color name="buttonPressed">#244059</color>
     <color name="buttonDisabled">#6A98BF</color>
@@ -16,5 +45,9 @@
     <color name="gray">#666666</color>
 
     <color name="red">#FF0000</color>
+    <color name="common_foreground_fg_primary">#ffffffff</color>
+
+    <color name="ios_thumb_color">#FFFFFF</color>
+    <color name="ios_track_color">#4CD964</color> <!-- iOS绿色 -->
 </resources>
 

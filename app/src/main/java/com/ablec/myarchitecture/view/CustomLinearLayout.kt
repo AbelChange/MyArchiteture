@@ -73,8 +73,8 @@ class CustomLinearLayout : LinearLayout {
         borderRect.set(0f, 0f, width.toFloat(), height.toFloat())
     }
 
-    override fun onDraw(canvas: Canvas?) {
-        canvas?.drawArc(
+    override fun onDraw(canvas: Canvas) {
+        canvas.drawArc(
             circleWidth / 2f,
             circleWidth / 2f,
             (width - circleWidth / 2f),
@@ -91,7 +91,7 @@ class CustomLinearLayout : LinearLayout {
         // 绘制边界线
         val startAngle = 220f
         val sweepAngle = 180f - 2 * (startAngle - 180f)
-        canvas?.drawArc(
+        canvas.drawArc(
             borderWidth / 2f,
             borderWidth / 2f,
             (width - borderWidth / 2f),

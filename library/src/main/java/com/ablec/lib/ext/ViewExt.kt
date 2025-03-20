@@ -14,7 +14,6 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.ColorRes
-import androidx.recyclerview.widget.RecyclerView
 import com.blankj.utilcode.util.ToastUtils
 import kotlin.properties.Delegates
 
@@ -30,21 +29,7 @@ val Int.dp
         Resources.getSystem().displayMetrics
     ).toInt()
 
-fun Context.showToast(stringResId: Int, duration: Int = Toast.LENGTH_SHORT) {
-    if (duration == Toast.LENGTH_SHORT) {
-        ToastUtils.showShort(stringResId)
-    } else {
-        ToastUtils.showLong(stringResId)
-    }
-}
 
-fun Context.showToast(content: String? = null, duration: Int = Toast.LENGTH_SHORT) {
-    if (duration == Toast.LENGTH_SHORT) {
-        ToastUtils.showShort(content)
-    } else {
-        ToastUtils.showLong(content)
-    }
-}
 
 /*--------------------View start---------------*/
 fun View.debounceClick(
@@ -84,71 +69,14 @@ fun View.increaseClickArea(
     }
 }
 
-/*--------------------View end---------------*/
-
-
 /**
- * recyclerview间距
- * 只处理竖直edge
- * 逻辑：第一个item无top
+ * 获取viewId对应的字符串
  */
-fun getVerticalItemDecoration(
-    left: Int = 0,
-    right: Int = 0,
-    top: Int = 0,
-    bottom: Int = 0,
-    includeEdge: Boolean = true
-): RecyclerView.ItemDecoration {
-    return object : RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            super.getItemOffsets(outRect, view, parent, state)
-            if (includeEdge) {
-                outRect.top = top.dp
-            } else {
-                val position = parent.getChildAdapterPosition(view)
-                if (position != 0) {
-                    outRect.top = top.dp
-                }
-            }
-            outRect.bottom = bottom.dp
-            outRect.left = left.dp
-            outRect.right = right.dp
-        }
-    }
-}
-
-fun getHorizontalItemDecoration(
-    left: Int = 0,
-    right: Int = 0,
-    top: Int = 0,
-    bottom: Int = 0,
-    includeEdge: Boolean = true
-): RecyclerView.ItemDecoration {
-    return object : RecyclerView.ItemDecoration() {
-        override fun getItemOffsets(
-            outRect: Rect,
-            view: View,
-            parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            super.getItemOffsets(outRect, view, parent, state)
-            if (includeEdge) {
-                outRect.left = left.dp
-            } else {
-                val position = parent.getChildAdapterPosition(view)
-                if (position != 0) {
-                    outRect.left = left.dp
-                }
-            }
-            outRect.top = top.dp
-            outRect.bottom = bottom.dp
-            outRect.right = right.dp
-        }
+fun View.getIdName(): String? {
+    return try {
+        resources.getResourceEntryName(this.id)
+    } catch (e: Exception) {
+        null // 防止 NotFoundException，返回 null 以避免崩溃
     }
 }
 

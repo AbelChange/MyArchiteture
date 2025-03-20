@@ -3,13 +3,13 @@
     <item android:state_checked="true">
         <shape android:dither="true" android:shape="rectangle" android:useLevel="false" android:visible="true">
             <solid android:color="@color/colorPrimary" />
-            <corners android:radius="999dp" />
+            <corners android:radius="@dimen/radius_full" />
         </shape>
     </item>
     <item android:state_checked="false">
         <shape android:dither="true" android:shape="rectangle" android:useLevel="false" android:visible="true">
             <solid android:color="@color/gray" />
-            <corners android:radius="999dp" />
+            <corners android:radius="@dimen/radius_full" />
         </shape>
     </item>
 </selector>

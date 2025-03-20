@@ -53,7 +53,7 @@ dependencies {
     //Router
     api("io.github.meituan-dianping:router:${Versions.wmRouter}")
     //util
-    api("com.blankj:utilcodex:1.31.0")
+    api("com.blankj:utilcodex:1.31.1")
 
     api("io.github.jeremyliao:live-event-bus-x:${Versions.eventBus}")
     //brvah

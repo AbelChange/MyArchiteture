@@ -1,16 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
 
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorSurface">@color/colorPrimary</item>
-        <item name="recyclerViewStyle">@style/Widget.App.Recyclerview</item>
-        <item name="materialButtonStyle">@style/Widget.App.Button</item>
-        <item name="materialButtonOutlinedStyle">@style/Widget.App.OutlinedButton</item>
-        <item name="imageButtonStyle">@style/Widget.App.ImageButton</item>
+        <item name="toolbarStyle">@style/ToolBar</item>
+        <item name="recyclerViewStyle">@style/Recyclerview</item>
+        <item name="materialButtonStyle">@style/Button</item>
+        <item name="materialButtonOutlinedStyle">@style/OutlinedButton</item>
+        <item name="materialButtonToggleGroupStyle">@style/Widget.Material3.MaterialButtonToggleGroup</item>
+        <item name="imageButtonStyle">@style/ImageButton</item>
+        <item name="toolbarNavigationButtonStyle">@style/ImageButton.InToolBar</item>
         <item name="android:enforceNavigationBarContrast" tools:targetApi="q">false</item>
         <item name="android:enforceStatusBarContrast" tools:targetApi="q">false</item>
     </style>
@@ -38,10 +41,10 @@
     </style>
 
     <style name="BaseDialogTheme" parent="Theme.MaterialComponents.DayNight.Dialog">
-        <item name="materialButtonStyle">@style/Widget.App.Button</item>
-        <item name="imageButtonStyle">@style/Widget.App.ImageButton</item>
+        <item name="materialButtonStyle">@style/Button</item>
+        <item name="imageButtonStyle">@style/ImageButton</item>
         <item name="checkboxStyle">@style/Widget.Material3.CompoundButton.CheckBox</item>
-        <item name="recyclerViewStyle">@style/Widget.App.Recyclerview</item>
+        <item name="recyclerViewStyle">@style/Recyclerview</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 

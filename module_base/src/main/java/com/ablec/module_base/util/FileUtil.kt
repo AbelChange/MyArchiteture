@@ -281,7 +281,7 @@ object FileUtil {
         if (insertUri != null) {
             try {
                 os = resolver.openOutputStream(insertUri)
-                image.compress(Bitmap.CompressFormat.PNG, 90, os)
+                image.compress(Bitmap.CompressFormat.PNG, 90, os!!)
                 values.clear()
                 //publish it
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
