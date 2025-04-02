@@ -130,4 +130,12 @@
         <item name="itemRippleColor">@color/transparent</item>
     </style>
 
+    <style name="SwitchStyle" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="showText">false</item>
+        <item name="android:thumb">@drawable/switch_thumb</item>
+        <item name="thumbTint">@color/switch_thumb_tint</item>
+        <item name="track">@drawable/switch_track</item>
+        <item name="trackTint">@color/switch_track_tint</item>
+    </style>
+
 </resources>
