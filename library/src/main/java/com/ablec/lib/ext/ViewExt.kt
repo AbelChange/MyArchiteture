@@ -3,6 +3,7 @@ package com.ablec.lib.ext
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.Color
 import android.graphics.Rect
 import android.text.*
 import android.text.method.LinkMovementMethod
@@ -13,7 +14,10 @@ import android.view.TouchDelegate
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
+import com.ablec.library.R
 import com.blankj.utilcode.util.ToastUtils
 import kotlin.properties.Delegates
 
@@ -89,31 +93,33 @@ fun View.getIdName(): String? {
  */
 @SuppressLint("ResourceAsColor")
 fun TextView.setSpannable(
+    text: CharSequence,
     spannableText: String,
-    underLine: Boolean = false,
-    @ColorRes color: Int = android.R.color.transparent,
-    clickAction: () -> Unit
+    underLine: Boolean = true,
+    @ColorInt foregroundColor: Int,
+    @ColorInt highlightColor: Int = Color.TRANSPARENT,
+    clickAction: (view: View) -> Unit
 ) {
+    this.text = text
     val start = this.text.indexOf(spannableText)
     if (start < 0) {
         return
     }
     val spannableString = SpannableString(this.text)
     spannableString.setSpan(
-        ForegroundColorSpan(color),
+        ForegroundColorSpan(foregroundColor),
         start, start + spannableText.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
     )
-    highlightColor = color
     spannableString.setSpan(object : ClickableSpan() {
-        override fun onClick(widget: View) {
-            clickAction.invoke()
+        override fun onClick(view: View) {
+            clickAction.invoke(view)
         }
 
         override fun updateDrawState(ds: TextPaint) {
-            ds.color = ds.linkColor
             ds.isUnderlineText = underLine
         }
     }, start, start + spannableText.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+    this.highlightColor = highlightColor
     this.text = spannableString
     this.movementMethod = LinkMovementMethod.getInstance()
 }

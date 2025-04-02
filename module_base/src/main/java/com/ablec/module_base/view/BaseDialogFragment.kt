@@ -9,21 +9,17 @@ import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.ablec.module_base.R
+import com.blankj.utilcode.util.ScreenUtils
 
 
-/**
- * @author HaoShuaiHui
- * @description: dialog 支持viewmodel + bottom动画 + 宽度自定义（高度随机）
- * @date :2022/3/9 17:44
- */
 abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
     DialogFragment(contentLayoutId) {
 
-    protected val fragmentTag = javaClass.simpleName
+    private val fragmentTag: String = javaClass.simpleName
 
     //点击外部取消
     protected open fun isCancelableOutside(): Boolean {
-        return true
+        return false
     }
 
     //返回按钮取消
@@ -34,9 +30,9 @@ abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (getGravity() == Gravity.BOTTOM) {
-            setStyle(DialogFragment.STYLE_NO_TITLE, R.style.BottomDialogTheme)
+            setStyle(STYLE_NO_TITLE, 0)
         }else{
-            setStyle(DialogFragment.STYLE_NO_TITLE, R.style.BaseDialogTheme)
+            setStyle(STYLE_NO_TITLE, 0)
         }
     }
 
@@ -45,27 +41,31 @@ abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.apply {
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setCanceledOnTouchOutside(isCancelableOutside())
+            setCancelable(canBeCancel())
+        }
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onStart() {
         super.onStart()
-        dialog?.apply {
-            setCanceledOnTouchOutside(isCancelableOutside())
-            setCancelable(canBeCancel())
-        }
         dialog?.window?.apply {
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             val gravity = getGravity()
             setDimAmount(0.3f)
             setGravity(gravity)
             //底部抬升
-            setLayout(getWindowAttrWidth(), WindowManager.LayoutParams.WRAP_CONTENT)
+            setLayout(getWidth(), getHeight())
         }
     }
 
-    protected open fun getWindowAttrWidth(): Int {
+    protected open fun getHeight(): Int {
+        return WindowManager.LayoutParams.MATCH_PARENT
+    }
+
+    protected open fun getWidth(): Int {
         return WindowManager.LayoutParams.MATCH_PARENT
     }
 

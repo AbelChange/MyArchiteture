@@ -8,4 +8,9 @@
     <dimen name="tool_bar_default_padding_start_material">16dp</dimen>
     <dimen name="tool_bar_default_padding_end_material">16dp</dimen>
     <dimen name="radius_full">9999dp</dimen>
+
+    <dimen name="switch_thumb_size">34dp</dimen>
+    <dimen name="switch_height">42dp</dimen>
+    <dimen name="switch_width">88dp</dimen>
+    <dimen name="switch_vertical_padding">4dp</dimen>
 </resources>

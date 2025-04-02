@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:dither="true"
+    android:shape="rectangle">
+    <solid android:color="@color/switch_thumb_tint" />
+    <size
+        android:width="@dimen/switch_height"
+        android:height="@dimen/switch_height" />
+    <stroke
+        android:width="8dp"
+        android:color="@color/transparent" />
+    <corners android:radius="@dimen/radius_full" />
+</shape>
+

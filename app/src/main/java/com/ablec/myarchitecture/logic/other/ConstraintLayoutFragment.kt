@@ -46,6 +46,8 @@ class ConstraintLayoutFragment : Fragment() {
             //always false
             Log.d("viewStub", binding.viewStub.isVisible.toString())
         }
+        val trackDrawable = binding.switchCompat.trackDrawable
+        Log.d("trackDrawable", trackDrawable.javaClass.name)
     }
 
 
