@@ -1,12 +1,14 @@
 package com.ablec.module_base.service
 
+import com.alibaba.android.arouter.facade.template.IProvider
+
 
 /**
  * @Description:
  * @Author:         haoshuaihui
  * @CreateDate:     2021/5/19 14:03
  */
-interface IPayService {
+interface IPayService : IProvider {
     fun registerObserver(observer: Observer?)
     fun unregisterObserver(observer: Observer?)
     fun notifyPaySuccess()

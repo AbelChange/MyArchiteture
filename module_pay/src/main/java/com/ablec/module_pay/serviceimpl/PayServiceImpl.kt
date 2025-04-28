@@ -1,15 +1,19 @@
 package com.ablec.module_pay.serviceimpl
 
 import android.app.Activity
-import android.text.TextUtils
-import com.alipay.sdk.app.PayTask
-import com.sankuai.waimai.router.annotation.RouterService
-import com.tencent.mm.opensdk.modelpay.PayReq
+import android.content.Context
 import com.ablec.module_base.config.Pay.PAY_SERVICE
 import com.ablec.module_base.config.ThirdApi
 import com.ablec.module_base.service.IPayService
 import com.ablec.module_pay.Util
-import kotlinx.coroutines.*
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.alipay.sdk.app.PayTask
+import com.tencent.mm.opensdk.modelpay.PayReq
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.concurrent.CopyOnWriteArraySet
 
 /**
@@ -17,8 +21,11 @@ import java.util.concurrent.CopyOnWriteArraySet
  * @Author: haoshuaihui
  * @CreateDate: 2021/4/30 13:24
  */
-@RouterService(interfaces = [IPayService::class], key = [PAY_SERVICE], singleton = true)
+@Route(path = PAY_SERVICE, name = "PayServiceImpl::class")
 class PayServiceImpl : IPayService {
+    override fun init(context: Context?) {
+
+    }
 
     private val mObservers: MutableSet<IPayService.Observer> = CopyOnWriteArraySet()
 

@@ -5,8 +5,10 @@ import android.app.Activity
 import android.app.Application
 import android.content.res.TypedArray
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.ThemeUtils
 import androidx.core.view.WindowInsetsControllerCompat
 import com.ablec.lib.BaseApplication
@@ -77,7 +79,9 @@ class AppApplication : BaseApplication() {
 }
 
 object SystemBarActivityLifecycleCallbacks : Application.ActivityLifecycleCallbacks {
-    private val lightThemeAttributes = intArrayOf(R.attr.isLightTheme)
+    @RequiresApi(Build.VERSION_CODES.Q)
+    private val lightThemeAttributes = intArrayOf(android.R.attr.isLightTheme)
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         val lightThemeTypedArray: TypedArray = activity.obtainStyledAttributes(lightThemeAttributes)
         //判断当前是否是亮色主题

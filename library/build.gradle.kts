@@ -1,18 +1,19 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kapt)
 }
 
 android {
     namespace = "com.ablec.library"
-    compileSdk = Versions.COMPILE_SDK
+    compileSdk = 35
 
     defaultConfig {
-        minSdk = Versions.MIN_SDK
+        minSdk = 28
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -28,12 +29,13 @@ dependencies {
     api(libs.androidx.lifecycle.runtime)
 
     api(libs.androidx.recyclerview)
-    api(libs.androidx.startup)
+    api(libs.androidx.startup.runtime)
 
     api(libs.hilt.android)
     api(libs.gson)
     api(libs.timber)
 
+//    api(platform(libs.kotlin.bom))
 
     api(libs.bundles.retrofit)
 
@@ -50,28 +52,23 @@ dependencies {
     //glide
     api(libs.glide)
     kapt(libs.glide.compiler)
-    //Router
-    api("io.github.meituan-dianping:router:${Versions.wmRouter}")
     //util
     api("com.blankj:utilcodex:1.31.1")
 
-    api("io.github.jeremyliao:live-event-bus-x:${Versions.eventBus}")
+    api("io.github.jeremyliao:live-event-bus-x:1.8.0")
     //brvah
-    api("com.github.CymChad:BaseRecyclerViewAdapterHelper:${Versions.BRVAH_Version}")
+    api("com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6")
 
-    //适配
-    api("com.tencent:mmkv-static:${Versions.mmkvVersion}")
+    api("com.tencent:mmkv-static:1.2.10")
     //load
     api("com.kingja.loadsir:loadsir:1.3.8")
 
-    //权限处理
-    api("io.reactivex.rxjava3:rxjava:3.1.4")
-    api("io.reactivex.rxjava3:rxandroid:3.0.0")
-    api("com.github.tbruyelle:rxpermissions:0.12")
     //下拉刷新
     api("io.github.scwang90:refresh-layout-kernel:2.0.5")
     api("io.github.scwang90:refresh-header-classics:2.0.5")
-
+    //权限处理
+    api("io.reactivex.rxjava3:rxjava:3.1.4")
+    api("io.reactivex.rxjava3:rxandroid:3.0.0")
     api("com.guolindev.permissionx:permissionx:1.6.3")
 
 }

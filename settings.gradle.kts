@@ -16,13 +16,10 @@ pluginManagement {
     resolutionStrategy {
         //非官方插件
         eachPlugin {
-            println("eachPluginId"+requested.id.id)
+            println("eachPlugin" + requested.id.id + { requested.version.toString() })
             when (requested.id.id) {
                 "androidx.navigation.safeargs.kotlin" -> {
                     useModule("androidx.navigation:navigation-safe-args-gradle-plugin:${requested.version}")
-                }
-                "io.github.meituan-dianping"->{
-                    useModule("io.github.meituan-dianping:plugin:${requested.version}")
                 }
                 //class path "com.example.plugin:test_plugin:1.0.1-snapshot"
                 "com.example.plugin"->{

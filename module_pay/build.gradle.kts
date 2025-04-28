@@ -8,11 +8,10 @@ plugins {
 android {
     resourcePrefix("module_pay")
     namespace = "com.ablec.module_pay"
-    compileSdk = Versions.COMPILE_SDK
+    compileSdk = 35
 
     defaultConfig {
-        minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
+        minSdk = 28
     }
 
     buildFeatures {
@@ -20,15 +19,17 @@ android {
         buildConfig = true
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.name)
+        }
     }
+
 }
 
 
 dependencies {
     implementation(projects.moduleBase)
-    kapt(Libs.routerCompiler)
+    kapt(libs.arouter.compiler)
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 }

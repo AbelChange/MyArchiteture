@@ -1,8 +1,9 @@
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-parcelize")
-    id("kotlin-kapt")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.kotlin.compose)
 }
 
 android {
@@ -10,19 +11,27 @@ android {
     buildFeatures {
         compose = true
     }
-
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+        kotlinCompilerExtensionVersion = "1.4.0"
+    }
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.name)
+        }
     }
 }
+
+//composeCompiler {
+//    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+//    stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
+//}
 
 dependencies {
     implementation(projects.moduleBase)
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
-    kapt(Libs.routerCompiler)
+    kapt(libs.arouter.compiler)
 
-    val composeBom = platform(libs.androidx.compose.bom)
-    implementation(composeBom)
+    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.animation)

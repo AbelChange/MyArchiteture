@@ -21,6 +21,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -29,7 +30,6 @@ dependencies {
     kapt(libs.androidx.room.compiler)
     kapt(libs.hilt.compiler)
     kapt(libs.glide.compiler)
-    kapt(Libs.routerCompiler)
     //umeng
     api("com.umeng.umsdk:common:9.4.2")
     api("com.umeng.umsdk:asms:1.4.1")
@@ -45,6 +45,7 @@ dependencies {
     api("com.tencent.bugly:nativecrashreport:3.9.2")
 
     //x5WebView
-    api (Libs.x5WebView)
+    api ("com.tencent.tbs:tbssdk:44226")
     api (libs.zxing.core)  // Zxing 核心库
+    api(libs.arouter.api)
 }

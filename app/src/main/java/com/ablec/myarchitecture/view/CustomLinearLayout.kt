@@ -2,14 +2,13 @@ package com.ablec.myarchitecture.view
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import com.ablec.lib.ext.dp
-import com.ablec.myarchitecture.R
 import com.blankj.utilcode.util.SizeUtils
 
 class CustomLinearLayout : LinearLayout {
@@ -47,13 +46,13 @@ class CustomLinearLayout : LinearLayout {
 
     private fun init() {
         // 设置圆环画笔
-        circlePaint.color = ContextCompat.getColor(context, R.color.white)
+        circlePaint.color = Color.WHITE
         circlePaint.style = Paint.Style.STROKE
         circlePaint.strokeWidth = circleWidth.toFloat() // 圆环宽度
         circlePaint.isAntiAlias = true // 抗锯齿
 
         // 设置边界线画笔
-        borderPaint.color = ContextCompat.getColor(context, R.color.red)
+        borderPaint.color = Color.RED
         borderPaint.style = Paint.Style.STROKE
         borderPaint.strokeWidth = borderWidth.toFloat() // 边界线宽度
         borderPaint.isAntiAlias = true // 抗锯齿

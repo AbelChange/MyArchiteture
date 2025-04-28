@@ -18,7 +18,7 @@ import com.ablec.module_base.db.entity.SearchHistoryEntity
 @Database(entities = [ProductEntity::class, SearchHistoryEntity::class], version = 1)
 @TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun productDao(): ProductDao
+//    abstract fun productDao(): ProductDao
 
     private val mIsDatabaseCreated = MutableLiveData<Boolean>()
 

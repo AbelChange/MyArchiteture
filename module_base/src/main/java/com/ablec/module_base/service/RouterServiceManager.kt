@@ -1,11 +1,6 @@
 package com.ablec.module_base.service
 
-import com.ablec.module_base.config.Compose.COMPOSE_SERVICE
-import com.sankuai.waimai.router.Router
-import com.ablec.module_base.config.Login.ACCOUNT_SERVICE
-import com.ablec.module_base.config.Main.APP_INFO_SERVICE
-import com.ablec.module_base.config.Native
-import com.ablec.module_base.config.Pay.PAY_SERVICE
+import com.alibaba.android.arouter.launcher.ARouter
 
 /**
  * @Description:
@@ -17,23 +12,23 @@ class RouterServiceManager {
     companion object {
 
         fun getAccountService(): IAccountService? {
-            return Router.getService(IAccountService::class.java, ACCOUNT_SERVICE)
+            return ARouter.getInstance().navigation(IAccountService::class.java)
         }
 
         fun getPayService(): IPayService? {
-            return Router.getService(IPayService::class.java, PAY_SERVICE)
+            return ARouter.getInstance().navigation(IPayService::class.java)
         }
 
         fun getAppInfoService(): IAppInfoService? {
-            return Router.getService(IAppInfoService::class.java, APP_INFO_SERVICE)
+            return ARouter.getInstance().navigation(IAppInfoService::class.java)
         }
 
         fun getComposeService():IComposeService?{
-            return Router.getService(IComposeService::class.java, COMPOSE_SERVICE)
+            return ARouter.getInstance().navigation(IComposeService::class.java)
         }
 
         fun getNativeService():INativeService?{
-            return Router.getService(INativeService::class.java, Native.SERVICE)
+            return ARouter.getInstance().navigation(INativeService::class.java)
         }
 
     }

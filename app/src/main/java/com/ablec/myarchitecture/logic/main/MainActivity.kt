@@ -16,17 +16,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.ablec.lib.base.BaseActivity
-import com.ablec.lib.ext.immerse
 import com.ablec.lib.ext.paddingStatusBar
-import com.ablec.module_base.config.Main.BASE
 import com.ablec.myarchitecture.databinding.MainActivityBinding
 import com.ablec.myarchitecture.logic.pageslist.DataListModel
-import com.blankj.utilcode.util.AppUtils
-import com.sankuai.waimai.router.annotation.RouterUri
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-@RouterUri(path = [BASE])
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: MainActivityBinding

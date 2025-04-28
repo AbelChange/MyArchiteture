@@ -2,9 +2,8 @@ package com.ablec.myarchitecture
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.sankuai.waimai.router.common.DefaultUriRequest
-import com.sankuai.waimai.router.core.OnCompleteListener
-import com.sankuai.waimai.router.core.UriRequest
+import com.alibaba.android.arouter.launcher.ARouter
+
 
 /**
  * @Description:    外部跳转统一交给router处理
@@ -18,14 +17,8 @@ class SchemeFilterActivity : AppCompatActivity() {
         //1.可以这里对跳转进行统一处理
 
         //2.也可以直接交给router处理（业务可能需要拦截器）
-        DefaultUriRequest.startFromProxyActivity(this, object : OnCompleteListener {
-            override fun onSuccess(request: UriRequest) {
-                finish()
-            }
-
-            override fun onError(request: UriRequest, resultCode: Int) {
-                finish()
-            }
-        })
+        val uri = intent.data
+        ARouter.getInstance().build(uri).navigation()
+        finish()
     }
 }

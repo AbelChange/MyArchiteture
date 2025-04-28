@@ -2,13 +2,12 @@ import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-parcelize")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
-    id("androidx.navigation.safeargs.kotlin")
-    id("WMRouter")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kotlin.safeargs)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.hilt)
     //自定义插件
 //    id("test_plugin")
 }
@@ -20,11 +19,11 @@ plugins {
 //}
 
 android {
+
     namespace = "com.ablec.myarchitecture"
-    compileSdk = Versions.COMPILE_SDK
+    compileSdk = 35
     defaultConfig {
-        minSdk = Versions.MIN_SDK
-        targetSdk = Versions.TARGET_SDK
+        minSdk = 28
         versionCode = 1
         versionName = "1.0"
         manifestPlaceholders["APP_NAME"] = "appname"
@@ -38,8 +37,19 @@ android {
                 "armeabi-v7a"
             )
         }
-    }
 
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.name)
+            }
+        }
+
+    }
+    sourceSets {
+        getByName("main") {
+            aidl.srcDirs("src/main/aidl")
+        }
+    }
     signingConfigs {
         create("release") {
             val keystorePropertiesFile = file("keystore/keystore.properties")
@@ -70,6 +80,7 @@ android {
     }
 
     buildFeatures {
+        aidl = true
         viewBinding = true
         buildConfig = true
     }
@@ -77,6 +88,11 @@ android {
     flavorDimensions.apply {
         add("server")
         add("market")
+    }
+    //ARouter & Hilt https://github.com/alibaba/ARouter/issues/1051
+    hilt {
+        enableExperimentalClasspathAggregation = true
+        enableAggregatingTask = false
     }
 
     productFlavors {
@@ -128,15 +144,16 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
     implementation(projects.moduleBase)
-//集成模式
-    if (!Config.buildModule) {
+    //集成模式
+    val buildModule = providers.gradleProperty("buildModule").get().toBoolean()
+    if (buildModule) {
         implementation(projects.moduleLogin)
         implementation(project(":module_pay"))
         implementation(project(":module_compose"))
         implementation(project(":module_native"))
     }
     kapt(libs.glide.compiler)
-    kapt(Libs.routerCompiler)
+    kapt(libs.arouter.compiler)
     kapt(libs.hilt.compiler)
 
     implementation(libs.hilt.android)

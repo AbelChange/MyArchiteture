@@ -13,12 +13,18 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.name)
+        }
+    }
 }
 
 
 dependencies {
     implementation(projects.moduleBase)
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
-    kapt(Libs.routerCompiler)
     kapt(libs.hilt.compiler)
+    kapt(libs.arouter.compiler)
 }

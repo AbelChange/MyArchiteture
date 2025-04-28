@@ -1,8 +1,9 @@
 package com.ablec.module_base.service
 
 import android.content.Context
+import com.alibaba.android.arouter.facade.template.IProvider
 
-interface IAccountService {
+interface IAccountService : IProvider {
     fun isLogin(): Boolean
     fun startLogin(context: Context?)
     fun getLoginToken(): String?

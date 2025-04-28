@@ -10,9 +10,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.ablec.lib.ext.debounceClick
 import com.ablec.lib.ext.viewBinding
+import com.ablec.myarchitecture.IRemote
 import com.ablec.myarchitecture.R
-import com.ablec.myarchitecture.aidl.IRemote
-import com.ablec.myarchitecture.aidl.IRemoteCallBack
 import com.ablec.myarchitecture.databinding.FragmentSimpleTextBinding
 import com.ablec.myarchitecture.service.ICalculator
 import java.io.File
@@ -122,21 +121,21 @@ class BinderFragment : Fragment(R.layout.fragment_simple_text) {
 
     }
 
-    private var callBack = object : IRemoteCallBack.Stub() {
-        override fun onSuccess(result: String?) {
-            bindings.textView.text = "异步回调$result"
-        }
-
-        override fun onFail(error: String?) {
-            bindings.textView.text = error
-        }
-    }
+//    private var callBack = object : IRemoteCallBack.Stub() {
+//        override fun onSuccess(result: String?) {
+//            bindings.textView.text = "异步回调$result"
+//        }
+//
+//        override fun onFail(error: String?) {
+//            bindings.textView.text = error
+//        }
+//    }
 
 
     private fun asyncCall() {
         binder?.let {
             try {
-                it.registerCallBack(callBack)
+//                it.registerCallBack(callBack)
                 for (i in 1 until 1000) {
                     it.async(i)
                 }
@@ -145,15 +144,6 @@ class BinderFragment : Fragment(R.layout.fragment_simple_text) {
             }
         }
     }
-
-    //
-
-
-
-
-
-
-
 
     //文件共享
     private fun sendFile(path: String) {
@@ -192,7 +182,7 @@ class BinderFragment : Fragment(R.layout.fragment_simple_text) {
     override fun onDestroy() {
         super.onDestroy()
         try {
-            binder?.unregisterCallBack(callBack)
+//            binder?.unregisterCallBack(callBack)
             requireActivity().unbindService(serviceConnection)
         } catch (_: Exception) {
 

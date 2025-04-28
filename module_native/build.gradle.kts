@@ -20,6 +20,12 @@ android {
         }
     }
 
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.name)
+        }
+    }
+
     externalNativeBuild {
         cmake {
             path("src/main/cpp/CMakeLists.txt")
@@ -38,7 +44,7 @@ android {
 dependencies {
     implementation(projects.moduleBase)
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
-    kapt(Libs.routerCompiler)
+    kapt(libs.arouter.compiler)
 }
 
 

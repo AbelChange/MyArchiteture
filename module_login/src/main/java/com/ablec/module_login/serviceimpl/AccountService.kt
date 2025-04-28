@@ -1,9 +1,9 @@
 package com.ablec.module_login.serviceimpl
 
 import android.content.Context
-import com.sankuai.waimai.router.annotation.RouterService
 import com.ablec.module_base.config.Login.ACCOUNT_SERVICE
 import com.ablec.module_base.service.IAccountService
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.blankj.utilcode.util.LogUtils
 
 /**
@@ -11,8 +11,13 @@ import com.blankj.utilcode.util.LogUtils
  * @Author: haoshuaihui
  * @CreateDate: 2021/4/30 13:24
  */
-@RouterService(interfaces = [IAccountService::class], key = [ACCOUNT_SERVICE], singleton = true)
+@Route(path = ACCOUNT_SERVICE, name = "AccountService::class")
 class AccountService : IAccountService {
+
+    override fun init(context: Context?) {
+
+    }
+
     private val mObservers: MutableList<IAccountService.Observer> = ArrayList()
     override fun isLogin(): Boolean {
         return false
