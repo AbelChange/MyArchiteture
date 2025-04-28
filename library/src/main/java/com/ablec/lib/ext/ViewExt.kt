@@ -1,38 +1,9 @@
 package com.ablec.lib.ext
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.content.res.Resources
-import android.graphics.Color
 import android.graphics.Rect
-import android.text.*
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
-import android.util.TypedValue
 import android.view.TouchDelegate
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
-import com.ablec.library.R
-import com.blankj.utilcode.util.ToastUtils
 import kotlin.properties.Delegates
-
-/**
- * @Description:
- * @Author: haoshuaihui
- * @CreateDate: 2021/1/28 14:42
- */
-val Int.dp
-    get() = TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_DIP,
-        this.toFloat(),
-        Resources.getSystem().displayMetrics
-    ).toInt()
-
 
 
 /*--------------------View start---------------*/
@@ -84,45 +55,7 @@ fun View.getIdName(): String? {
     }
 }
 
-/**
- * 改变指定文本的颜色
- * @param rawText
- * @param colorTextArray
- * @param colorArray
- * @return
- */
-@SuppressLint("ResourceAsColor")
-fun TextView.setSpannable(
-    text: CharSequence,
-    spannableText: String,
-    underLine: Boolean = true,
-    @ColorInt foregroundColor: Int,
-    @ColorInt highlightColor: Int = Color.TRANSPARENT,
-    clickAction: (view: View) -> Unit
-) {
-    this.text = text
-    val start = this.text.indexOf(spannableText)
-    if (start < 0) {
-        return
-    }
-    val spannableString = SpannableString(this.text)
-    spannableString.setSpan(
-        ForegroundColorSpan(foregroundColor),
-        start, start + spannableText.length, Spannable.SPAN_EXCLUSIVE_INCLUSIVE
-    )
-    spannableString.setSpan(object : ClickableSpan() {
-        override fun onClick(view: View) {
-            clickAction.invoke(view)
-        }
 
-        override fun updateDrawState(ds: TextPaint) {
-            ds.isUnderlineText = underLine
-        }
-    }, start, start + spannableText.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-    this.highlightColor = highlightColor
-    this.text = spannableString
-    this.movementMethod = LinkMovementMethod.getInstance()
-}
 
 
 

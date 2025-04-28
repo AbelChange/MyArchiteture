@@ -3,13 +3,16 @@ package com.ablec.module_base.view
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import android.view.WindowManager
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.ablec.module_base.R
-import com.blankj.utilcode.util.ScreenUtils
 
 
 abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
@@ -30,9 +33,9 @@ abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (getGravity() == Gravity.BOTTOM) {
-            setStyle(STYLE_NO_TITLE, 0)
+            setStyle(STYLE_NO_TITLE, R.style.DialogTheme_Sheet)
         }else{
-            setStyle(STYLE_NO_TITLE, 0)
+            setStyle(STYLE_NO_TITLE, R.style.DialogTheme_Fade)
         }
     }
 
@@ -42,6 +45,7 @@ abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
         savedInstanceState: Bundle?
     ): View? {
         dialog?.apply {
+            dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));//1.必须设置dialog的window背景为透明颜色，不然圆角无效或者是系统默认的颜色
             requestWindowFeature(Window.FEATURE_NO_TITLE)
             setCanceledOnTouchOutside(isCancelableOutside())
             setCancelable(canBeCancel())
@@ -52,9 +56,8 @@ abstract class BaseDialogFragment(@LayoutRes private val contentLayoutId: Int) :
     override fun onStart() {
         super.onStart()
         dialog?.window?.apply {
-            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             val gravity = getGravity()
-            setDimAmount(0.3f)
+            setDimAmount(0.5f)
             setGravity(gravity)
             //底部抬升
             setLayout(getWidth(), getHeight())

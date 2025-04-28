@@ -85,7 +85,23 @@
         <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
     </style>
 
-    <style name="Recyclerview" parent="android:Widget.Material.ScrollView">
+    <style name="ScrollView" parent="android:Widget.Material.ScrollView">
+        <!--自动隐藏滚动条-->
+        <item name="android:fadeScrollbars">true</item>
+        <!--尽量不要使用xxxInset 会影响内容区域的布局-->
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:overScrollMode">never</item>
+        <!--边缘模糊效果-->
+        <item name="android:fadingEdgeLength">50dp</item>
+        <item name="android:requiresFadingEdge">vertical</item>
+        <item name="android:fadingEdge">vertical</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollbarTrackVertical">@drawable/scrollbar_track_vertical</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb_vertical</item>
+    </style>
+
+
+    <style name="Recyclerview" parent="ScrollView">
         <item name="android:scrollbars">none</item>
         <!--自动隐藏滚动条-->
         <item name="android:fadeScrollbars">true</item>
@@ -98,19 +114,20 @@
         <item name="android:fadingEdgeLength">0dp</item>
     </style>
 
+
     <style name="Recyclerview.Vertical">
-        <!--列表view边缘模糊效果-->
-        <item name="android:fadingEdge">vertical</item>
-        <item name="android:fadingEdgeLength">0dp</item>
-        <!--滚动条-->
+        <item name="android:requiresFadingEdge">vertical</item>
         <item name="android:scrollbars">vertical</item>
         <item name="android:scrollbarTrackVertical">@drawable/scrollbar_track_vertical</item>
         <item name="android:scrollbarThumbVertical">@drawable/scrollbar_thumb_vertical</item>
+        <item name="android:scrollbarSize">4dp</item>
         <!--自动隐藏滚动条-->
         <item name="android:fadeScrollbars">true</item>
-        <!--尽量不要使用xxxInset 会影响内容区域的布局-->
-        <item name="android:scrollbarStyle">insideOverlay</item>
-        <item name="android:overScrollMode">ifContentScrolls</item>
+    </style>
+
+    <style name="Recyclerview.Horizontal">
+        <item name="android:requiresFadingEdge">horizontal</item>
+        <item name="android:scrollbars">none</item>
     </style>
 
     <style name="TextAppearance.Title" parent="android:TextAppearance.Material.Title">
@@ -136,6 +153,20 @@
         <item name="thumbTint">@color/switch_thumb_tint</item>
         <item name="track">@drawable/switch_track</item>
         <item name="trackTint">@color/switch_track_tint</item>
+    </style>
+
+    <style name="MaterialDivider" parent="Widget.Material3.MaterialDivider">
+        <item name="dividerThickness">1px</item>
+        <item name="lastItemDecorated">false</item>
+        <item name="dividerInsetStart">0dp</item>
+        <item name="dividerInsetEnd">0dp</item>
+    </style>
+
+    <style name="CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:clipChildren">false</item>
+        <item name="cardPreventCornerOverlap">true</item>
+        <item name="cardUseCompatPadding">false</item>
+        <item name="cardElevation">4dp</item>
     </style>
 
 </resources>

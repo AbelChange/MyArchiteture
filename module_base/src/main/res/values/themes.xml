@@ -10,6 +10,8 @@
         <item name="toolbarStyle">@style/ToolBar</item>
         <item name="recyclerViewStyle">@style/Recyclerview</item>
         <item name="switchStyle">@style/SwitchStyle</item>
+<!--        <item name="android:windowBackground">@android:color/transparent</item>-->
+        <item name="cardViewStyle">@style/CardView</item>
         <item name="materialButtonStyle">@style/Button</item>
         <item name="materialButtonOutlinedStyle">@style/OutlinedButton</item>
         <item name="materialButtonToggleGroupStyle">@style/Widget.Material3.MaterialButtonToggleGroup</item>
@@ -39,6 +41,39 @@
         <item name="android:windowDisablePreview">true</item>
         <!--这里替换闪屏图片-->
         <item name="android:windowBackground">@mipmap/splash_chinese_bg</item>
+    </style>
+
+    <style name="DialogTheme.Base" parent="Theme.Material3.DayNight.Dialog">
+        <item name="android:imageButtonStyle">@style/ImageButton</item>
+        <item name="materialButtonStyle">@style/Button</item>
+        <item name="imageButtonStyle">@style/ImageButton</item>
+        <item name="switchStyle">@style/SwitchStyle</item>
+        <item name="checkboxStyle">@style/Widget.Material3.CompoundButton.CheckBox</item>
+        <item name="recyclerViewStyle">@style/Recyclerview</item>
+        <item name="android:scrollViewStyle">@style/ScrollView</item>
+        <item name="materialDividerStyle">@style/MaterialDivider</item>
+        <item name="cardViewStyle">@style/CardView</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="DialogFadeAnimation">
+        <item name="android:windowEnterAnimation">@anim/fast_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fast_fade_out</item>
+    </style>
+
+    <style name="DialogSheetAnimation">
+        <item name="android:windowEnterAnimation">@anim/dialog_sheet_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_sheet_exit</item>
+    </style>
+
+    <style name="DialogTheme.Fade" parent="DialogTheme.Base">
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowAnimationStyle">@style/DialogFadeAnimation</item>
+    </style>
+
+    <style name="DialogTheme.Sheet" parent="DialogTheme.Base">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowAnimationStyle">@style/DialogSheetAnimation</item>
     </style>
 
 </resources>
