@@ -16,8 +16,8 @@ class RemoteService : Service() {
 
     private val TAG = "RemoteService"
 
-//    private val remoteCallBackList: RemoteCallbackList<IRemoteCallBack> =
-//        RemoteCallbackList<IRemoteCallBack>()
+    private val remoteCallBackList: RemoteCallbackList<IRemote.IRemoteCallBack> =
+        RemoteCallbackList<IRemote.IRemoteCallBack>()
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main + CoroutineExceptionHandler { _, throwable ->
         LogUtils.e(
@@ -31,17 +31,17 @@ class RemoteService : Service() {
     }
 
     private fun broadcast(s: String) {
-//        var i: Int = remoteCallBackList.beginBroadcast()
-//        while (i > 0) {
-//            i--
-//            try {
-//                remoteCallBackList.getBroadcastItem(i).onSuccess(s)
-//            } catch (e: RemoteException) {
-//                // The RemoteCallbackList will take care of removing
-//                // the dead object for us.
-//            }
-//        }
-//        remoteCallBackList.finishBroadcast()
+        var i: Int = remoteCallBackList.beginBroadcast()
+        while (i > 0) {
+            i--
+            try {
+                remoteCallBackList.getBroadcastItem(i).onSuccess(s)
+            } catch (e: RemoteException) {
+                // The RemoteCallbackList will take care of removing
+                // the dead object for us.
+            }
+        }
+        remoteCallBackList.finishBroadcast()
     }
 
     //stub类 继承binder，实现业务接口，onBind返回
@@ -88,18 +88,18 @@ class RemoteService : Service() {
             LogUtils.d(TAG,lines.toString())
         }
 
-//        override fun registerCallBack(callback: IRemoteCallBack?) {
-//            callback?.asBinder()?.apply {
-//                linkToDeath({
-//                    remoteCallBackList.unregister(callback)
-//                }, 0)
-//            }
-//            remoteCallBackList.register(callback)
-//        }
-//
-//        override fun unregisterCallBack(callback: IRemoteCallBack?) {
-//            remoteCallBackList.unregister(callback)
-//        }
+        override fun registerCallBack(callback: IRemote.IRemoteCallBack?) {
+            callback?.asBinder()?.apply {
+                linkToDeath({
+                    remoteCallBackList.unregister(callback)
+                }, 0)
+            }
+            remoteCallBackList.register(callback)
+        }
+
+        override fun unregisterCallBack(callback: IRemote.IRemoteCallBack?) {
+            remoteCallBackList.unregister(callback)
+        }
 
     }
 

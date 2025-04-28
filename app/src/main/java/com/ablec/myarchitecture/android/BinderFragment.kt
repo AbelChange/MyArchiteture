@@ -121,21 +121,21 @@ class BinderFragment : Fragment(R.layout.fragment_simple_text) {
 
     }
 
-//    private var callBack = object : IRemoteCallBack.Stub() {
-//        override fun onSuccess(result: String?) {
-//            bindings.textView.text = "异步回调$result"
-//        }
-//
-//        override fun onFail(error: String?) {
-//            bindings.textView.text = error
-//        }
-//    }
+    private var callBack = object : IRemote.IRemoteCallBack.Stub() {
+        override fun onSuccess(result: String?) {
+            bindings.textView.text = "异步回调$result"
+        }
+
+        override fun onFail(error: String?) {
+            bindings.textView.text = error
+        }
+    }
 
 
     private fun asyncCall() {
         binder?.let {
             try {
-//                it.registerCallBack(callBack)
+                it.registerCallBack(callBack)
                 for (i in 1 until 1000) {
                     it.async(i)
                 }
@@ -182,7 +182,7 @@ class BinderFragment : Fragment(R.layout.fragment_simple_text) {
     override fun onDestroy() {
         super.onDestroy()
         try {
-//            binder?.unregisterCallBack(callBack)
+            binder?.unregisterCallBack(callBack)
             requireActivity().unbindService(serviceConnection)
         } catch (_: Exception) {
 
