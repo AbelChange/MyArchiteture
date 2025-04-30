@@ -19,6 +19,6 @@ interface UploadApiService {
      */
     @Multipart
     @POST("uploadImage")
-    suspend fun uploadPic(@Part part: MultipartBody.Part,
+    suspend fun uploadImage(@Part part: MultipartBody.Part,
                           @QueryMap map: Map<String, String>): BaseResp<Unit>
 }

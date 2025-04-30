@@ -30,18 +30,21 @@ dependencies {
     implementation(projects.moduleBase)
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
     kapt(libs.arouter.compiler)
-
-    implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.animation)
-    implementation(libs.androidx.compose.foundation.layout)
-    implementation(libs.androidx.compose.material.iconsExtended)
+    implementation(platform(libs.androidx.compose.bom))
+    //从上到下 线性依赖 https://developer.android.com/jetpack/androidx/explorer?case=navigation
+    //material<-foundation<-animation<-ui<-runtime
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.iconsExtended)//比较特殊 必须依赖
     implementation(libs.androidx.compose.materialWindow)
-    implementation(libs.androidx.compose.runtime.livedata)
-    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.animation)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.ui.tooling)//for preview 比较特殊 不仅是 ui 预览
+    implementation(libs.androidx.compose.runtime)
+
+
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
-
 }

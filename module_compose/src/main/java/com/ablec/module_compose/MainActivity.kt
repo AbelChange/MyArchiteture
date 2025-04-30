@@ -10,6 +10,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,6 +44,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -79,7 +81,7 @@ class MainActivity : ComponentActivity() {
             Surface(
                 modifier = Modifier
                     .fillMaxSize(),
-                color = Color.LightGray
+                color = MaterialTheme.colorScheme.background
             ) {
                 SimpleLinearLayout()
             }
@@ -109,12 +111,12 @@ class MainActivity : ComponentActivity() {
                 color = Color.Red
             ) {
                 Image(
-                    imageVector = ImageVector.vectorResource(R.drawable.baseline_6_ft_apart_24),
+                    painterResource(R.drawable.baseline_6_ft_apart_24),
                     contentDescription = null,
                     modifier = Modifier
-                        .padding(15.dp)
-                        .clip(CircleShape)
-                        .background(Color.Green),
+                        .padding(15.dp)//bg之前是margin
+                        .background(Color.Green, CircleShape)
+                        .padding(15.dp),//bg之后是padding
                 )
             }
             Text(text = "John Doe", style = MaterialTheme.typography.bodyLarge, fontSize = 25.sp)

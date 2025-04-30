@@ -1,6 +1,9 @@
 pluginManagement {
     repositories {
-        mavenLocal()
+        mavenLocal {
+            name = "local"
+            url = uri("./repo")
+        }
         gradlePluginPortal()
         maven {
             name = "jcenter托管"
@@ -10,7 +13,13 @@ pluginManagement {
             name = "google备选"
             url = uri("https://maven.aliyun.com/repository/google")
         }
-        google()
+        google{
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
     }
     resolutionStrategy {
@@ -21,9 +30,8 @@ pluginManagement {
                 "androidx.navigation.safeargs.kotlin" -> {
                     useModule("androidx.navigation:navigation-safe-args-gradle-plugin:${requested.version}")
                 }
-                //class path "com.example.plugin:test_plugin:1.0.1-snapshot"
-                "com.example.plugin"->{
-                    useModule("com.example.plugin:test_plugin:${requested.version}")
+                "com.ablec.time_cost"->{
+                    useModule("com.ablec.plugin:time_cost:${requested.version}")
                 }
                 else -> {}
             }
@@ -34,8 +42,10 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        mavenLocal()
-
+        mavenLocal {
+            name = "local"
+            url = uri("./repo")
+        }
         maven {
             name = "jcenter托管"
             url = uri("https://maven.aliyun.com/repository/public")
@@ -69,4 +79,4 @@ rootProject.name = "MyArchitecture"
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":learn_note")
-include(":test_plugin")
+include(":time_cost")

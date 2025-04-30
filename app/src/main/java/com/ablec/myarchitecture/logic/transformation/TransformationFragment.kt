@@ -10,20 +10,20 @@ import androidx.lifecycle.*
 import com.ablec.lib.ext.collectInViewLifecycle
 import com.ablec.myarchitecture.databinding.TransformationFragmentBinding
 import com.blankj.utilcode.util.LogUtils
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * @Description:
  * @Author:         haoshuaihui
  * @CreateDate:     2021/2/2 15:54
  */
+@AndroidEntryPoint
 class TransformationFragment : Fragment() {
     private val TAG = "TransformationFragment"
 
     private lateinit var binding: TransformationFragmentBinding
 
-    private val viewModel: TransformationViewModel by viewModels {
-        defaultViewModelProviderFactory
-    }
+    private val viewModel: TransformationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,

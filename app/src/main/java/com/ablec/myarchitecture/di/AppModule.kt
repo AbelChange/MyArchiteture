@@ -62,6 +62,7 @@ object AppModule {
                 level = HttpLoggingInterceptor.Level.BODY
             }
         return OkHttpClient().newBuilder()
+            //应用拦截器 日志，header,重试，token刷新
             .addInterceptor(loggingInterceptor)
             .build()
     }

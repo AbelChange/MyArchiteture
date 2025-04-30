@@ -9,14 +9,16 @@ plugins {
     alias(libs.plugins.kapt)
     alias(libs.plugins.hilt)
     //自定义插件
-//    id("test_plugin")
+    id("time_cost") // ← 注意：要和插件模块中 gradlePlugin {} 中的 id 保持一致
 }
 
-//TimeCostConfig {
-//    logTag.set("耗时")
-//    packageNames.set(listOf("com.ablec.myarchitecture"))
-//    methodNames.set(listOf("onCreate"))
-//}
+timeCostConfig {
+    packageNames = listOf("com.ablec.myarchitecture") // 设置要插桩的包名
+    methodNames = listOf("onCreate", "onResume")    // 设置要插桩的方法名
+    logTag = "TAG_TimeCost"                           // 设置日志 tag
+    thresholdTime = 500L                          // 慢函数时间阈值
+}
+
 
 android {
 

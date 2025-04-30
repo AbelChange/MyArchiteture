@@ -11,7 +11,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.kotlin.compose) apply false
-    id("com.example.plugin") version "1.0.1-snapshot" apply false
+    id("time_cost") version "1.0.1-SNAPSHOT" apply false
 }
 
 
@@ -72,12 +72,12 @@ subprojects {
     plugins.withId("maven-publish") {
         (project as ExtensionAware).extensions.configure<PublishingExtension>("publishing") {
             repositories {
-                maven {
-                    name = "localRepo"
+                mavenLocal{
+                    name = "local"
                     url = uri("../repo")
                 }
                 maven {
-                    name = "JDOArtifactory"
+                    name = "GithubRepo"
                     url = uri("xxxxx")
                     isAllowInsecureProtocol = true
                     credentials {
