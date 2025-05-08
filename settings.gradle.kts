@@ -61,6 +61,9 @@ dependencyResolutionManagement {
             url = uri("https://jitpack.io")
         }
 
+        flatDir {
+            dirs("./module_pay/libs")
+        }
     }
 }
 

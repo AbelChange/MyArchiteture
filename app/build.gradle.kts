@@ -148,11 +148,12 @@ dependencies {
     implementation(projects.moduleBase)
     //集成模式
     val buildModule = providers.gradleProperty("buildModule").get().toBoolean()
-    if (buildModule) {
+    if (!buildModule) {
         implementation(projects.moduleLogin)
         implementation(project(":module_pay"))
         implementation(project(":module_compose"))
         implementation(project(":module_native"))
+        implementation(project(":module_login"))
     }
     kapt(libs.glide.compiler)
     kapt(libs.arouter.compiler)

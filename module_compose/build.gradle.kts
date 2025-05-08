@@ -14,11 +14,17 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.0"
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
     kapt {
         arguments {
             arg("AROUTER_MODULE_NAME", project.name)
         }
     }
+
 }
 
 //composeCompiler {
@@ -29,6 +35,14 @@ android {
 dependencies {
     implementation(projects.moduleBase)
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     kapt(libs.arouter.compiler)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)

@@ -18,8 +18,7 @@
         <provider
                 android:name="androidx.startup.InitializationProvider"
                 android:authorities="${applicationId}.androidx-startup"
-                android:exported="false"
-                tools:node="remove">
+                android:exported="false">
             <meta-data
                     android:name="com.ablec.module_base.provider.BaseInitializer"
                     android:value="androidx.startup" />

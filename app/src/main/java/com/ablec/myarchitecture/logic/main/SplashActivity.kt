@@ -8,6 +8,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.ablec.lib.base.BaseActivity
 import com.ablec.lib.ext.hideSystemBar
 import com.ablec.lib.ext.immerse
+import com.ablec.module_compose.MainActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch

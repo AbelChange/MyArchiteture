@@ -131,6 +131,7 @@ androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 
 
 

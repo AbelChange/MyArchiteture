@@ -1,3 +1,4 @@
 <resources>
     <string name="module_compose_app_name">module_compose</string>
+    <string name="title_activity_main2">MainActivity2</string>
 </resources>

@@ -34,9 +34,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -97,7 +100,7 @@ class MainActivity : ComponentActivity() {
                 .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally,//对齐方式
         ) {
-            val count = remember { mutableStateOf(0) }  // 初始化为 0
+            var count by remember { mutableIntStateOf(0) }  // 初始化为 0
             Surface(
                 modifier = Modifier
                     .padding(vertical = 20.dp)//margin
@@ -122,9 +125,9 @@ class MainActivity : ComponentActivity() {
             Text(text = "John Doe", style = MaterialTheme.typography.bodyLarge, fontSize = 25.sp)
             Text(text = "john.doe@example.com", style = MaterialTheme.typography.bodySmall)
             OutlinedButton(onClick = {
-                count.value++
+                count++
             }) {
-                Text(text = "已点击了 ${count.value} 次！")
+                Text(text = "已点击了 $count 次！")
             }
 //            SimpleLoadMoreList()
             PhotographerCard()
@@ -151,6 +154,9 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Text(UserName.current)
                 }
+                Text("跳转页面",Modifier.clickable{
+                    MainActivity2.start(context = this@MainActivity)
+                })
             }
         }
     }

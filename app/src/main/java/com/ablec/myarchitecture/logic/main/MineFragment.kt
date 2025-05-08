@@ -8,6 +8,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.ablec.lib.ext.viewBinding
+import com.ablec.module_base.service.RouterServiceManager
 import com.ablec.myarchitecture.R
 import com.ablec.myarchitecture.databinding.FragmentMineBinding
 
@@ -31,12 +32,12 @@ class MineFragment : Fragment(R.layout.fragment_mine) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.btnGoLogin.setOnTouchListener { v, event ->
-            return@setOnTouchListener gestureDetector.onTouchEvent(event)
-        }
-//        binding.btnGoLogin.setOnClickListener {
-//            Log.e("MineFragment", "单击")
+//        binding.btnGoLogin.setOnTouchListener { v, event ->
+//            return@setOnTouchListener gestureDetector.onTouchEvent(event)
 //        }
+        binding.btnGoLogin.setOnClickListener {
+            RouterServiceManager.getAccountService()?.startLogin(requireContext())
+        }
     }
 
 }

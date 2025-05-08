@@ -43,12 +43,6 @@ subprojects {
         }
     }
 
-    tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            jvmTarget = "17"
-        }
-    }
-
     plugins.withType<com.android.build.gradle.LibraryPlugin>().configureEach {
         (project as ExtensionAware).extensions.configure<com.android.build.gradle.LibraryExtension>("android") {
             compileSdk = 35
