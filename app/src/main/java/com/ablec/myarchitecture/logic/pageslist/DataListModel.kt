@@ -14,6 +14,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ablec.module_base.http.handleApiCall
 import com.ablec.module_base.util.convert
 import com.ablec.module_base.util.fromJson
 import com.ablec.module_base.util.toJson
@@ -55,6 +56,18 @@ class DataListModel @Inject constructor(
                 }
             }
         }
+//        getListLiveData()
+    }
+
+    private fun getListLiveData() {
+        viewModelScope.launch() {
+            handleApiCall { apiService.getListData(GetListReq(1, 10).convert()) }.onSuccess {
+                _list.value = it
+            }.onFailure {
+                LogUtils.e(it)
+            }
+        }
+
     }
 
     fun getListTest() {
@@ -93,13 +106,7 @@ class DataListModel @Inject constructor(
                 ListItem("", "", "", "", "", ""),
             )
         }
-//        viewModelScope.launch() {
-//            handleApiCall { apiService.getListData(GetListReq(1, 10).convert()) }.onSuccess {
-//                _list.value = it
-//            }.onFailure {
-//                LogUtils.e(it)
-//            }
-//        }
+
     }
 
     // standard repo

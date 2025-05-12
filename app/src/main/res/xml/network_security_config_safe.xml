@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-
     <!--缺点：app层级 network_security_config配置方式最低只支持到7.0系统，7.0以前的系统配置不生效-->|
-    <!--okHttp可以框架层单独设置证书校验-->
-
+    <!--okHttp可以框架层单独设置证书校验SSLUtil-->
     <!--除了domain-config 的标签下的域名都不允许明文传输-->
-    <base-config cleartextTrafficPermitted="false">
+    <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
+            <!--信任系统证书-->
             <certificates src="system" />
         </trust-anchors>
     </base-config>
 
-
-    <!--cleartextTrafficPermitted配置false时候,只支持配置的域名明文传输-->
-    <domain-config cleartextTrafficPermitted="true">
+    <!--    cleartextTrafficPermitted配置false时候,只支持配置的域名明文传输-->
+    <domain-config cleartextTrafficPermitted="false">
         <!--允许明文传输的域名-->
         <domain includeSubdomains="true">测试环境域名</domain>
         <domain includeSubdomains="true">正式环境域名</domain>
         <trust-anchors>
-            <!--信任server证书-->
-            <!--<certificates src="@raw/my_ca"/>-->
+            <!-- 只信任特定 CA 或服务器证书 -->
+            <certificates src="@raw/my_ca" />
         </trust-anchors>
     </domain-config>
 
-    <!--证书相关-->
-    <!-- 兼容 Android 7.0 以上debug 时，信任 用户 证书，抓包 -->
-    <debug-overrides>
+    <!--debug 允许明文传输，信任CA与用户证书-->
+    <debug-overrides cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />
             <certificates src="user" />
         </trust-anchors>
     </debug-overrides>
-
 </network-security-config>

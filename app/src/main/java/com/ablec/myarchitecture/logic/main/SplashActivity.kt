@@ -25,7 +25,7 @@ class SplashActivity : BaseActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 delay(1000)
-                MainActivity.start(this@SplashActivity)
+                com.ablec.myarchitecture.logic.main.MainActivity.start(this@SplashActivity)
                 finish()
             }
         }
