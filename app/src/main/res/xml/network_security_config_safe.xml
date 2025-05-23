@@ -17,7 +17,7 @@
         <domain includeSubdomains="true">正式环境域名</domain>
         <trust-anchors>
             <!-- 只信任特定 CA 或服务器证书 -->
-            <certificates src="@raw/my_ca" />
+<!--            <certificates src="@raw/my_ca" />-->
         </trust-anchors>
     </domain-config>
 

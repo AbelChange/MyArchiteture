@@ -18,6 +18,15 @@ plugins {
 
 
 subprojects {
+
+    afterEvaluate {
+        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile>().configureEach {
+            compilerOptions {
+                jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
+            }
+        }
+    }
+
     plugins.withType<com.android.build.gradle.AppPlugin>().configureEach {
         (project as ExtensionAware).extensions.configure<com.android.build.gradle.internal.dsl.BaseAppModuleExtension>("android") {
             compileSdk = 35
@@ -32,8 +41,8 @@ subprojects {
                 }
             }
             compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_17
-                targetCompatibility = JavaVersion.VERSION_17
+                sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_1_8
             }
             lint {
                 abortOnError = true
@@ -51,8 +60,8 @@ subprojects {
             }
 
             compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_17
-                targetCompatibility = JavaVersion.VERSION_17
+                sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_1_8
             }
             lint {
                 abortOnError = true

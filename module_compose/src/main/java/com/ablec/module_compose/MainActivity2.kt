@@ -1,17 +1,21 @@
 package com.ablec.module_compose
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.clickable
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -22,15 +26,16 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ablec.module_compose.ui.theme.AppTheme
@@ -64,7 +69,7 @@ class MainActivity2 : ComponentActivity() {
                             .fillMaxSize(),
                         color = MaterialTheme.colorScheme.background
                     ) {
-                        Content()
+                        NoteApp()
                     }
                 }
             }
@@ -72,44 +77,103 @@ class MainActivity2 : ComponentActivity() {
     }
 
 
-    @SuppressLint("UnrememberedMutableState")
-    @OptIn(ExperimentalMaterial3Api::class)
+    @Preview
     @Composable
-    fun Content() {
-
-        var count by remember { mutableIntStateOf(0) }
-        Log.d("Recompose", "A recomposed before")
-
-        Log.d("Recompose", "C recomposed before")
-        Text(text = "点击加一：${count}", modifier = Modifier.clickable {
-            count++
-        })
-        Log.d("Recompose", "D recomposed before")
-        Log.d("Recompose", "B recomposed before")
+    fun NoteApp() {
+        var darkTheme by remember { mutableStateOf(false) }
+        CompositionLocalProvider(LocalIsDark provides darkTheme) {
+            Surface(
+                color = if (darkTheme) Color.DarkGray else Color.White,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Column {
+                    ThemeSwitch(darkTheme) { darkTheme = it }
+                    NoteEditor()
+                }
+            }
+        }
     }
 
-    /**
-     * 变化的nums驱动recomposition
-     */
+    val LocalIsDark = compositionLocalOf { false }
+
     @Composable
-    fun A(nums: Int) {
-        Log.d("Recompose", "A recomposed $nums")
+    fun ThemeSwitch(isDark: Boolean, onToggle: (Boolean) -> Unit) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text("Dark Theme")
+            Switch(checked = isDark, onCheckedChange = onToggle)
+        }
+    }
+
+    @Preview
+    @Composable
+    fun NoteEditor() {
+        val notes = remember { mutableStateListOf("Compose is cool!") }
+        var currentText by remember { mutableStateOf("") }
+
+        Column {
+            TextField(
+                value = currentText,
+                onValueChange = { currentText = it },
+                label = { Text("Write note") }
+            )
+
+            Row {
+                Button(onClick = {
+                    if (currentText.isNotBlank()) {
+                        notes.add(currentText)
+                        currentText = ""
+                    }
+                }) {
+                    Text("Add")
+                }
+
+                Spacer(Modifier.width(8.dp))
+
+                Button(onClick = {
+                    if (notes.isNotEmpty()) notes.removeAt(notes.size - 1)
+                }) {
+                    Text("Delete Last")
+                }
+            }
+
+            AnimatedContent(targetState = notes) { currentNotes ->
+                Column {
+                    currentNotes.forEach {
+                        NoteItem(it)
+                    }
+                }
+            }
+        }
     }
 
     @Composable
-    fun C() {
-        Log.d("Recompose", "C recomposed")
+    fun NoteItem(note: String) {
+        val isDark = LocalIsDark.current
+        Text(
+            text = note,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .customClickable()
+                .background(if (isDark) Color.Gray else Color.LightGray)
+        )
     }
 
-    @Composable
-    fun D() {
-        Log.d("Recompose", "D recomposed")
+    private fun Modifier.customClickable(): Modifier = composed {
+        var pressed by remember { mutableStateOf(false) }
+        this
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onPress = {
+                        pressed = true
+                        tryAwaitRelease()
+                        pressed = false
+                    }
+                )
+            }
+            .background(if (pressed) Color.Red else Color.Transparent)
     }
 
-    @Composable
-    fun B() {
-        Log.d("Recompose", "B recomposed")
-    }
 
     companion object{
         @JvmStatic
