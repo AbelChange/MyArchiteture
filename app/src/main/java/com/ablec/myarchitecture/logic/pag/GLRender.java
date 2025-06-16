@@ -1,0 +1,198 @@
+package com.ablec.myarchitecture.logic.pag;
+
+import android.content.Context;
+import android.opengl.GLES20;
+import android.opengl.GLSurfaceView;
+import android.util.Log;
+
+import org.libpag.PAGFile;
+import org.libpag.PAGLayer;
+import org.libpag.PAGPlayer;
+import org.libpag.PAGSurface;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
+public class GLRender implements GLSurfaceView.Renderer {
+
+    static final float SQUARE_COORDS[] = {
+            1.0f, -1.0f,
+            -1.0f, -1.0f,
+            1.0f, 1.0f,
+            -1.0f, 1.0f,
+    };
+    static final float TEXTURE_COORDS[] = {
+            1f, 1f,
+            0f, 1f,
+            1f, 0f,
+            0f, 0f
+    };
+    private static final String TAG = "GLRender";
+    private static final String VERTEX_MAIN =
+            "attribute vec2  vPosition;\n" +
+                    "attribute vec2  vTexCoord;\n" +
+                    "varying vec2    texCoord;\n" +
+                    "\n" +
+                    "void main() {\n" +
+                    "    texCoord = vTexCoord;\n" +
+                    "    gl_Position = vec4 ( vPosition.x, vPosition.y, 0.0, 1.0 );\n" +
+                    "}";
+    private static final String FRAGMENT_MAIN =
+            "precision mediump float;\n" +
+                    "\n" +
+                    "varying vec2                texCoord;\n" +
+                    "uniform sampler2D sTexture;\n" +
+                    "\n" +
+                    "void main() {\n" +
+                    "    gl_FragColor = texture2D(sTexture, texCoord);\n" +
+                    "}";
+    static FloatBuffer VERTEX_BUF, TEXTURE_COORD_BUF;
+    int mWidth = 0;
+    int mHeight = 0;
+    private final Context context;
+    private final String path;
+    private int mTextureId;
+    private PAGPlayer mPagPlayer;
+    private int mProgram;
+    private PAGFile pagFile;
+
+    /**
+     * 该处path为底图，后续添加layer,尺寸以此为准
+     * @param context
+     * @param path
+     */
+    public GLRender(Context context,String path) {
+        this.context = context;
+        this.path = path;
+    }
+
+    private void initShader() {
+
+        if (VERTEX_BUF == null) {
+            VERTEX_BUF = ByteBuffer.allocateDirect(SQUARE_COORDS.length * 4)
+                    .order(ByteOrder.nativeOrder()).asFloatBuffer();
+            VERTEX_BUF.put(SQUARE_COORDS);
+            VERTEX_BUF.position(0);
+        }
+        if (TEXTURE_COORD_BUF == null) {
+            TEXTURE_COORD_BUF = ByteBuffer.allocateDirect(TEXTURE_COORDS.length * 4)
+                    .order(ByteOrder.nativeOrder()).asFloatBuffer();
+            TEXTURE_COORD_BUF.put(TEXTURE_COORDS);
+            TEXTURE_COORD_BUF.position(0);
+        }
+        if (mProgram == 0) {
+            mProgram = GLUtil.buildProgram(VERTEX_MAIN, FRAGMENT_MAIN);
+        }
+    }
+
+    @Override
+    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        pagFile = PAGFile.Load(context.getAssets(), path);
+        mWidth = pagFile.width();
+        mHeight = pagFile.height();
+        mTextureId = initRenderTarget(mWidth,mHeight);
+        PAGSurface surface = PAGSurface.FromTexture(mTextureId, mWidth, mHeight);
+        // 新建 Player
+        mPagPlayer = new PAGPlayer();
+        mPagPlayer.setComposition(pagFile);
+        mPagPlayer.setSurface(surface);
+        layerNo = 1;
+    }
+
+    public void replaceLayer(int zIndex, String path) {
+        if (path != null) {
+            PAGLayer pagLayer = pagFile.removeLayerAt(zIndex);
+            if (pagLayer != null){
+                addLayer(path);
+                layerNo --;
+            }
+        }
+    }
+
+    public void addLayer(String path){
+        PAGFile file = PAGFile.Load(context.getAssets(), path);
+        pagFile.addLayer(file);
+        layerNo++;
+    }
+
+    @Override
+    public void onSurfaceChanged(GL10 gl, int width, int height) {
+        GLES20.glViewport(0, 0, width, height);
+        Log.d(TAG, "width is " + width + " height is " + height);
+    }
+
+    /**
+     * 对应layer层
+     */
+    private int layerNo = 0;
+    private final Map<Integer, Long> timeStampMap = new HashMap<>();
+
+    @Override
+    public void onDrawFrame(GL10 gl) {
+        //layer 播放
+        for (int i = 0; i < layerNo; i++) {
+            Long timestamp = timeStampMap.get(i);
+            if (timestamp == null || timestamp == 0){
+                timestamp = System.currentTimeMillis();
+                timeStampMap.put(i, timestamp);
+            }
+            long playTime = (long) ((System.currentTimeMillis() - timestamp)) * 1000;
+            PAGLayer layer = pagFile.getLayerAt(i);
+            if (layer != null){
+                long duration = layer.duration();
+                layer.setProgress((double) playTime / duration);
+            }
+        }
+        mPagPlayer.flush();
+        //可以拿到当前截图
+        //pagPlayer.getSurface().makeSnapshot();
+        initShader();
+        Log.d(TAG, "draw texture id is " + mTextureId);
+        GLES20.glUseProgram(mProgram);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+        int vPositionLocation = GLES20.glGetAttribLocation(mProgram, "vPosition");
+        GLES20.glEnableVertexAttribArray(vPositionLocation);
+        GLES20.glVertexAttribPointer(vPositionLocation, 2, GLES20.GL_FLOAT, false, 4 * 2, VERTEX_BUF);
+        int vTexCoordLocation = GLES20.glGetAttribLocation(mProgram, "vTexCoord");
+        GLES20.glEnableVertexAttribArray(vTexCoordLocation);
+        GLES20.glVertexAttribPointer(vTexCoordLocation, 2, GLES20.GL_FLOAT, false, 4 * 2, TEXTURE_COORD_BUF);
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureId);
+
+
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
+    }
+
+    private int initRenderTarget(int width,int height) {
+        int id[] = {0};
+        GLES20.glGenTextures(1, id, 0);
+        if (id[0] == 0) {
+            return 0;
+        }
+        int textureId = id[0];
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_S, GL10.GL_REPEAT);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_T, GL10.GL_REPEAT);
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height, 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
+        return textureId;
+    }
+
+    public void release(){
+        if (mPagPlayer != null){
+            mPagPlayer.release();
+            mPagPlayer = null;
+        }
+    }
+
+}

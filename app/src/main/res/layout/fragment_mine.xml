@@ -5,7 +5,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
     <com.ablec.module_base.view.ControlInterceptLinearLayout
+            android:visibility="gone"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -17,4 +19,14 @@
                 android:text="LOGINMODULE" />
 
     </com.ablec.module_base.view.ControlInterceptLinearLayout>
+
+    <android.opengl.GLSurfaceView
+            android:id="@+id/surfaceView1"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+    <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"/>
 </androidx.appcompat.widget.LinearLayoutCompat>
