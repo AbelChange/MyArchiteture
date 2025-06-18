@@ -11,7 +11,7 @@ import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
 
 /**
- * @Description:
+ * @Description:    在普通类中注入，非android类
  * @Author:         haoshuaihui
  * @CreateDate:     2020/12/29 19:07
  */

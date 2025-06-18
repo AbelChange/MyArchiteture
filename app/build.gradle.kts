@@ -31,14 +31,14 @@ android {
         manifestPlaceholders["APP_NAME"] = "appname"
         manifestPlaceholders["UMENG_CHANNEL_NAME"] = "common"
 
-        ndk {
-            // Specifies the ABI configurations of your native
-            // libraries Gradle should build and package with your app.
-            abiFilters += listOf(
-                "arm64-v8a",
-                "armeabi-v7a"
-            )
-        }
+//        ndk {
+//            // Specifies the ABI configurations of your native
+//            // libraries Gradle should build and package with your app.
+//            abiFilters += listOf(
+//                "arm64-v8a",
+//                "armeabi-v7a"
+//            )
+//        }
 
         kapt {
             arguments {
