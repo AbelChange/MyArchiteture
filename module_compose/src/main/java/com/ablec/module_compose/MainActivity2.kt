@@ -7,8 +7,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +18,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -104,10 +109,11 @@ class MainActivity2 : ComponentActivity() {
         }
     }
 
+    @OptIn(ExperimentalFoundationApi::class)
     @Preview
     @Composable
     fun NoteEditor() {
-        val notes = remember { mutableStateListOf("Compose is cool!") }
+        var notes by remember { mutableStateOf(listOf("Compose is cool!")) }
         var currentText by remember { mutableStateOf("") }
 
         Column {
@@ -119,8 +125,8 @@ class MainActivity2 : ComponentActivity() {
 
             Row {
                 Button(onClick = {
-                    if (currentText.isNotBlank()) {
-                        notes.add(currentText)
+                    if (currentText.isNotBlank() && !notes.contains(currentText)) {
+                        notes = notes + currentText
                         currentText = ""
                     }
                 }) {
@@ -130,52 +136,38 @@ class MainActivity2 : ComponentActivity() {
                 Spacer(Modifier.width(8.dp))
 
                 Button(onClick = {
-                    if (notes.isNotEmpty()) notes.removeAt(notes.size - 1)
+                    if (notes.isNotEmpty()) notes = notes - notes[notes.size -4]
                 }) {
                     Text("Delete Last")
                 }
             }
-
-            AnimatedContent(targetState = notes) { currentNotes ->
-                Column {
-                    currentNotes.forEach {
-                        NoteItem(it)
-                    }
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(items = notes, key = { it }) { item ->
+                    NoteItem(item, Modifier.animateItemPlacement())
                 }
             }
         }
     }
 
     @Composable
-    fun NoteItem(note: String) {
+    fun NoteItem(note: String, modifier: Modifier = Modifier) {
         val isDark = LocalIsDark.current
         Text(
             text = note,
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(8.dp)
-                .customClickable()
                 .background(if (isDark) Color.Gray else Color.LightGray)
         )
     }
 
-    private fun Modifier.customClickable(): Modifier = composed {
-        var pressed by remember { mutableStateOf(false) }
-        this
-            .pointerInput(Unit) {
-                detectTapGestures(
-                    onPress = {
-                        pressed = true
-                        tryAwaitRelease()
-                        pressed = false
-                    }
-                )
-            }
-            .background(if (pressed) Color.Red else Color.Transparent)
-    }
 
 
-    companion object{
+
+    companion object {
         @JvmStatic
         fun start(context: Context) {
             val starter = Intent(context, MainActivity2::class.java)

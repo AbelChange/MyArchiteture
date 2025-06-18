@@ -32,13 +32,13 @@ subprojects {
             compileSdk = 35
             defaultConfig {
                 minSdk =  28
-                ndk {
-                    //noinspection ChromeOsAbiSupport
-                    abiFilters += listOf(
-                        "arm64-v8a",
-                        "armeabi-v7a"
-                    )
-                }
+//                ndk {
+//                    //noinspection ChromeOsAbiSupport
+//                    abiFilters += listOf(
+//                        "arm64-v8a",
+//                        "armeabi-v7a"
+//                    )
+//                }
             }
             compileOptions {
                 sourceCompatibility = JavaVersion.VERSION_1_8

@@ -5,6 +5,7 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
+import org.libpag.PAGComposition;
 import org.libpag.PAGFile;
 import org.libpag.PAGLayer;
 import org.libpag.PAGPlayer;
@@ -13,13 +14,19 @@ import org.libpag.PAGSurface;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 public class GLRender implements GLSurfaceView.Renderer {
+
+    public static final String TAG = "GLRender";
 
     static final float SQUARE_COORDS[] = {
             1.0f, -1.0f,
@@ -33,7 +40,7 @@ public class GLRender implements GLSurfaceView.Renderer {
             1f, 0f,
             0f, 0f
     };
-    private static final String TAG = "GLRender";
+
     private static final String VERTEX_MAIN =
             "attribute vec2  vPosition;\n" +
                     "attribute vec2  vTexCoord;\n" +
@@ -53,23 +60,27 @@ public class GLRender implements GLSurfaceView.Renderer {
                     "    gl_FragColor = texture2D(sTexture, texCoord);\n" +
                     "}";
     static FloatBuffer VERTEX_BUF, TEXTURE_COORD_BUF;
-    int mWidth = 0;
-    int mHeight = 0;
     private final Context context;
-    private final String path;
+    private final List<PagLayerWrapper> layers;
+    private final List<PagLayerWrapper> runningLayers = new ArrayList<>();
+
+    /**
+     * 对应layer层
+     */
+    private final Map<Integer, Long> timeStampMap = new HashMap<>();
     private int mTextureId;
     private PAGPlayer mPagPlayer;
     private int mProgram;
     private PAGFile pagFile;
 
     /**
-     * 该处path为底图，后续添加layer,尺寸以此为准
+     * 以index 0 为底图，后续添加的layer均依赖于0，不可移除
      * @param context
-     * @param path
+     * @param layers
      */
-    public GLRender(Context context,String path) {
+    public GLRender(Context context, List<PagLayerWrapper> layers) {
         this.context = context;
-        this.path = path;
+        this.layers = layers;
     }
 
     private void initShader() {
@@ -94,32 +105,46 @@ public class GLRender implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        pagFile = PAGFile.Load(context.getAssets(), path);
-        mWidth = pagFile.width();
-        mHeight = pagFile.height();
-        mTextureId = initRenderTarget(mWidth,mHeight);
-        PAGSurface surface = PAGSurface.FromTexture(mTextureId, mWidth, mHeight);
+        pagFile = (PAGFile) layers.get(0).getPagLayer();
+        int width = pagFile.width();
+        int height = pagFile.height();
+        mTextureId = initRenderTarget(width, height);
+        PAGSurface surface = PAGSurface.FromTexture(mTextureId, width, height);
         // 新建 Player
         mPagPlayer = new PAGPlayer();
-        mPagPlayer.setComposition(pagFile);
         mPagPlayer.setSurface(surface);
-        layerNo = 1;
+        resetRoot(0);
     }
 
-    public void replaceLayer(int zIndex, String path) {
-        if (path != null) {
-            PAGLayer pagLayer = pagFile.removeLayerAt(zIndex);
-            if (pagLayer != null){
-                addLayer(path);
-                layerNo --;
-            }
+    public void resetRoot(int index){
+        timeStampMap.clear();
+        PagLayerWrapper pagLayerWrapper = layers.get(index);
+        pagFile = (PAGFile) pagLayerWrapper.getPagLayer();
+        mPagPlayer.setComposition(pagFile);
+        runningLayers.clear();
+        runningLayers.add(pagLayerWrapper);
+    }
+
+    /**
+     * @param index
+     */
+    public void addLayer(int index) {
+        PagLayerWrapper pagLayerWrapper = layers.get(index);
+        pagFile.addLayer(pagLayerWrapper.getPagLayer());
+        runningLayers.add(pagLayerWrapper);
+    }
+
+    public boolean removeLayer(int index) {
+        PAGLayer pagLayer = pagFile.removeLayer(layers.get(index).getPagLayer());
+        runningLayers.remove(pagLayer);
+        return pagLayer != null;
+    }
+
+    public void release() {
+        if (mPagPlayer != null) {
+            mPagPlayer.release();
+            mPagPlayer = null;
         }
-    }
-
-    public void addLayer(String path){
-        PAGFile file = PAGFile.Load(context.getAssets(), path);
-        pagFile.addLayer(file);
-        layerNo++;
     }
 
     @Override
@@ -128,27 +153,35 @@ public class GLRender implements GLSurfaceView.Renderer {
         Log.d(TAG, "width is " + width + " height is " + height);
     }
 
-    /**
-     * 对应layer层
-     */
-    private int layerNo = 0;
-    private final Map<Integer, Long> timeStampMap = new HashMap<>();
-
     @Override
     public void onDrawFrame(GL10 gl) {
         //layer 播放
-        for (int i = 0; i < layerNo; i++) {
-            Long timestamp = timeStampMap.get(i);
-            if (timestamp == null || timestamp == 0){
+        Iterator<PagLayerWrapper> iterator = runningLayers.listIterator();
+        int index = 0;
+        while (iterator.hasNext()) {
+            PagLayerWrapper pagLayerWrapper = iterator.next();
+            Long timestamp = timeStampMap.get(index);
+            if (timestamp == null || timestamp == 0) {
                 timestamp = System.currentTimeMillis();
-                timeStampMap.put(i, timestamp);
+                timeStampMap.put(index, timestamp);
             }
-            long playTime = (long) ((System.currentTimeMillis() - timestamp)) * 1000;
-            PAGLayer layer = pagFile.getLayerAt(i);
-            if (layer != null){
-                long duration = layer.duration();
-                layer.setProgress((double) playTime / duration);
+            long playTime = (System.currentTimeMillis() - timestamp) * 1000;
+            PAGLayer pagLayer = pagLayerWrapper.getPagLayer();
+            long duration = pagLayerWrapper.getPagLayer().duration();
+            if (playTime >= duration) {
+                PlayEndStrategy strategy = pagLayerWrapper.getStrategy();
+                switch (strategy) {
+                    case REPEAT:
+                        timeStampMap.put(index, 0L);
+                        break;
+                    case ONCE:
+                        onLayerOnceFinish(index);
+                        break;
+                }
+            } else {
+                pagLayer.setProgress((double) playTime / duration);
             }
+            index++;
         }
         mPagPlayer.flush();
         //可以拿到当前截图
@@ -171,7 +204,13 @@ public class GLRender implements GLSurfaceView.Renderer {
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
     }
 
-    private int initRenderTarget(int width,int height) {
+
+    private void onLayerOnceFinish(int i) {
+            Log.d(TAG,"onLayerOnceFinish");
+    }
+
+
+    private int initRenderTarget(int width, int height) {
         int id[] = {0};
         GLES20.glGenTextures(1, id, 0);
         if (id[0] == 0) {
@@ -188,11 +227,6 @@ public class GLRender implements GLSurfaceView.Renderer {
         return textureId;
     }
 
-    public void release(){
-        if (mPagPlayer != null){
-            mPagPlayer.release();
-            mPagPlayer = null;
-        }
-    }
+
 
 }
