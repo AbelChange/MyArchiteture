@@ -1,5 +1,6 @@
 package com.ablec.myarchitecture.logic.main
 
+import android.animation.ValueAnimator
 import android.opengl.GLSurfaceView
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.ablec.lib.ext.viewBinding
@@ -16,6 +18,8 @@ import com.ablec.myarchitecture.databinding.FragmentMineBinding
 import com.ablec.myarchitecture.logic.pag.GLRender
 import com.ablec.myarchitecture.logic.pag.PagLayerWrapper
 import com.ablec.myarchitecture.logic.pag.PlayEndStrategy
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.NonDisposableHandle.parent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -26,6 +30,7 @@ class MineFragment : Fragment(R.layout.fragment_mine) {
 
     private val binding: FragmentMineBinding by viewBinding()
 
+    private var renderJob:Job? = null
     //只消费点击事件的识别器
     private val gestureDetector: GestureDetector by lazy {
         GestureDetector(requireContext(), object : SimpleOnGestureListener() {
@@ -96,7 +101,7 @@ class MineFragment : Fragment(R.layout.fragment_mine) {
         }
 
         val FPS = 12L
-        lifecycleScope.launch {
+        renderJob = lifecycleScope.launch {
             while (isActive) {
                 delay(1000 / FPS)//12帧
                 binding.surfaceView1.requestRender()
@@ -112,6 +117,27 @@ class MineFragment : Fragment(R.layout.fragment_mine) {
                         glRender.addLayer(3)
                     }
                 }
+            }
+        }
+
+        binding.btnAlpha.setOnClickListener {
+            ValueAnimator.ofFloat(0.5f, 1.0f).apply {
+                duration = 1000 // 动画持续时间（毫秒）
+                addUpdateListener { animation ->
+                    val value = animation.animatedValue as Float
+                    // 使用 value 更新透明度、缩放等属性
+                    glRender.animAlphaAll(value)
+                }
+                start()
+            }
+        }
+
+        binding.btnClose.setOnClickListener {
+            renderJob?.cancel()
+            val viewGroup = binding.surfaceView1.parent as ViewGroup
+            viewGroup.removeView(binding.surfaceView1)
+            binding.surfaceView1.queueEvent {
+                glRender.release()
             }
         }
     }

@@ -158,7 +158,7 @@ dependencies {
     kapt(libs.glide.compiler)
     kapt(libs.arouter.compiler)
     kapt(libs.hilt.compiler)
-    implementation ("com.tencent.tav:libpag:4.3.57")
+//    implementation ("com.tencent.tav:libpag:4.3.68")
 
     implementation(libs.hilt.android)
 

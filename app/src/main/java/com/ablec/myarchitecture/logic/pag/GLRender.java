@@ -5,7 +5,6 @@ import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 
-import org.libpag.PAGComposition;
 import org.libpag.PAGFile;
 import org.libpag.PAGLayer;
 import org.libpag.PAGPlayer;
@@ -19,7 +18,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -140,11 +138,18 @@ public class GLRender implements GLSurfaceView.Renderer {
         return pagLayer != null;
     }
 
-    public void release() {
-        if (mPagPlayer != null) {
-            mPagPlayer.release();
-            mPagPlayer = null;
+    public void animAlphaAll(float alpha){
+        for (int i = 0; i < runningLayers.size(); i++) {
+            runningLayers.get(i).getPagLayer().setAlpha(alpha);
         }
+    }
+
+    public void release() {
+        mPagPlayer.release();
+        int[] textures = new int[]{mTextureId};
+        GLES20.glDeleteTextures(1, textures, 0);
+        GLES20.glDeleteFramebuffers(1, textures, 0);
+        mTextureId = 0;
     }
 
     @Override
@@ -156,6 +161,9 @@ public class GLRender implements GLSurfaceView.Renderer {
     @Override
     public void onDrawFrame(GL10 gl) {
         //layer 播放
+        if (mPagPlayer == null){
+            return;
+        }
         Iterator<PagLayerWrapper> iterator = runningLayers.listIterator();
         int index = 0;
         while (iterator.hasNext()) {
