@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph_recent.xml"
+        app:startDestination="@id/recentRouterFragment">
+
+    <fragment
+            android:id="@+id/recentRouterFragment"
+            android:name="com.ablec.myarchitecture.logic.main.recent.RecentFragment"
+            android:label="RecentRouterFragment" />
+
+
+</navigation>

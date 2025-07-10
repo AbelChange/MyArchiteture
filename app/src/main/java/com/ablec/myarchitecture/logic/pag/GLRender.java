@@ -103,12 +103,15 @@ public class GLRender implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+        // ✅ 确保 EGLContext 创建后立刻重新构建 shader program
+        initShader();
+
         pagFile = (PAGFile) layers.get(0).getPagLayer();
         int width = pagFile.width();
         int height = pagFile.height();
         mTextureId = initRenderTarget(width, height);
         PAGSurface surface = PAGSurface.FromTexture(mTextureId, width, height);
-        // 新建 Player
         mPagPlayer = new PAGPlayer();
         mPagPlayer.setSurface(surface);
         resetRoot(0);
@@ -146,6 +149,10 @@ public class GLRender implements GLSurfaceView.Renderer {
 
     public void release() {
         mPagPlayer.release();
+        if (mProgram != 0) {
+            GLES20.glDeleteProgram(mProgram);
+            mProgram = 0;
+        }
         int[] textures = new int[]{mTextureId};
         GLES20.glDeleteTextures(1, textures, 0);
         GLES20.glDeleteFramebuffers(1, textures, 0);
@@ -201,8 +208,10 @@ public class GLRender implements GLSurfaceView.Renderer {
         GLES20.glUseProgram(mProgram);
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
         int vPositionLocation = GLES20.glGetAttribLocation(mProgram, "vPosition");
-        GLES20.glEnableVertexAttribArray(vPositionLocation);
-        GLES20.glVertexAttribPointer(vPositionLocation, 2, GLES20.GL_FLOAT, false, 4 * 2, VERTEX_BUF);
+        if (vPositionLocation >= 0) {
+            GLES20.glEnableVertexAttribArray(vPositionLocation);
+            GLES20.glVertexAttribPointer(vPositionLocation, 2, GLES20.GL_FLOAT, false, 4 * 2, VERTEX_BUF);
+        }
         int vTexCoordLocation = GLES20.glGetAttribLocation(mProgram, "vTexCoord");
         GLES20.glEnableVertexAttribArray(vTexCoordLocation);
         GLES20.glVertexAttribPointer(vTexCoordLocation, 2, GLES20.GL_FLOAT, false, 4 * 2, TEXTURE_COORD_BUF);

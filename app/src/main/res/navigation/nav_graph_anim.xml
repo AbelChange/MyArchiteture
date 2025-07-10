@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/nav_graph_anim.xml"
+        app:startDestination="@id/animRouterFragment">
+
+    <fragment
+            android:id="@+id/animRouterFragment"
+            tools:layout="@layout/router_fragment"
+            android:name="com.ablec.myarchitecture.logic.main.anim.AnimRouterFragment"
+            android:label="AnimRouterFragment" >
+        <action
+                android:id="@+id/action_animRouterFragment_to_motionLayoutFragment"
+                app:destination="@id/motionLayoutFragment" />
+        <action
+                android:id="@+id/action_animRouterFragment_to_coordinatorLayoutFragment"
+                app:destination="@id/coordinatorLayoutFragment" />
+        <action
+                android:id="@+id/action_animRouterFragment_to_animListFragment"
+                app:destination="@id/animListFragment" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/motionLayoutFragment"
+            tools:layout="@layout/fragment_motion_layout_drag"
+            android:name="com.ablec.myarchitecture.logic.main.anim.MotionLayoutFragment"
+            android:label="MotionLayoutFragment" />
+
+
+    <fragment
+            android:id="@+id/coordinatorLayoutFragment"
+            android:name="com.ablec.myarchitecture.logic.other.CoordinatorLayoutFragment"
+            android:label="coordinator_layout_fragment"
+            tools:layout="@layout/coordinator_layout_fragment"/>
+
+    <fragment
+            tools:layout="@layout/fragment_anim_list"
+            android:id="@+id/animListFragment"
+            android:name="com.ablec.myarchitecture.android.AnimListFragment"
+            android:label="AnimListFragment" />
+
+    <fragment
+            android:id="@+id/PAGFragment"
+            android:name="com.ablec.myarchitecture.logic.main.anim.PAGFragment"
+            android:label="PAGFragment" />
+</navigation>

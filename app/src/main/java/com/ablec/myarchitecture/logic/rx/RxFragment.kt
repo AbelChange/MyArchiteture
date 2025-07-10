@@ -9,13 +9,14 @@ import com.ablec.lib.ext.debounceClick
 import com.ablec.lib.ext.viewBinding
 import com.ablec.myarchitecture.R
 import com.ablec.myarchitecture.databinding.RxFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 
-
+@AndroidEntryPoint
 class RxFragment : BaseFragment(R.layout.rx_fragment) {
 
     private val viewModel by viewModels<RxViewModel>()

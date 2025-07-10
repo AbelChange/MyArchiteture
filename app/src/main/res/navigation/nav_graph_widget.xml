@@ -2,13 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/nav_graph.xml"
+            android:id="@+id/nav_graph_widget.xml"
             app:startDestination="@id/mainFragment">
 
     <fragment
             android:id="@+id/mainFragment"
-            android:name="com.ablec.myarchitecture.logic.main.RouterFragment"
-            android:label="main_fragment"
+            android:name="com.ablec.myarchitecture.logic.main.widget.WidgetRouterFragment"
+            android:label="WidgetAll"
             tools:layout="@layout/router_fragment">
         <argument
                 android:name="argString"
@@ -30,24 +30,15 @@
                 android:id="@+id/action_mainFragment_to_webSocketFragment"
                 app:destination="@id/webSocketFragment"/>
         <action
-                android:id="@+id/action_mainFragment_to_coordinatorLayoutFragment"
-                app:destination="@id/coordinatorLayoutFragment"/>
-        <action
                 android:id="@+id/action_mainFragment_to_rxFragment"
                 app:destination="@id/rxFragment"/>
-
-        <action
-                android:id="@+id/action_mainFragment_to_animFragment"
-                app:destination="@id/animFragment"/>
         <action
                 android:id="@+id/action_mainFragment_to_eventFragment"
                 app:destination="@id/eventFragment"/>
         <action
                 android:id="@+id/action_mainFragment_to_pickerFragment"
                 app:destination="@id/pickerFragment"/>
-        <action
-                android:id="@+id/action_mainFragment_to_binderFragment"
-                app:destination="@id/binderFragment"/>
+
         <action
                 android:id="@+id/action_mainFragment_to_myListFragment"
                 app:destination="@id/myListFragment"/>
@@ -76,11 +67,7 @@
             android:name="com.ablec.myarchitecture.logic.websocket.WebSocketFragment"
             android:label="web_socket_fragment"
             tools:layout="@layout/web_socket_fragment"/>
-    <fragment
-            android:id="@+id/coordinatorLayoutFragment"
-            android:name="com.ablec.myarchitecture.logic.other.CoordinatorLayoutFragment"
-            android:label="coordinator_layout_fragment"
-            tools:layout="@layout/coordinator_layout_fragment"/>
+
     <fragment
             android:id="@+id/rxFragment"
             android:name="com.ablec.myarchitecture.logic.rx.RxFragment"
@@ -90,20 +77,13 @@
             android:id="@+id/pickerFragment"
             android:name="com.ablec.myarchitecture.android.PickerFragment"
             android:label="TestFragment"/>
-    <fragment
-            android:id="@+id/animFragment"
-            tools:layout="@layout/fragment_anim"
-            android:name="com.ablec.myarchitecture.android.AnimFragment"
-            android:label="AnimFragment"/>
+
     <fragment
             tools:layout="@layout/fragment_event"
             android:id="@+id/eventFragment"
             android:name="com.ablec.myarchitecture.android.EventFragment"
             android:label="EventFragment"/>
-    <fragment
-            android:id="@+id/binderFragment"
-            android:name="com.ablec.myarchitecture.android.BinderFragment"
-            android:label="BinderFragment"/>
+
     <fragment
             android:id="@+id/myListFragment"
             android:name="com.ablec.myarchitecture.logic.other.MyListFragment"

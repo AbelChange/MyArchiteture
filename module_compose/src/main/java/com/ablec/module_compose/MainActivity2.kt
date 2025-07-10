@@ -146,7 +146,7 @@ class MainActivity2 : ComponentActivity() {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(items = notes, key = { it }) { item ->
-                    NoteItem(item, Modifier.animateItemPlacement())
+                    NoteItem(item, Modifier.animateItem())
                 }
             }
         }

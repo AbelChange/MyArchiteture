@@ -47,7 +47,7 @@ class ImageFragment : Fragment() {
             .listener(object : RequestListener<Drawable?> {
                 override fun onLoadFailed(
                     e: GlideException?,
-                    model: Any,
+                    model: Any?,
                     target: Target<Drawable?>,
                     isFirstResource: Boolean
                 ): Boolean {
@@ -56,16 +56,12 @@ class ImageFragment : Fragment() {
                 }
 
                 override fun onResourceReady(
-                    resource: Drawable?,
+                    resource: Drawable,
                     model: Any,
-                    target: Target<Drawable?>,
+                    target: Target<Drawable?>?,
                     dataSource: DataSource,
                     isFirstResource: Boolean
                 ): Boolean {
-
-                    // The postponeEnterTransition is called on the parent ImagePagerFragment, so the
-                    // startPostponedEnterTransition() should also be called on it to get the transition
-                    // going when the image is ready.
                     parentFragment?.startPostponedEnterTransition()
                     return false
                 }

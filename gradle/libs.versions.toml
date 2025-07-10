@@ -2,18 +2,19 @@
 agp = "8.6.0"
 kotlin = "1.9.23"
 ksp = "1.8.0-1.0.9"
-androidx-corektx = "1.9.0"
-androidx-activity = "1.7.2"
-androidx-fragment = "1.5.4"
-androidx-lifecycle = "2.5.0"
-androidx-appcompat = "1.6.1"
-androidx-annotation = "1.4.0"
+androidx-corektx = "1.16.0"
+androidx-activity = "1.10.1"
+androidx-fragment = "1.8.8"
+androidx-lifecycle = "2.9.1"
+androidx-appcompat = "1.7.1"
+androidx-annotation = "1.9.1"
 androidx-constraintlayout = "2.2.1"
 androidx-recyclerview = "1.4.0"
 androidx-room = "2.5.1"
-androidx-datastore = "1.0.0"
-androidx-paging = "3.1.1"
-androidx-navigation = "2.5.3"
+androidx-datastore = "1.1.7"
+androidx-paging = "3.3.6"
+androidx-navigation = "2.9.1"
+androidx-navigation-safeargs = "2.9.1"
 androidx-startup = "1.2.0"
 androidx-test-ext-junit = "1.2.1"
 
@@ -22,11 +23,11 @@ okhttp = "4.10.0"
 okio = "3.2.0"
 hilt = "2.50"
 retrofit = "2.9.0"
-glide = "4.12.0"
+glide = "4.16.0"
 glideTransformations = "4.3.0"
 material = "1.12.0"
 
-androidx-compose-bom = "2024.04.01"
+androidx-compose-bom = "2025.06.01"
 composePlugin = "2.0.0"
 
 compose = "1.4.0"
@@ -43,7 +44,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
-kotlin-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "androidx-navigation" }
+kotlin-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "androidx-navigation-safeargs" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }

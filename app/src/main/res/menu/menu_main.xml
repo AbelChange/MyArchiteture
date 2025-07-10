@@ -5,22 +5,22 @@
         android:id="@+id/navigation_item1"
         android:icon="@drawable/bottom_navigation_home"
         android:orderInCategory="0"
-        android:title="home" />
+        android:title="widget" />
     <item
         android:id="@+id/navigation_item2"
         android:icon="@drawable/bottom_navigation_match"
         android:orderInCategory="1"
-        android:title="learn" />
+        android:title="animate" />
 
     <item
         android:id="@+id/navigation_item3"
         android:icon="@drawable/bottom_navigation_msg"
         android:orderInCategory="2"
-        android:title="message" />
+        android:title="module" />
 
     <item
         android:id="@+id/navigation_item4"
         android:icon="@drawable/bottom_navigation_mine"
         android:orderInCategory="3"
-        android:title="mine" />
+        android:title="recent" />
 </menu>

@@ -27,9 +27,6 @@ pluginManagement {
         eachPlugin {
             println("eachPlugin" + requested.id.id + { requested.version.toString() })
             when (requested.id.id) {
-                "androidx.navigation.safeargs.kotlin" -> {
-                    useModule("androidx.navigation:navigation-safe-args-gradle-plugin:${requested.version}")
-                }
                 "com.ablec.time_cost"->{
                     useModule("com.ablec.plugin:time_cost:${requested.version}")
                 }

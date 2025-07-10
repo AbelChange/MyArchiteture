@@ -19,7 +19,13 @@ class ImageActivity :BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.simple_fragment)
+        setContentView(R.layout.activity_main)
+
+        // Set the toolbar as the activity's app bar.
+        setSupportActionBar(findViewById(R.id.toolbar))
+
+        //showNavigationIcon
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         //防止添加新的 Fragment
         if (savedInstanceState == null) {
             val fragmentManager = supportFragmentManager

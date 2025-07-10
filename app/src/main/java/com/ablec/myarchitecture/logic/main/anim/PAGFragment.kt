@@ -1,63 +1,40 @@
-package com.ablec.myarchitecture.logic.main
+package com.ablec.myarchitecture.logic.main.anim
 
 import android.animation.ValueAnimator
 import android.opengl.GLSurfaceView
 import android.os.Bundle
-import android.util.Log
-import android.view.GestureDetector
-import android.view.GestureDetector.SimpleOnGestureListener
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.ablec.lib.ext.viewBinding
 import com.ablec.module_base.service.RouterServiceManager
 import com.ablec.myarchitecture.R
-import com.ablec.myarchitecture.databinding.FragmentMineBinding
+import com.ablec.myarchitecture.databinding.FragmentPagBinding
 import com.ablec.myarchitecture.logic.pag.GLRender
 import com.ablec.myarchitecture.logic.pag.PagLayerWrapper
 import com.ablec.myarchitecture.logic.pag.PlayEndStrategy
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.NonDisposableHandle.parent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.libpag.PAGFile
 
 
-class MineFragment : Fragment(R.layout.fragment_mine) {
+class PAGFragment : Fragment(R.layout.fragment_pag) {
 
-    private val binding: FragmentMineBinding by viewBinding()
+    private val binding: FragmentPagBinding by viewBinding()
 
     private var renderJob:Job? = null
-    //只消费点击事件的识别器
-    private val gestureDetector: GestureDetector by lazy {
-        GestureDetector(requireContext(), object : SimpleOnGestureListener() {
-//            override fun onDoubleTap(e: MotionEvent): Boolean {
-//                Log.e("MineFragment", "双击")
-//                return true
-//            }
-
-            override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
-                Log.e("MineFragment", "单击")
-                return true
-            }
-        })
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        binding.btnGoLogin.setOnTouchListener { v, event ->
-//            return@setOnTouchListener gestureDetector.onTouchEvent(event)
-//        }
-        binding.btnGoLogin.setOnClickListener {
-            RouterServiceManager.getAccountService()?.startLogin(requireContext())
-        }
         setupSharedPagSystem()
     }
 
-    private fun setupSharedPagSystem() {
-        val pagLayers = listOf<PagLayerWrapper>(
+    val glRender by lazy {
+        return@lazy GLRender(context, listOf<PagLayerWrapper>(
             PagLayerWrapper(
                 PAGFile.Load(context?.assets, "autumn_start3.pag"),
                 PlayEndStrategy.ONCE
@@ -88,9 +65,11 @@ class MineFragment : Fragment(R.layout.fragment_mine) {
                 PAGFile.Load(context?.assets, "autumn_end3.pag"),
                 PlayEndStrategy.REPEAT
             )
-        )
+        ))
+    }
 
-        val glRender = GLRender(context, pagLayers)
+
+    private fun setupSharedPagSystem() {
 
         binding.surfaceView1.apply {
             setEGLContextClientVersion(2);
@@ -101,10 +80,13 @@ class MineFragment : Fragment(R.layout.fragment_mine) {
         }
 
         val FPS = 12L
+
         renderJob = lifecycleScope.launch {
-            while (isActive) {
-                delay(1000 / FPS)//12帧
-                binding.surfaceView1.requestRender()
+            repeatOnLifecycle(Lifecycle.State.RESUMED){
+                while (isActive) {
+                    delay(1000 / FPS)//12帧
+                    binding.surfaceView1.requestRender()
+                }
             }
         }
 
@@ -144,14 +126,16 @@ class MineFragment : Fragment(R.layout.fragment_mine) {
 
     override fun onResume() {
         super.onResume()
-        binding.surfaceView1.onResume()
-//        binding.surfaceView2.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        glRender.release()
+        binding.surfaceView1.onPause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        binding.surfaceView1.onPause()
-//        binding.surfaceView2.onPause()
     }
 
 }

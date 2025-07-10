@@ -12,7 +12,7 @@ import javax.inject.Inject
 import kotlin.math.abs
 
 @HiltViewModel
-open class RxViewModel @Inject constructor(app: Application) : ViewModel() {
+open class RxViewModel @Inject constructor(val app: Application) : ViewModel() {
 
     companion object {
         const val TAG = "RxViewModel"

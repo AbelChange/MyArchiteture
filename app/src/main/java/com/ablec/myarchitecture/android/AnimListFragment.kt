@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ablec.lib.base.VBBaseAdapter
 import com.ablec.lib.base.VBViewHolder
 import com.ablec.myarchitecture.R
-import com.ablec.myarchitecture.databinding.FragmentAnimBinding
+import com.ablec.myarchitecture.databinding.FragmentAnimListBinding
 import com.ablec.myarchitecture.databinding.ItemSimpleDataBinding
 
-class AnimFragment : Fragment() {
+class AnimListFragment : Fragment() {
 
-    private lateinit var binding: FragmentAnimBinding
+    private lateinit var binding: FragmentAnimListBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAnimBinding.inflate(layoutInflater)
+        binding = FragmentAnimListBinding.inflate(layoutInflater)
         Choreographer.getInstance().postFrameCallback {  }
         return binding.root
     }
