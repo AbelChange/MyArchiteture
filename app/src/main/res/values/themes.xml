@@ -1,5 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-
-
+    <style name="AppTheme" parent="BaseTheme">
+        <!--         Set the transitions which are used for the entrance and exit of shared elements -->
+        <item name="android:windowSharedElementEnterTransition" tools:ignore="NewApi">
+            @transition/shared_element_transition
+        </item>
+        <item name="android:windowSharedElementExitTransition" tools:ignore="NewApi">
+            @transition/shared_element_transition
+        </item>
+        <item name="android:windowActivityTransitions">true</item>
+        <!-- specify enter and exit transitions -->
+        <item name="android:windowEnterTransition">@transition/window_transition</item>
+        <item name="android:windowExitTransition">@transition/window_transition</item>
+    </style>
 </resources>

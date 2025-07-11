@@ -19,6 +19,12 @@
         <action
                 android:id="@+id/action_animRouterFragment_to_animListFragment"
                 app:destination="@id/animListFragment" />
+        <action
+                android:id="@+id/action_animRouterFragment_to_PAGFragment"
+                app:destination="@id/PAGFragment" />
+        <action
+                android:id="@+id/action_animRouterFragment_to_carouselFragment"
+                app:destination="@id/carouselFragment" />
     </fragment>
 
     <fragment
@@ -30,9 +36,9 @@
 
     <fragment
             android:id="@+id/coordinatorLayoutFragment"
-            android:name="com.ablec.myarchitecture.logic.other.CoordinatorLayoutFragment"
+            android:name="com.ablec.myarchitecture.logic.main.anim.CoordinatorLayoutFragment"
             android:label="coordinator_layout_fragment"
-            tools:layout="@layout/coordinator_layout_fragment"/>
+            tools:layout="@layout/fragment_motion_layout_coordinator"/>
 
     <fragment
             tools:layout="@layout/fragment_anim_list"
@@ -41,7 +47,13 @@
             android:label="AnimListFragment" />
 
     <fragment
+            tools:layout="@layout/fragment_pag"
             android:id="@+id/PAGFragment"
             android:name="com.ablec.myarchitecture.logic.main.anim.PAGFragment"
             android:label="PAGFragment" />
+    <fragment
+            android:id="@+id/carouselFragment"
+            tools:layout="@layout/fragment_motion_layout_carousel"
+            android:name="com.ablec.myarchitecture.logic.main.anim.CarouselFragment"
+            android:label="CarouselFragment" />
 </navigation>

@@ -34,7 +34,7 @@ class GridFragment : Fragment(R.layout.fragment_grid) {
     private fun prepareTransitions() {
         val transition:android.transition.Transition = android.transition.TransitionInflater.from(
             context
-        ).inflateTransition(R.transition.image_shared_element_transition)
+        ).inflateTransition(R.transition.shared_element_transition)
         requireActivity().window.reenterTransition = transition
         // A similar mapping is set at the ImagePagerFragment with a setEnterSharedElementCallback.
         requireActivity().setExitSharedElementCallback(

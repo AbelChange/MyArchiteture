@@ -15,7 +15,7 @@ import com.ablec.myarchitecture.gridtopager.fragment.ImagePagerFragment
  * @date 2024/5/30
  * @description
  */
-class ImageActivity :BaseActivity() {
+class ImageActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,14 +31,18 @@ class ImageActivity :BaseActivity() {
             val fragmentManager = supportFragmentManager
             fragmentManager
                 .beginTransaction()
-                .replace(R.id.fragment_container, ImagePagerFragment(), ImagePagerFragment::class.java.simpleName)
+                .replace(
+                    R.id.fragment_container,
+                    ImagePagerFragment(),
+                    ImagePagerFragment::class.java.simpleName
+                )
                 //添加到回退栈会影响返回行为
 //                .addToBackStack(null)
                 .commit()
         }
     }
 
-    companion object{
+    companion object {
         @JvmStatic
         fun start(context: Activity, transitionView: ImageView) {
             val starter = Intent(context, ImageActivity::class.java)
@@ -46,7 +50,7 @@ class ImageActivity :BaseActivity() {
                 context,
                 transitionView, transitionView.transitionName
             )
-            ActivityCompat.startActivity(context, starter, options.toBundle())
+            context.startActivity(starter, options.toBundle())
         }
     }
 

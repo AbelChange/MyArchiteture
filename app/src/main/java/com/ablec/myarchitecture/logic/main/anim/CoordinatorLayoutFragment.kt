@@ -1,4 +1,4 @@
-package com.ablec.myarchitecture.logic.other
+package com.ablec.myarchitecture.logic.main.anim
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ablec.lib.base.BaseFragment
 import com.ablec.lib.ext.viewBinding
 import com.ablec.myarchitecture.R
-import com.ablec.myarchitecture.databinding.CoordinatorLayoutFragmentBinding
+import com.ablec.myarchitecture.databinding.FragmentMotionLayoutCoordinatorBinding
+import com.ablec.myarchitecture.logic.other.MyListFragment
 import com.blankj.utilcode.util.LogUtils
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -17,9 +18,9 @@ import com.google.android.material.tabs.TabLayoutMediator
  * @description:
  * @date :2022/9/17 16:39
  */
-class CoordinatorLayoutFragment : BaseFragment(R.layout.coordinator_layout_fragment) {
+class CoordinatorLayoutFragment : BaseFragment(R.layout.fragment_motion_layout_coordinator) {
 
-    private val mBinding: CoordinatorLayoutFragmentBinding by viewBinding()
+    private val mBinding: FragmentMotionLayoutCoordinatorBinding by viewBinding()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

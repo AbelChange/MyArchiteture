@@ -78,9 +78,10 @@ public class ImagePagerFragment extends Fragment {
      * Prepares the shared element transition from and back to the grid fragment.
      */
     private void prepareSharedElementTransition() {
+        //  shared_element_transition已经配置在app_theme
         // A similar mapping is set at the GridFragment with a setExitSharedElementCallback.
         requireActivity().getWindow().setSharedElementEnterTransition(TransitionInflater.from(requireActivity())
-                .inflateTransition(R.transition.image_shared_element_transition));
+                .inflateTransition(R.transition.shared_element_transition));
         requireActivity().setEnterSharedElementCallback(
                 new SharedElementCallback() {
                     @Override

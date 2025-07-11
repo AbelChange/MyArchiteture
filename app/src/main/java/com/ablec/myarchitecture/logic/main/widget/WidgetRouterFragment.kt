@@ -44,9 +44,6 @@ class WidgetRouterFragment : RouterFragment() {
                 WidgetRouterFragmentDirections.actionMainFragmentToEventFragment(),
                 "EventDispatch"
             ),
-            ItemActivity("TransitionImageView") {
-                GridActivity.start(requireContext())
-            },
             ItemActivity("BottomBehaviorActivity") {
                 BottomSheetBehaviorActivity.start(requireActivity())
             }

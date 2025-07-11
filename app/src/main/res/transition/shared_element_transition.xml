@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+        android:interpolator="@android:interpolator/fast_out_slow_in"
+        android:transitionOrdering="together">
+    <!--    为目标视图布局边界的变化添加动画效果。is used for the TextViews which are shared-->
+    <changeBounds />
+    <!--    为目标视图缩放和旋转方面的变化添加动画效果-->
+    <changeTransform />
+    <!--    为目标图片尺寸和缩放方面的变化添加动画效果 is used for the ImageViews which are shared-->
+    <changeImageTransform />
+    <!--    为目标视图裁剪边界的变化添加动画效果-->
+    <changeClipBounds />
+</transitionSet>

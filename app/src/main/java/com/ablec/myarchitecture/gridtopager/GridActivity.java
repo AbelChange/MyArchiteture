@@ -41,15 +41,13 @@ public class GridActivity extends BaseActivity {
                 finish();
             }
         });
-        if (savedInstanceState != null) {
-            // Return here to prevent adding additional GridFragments when changing orientation.
-            return;
+        if (savedInstanceState == null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager
+                    .beginTransaction()
+                    .add(R.id.fragment_container, new GridFragment(), GridFragment.class.getSimpleName())
+                    .commit();
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager
-                .beginTransaction()
-                .add(R.id.fragment_container, new GridFragment(), GridFragment.class.getSimpleName())
-                .commit();
     }
 
     @Override
