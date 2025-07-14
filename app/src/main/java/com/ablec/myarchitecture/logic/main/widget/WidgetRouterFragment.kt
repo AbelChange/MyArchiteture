@@ -1,6 +1,7 @@
 package com.ablec.myarchitecture.logic.main.widget
 
 import com.ablec.myarchitecture.android.BottomSheetBehaviorActivity
+import com.ablec.myarchitecture.android.TopSheetBehaviorActivity
 import com.ablec.myarchitecture.base.RouterFragment
 import com.ablec.myarchitecture.gridtopager.GridActivity
 
@@ -46,6 +47,9 @@ class WidgetRouterFragment : RouterFragment() {
             ),
             ItemActivity("BottomBehaviorActivity") {
                 BottomSheetBehaviorActivity.start(requireActivity())
+            },
+            ItemActivity("TopBehaviorActivity") {
+                TopSheetBehaviorActivity.start(requireActivity())
             }
         )
     }

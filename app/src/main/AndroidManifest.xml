@@ -97,6 +97,11 @@
 
         </activity>
 
+        <activity android:name=".android.TopSheetBehaviorActivity"
+                android:theme="@style/ActivityTranslucent">
+
+        </activity>
+
         <activity
                 android:exported="true"
                 android:name="com.github.moduth.blockcanary.ui.DisplayActivity"
