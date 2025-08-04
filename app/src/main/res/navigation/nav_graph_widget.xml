@@ -8,7 +8,7 @@
     <fragment
             android:id="@+id/mainFragment"
             android:name="com.ablec.myarchitecture.logic.main.widget.WidgetRouterFragment"
-            android:label="WidgetAll"
+            android:label="WidgetRouterFragment"
             tools:layout="@layout/router_fragment">
         <argument
                 android:name="argString"

@@ -23,6 +23,10 @@ class AnimRouterFragment : RouterFragment() {
                 AnimRouterFragmentDirections.actionAnimRouterFragmentToAnimListFragment(),
                 "AnimList"
             ),
+            ItemFragment(
+                AnimRouterFragmentDirections.actionAnimRouterFragmentToPAGFragment(),
+                "PAG"
+            ),
             ItemActivity("转场动画") {
                 GridActivity.start(requireContext())
             },
