@@ -12,12 +12,24 @@ import org.gradle.api.Project
 
 class TimeCostPlugin : Plugin<Project> {
 
+    val TAG = "TimeCostPlugin"
+
     /**
      * Apply this plugin to the given target object.
      *
      * @param target The target object
      */
     override fun apply(project: Project) {
+        project.pluginManager.withPlugin("com.android.application") {
+            println("$TAG ConfigInAppStart:>>>>>>>>>>>>>>>")
+//            project.dependencies.add("implementation", "xxx:yyy:1.0.0")
+        }
+
+        project.pluginManager.withPlugin("com.android.library") {
+            println("$TAG ConfigInLibStart:>>>>>>>>>>>>>>>")
+//            project.dependencies.add("implementation", "xxx:yyy:1.0.0")
+        }
+
         val appExtension = project.extensions.getByType(AndroidComponentsExtension::class.java)
 
         // 创建配置扩展

@@ -1,4 +1,7 @@
 pluginManagement {
+    // 本地调试插件时可临时开启，正式使用走已发布的 Maven 依赖。
+    // includeBuild("time_cost")
+
     repositories {
         mavenLocal {
             name = "local"
@@ -27,7 +30,7 @@ pluginManagement {
         eachPlugin {
             println("eachPlugin" + requested.id.id + { requested.version.toString() })
             when (requested.id.id) {
-                "com.ablec.time_cost"->{
+                "time_cost"->{
                     useModule("com.ablec.plugin:time_cost:${requested.version}")
                 }
                 else -> {}
