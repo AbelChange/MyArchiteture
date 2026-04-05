@@ -15,10 +15,6 @@ class RouterServiceManager {
             return ARouter.getInstance().navigation(IAccountService::class.java)
         }
 
-        fun getPayService(): IPayService? {
-            return ARouter.getInstance().navigation(IPayService::class.java)
-        }
-
         fun getAppInfoService(): IAppInfoService? {
             return ARouter.getInstance().navigation(IAppInfoService::class.java)
         }

@@ -150,7 +150,6 @@ dependencies {
     val buildModule = providers.gradleProperty("buildModule").get().toBoolean()
     if (!buildModule) {
         implementation(projects.moduleLogin)
-        implementation(project(":module_pay"))
         implementation(project(":module_compose"))
         implementation(project(":module_native"))
         implementation(project(":module_login"))

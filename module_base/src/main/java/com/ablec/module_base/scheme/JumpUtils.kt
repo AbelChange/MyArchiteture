@@ -40,11 +40,6 @@ object JumpUtils {
     private val OPEN_GROUP_DETAIL: String = SCHEME + "open.dm/openScriptGroupDetail"
 
     /**
-     * 已经下单，跳转native确认支付页面
-     */
-    private val OPEN_PAY_ORDER: String = SCHEME + "open.dm/openOrderInfoActivity"
-
-    /**
      * 打开订单详情
      */
     private val OPEN_ORDER_DETAIL: String = SCHEME + "open.dm/openOrderDetail"

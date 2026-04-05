@@ -9,10 +9,9 @@ object ModuleConstant {
     //    //基础module初始化
     //    private static final String RouterInit = "com.ablec.module_base.config.BaseModule";
     //    private static final String LoginInit = "com.ablec.module_login.config.LoginModule";
-    //    private static final String PayInit = "com.ablec.module_pay.config.PayModule";
     //    //主业务模块
     //    //    private static final String MainInit = "com.temption.module_main.MainModule";
-    //    public static String[] initModuleNames = {RouterInit,LoginInit,PayInit};
+    //    public static String[] initModuleNames = {RouterInit,LoginInit};
 
     const val UMENG_APPKEY = "6095fb68c9aacd3bd4c94f7f"
 

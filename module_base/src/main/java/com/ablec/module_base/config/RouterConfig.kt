@@ -14,13 +14,6 @@ object Compose{
     const val COMPOSE_SERVICE = "$COMPOSE_BASE/service"
 }
 
-
-object Pay {
-    const val PAY_BASE = "/pay"
-    const val PAY_SERVICE = "$PAY_BASE/service"
-}
-
-
 object Main {
     const val BASE = "/main"
     const val APP_INFO_SERVICE = "${BASE}/service"
@@ -30,4 +23,3 @@ object Native{
     const val BASE = "/native"
     const val SERVICE = "$BASE/service"
 }
-
