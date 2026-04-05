@@ -4,7 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".logic.other.ConstraintLayoutFragment">
+        tools:context=".logic.ui.layout.ConstraintLayoutFragment">
 
     <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -101,12 +101,13 @@
             app:roundPercent="1" />
 
 
-    <androidx.constraintlayout.utils.widget.ImageFilterView
+    <com.ablec.module_base.view.ImageView
             android:id="@+id/btn"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="@mipmap/play_music_full_screen_bg_7"
             android:scaleType="centerCrop"
+            app:roundCornerType="TOP_LEFT"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline2"
@@ -202,6 +203,15 @@
             android:src="@drawable/icon_msg_n"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-
+    <com.ablec.module_base.view.QrcodeView
+            android:id="@+id/qrCode"
+            android:layout_width="336dp"
+            android:layout_height="336dp"
+            android:tooltipText="二维码索引"
+            android:layout_margin="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:logo="@mipmap/ic_launcher"
+            app:qrcodeContent="@string/app_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,4 +26,23 @@
         </attr>
     </declare-styleable>
 
+
+    <declare-styleable name="ImageView">
+        <!--圆角值-->
+        <attr name="round" format="dimension" />
+        <!--圆角百分比 适用于未知宽高的case-->
+        <attr name="roundPercent" format="float" />
+        <!--圆角类型-->
+        <attr name="roundCornerType" format="enum">
+            <enum name="ALL" value="0" />
+            <enum name="TOP_LEFT" value="1" />
+            <enum name="TOP_RIGHT" value="2" />
+            <enum name="BOTTOM_LEFT" value="3" />
+            <enum name="BOTTOM_RIGHT" value="4" />
+            <enum name="TOP" value="5" />
+            <enum name="BOTTOM" value="6" />
+            <enum name="LEFT" value="7" />
+            <enum name="RIGHT" value="8" />
+        </attr>
+    </declare-styleable>
 </resources>

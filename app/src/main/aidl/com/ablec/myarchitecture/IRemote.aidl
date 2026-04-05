@@ -4,7 +4,7 @@ interface IRemote {
 
     String plus(int a,int b); //同步调用，如果server方法耗时，可能会anr,
 
-    void send(in AidlData data);//引用数据类型 必须标明in/out/inout
+    void send(in AidlData data);//对象类型 in/out/inout，建议标明，默认IN,代表数据流向
 
     void receive(out AidlData data);
 

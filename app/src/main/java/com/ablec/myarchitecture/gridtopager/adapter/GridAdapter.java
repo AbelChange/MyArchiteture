@@ -33,7 +33,7 @@ import android.widget.ImageView;
 import com.ablec.myarchitecture.R;
 import com.ablec.myarchitecture.gridtopager.GridActivity;
 import com.ablec.myarchitecture.gridtopager.ImageActivity;
-import com.ablec.myarchitecture.gridtopager.fragment.ImagePagerFragment;
+import com.ablec.myarchitecture.logic.graphics.transition.ImagePagerFragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.load.DataSource;

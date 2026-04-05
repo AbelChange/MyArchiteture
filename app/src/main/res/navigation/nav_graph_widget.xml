@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/mainFragment"
-            android:name="com.ablec.myarchitecture.logic.main.widget.WidgetRouterFragment"
+            android:name="com.ablec.myarchitecture.logic.navigation.widget.WidgetRouterFragment"
             android:label="WidgetRouterFragment"
             tools:layout="@layout/router_fragment">
         <argument
@@ -52,49 +52,49 @@
 
     <fragment
             android:id="@+id/constraintLayoutFragment"
-            android:name="com.ablec.myarchitecture.logic.other.ConstraintLayoutFragment"
+            android:name="com.ablec.myarchitecture.logic.ui.layout.ConstraintLayoutFragment"
             android:label="ConstraintLayoutFragment"
             tools:layout="@layout/constraint_fragment"/>
 
     <fragment
             android:id="@+id/transformationFragment"
-            android:name="com.ablec.myarchitecture.logic.transformation.TransformationFragment"
+            android:name="com.ablec.myarchitecture.logic.graphics.transform.TransformationFragment"
             android:label="TransformationFragment"
             tools:layout="@layout/transformation_fragment"/>
 
     <fragment
             android:id="@+id/webSocketFragment"
-            android:name="com.ablec.myarchitecture.logic.websocket.WebSocketFragment"
+            android:name="com.ablec.myarchitecture.logic.network.websocket.WebSocketFragment"
             android:label="web_socket_fragment"
             tools:layout="@layout/web_socket_fragment"/>
 
     <fragment
             android:id="@+id/rxFragment"
-            android:name="com.ablec.myarchitecture.logic.rx.RxFragment"
+            android:name="com.ablec.myarchitecture.logic.reactive.rx.RxFragment"
             android:label="rx_fragment"
             tools:layout="@layout/rx_fragment"/>
     <fragment
             android:id="@+id/pickerFragment"
-            android:name="com.ablec.myarchitecture.android.PickerFragment"
+            android:name="com.ablec.myarchitecture.logic.ui.picker.PickerFragment"
             android:label="TestFragment"/>
 
     <fragment
             tools:layout="@layout/fragment_event"
             android:id="@+id/eventFragment"
-            android:name="com.ablec.myarchitecture.android.EventFragment"
+            android:name="com.ablec.myarchitecture.logic.animation.touch.EventFragment"
             android:label="EventFragment"/>
 
     <fragment
             android:id="@+id/myListFragment"
-            android:name="com.ablec.myarchitecture.logic.other.MyListFragment"
+            android:name="com.ablec.myarchitecture.logic.ui.list.MyListFragment"
             android:label="MyListFragment"/>
     <fragment android:id="@+id/flowFragment"
               tools:layout="@layout/fragment_flow"
-              android:name="com.ablec.myarchitecture.logic.flow.FlowFragment"
+              android:name="com.ablec.myarchitecture.logic.reactive.flow.FlowFragment"
               android:label="FlowFragment"/>
     <fragment
         android:id="@+id/matrixFragment"
-        android:name="com.ablec.myarchitecture.customviewlearn.MatrixFragment"
+        android:name="com.ablec.myarchitecture.logic.graphics.matrix.MatrixFragment"
         android:label="MatrixFragment" />
 
 

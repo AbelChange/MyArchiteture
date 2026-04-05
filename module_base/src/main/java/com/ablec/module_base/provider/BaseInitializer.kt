@@ -3,6 +3,7 @@ package com.ablec.module_base.provider
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.startup.Initializer
 import com.ablec.module_base.config.ModuleConstant
 import com.ablec.module_base.db.AppDatabase
@@ -26,7 +27,7 @@ class BaseInitializer : Initializer<Context> {
     fun init() {
         if (ProcessUtils.isMainProcess()) {
             configCommonLoading()
-            //初始化WMRouter
+            //初始化Router
             initRouter(GlobalContext)
             //初始化LiveDataBus
             LiveEventBus.config().setContext(GlobalContext).lifecycleObserverAlwaysActive(false)
@@ -59,7 +60,21 @@ class BaseInitializer : Initializer<Context> {
      * 初始化路由组件
      */
     private fun initRouter(ctx: Context?) {
-        ARouter.init(ctx as? Application)
+        val app = ctx as? Application ?: return
+        try {
+            ARouter.init(app)
+        } catch (t: Throwable) {
+            clearARouterCache(app)
+            Log.w(TAG, "ARouter init failed once, cleared cache and retrying.", t)
+            ARouter.init(app)
+        }
+    }
+
+    private fun clearARouterCache(context: Context) {
+        context.getSharedPreferences(AROUTER_SP_CACHE_KEY, Context.MODE_PRIVATE)
+            .edit()
+            .clear()
+            .commit()
     }
 
     override fun dependencies(): MutableList<Class<out Initializer<*>>> {
@@ -67,6 +82,9 @@ class BaseInitializer : Initializer<Context> {
     }
 
     companion object {
+        private const val TAG = "BaseInitializer"
+        private const val AROUTER_SP_CACHE_KEY = "SP_AROUTER_CACHE"
+
         @SuppressLint("StaticFieldLeak")
         lateinit var GlobalContext: Context
             private set

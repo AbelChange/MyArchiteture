@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".logic.transformation.TransformationFragment">
+    tools:context=".logic.graphics.transform.TransformationFragment">
 
     <Button
         android:id="@+id/buttonStart"

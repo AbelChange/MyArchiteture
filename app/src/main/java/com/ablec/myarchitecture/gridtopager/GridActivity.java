@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.ablec.lib.base.BaseActivity;
 import com.ablec.myarchitecture.R;
-import com.ablec.myarchitecture.gridtopager.fragment.GridFragment;
+import com.ablec.myarchitecture.logic.graphics.transition.GridFragment;
 
 /**
  * Grid to pager app's main activity.

@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/moduleRouterFragment"
-            android:name="com.ablec.myarchitecture.logic.main.module.ModuleRouterFragment"
+            android:name="com.ablec.myarchitecture.logic.navigation.module.ModuleRouterFragment"
             android:label="ModuleRouterFragment">
         <action
                 android:id="@+id/action_moduleRouterFragment_to_binderFragment"
@@ -16,6 +16,6 @@
 
     <fragment
             android:id="@+id/binderFragment"
-            android:name="com.ablec.myarchitecture.android.BinderFragment"
+            android:name="com.ablec.myarchitecture.logic.system.binder.BinderFragment"
             android:label="BinderFragment" />
 </navigation>

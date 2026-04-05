@@ -4,20 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btnGetStringFromJni"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="getStringFromJni" />
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleCentered="true"
+        app:title="JNI" />
 
-    <Button
-        android:layout_marginTop="25dp"
-        android:id="@+id/btnJNICallBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="jniCallback" />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnGetStringFromJni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="getStringFromJni" />
+
+        <Button
+            android:id="@+id/btnJNICallBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="jniCallback" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>

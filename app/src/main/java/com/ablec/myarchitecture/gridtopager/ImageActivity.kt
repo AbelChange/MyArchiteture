@@ -8,7 +8,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import com.ablec.lib.base.BaseActivity
 import com.ablec.myarchitecture.R
-import com.ablec.myarchitecture.gridtopager.fragment.ImagePagerFragment
+import com.ablec.myarchitecture.logic.graphics.transition.ImagePagerFragment
 
 /**
  * @author shuaihui_hao

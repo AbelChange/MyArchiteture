@@ -8,7 +8,7 @@
     <fragment
             android:id="@+id/animRouterFragment"
             tools:layout="@layout/router_fragment"
-            android:name="com.ablec.myarchitecture.logic.main.anim.AnimRouterFragment"
+            android:name="com.ablec.myarchitecture.logic.navigation.anim.AnimRouterFragment"
             android:label="AnimRouterFragment" >
         <action
                 android:id="@+id/action_animRouterFragment_to_motionLayoutFragment"
@@ -30,30 +30,30 @@
     <fragment
             android:id="@+id/motionLayoutFragment"
             tools:layout="@layout/fragment_motion_layout_drag"
-            android:name="com.ablec.myarchitecture.logic.main.anim.MotionLayoutFragment"
+            android:name="com.ablec.myarchitecture.logic.animation.motion.MotionLayoutFragment"
             android:label="MotionLayoutFragment" />
 
 
     <fragment
             android:id="@+id/coordinatorLayoutFragment"
-            android:name="com.ablec.myarchitecture.logic.main.anim.CoordinatorLayoutFragment"
+            android:name="com.ablec.myarchitecture.logic.animation.motion.CoordinatorLayoutFragment"
             android:label="coordinator_layout_fragment"
             tools:layout="@layout/fragment_motion_layout_coordinator"/>
 
     <fragment
             tools:layout="@layout/fragment_anim_list"
             android:id="@+id/animListFragment"
-            android:name="com.ablec.myarchitecture.android.AnimListFragment"
+            android:name="com.ablec.myarchitecture.logic.animation.list.AnimListFragment"
             android:label="AnimListFragment" />
 
     <fragment
             tools:layout="@layout/fragment_pag"
             android:id="@+id/PAGFragment"
-            android:name="com.ablec.myarchitecture.logic.main.anim.PAGFragment"
+            android:name="com.ablec.myarchitecture.logic.animation.pag.PAGFragment"
             android:label="PAGFragment" />
     <fragment
             android:id="@+id/carouselFragment"
             tools:layout="@layout/fragment_motion_layout_carousel"
-            android:name="com.ablec.myarchitecture.logic.main.anim.CarouselFragment"
+            android:name="com.ablec.myarchitecture.logic.animation.motion.CarouselFragment"
             android:label="CarouselFragment" />
 </navigation>

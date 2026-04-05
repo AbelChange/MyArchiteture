@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.ablec.myarchitecture.gridtopager.fragment.ImageFragment;
+import com.ablec.myarchitecture.logic.graphics.transition.ImageFragment;
 
 public class ImagePagerAdapter extends FragmentStateAdapter {
 
